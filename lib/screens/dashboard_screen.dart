@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:nutri_voice/layouts/desktop_layout.dart';
 import 'package:nutri_voice/providers/nutrition_provider.dart';
 import 'package:nutri_voice/providers/user_provider.dart';
 import 'package:nutri_voice/screens/food_log_screen.dart';
@@ -11,6 +14,9 @@ import 'package:nutri_voice/widgets/calorie_ring_chart.dart';
 import 'package:nutri_voice/widgets/macro_card.dart';
 import 'package:nutri_voice/widgets/nutrient_gap_row.dart';
 import 'package:nutri_voice/widgets/pulsing_mic_button.dart';
+
+bool get _isDesktop =>
+    !kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux);
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -48,8 +54,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  Widget get _currentPage {
+    return switch (_navIndex) {
+      1 => const FoodLogScreen(),
+      2 => const ProfileScreen(),
+      _ => _DashboardBody(greeting: _greeting),
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_isDesktop) {
+      return DesktopLayout(
+        selectedIndex: _navIndex,
+        onNavTap: (i) => setState(() => _navIndex = i),
+        mainContent: _currentPage,
+      );
+    }
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: IndexedStack(
