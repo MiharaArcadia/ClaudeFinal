@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriVoice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── Onboarding ───────────────────────────────────────────── -->
+<div id="onboarding">
+  <div class="onboarding-card">
+    <div class="ob-steps">
+      <div class="ob-step done" id="ob-s0"></div>
+      <div class="ob-step" id="ob-s1"></div>
+      <div class="ob-step" id="ob-s2"></div>
+      <div class="ob-step" id="ob-s3"></div>
+      <div class="ob-step" id="ob-s4"></div>
+    </div>
+    <div id="ob-content"></div>
+    <button class="ob-btn" id="ob-next">Weiter</button>
+  </div>
+</div>
+
+<!-- ── Main App ─────────────────────────────────────────────── -->
+<div id="app" style="display:none">
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">◉</span>
+      <span>NutriVoice</span>
+    </div>
+    <div class="nav-items">
+      <div class="nav-item active" data-screen="dashboard">
+        <span class="nav-icon">◎</span> <span id="nav-dash">Dashboard</span>
+      </div>
+      <div class="nav-item" data-screen="log">
+        <span class="nav-icon">☰</span> <span id="nav-log">Tagebuch</span>
+      </div>
+      <div class="nav-item" data-screen="profile">
+        <span class="nav-icon">◯</span> <span id="nav-profile">Profil</span>
+      </div>
+    </div>
+    <div class="sidebar-calorie-box">
+      <div class="sct-label" id="sc-lbl">Kalorien heute</div>
+      <div class="sct-val" id="sc-eaten">0 kcal</div>
+      <div class="sct-bar"><div class="sct-fill" id="sc-fill" style="width:0%"></div></div>
+      <div class="sct-rem" id="sc-rem">2000 kcal verbleibend</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main">
+
+    <!-- Dashboard -->
+    <section class="screen active" id="screen-dashboard">
+      <div class="dash-header">
+        <div class="dash-greeting" id="dash-greeting">Guten Morgen!</div>
+        <div class="dash-date" id="dash-date"></div>
+      </div>
+
+      <div class="dash-ring-wrap">
+        <div class="ring-container">
+          <canvas id="calorie-ring" width="200" height="200"></canvas>
+          <div class="ring-center">
+            <div class="ring-kcal" id="ring-eaten">0</div>
+            <div class="ring-unit">kcal</div>
+            <div class="ring-of" id="ring-of">von 2000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="macro-row">
+        <div class="macro-card">
+          <div class="macro-dot-row"><div class="macro-dot" style="background:var(--blue)"></div><span class="macro-lbl">Protein</span></div>
+          <div class="macro-val" id="m-protein">0g</div>
+          <div class="macro-tgt" id="m-protein-t">/ 50g</div>
+          <div class="prog-bar"><div class="prog-fill" id="m-protein-bar" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="macro-card">
+          <div class="macro-dot-row"><div class="macro-dot" style="background:var(--orange)"></div><span class="macro-lbl" id="lbl-carbs">Kohlenhydrate</span></div>
+          <div class="macro-val" id="m-carbs">0g</div>
+          <div class="macro-tgt">/ 260g</div>
+          <div class="prog-bar"><div class="prog-fill" id="m-carbs-bar" style="width:0%;background:var(--orange)"></div></div>
+        </div>
+        <div class="macro-card">
+          <div class="macro-dot-row"><div class="macro-dot" style="background:var(--pink)"></div><span class="macro-lbl" id="lbl-fat">Fett</span></div>
+          <div class="macro-val" id="m-fat">0g</div>
+          <div class="macro-tgt">/ 65g</div>
+          <div class="prog-bar"><div class="prog-fill" id="m-fat-bar" style="width:0%;background:var(--pink)"></div></div>
+        </div>
+      </div>
+
+      <div class="section-title" id="title-gaps">Nährstoff-Status</div>
+      <div class="gap-card" id="gap-card">
+        <div class="gap-row"><span class="gap-name">Protein</span><div class="gap-bar"><div class="gap-fill" id="gap-protein" style="width:0%;background:var(--pink)"></div></div><span class="gap-val" id="gv-protein">0 / 50g</span></div>
+        <div class="gap-row"><span class="gap-name" id="lbl-gap-carbs">Kohlenhydrate</span><div class="gap-bar"><div class="gap-fill" id="gap-carbs" style="width:0%;background:var(--orange)"></div></div><span class="gap-val" id="gv-carbs">0 / 260g</span></div>
+        <div class="gap-row"><span class="gap-name" id="lbl-gap-fat">Fett</span><div class="gap-bar"><div class="gap-fill" id="gap-fat" style="width:0%;background:var(--orange)"></div></div><span class="gap-val" id="gv-fat">0 / 65g</span></div>
+        <div class="gap-row"><span class="gap-name" id="lbl-gap-fiber">Ballaststoffe</span><div class="gap-bar"><div class="gap-fill" id="gap-fiber" style="width:0%;background:var(--pink)"></div></div><span class="gap-val" id="gv-fiber">0 / 25g</span></div>
+      </div>
+
+      <div class="section-title" id="title-reco">Was du noch essen solltest</div>
+      <div class="chip-row" id="reco-chips"></div>
+    </section>
+
+    <!-- Log -->
+    <section class="screen" id="screen-log">
+      <div class="log-header">
+        <div class="section-title" id="title-log" style="margin-bottom:0">Tagebuch</div>
+        <div class="log-total-badge" id="log-total">0 kcal</div>
+      </div>
+      <div id="log-list"></div>
+    </section>
+
+    <!-- Profile -->
+    <section class="screen" id="screen-profile">
+      <div class="section-title" id="title-profile">Profil</div>
+      <div style="margin-top:20px">
+        <div class="profile-avatar">👤</div>
+
+        <div class="profile-section">
+          <div class="profile-section-label" id="lbl-lang">Sprache</div>
+          <div class="lang-row">
+            <button class="lang-btn active" id="lang-de" onclick="App.setLang('de')">🇩🇪 Deutsch</button>
+            <button class="lang-btn" id="lang-en" onclick="App.setLang('en')">🇬🇧 English</button>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <div class="profile-section-label" id="lbl-name">Name</div>
+          <div class="profile-field"><input type="text" id="pf-name" placeholder="Dein Name"></div>
+        </div>
+
+        <div class="profile-section">
+          <div class="slider-field">
+            <div class="slider-field-header"><span class="slider-field-label" id="lbl-age">Alter</span><span class="slider-field-val" id="pf-age-val">25 Jahre</span></div>
+            <input type="range" class="portion-slider" id="pf-age" min="10" max="100" value="25" oninput="App.updateSlider('age',this.value)">
+          </div>
+          <div class="slider-field">
+            <div class="slider-field-header"><span class="slider-field-label" id="lbl-weight">Gewicht</span><span class="slider-field-val" id="pf-weight-val">70 kg</span></div>
+            <input type="range" class="portion-slider" id="pf-weight" min="30" max="200" value="70" oninput="App.updateSlider('weight',this.value)">
+          </div>
+          <div class="slider-field">
+            <div class="slider-field-header"><span class="slider-field-label" id="lbl-height">Größe</span><span class="slider-field-val" id="pf-height-val">175 cm</span></div>
+            <input type="range" class="portion-slider" id="pf-height" min="100" max="220" value="175" oninput="App.updateSlider('height',this.value)">
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <div class="profile-section-label" id="lbl-goal">Ziel</div>
+          <div class="goal-row">
+            <div class="goal-card" id="goal-lose" onclick="App.setGoal('lose')"><div class="goal-icon">↘</div><span id="lbl-lose">Abnehmen</span></div>
+            <div class="goal-card active" id="goal-maintain" onclick="App.setGoal('maintain')"><div class="goal-icon">→</div><span id="lbl-maintain">Halten</span></div>
+            <div class="goal-card" id="goal-gain" onclick="App.setGoal('gain')"><div class="goal-icon">↗</div><span id="lbl-gain">Zunehmen</span></div>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <div class="profile-section-label" id="lbl-calgoal">Kalorienziel</div>
+          <div class="profile-field" style="font-size:22px;font-weight:800;color:var(--orange);text-align:center;padding:16px">
+            <span id="pf-cal-preview">2000</span> kcal
+          </div>
+        </div>
+
+        <button class="save-btn" onclick="App.saveProfile()" id="btn-save">Speichern</button>
+      </div>
+    </section>
+
+    <!-- Food Detail -->
+    <section class="screen" id="screen-detail">
+      <div class="detail-hero" id="detail-hero">
+        <button class="detail-back" onclick="App.goBack()">← Zurück</button>
+        <span class="hero-emoji" id="detail-emoji">🥗</span>
+      </div>
+      <div class="detail-body">
+        <div class="detail-name" id="detail-name">-</div>
+        <div class="detail-brand" id="detail-brand"></div>
+
+        <div class="info-chips">
+          <div class="info-chip" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3)">
+            <div class="ic-val" style="color:var(--orange)" id="detail-kcal100">-</div>
+            <div class="ic-lbl" id="lbl-per100">pro 100g</div>
+          </div>
+          <div class="info-chip" style="background:rgba(0,188,212,.12);border:1px solid rgba(0,188,212,.3)">
+            <div class="ic-val" style="color:var(--teal)" id="detail-portion-size">-</div>
+            <div class="ic-lbl" id="lbl-avg-portion">Ø Portion</div>
+          </div>
+        </div>
+
+        <div class="card portion-card">
+          <div class="portion-header">
+            <span class="portion-lbl" id="lbl-portion-size">Portionsgröße</span>
+            <span class="portion-val" id="portion-display">100g</span>
+          </div>
+          <input type="range" class="portion-slider" id="portion-slider" min="10" max="500" value="100"
+            oninput="App.updatePortion(this.value)">
+          <div class="slider-ends"><span>10g</span><span>500g</span></div>
+          <div class="portion-kcal-live" id="portion-kcal-live">= 0 kcal</div>
+        </div>
+
+        <div class="section-title" id="lbl-nutr-table">Nährwerttabelle</div>
+        <div class="nutr-table">
+          <div class="nutr-head">
+            <div class="nutr-head-name"></div>
+            <div class="nutr-head-col">100g</div>
+            <div class="nutr-head-col active" id="nutr-head-portion">100g</div>
+          </div>
+          <div id="nutr-rows"></div>
+        </div>
+
+        <button class="add-btn" id="btn-add" onclick="App.addToLog()">➕ Zum Tagebuch hinzufügen</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Right Panel -->
+  <aside id="right-panel">
+    <div class="rp-header" id="rp-title">Lebensmittel hinzufügen</div>
+
+    <div class="rp-mic-section">
+      <button class="mic-btn" id="mic-btn" onclick="App.toggleMic()">🎙️</button>
+      <div class="mic-label" id="mic-label">Klicken zum Sprechen</div>
+      <div class="recognized-badge" id="recognized-badge"></div>
+    </div>
+
+    <div class="rp-search-field">
+      <div class="rp-search-input">
+        <input type="text" id="rp-search-input" placeholder="Lebensmittel eingeben...">
+        <button onclick="App.searchFromInput()">🔍</button>
+      </div>
+    </div>
+
+    <div class="spinner" id="rp-spinner">⟳</div>
+    <div class="rp-results" id="rp-results"></div>
+
+    <div class="rp-log-section" id="rp-log-section" style="display:none">
+      <div class="rp-log-header">
+        <span id="rp-log-title">Heute gegessen</span>
+        <span class="rp-log-total" id="rp-log-total">0 kcal</span>
+      </div>
+      <div id="rp-log-items"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

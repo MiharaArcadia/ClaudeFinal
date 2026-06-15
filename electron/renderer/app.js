@@ -1,0 +1,956 @@
+'use strict';
+
+// ─────────────────────────────────────────────────────────────────
+// DESIGN TOKENS
+// ─────────────────────────────────────────────────────────────────
+const C = {
+  orange: '#FF6B35', green: '#4CAF50', teal: '#00BCD4',
+  purple: '#9C27B0', blue: '#2196F3', pink: '#E91E63',
+  ringEmpty: '#2A2A2A', muted: '#9E9E9E',
+};
+
+// ─────────────────────────────────────────────────────────────────
+// TRANSLATIONS
+// ─────────────────────────────────────────────────────────────────
+const T = {
+  de: {
+    greeting_morning: 'Guten Morgen', greeting_afternoon: 'Guten Tag', greeting_evening: 'Guten Abend',
+    dash: 'Dashboard', log: 'Tagebuch', profile: 'Profil',
+    cal_today: 'Kalorien heute', remaining: 'kcal verbleibend',
+    gaps: 'Nährstoff-Status', reco: 'Was du noch essen solltest',
+    protein: 'Protein', carbs: 'Kohlenhydrate', fat: 'Fett', fiber: 'Ballaststoffe',
+    per100: 'pro 100g', avg_portion: 'Ø Portion', portion_size: 'Portionsgröße',
+    nutr_table: 'Nährwerttabelle', add_btn: '➕ Zum Tagebuch hinzufügen',
+    energy: 'Energie', sugar: 'Zucker', salt: 'Salz',
+    add_food: 'Lebensmittel hinzufügen', speak: 'Klicken zum Sprechen',
+    listening: 'Höre zu...', type_here: 'Lebensmittel eingeben...',
+    today_eaten: 'Heute gegessen', no_results: 'Keine Ergebnisse',
+    log_title: 'Tagebuch', nothing_logged: 'Noch nichts eingetragen.',
+    speak_a_food: 'Sprich oder tippe ein Lebensmittel!',
+    lang: 'Sprache', name: 'Name', age: 'Alter', weight: 'Gewicht',
+    height: 'Größe', goal: 'Ziel', calgoal: 'Kalorienziel', save: 'Speichern',
+    lose: 'Abnehmen', maintain: 'Halten', gain: 'Zunehmen',
+    added: 'Hinzugefügt!', saved: 'Gespeichert!',
+    back: '← Zurück', years: 'Jahre', kg: 'kg', cm: 'cm',
+  },
+  en: {
+    greeting_morning: 'Good morning', greeting_afternoon: 'Good afternoon', greeting_evening: 'Good evening',
+    dash: 'Dashboard', log: 'Food log', profile: 'Profile',
+    cal_today: 'Today\'s calories', remaining: 'kcal remaining',
+    gaps: 'Nutrient status', reco: 'What to eat next',
+    protein: 'Protein', carbs: 'Carbohydrates', fat: 'Fat', fiber: 'Fiber',
+    per100: 'per 100g', avg_portion: 'Avg. portion', portion_size: 'Portion size',
+    nutr_table: 'Nutrition facts', add_btn: '➕ Add to food log',
+    energy: 'Energy', sugar: 'Sugar', salt: 'Salt',
+    add_food: 'Add food', speak: 'Click to speak',
+    listening: 'Listening...', type_here: 'Type food name...',
+    today_eaten: 'Eaten today', no_results: 'No results found',
+    log_title: 'Food log', nothing_logged: 'Nothing logged yet.',
+    speak_a_food: 'Speak or type a food!',
+    lang: 'Language', name: 'Name', age: 'Age', weight: 'Weight',
+    height: 'Height', goal: 'Goal', calgoal: 'Calorie goal', save: 'Save',
+    lose: 'Lose weight', maintain: 'Maintain', gain: 'Gain weight',
+    added: 'Added!', saved: 'Saved!',
+    back: '← Back', years: 'years', kg: 'kg', cm: 'cm',
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+const State = {
+  lang: 'de',
+  profile: {
+    name: '', age: 25, weight: 70, height: 175,
+    goal: 'maintain', dailyCalorieGoal: 2000,
+  },
+  log: [],           // { id, food, grams }
+  currentScreen: 'dashboard',
+  prevScreen: 'dashboard',
+  currentFood: null, // Food being viewed in detail
+  currentPortion: 100,
+};
+
+// RDA values
+const RDA = { protein: 50, carbs: 260, fat: 65, fiber: 25 };
+
+const RECO = {
+  protein: ['🍗 Hähnchenbrust', '🥚 Eier', '🐟 Lachs', '🫘 Linsen', '🥛 Quark'],
+  carbs:   ['🌾 Haferflocken', '🍞 Vollkornbrot', '🍠 Süßkartoffeln', '🍚 Reis'],
+  fat:     ['🥑 Avocado', '🥜 Nüsse', '🐟 Lachs', '🌿 Olivenöl'],
+  fiber:   ['🍎 Äpfel', '🥦 Brokkoli', '🫘 Linsen', '🌾 Haferflocken', '🌱 Chiasamen'],
+};
+
+// ─────────────────────────────────────────────────────────────────
+// OPEN FOOD FACTS SERVICE
+// ─────────────────────────────────────────────────────────────────
+const FoodAPI = {
+  async search(query, lang = 'de') {
+    try {
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?` +
+        `search_terms=${encodeURIComponent(query)}&search_simple=1&action=process` +
+        `&json=1&lc=${lang}&fields=product_name,nutriments,image_url,serving_size,brands,_id&page_size=10`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return (data.products || [])
+        .map(p => FoodAPI.parse(p))
+        .filter(f => f.name && f.calories > 0);
+    } catch {
+      return FoodAPI.fallback(query);
+    }
+  },
+
+  parse(p) {
+    const n = p.nutriments || {};
+    const d = k => {
+      const v = n[k];
+      if (v == null) return 0;
+      return parseFloat(v) || 0;
+    };
+    return {
+      id: p._id || Math.random().toString(36),
+      name: p.product_name || '',
+      brand: p.brands || '',
+      imageUrl: p.image_url || '',
+      calories: d('energy-kcal_100g'),
+      protein: d('proteins_100g'),
+      carbs: d('carbohydrates_100g'),
+      fat: d('fat_100g'),
+      fiber: d('fiber_100g'),
+      sugar: d('sugars_100g'),
+      salt: d('salt_100g'),
+      defaultPortion: FoodAPI.servingGrams(p.serving_size),
+    };
+  },
+
+  servingGrams(s) {
+    if (!s) return null;
+    const m = s.match(/(\d+(?:\.\d+)?)/);
+    return m ? parseFloat(m[1]) : null;
+  },
+
+  defaultPortion(name) {
+    const n = name.toLowerCase();
+    const map = {
+      apfel: 182, apple: 182, banane: 120, banana: 120, orange: 130,
+      ei: 60, egg: 60, bread: 30, brot: 30, toast: 25,
+      hähnchen: 150, chicken: 150, lachs: 150, salmon: 150,
+      kartoffel: 150, potato: 150, tomate: 100, tomato: 100,
+      avocado: 150, joghurt: 150, yogurt: 150, milch: 240, milk: 240,
+      käse: 30, cheese: 30, reis: 180, rice: 180, pasta: 220,
+      haferflocken: 80, oats: 80, mandel: 28, almond: 28,
+    };
+    for (const [k, v] of Object.entries(map)) {
+      if (n.includes(k)) return v;
+    }
+    return 100;
+  },
+
+  fallback(q) {
+    const common = [
+      { id: 'apple', name: 'Apfel', brand: '', imageUrl: '', calories: 52, protein: 0.3, carbs: 14, fat: 0.2, fiber: 2.4, sugar: 10, salt: 0, defaultPortion: 182 },
+      { id: 'banana', name: 'Banane', brand: '', imageUrl: '', calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6, sugar: 12, salt: 0, defaultPortion: 120 },
+      { id: 'egg', name: 'Ei', brand: '', imageUrl: '', calories: 155, protein: 13, carbs: 1.1, fat: 11, fiber: 0, sugar: 1.1, salt: 0.4, defaultPortion: 60 },
+      { id: 'chicken', name: 'Hähnchenbrust', brand: '', imageUrl: '', calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0, sugar: 0, salt: 0.07, defaultPortion: 150 },
+      { id: 'oats', name: 'Haferflocken', brand: '', imageUrl: '', calories: 389, protein: 17, carbs: 66, fat: 7, fiber: 10.6, sugar: 1, salt: 0, defaultPortion: 80 },
+      { id: 'salmon', name: 'Lachs', brand: '', imageUrl: '', calories: 208, protein: 20, carbs: 0, fat: 13, fiber: 0, sugar: 0, salt: 0.06, defaultPortion: 150 },
+    ];
+    return common.filter(f => f.name.toLowerCase().includes(q.toLowerCase()) ||
+      (q.toLowerCase().includes('apfel') && f.id === 'apple') ||
+      (q.toLowerCase().includes('apple') && f.id === 'apple'));
+  },
+
+  nutriPer(food, key, grams) {
+    return (food[key] || 0) * grams / 100;
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// CALORIE RING (Chart.js)
+// ─────────────────────────────────────────────────────────────────
+let ringChart = null;
+
+function initRing() {
+  const ctx = document.getElementById('calorie-ring').getContext('2d');
+
+  // Gradient
+  const grad = ctx.createLinearGradient(0, 0, 200, 0);
+  grad.addColorStop(0,    C.orange);
+  grad.addColorStop(0.25, C.pink);
+  grad.addColorStop(0.5,  C.purple);
+  grad.addColorStop(0.75, C.blue);
+  grad.addColorStop(1,    C.teal);
+
+  ringChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [0, 2000],
+        backgroundColor: [grad, C.ringEmpty],
+        borderWidth: 0,
+        hoverOffset: 0,
+      }],
+    },
+    options: {
+      cutout: '66%',
+      rotation: -90,
+      circumference: 360,
+      animation: { duration: 600, easing: 'easeInOutQuart' },
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      events: [],
+    },
+  });
+}
+
+function updateRing(eaten, goal) {
+  if (!ringChart) return;
+  const remaining = Math.max(0, goal - eaten);
+  ringChart.data.datasets[0].data = [Math.max(eaten, 0.1), remaining];
+  ringChart.update();
+
+  document.getElementById('ring-eaten').textContent = Math.round(eaten);
+  document.getElementById('ring-of').textContent = `von ${goal}`;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// NUTRITION CALCULATIONS
+// ─────────────────────────────────────────────────────────────────
+function totals() {
+  return State.log.reduce((acc, e) => {
+    acc.calories += FoodAPI.nutriPer(e.food, 'calories', e.grams);
+    acc.protein  += FoodAPI.nutriPer(e.food, 'protein', e.grams);
+    acc.carbs    += FoodAPI.nutriPer(e.food, 'carbs', e.grams);
+    acc.fat      += FoodAPI.nutriPer(e.food, 'fat', e.grams);
+    acc.fiber    += FoodAPI.nutriPer(e.food, 'fiber', e.grams);
+    return acc;
+  }, { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+}
+
+function tdee(p) {
+  const bmr = 10 * p.weight + 6.25 * p.height - 5 * p.age + 5;
+  const t = Math.round(bmr * 1.55);
+  return p.goal === 'lose' ? t - 500 : p.goal === 'gain' ? t + 300 : t;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// UI UPDATE
+// ─────────────────────────────────────────────────────────────────
+function updateUI() {
+  const t = totals();
+  const goal = State.profile.dailyCalorieGoal || 2000;
+  const lang = State.lang;
+  const tx = T[lang];
+
+  // Ring
+  updateRing(t.calories, goal);
+
+  // Sidebar
+  document.getElementById('sc-eaten').textContent = `${Math.round(t.calories)} kcal`;
+  const pct = Math.min((t.calories / goal) * 100, 100);
+  document.getElementById('sc-fill').style.width = pct + '%';
+  const rem = Math.max(0, goal - t.calories);
+  document.getElementById('sc-rem').textContent = `${Math.round(rem)} ${tx.remaining}`;
+
+  // Macros
+  const setMacro = (id, barId, val, max) => {
+    document.getElementById(id).textContent = `${Math.round(val)}g`;
+    document.getElementById(barId).style.width = Math.min((val / max) * 100, 100) + '%';
+  };
+  setMacro('m-protein', 'm-protein-bar', t.protein, RDA.protein);
+  setMacro('m-carbs',   'm-carbs-bar',   t.carbs,   RDA.carbs);
+  setMacro('m-fat',     'm-fat-bar',     t.fat,     RDA.fat);
+
+  // Gaps
+  const gapColor = (v, max) => v >= max ? C.green : v >= max * 0.5 ? C.orange : C.pink;
+  const setGap = (fillId, valId, val, max, unit) => {
+    const el = document.getElementById(fillId);
+    el.style.width = Math.min((val / max) * 100, 100) + '%';
+    el.style.background = gapColor(val, max);
+    document.getElementById(valId).textContent = `${Math.round(val)} / ${max}${unit}`;
+  };
+  setGap('gap-protein', 'gv-protein', t.protein, RDA.protein, 'g');
+  setGap('gap-carbs',   'gv-carbs',   t.carbs,   RDA.carbs,   'g');
+  setGap('gap-fat',     'gv-fat',     t.fat,     RDA.fat,     'g');
+  setGap('gap-fiber',   'gv-fiber',   t.fiber,   RDA.fiber,   'g');
+
+  // Recommendations
+  const gaps = [
+    { key: 'protein', val: t.protein, max: RDA.protein },
+    { key: 'carbs',   val: t.carbs,   max: RDA.carbs },
+    { key: 'fat',     val: t.fat,     max: RDA.fat },
+    { key: 'fiber',   val: t.fiber,   max: RDA.fiber },
+  ].filter(g => g.val < g.max).sort((a, b) => (a.val / a.max) - (b.val / b.max));
+
+  const recos = new Set();
+  gaps.slice(0, 3).forEach(g => RECO[g.key].slice(0, 2).forEach(r => recos.add(r)));
+  const chipRow = document.getElementById('reco-chips');
+  chipRow.innerHTML = [...recos].map(r =>
+    `<div class="chip">${r}</div>`).join('');
+
+  // Log screen
+  renderLog(t, lang);
+
+  // Right panel log
+  renderRPLog(t, lang);
+
+  // Translate UI
+  translateUI(lang, tx);
+}
+
+function translateUI(lang, tx) {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const setPlaceholder = (id, val) => { const el = document.getElementById(id); if (el) el.placeholder = val; };
+
+  set('nav-dash', tx.dash);
+  set('nav-log', tx.log);
+  set('nav-profile', tx.profile);
+  set('sc-lbl', tx.cal_today);
+  set('title-gaps', tx.gaps);
+  set('title-reco', tx.reco);
+  set('lbl-carbs', tx.carbs);
+  set('lbl-fat', tx.fat);
+  set('lbl-gap-carbs', tx.carbs);
+  set('lbl-gap-fat', tx.fat);
+  set('lbl-gap-fiber', tx.fiber);
+  set('title-log', tx.log_title);
+  set('title-profile', tx.profile);
+  set('rp-title', tx.add_food);
+  set('rp-log-title', tx.today_eaten);
+  set('lbl-lang', tx.lang);
+  set('lbl-name', tx.name);
+  set('lbl-age', tx.age);
+  set('lbl-weight', tx.weight);
+  set('lbl-height', tx.height);
+  set('lbl-goal', tx.goal);
+  set('lbl-calgoal', tx.calgoal);
+  set('btn-save', tx.save);
+  set('lbl-lose', tx.lose);
+  set('lbl-maintain', tx.maintain);
+  set('lbl-gain', tx.gain);
+  set('lbl-per100', tx.per100);
+  set('lbl-avg-portion', tx.avg_portion);
+  set('lbl-portion-size', tx.portion_size);
+  set('lbl-nutr-table', tx.nutr_table);
+  set('btn-add', tx.add_btn);
+  set('detail-back-btn', tx.back);
+
+  setPlaceholder('rp-search-input', tx.type_here);
+  setPlaceholder('pf-name', lang === 'de' ? 'Dein Name' : 'Your name');
+
+  // Greeting
+  const h = new Date().getHours();
+  const greeting = h < 12 ? tx.greeting_morning : h < 17 ? tx.greeting_afternoon : tx.greeting_evening;
+  const name = State.profile.name || '';
+  set('dash-greeting', name ? `${greeting}, ${name}!` : `${greeting}!`);
+
+  // Date
+  const now = new Date();
+  const dateStr = lang === 'de'
+    ? now.toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    : now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  set('dash-date', dateStr);
+
+  // Mic label
+  const micLabel = document.getElementById('mic-label');
+  if (micLabel && !Voice.listening) micLabel.textContent = tx.speak;
+
+  // Lang buttons
+  document.getElementById('lang-de').classList.toggle('active', lang === 'de');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+}
+
+function renderLog(t, lang) {
+  const tx = T[lang];
+  const container = document.getElementById('log-list');
+  document.getElementById('log-total').textContent = `${Math.round(t.calories)} kcal`;
+
+  if (State.log.length === 0) {
+    container.innerHTML = `
+      <div class="log-empty">
+        <div class="log-empty-icon">🍽️</div>
+        <div style="font-size:15px;margin-bottom:8px">${tx.nothing_logged}</div>
+        <div style="font-size:13px;color:var(--muted)">${tx.speak_a_food}</div>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = State.log.map(entry => {
+    const kcal = FoodAPI.nutriPer(entry.food, 'calories', entry.grams);
+    const prot = FoodAPI.nutriPer(entry.food, 'protein', entry.grams);
+    const carbs = FoodAPI.nutriPer(entry.food, 'carbs', entry.grams);
+    return `
+      <div class="log-item">
+        <div class="log-item-icon">🍽️</div>
+        <div class="log-item-info">
+          <div class="log-item-name">${entry.food.name}</div>
+          <div class="log-item-g">${entry.grams}g</div>
+          <div class="log-item-macros">P: ${prot.toFixed(1)}g  K: ${carbs.toFixed(1)}g</div>
+        </div>
+        <div class="log-item-kcal">${Math.round(kcal)} kcal</div>
+        <button class="log-delete" onclick="App.removeFromLog('${entry.id}')">✕</button>
+      </div>`;
+  }).join('');
+}
+
+function renderRPLog(t, lang) {
+  const results = document.getElementById('rp-results');
+  const logSection = document.getElementById('rp-log-section');
+
+  if (results.children.length === 0 && !document.getElementById('rp-spinner').classList.contains('visible')) {
+    logSection.style.display = 'flex';
+    logSection.style.flexDirection = 'column';
+    results.style.display = 'none';
+
+    document.getElementById('rp-log-total').textContent = `${Math.round(t.calories)} kcal`;
+    const items = document.getElementById('rp-log-items');
+    items.innerHTML = State.log.length === 0
+      ? `<div class="rp-empty">${T[lang].nothing_logged}</div>`
+      : State.log.map(e => {
+          const kcal = FoodAPI.nutriPer(e.food, 'calories', e.grams);
+          return `<div class="rp-log-item">
+            <div class="rp-log-item-name">${e.food.name}</div>
+            <div class="rp-log-item-g">${e.grams}g</div>
+            <div class="rp-log-item-kcal">${Math.round(kcal)}</div>
+          </div>`;
+        }).join('');
+  } else {
+    logSection.style.display = 'none';
+    results.style.display = '';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// VOICE
+// ─────────────────────────────────────────────────────────────────
+const Voice = {
+  recognition: null,
+  listening: false,
+
+  init() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      console.warn('Speech recognition not available');
+      return;
+    }
+    this.recognition = new SpeechRecognition();
+    this.recognition.continuous = false;
+    this.recognition.interimResults = true;
+    this.recognition.maxAlternatives = 1;
+
+    this.recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map(r => r[0].transcript).join('').trim();
+      document.getElementById('rp-search-input').value = transcript;
+      document.getElementById('recognized-badge').textContent = `"${transcript}"`;
+      document.getElementById('recognized-badge').classList.add('visible');
+
+      if (event.results[event.results.length - 1].isFinal) {
+        this.stop();
+        if (transcript) App.searchFood(transcript);
+      }
+    };
+
+    this.recognition.onend = () => this.stop();
+    this.recognition.onerror = () => this.stop();
+  },
+
+  start() {
+    if (!this.recognition) this.init();
+    if (!this.recognition) return;
+    const lang = State.lang === 'de' ? 'de-DE' : 'en-US';
+    this.recognition.lang = lang;
+    try {
+      this.recognition.start();
+      this.listening = true;
+      const btn = document.getElementById('mic-btn');
+      btn.classList.add('listening');
+      const label = document.getElementById('mic-label');
+      label.textContent = T[State.lang].listening;
+      label.classList.add('active');
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  stop() {
+    this.listening = false;
+    if (this.recognition) {
+      try { this.recognition.stop(); } catch (_) {}
+    }
+    const btn = document.getElementById('mic-btn');
+    btn.classList.remove('listening');
+    const label = document.getElementById('mic-label');
+    label.textContent = T[State.lang].speak;
+    label.classList.remove('active');
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// ROUTER
+// ─────────────────────────────────────────────────────────────────
+const Router = {
+  go(screen) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => {
+      n.classList.toggle('active', n.dataset.screen === screen);
+    });
+    const el = document.getElementById(`screen-${screen}`);
+    if (el) el.classList.add('active');
+    State.prevScreen = State.currentScreen;
+    State.currentScreen = screen;
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// APP — public API called from HTML
+// ─────────────────────────────────────────────────────────────────
+const App = {
+
+  // ── Navigation ──────────────────────────────────────────────
+  navigate(screen) {
+    Router.go(screen);
+    updateUI();
+  },
+
+  goBack() {
+    Router.go(State.prevScreen || 'dashboard');
+    updateUI();
+  },
+
+  // ── Mic ─────────────────────────────────────────────────────
+  toggleMic() {
+    if (Voice.listening) {
+      Voice.stop();
+    } else {
+      document.getElementById('recognized-badge').classList.remove('visible');
+      document.getElementById('rp-search-input').value = '';
+      App.clearResults();
+      Voice.start();
+    }
+  },
+
+  // ── Search ──────────────────────────────────────────────────
+  searchFromInput() {
+    const q = document.getElementById('rp-search-input').value.trim();
+    if (q) App.searchFood(q);
+  },
+
+  async searchFood(query) {
+    const spinner = document.getElementById('rp-spinner');
+    const resultsEl = document.getElementById('rp-results');
+    const logSection = document.getElementById('rp-log-section');
+
+    spinner.classList.add('visible');
+    resultsEl.innerHTML = '';
+    logSection.style.display = 'none';
+    resultsEl.style.display = '';
+
+    const results = await FoodAPI.search(query, State.lang);
+    spinner.classList.remove('visible');
+
+    if (results.length === 0) {
+      resultsEl.innerHTML = `<div class="rp-empty">${T[State.lang].no_results}</div>`;
+      return;
+    }
+
+    resultsEl.innerHTML = results.map((food, i) => `
+      <div class="result-card ${i === 0 ? 'highlighted' : ''}" onclick="App.openDetail(${i})" data-idx="${i}">
+        <div class="result-thumb">
+          ${food.imageUrl
+            ? `<img src="${food.imageUrl}" alt="" onerror="this.parentElement.textContent='🍽️'">`
+            : '🍽️'}
+        </div>
+        <div class="result-info">
+          <div class="result-name">${food.name}</div>
+          ${food.brand ? `<div class="result-brand">${food.brand}</div>` : ''}
+        </div>
+        <div class="result-kcal">${Math.round(food.calories)} kcal</div>
+        <span class="rp-chevron">›</span>
+      </div>`).join('');
+
+    // Store results for index access
+    App._lastResults = results;
+  },
+
+  _lastResults: [],
+
+  clearResults() {
+    document.getElementById('rp-results').innerHTML = '';
+    App._lastResults = [];
+  },
+
+  // ── Food Detail ─────────────────────────────────────────────
+  openDetail(idx) {
+    const food = App._lastResults[idx];
+    if (!food) return;
+    State.currentFood = food;
+    State.currentPortion = food.defaultPortion || FoodAPI.defaultPortion(food.name);
+
+    // Populate detail screen
+    document.getElementById('detail-name').textContent = food.name;
+    document.getElementById('detail-brand').textContent = food.brand || '';
+    document.getElementById('detail-kcal100').textContent = `${Math.round(food.calories)} kcal`;
+    document.getElementById('detail-portion-size').textContent = `${Math.round(State.currentPortion)}g`;
+
+    // Hero image
+    const hero = document.getElementById('detail-hero');
+    const emoji = document.getElementById('detail-emoji');
+    if (food.imageUrl) {
+      hero.style.backgroundImage = `url('${food.imageUrl}')`;
+      hero.style.backgroundSize = 'cover';
+      hero.style.backgroundPosition = 'center';
+      emoji.style.display = 'none';
+    } else {
+      hero.style.backgroundImage = 'none';
+      emoji.style.display = '';
+    }
+
+    document.getElementById('portion-slider').value = State.currentPortion;
+    App.updatePortion(State.currentPortion);
+
+    // Nutrition table rows
+    const lang = State.lang;
+    const tx = T[lang];
+    const rows = [
+      { label: tx.energy,  key: 'calories', unit: 'kcal', color: C.orange },
+      { label: tx.protein, key: 'protein',  unit: 'g',    color: C.blue },
+      { label: tx.carbs,   key: 'carbs',    unit: 'g',    color: C.teal },
+      { label: `  ${tx.sugar}`, key: 'sugar', unit: 'g',  color: '#00BCD488' },
+      { label: tx.fat,     key: 'fat',      unit: 'g',    color: C.pink },
+      { label: tx.fiber,   key: 'fiber',    unit: 'g',    color: C.green },
+      { label: tx.salt,    key: 'salt',     unit: 'g',    color: C.muted },
+    ];
+
+    document.getElementById('nutr-rows').innerHTML = rows.map(r => {
+      const per100 = food[r.key] || 0;
+      const perP = FoodAPI.nutriPer(food, r.key, State.currentPortion);
+      const fmt = (v, u) => u === 'kcal' ? `${Math.round(v)} ${u}` : `${v.toFixed(r.key === 'salt' ? 2 : 1)}${u}`;
+      return `<div class="nutr-row" data-key="${r.key}">
+        <div class="nutr-color-bar" style="background:${r.color}"></div>
+        <div class="nutr-name">${r.label}</div>
+        <div class="nutr-100g">${fmt(per100, r.unit)}</div>
+        <div class="nutr-portion-val" id="nutr-p-${r.key}">${fmt(perP, r.unit)}</div>
+      </div>`;
+    }).join('');
+
+    Router.go('detail');
+  },
+
+  updatePortion(grams) {
+    State.currentPortion = parseFloat(grams);
+    document.getElementById('portion-display').textContent = `${Math.round(grams)}g`;
+    document.getElementById('nutr-head-portion').textContent = `${Math.round(grams)}g`;
+
+    if (!State.currentFood) return;
+    const food = State.currentFood;
+
+    const kcal = FoodAPI.nutriPer(food, 'calories', grams);
+    document.getElementById('portion-kcal-live').textContent = `= ${Math.round(kcal)} kcal`;
+
+    const rows = [
+      { key: 'calories', unit: 'kcal' }, { key: 'protein', unit: 'g' },
+      { key: 'carbs', unit: 'g' }, { key: 'sugar', unit: 'g' },
+      { key: 'fat', unit: 'g' }, { key: 'fiber', unit: 'g' },
+      { key: 'salt', unit: 'g' },
+    ];
+    rows.forEach(r => {
+      const el = document.getElementById(`nutr-p-${r.key}`);
+      if (!el) return;
+      const v = FoodAPI.nutriPer(food, r.key, grams);
+      el.textContent = r.unit === 'kcal' ? `${Math.round(v)} kcal`
+        : `${v.toFixed(r.key === 'salt' ? 2 : 1)}g`;
+    });
+  },
+
+  addToLog() {
+    if (!State.currentFood) return;
+    const entry = {
+      id: Date.now().toString(36),
+      food: State.currentFood,
+      grams: State.currentPortion,
+    };
+    State.log.push(entry);
+    App.saveLog();
+    App.clearResults();
+    showToast(T[State.lang].added);
+    Router.go('dashboard');
+    updateUI();
+  },
+
+  removeFromLog(id) {
+    State.log = State.log.filter(e => e.id !== id);
+    App.saveLog();
+    updateUI();
+  },
+
+  // ── Profile ─────────────────────────────────────────────────
+  setLang(lang) {
+    State.lang = lang;
+    App.saveProfile(true);
+    updateUI();
+  },
+
+  setGoal(goal) {
+    State.profile.goal = goal;
+    document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('active'));
+    document.getElementById(`goal-${goal}`).classList.add('active');
+    App.recalcCalGoal();
+  },
+
+  updateSlider(field, val) {
+    val = parseFloat(val);
+    const tx = T[State.lang];
+    const units = { age: tx.years, weight: tx.kg, height: tx.cm };
+    document.getElementById(`pf-${field}-val`).textContent = `${Math.round(val)} ${units[field]}`;
+    State.profile[field] = val;
+    App.recalcCalGoal();
+  },
+
+  recalcCalGoal() {
+    const p = {
+      ...State.profile,
+      name: document.getElementById('pf-name').value || '',
+      age: parseFloat(document.getElementById('pf-age').value),
+      weight: parseFloat(document.getElementById('pf-weight').value),
+      height: parseFloat(document.getElementById('pf-height').value),
+    };
+    const goal = tdee(p);
+    document.getElementById('pf-cal-preview').textContent = goal;
+    State.profile.dailyCalorieGoal = goal;
+  },
+
+  saveProfile(silent = false) {
+    State.profile.name = document.getElementById('pf-name').value.trim();
+    State.profile.age = parseFloat(document.getElementById('pf-age').value);
+    State.profile.weight = parseFloat(document.getElementById('pf-weight').value);
+    State.profile.height = parseFloat(document.getElementById('pf-height').value);
+    State.profile.language = State.lang;
+    State.profile.dailyCalorieGoal = tdee(State.profile);
+
+    if (window.electronAPI) {
+      window.electronAPI.storeSet('profile', State.profile);
+      window.electronAPI.storeSet('lang', State.lang);
+    } else {
+      localStorage.setItem('nv_profile', JSON.stringify(State.profile));
+      localStorage.setItem('nv_lang', State.lang);
+    }
+    if (!silent) showToast(T[State.lang].saved);
+    updateUI();
+  },
+
+  saveLog() {
+    const data = State.log.map(e => ({ id: e.id, food: e.food, grams: e.grams }));
+    if (window.electronAPI) {
+      window.electronAPI.storeSet('log_' + todayKey(), data);
+    } else {
+      localStorage.setItem('nv_log_' + todayKey(), JSON.stringify(data));
+    }
+  },
+
+  async loadData() {
+    if (window.electronAPI) {
+      const profile = await window.electronAPI.storeGet('profile');
+      const lang = await window.electronAPI.storeGet('lang');
+      const log = await window.electronAPI.storeGet('log_' + todayKey());
+      if (profile) State.profile = { ...State.profile, ...profile };
+      if (lang) State.lang = lang;
+      if (log) State.log = log;
+    } else {
+      try {
+        const p = localStorage.getItem('nv_profile');
+        const l = localStorage.getItem('nv_lang');
+        const lg = localStorage.getItem('nv_log_' + todayKey());
+        if (p) State.profile = { ...State.profile, ...JSON.parse(p) };
+        if (l) State.lang = l;
+        if (lg) State.log = JSON.parse(lg);
+      } catch (_) {}
+    }
+    return !!State.profile.name;
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// ONBOARDING
+// ─────────────────────────────────────────────────────────────────
+const Onboarding = {
+  step: 0,
+  data: { lang: 'de', name: '', age: 25, weight: 70, height: 175, goal: 'maintain' },
+
+  steps: [
+    // 0: Language
+    (ob) => `
+      <div class="ob-title">${ob.data.lang === 'de' ? 'Willkommen!' : 'Welcome!'}</div>
+      <div class="ob-sub">${ob.data.lang === 'de' ? 'Wähle deine Sprache' : 'Choose your language'}</div>
+      <div class="lang-row" style="margin-top:12px">
+        <button class="lang-btn ${ob.data.lang === 'de' ? 'active' : ''}" onclick="Onboarding.data.lang='de';Onboarding.render()">🇩🇪 Deutsch</button>
+        <button class="lang-btn ${ob.data.lang === 'en' ? 'active' : ''}" onclick="Onboarding.data.lang='en';Onboarding.render()">🇬🇧 English</button>
+      </div>`,
+
+    // 1: Name
+    (ob) => {
+      const tx = T[ob.data.lang];
+      return `<div class="ob-title">${tx.name === 'Name' ? (ob.data.lang === 'de' ? 'Wie heißt du?' : "What's your name?") : ''}</div>
+      <input class="ob-input" id="ob-name" placeholder="${ob.data.lang === 'de' ? 'Dein Name' : 'Your name'}" value="${ob.data.name}" oninput="Onboarding.data.name=this.value">`;
+    },
+
+    // 2: Stats
+    (ob) => {
+      const tx = T[ob.data.lang];
+      return `<div class="ob-title">${ob.data.lang === 'de' ? 'Deine Daten' : 'Your stats'}</div>
+      <div class="slider-field">
+        <div class="slider-field-header"><span class="slider-field-label">${tx.age}</span><span id="ob-age-v">${ob.data.age} ${tx.years}</span></div>
+        <input type="range" class="portion-slider" min="10" max="100" value="${ob.data.age}" oninput="Onboarding.data.age=+this.value;document.getElementById('ob-age-v').textContent=this.value+' ${tx.years}'">
+      </div>
+      <div class="slider-field">
+        <div class="slider-field-header"><span class="slider-field-label">${tx.weight}</span><span id="ob-w-v">${ob.data.weight} kg</span></div>
+        <input type="range" class="portion-slider" min="30" max="200" value="${ob.data.weight}" oninput="Onboarding.data.weight=+this.value;document.getElementById('ob-w-v').textContent=this.value+' kg'">
+      </div>
+      <div class="slider-field">
+        <div class="slider-field-header"><span class="slider-field-label">${tx.height}</span><span id="ob-h-v">${ob.data.height} cm</span></div>
+        <input type="range" class="portion-slider" min="100" max="220" value="${ob.data.height}" oninput="Onboarding.data.height=+this.value;document.getElementById('ob-h-v').textContent=this.value+' cm'">
+      </div>`;
+    },
+
+    // 3: Goal
+    (ob) => {
+      const tx = T[ob.data.lang];
+      const goal = ob.data.goal;
+      return `<div class="ob-title">${tx.goal}</div>
+      <div class="goal-row" style="margin-top:20px">
+        <div class="goal-card ${goal==='lose'?'active':''}" onclick="Onboarding.data.goal='lose';Onboarding.render()"><div class="goal-icon">↘</div>${tx.lose}</div>
+        <div class="goal-card ${goal==='maintain'?'active':''}" onclick="Onboarding.data.goal='maintain';Onboarding.render()"><div class="goal-icon">→</div>${tx.maintain}</div>
+        <div class="goal-card ${goal==='gain'?'active':''}" onclick="Onboarding.data.goal='gain';Onboarding.render()"><div class="goal-icon">↗</div>${tx.gain}</div>
+      </div>`;
+    },
+
+    // 4: Summary
+    (ob) => {
+      const d = ob.data;
+      const cal = tdee({ ...d, dailyCalorieGoal: 0 });
+      const tx = T[d.lang];
+      return `<div class="ob-title">${tx.calgoal}</div>
+      <div style="text-align:center;margin:24px 0">
+        <div style="font-size:72px;font-weight:900;background:linear-gradient(90deg,var(--orange),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent">${cal}</div>
+        <div style="font-size:18px;color:var(--muted)">kcal / ${d.lang==='de'?'Tag':'day'}</div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;padding:16px">
+        ${[['Name', d.name || '-'], [tx.age, `${d.age} ${tx.years}`], [tx.weight, `${d.weight} kg`], [tx.height, `${d.height} cm`], [tx.goal, T[d.lang][d.goal]]]
+          .map(([l,v]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--ring-empty);font-size:13px"><span style="color:var(--muted)">${l}</span><span style="font-weight:600">${v}</span></div>`).join('')}
+      </div>`;
+    },
+  ],
+
+  render() {
+    document.getElementById('ob-content').innerHTML = this.steps[this.step](this);
+    // Update step indicators
+    for (let i = 0; i < 5; i++) {
+      document.getElementById(`ob-s${i}`).classList.toggle('done', i <= this.step);
+    }
+    const tx = T[this.data.lang];
+    document.getElementById('ob-next').textContent = this.step < 4 ? tx.next || 'Weiter' : tx.start || 'Loslegen!';
+  },
+
+  next() {
+    if (this.step < 4) {
+      this.step++;
+      this.render();
+    } else {
+      this.finish();
+    }
+  },
+
+  finish() {
+    const d = this.data;
+    State.lang = d.lang;
+    State.profile = {
+      name: d.name || 'User',
+      age: d.age,
+      weight: d.weight,
+      height: d.height,
+      goal: d.goal,
+      language: d.lang,
+      dailyCalorieGoal: tdee(d),
+    };
+
+    // Sync profile UI
+    document.getElementById('pf-name').value = State.profile.name;
+    document.getElementById('pf-age').value = d.age;
+    document.getElementById('pf-weight').value = d.weight;
+    document.getElementById('pf-height').value = d.height;
+    document.getElementById(`goal-${d.goal}`).classList.add('active');
+    document.getElementById('pf-cal-preview').textContent = State.profile.dailyCalorieGoal;
+
+    App.saveProfile(true);
+    document.getElementById('onboarding').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    updateUI();
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  // Nav click handlers
+  document.querySelectorAll('.nav-item[data-screen]').forEach(item => {
+    item.addEventListener('click', () => App.navigate(item.dataset.screen));
+  });
+
+  // Search input enter key
+  document.getElementById('rp-search-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') App.searchFromInput();
+  });
+
+  // Init Chart.js ring
+  initRing();
+
+  // Load saved data
+  const hasProfile = await App.loadData();
+
+  if (hasProfile) {
+    // Restore profile UI
+    const p = State.profile;
+    document.getElementById('pf-name').value = p.name || '';
+    document.getElementById('pf-age').value = p.age || 25;
+    document.getElementById('pf-weight').value = p.weight || 70;
+    document.getElementById('pf-height').value = p.height || 175;
+    ['lose', 'maintain', 'gain'].forEach(g => {
+      document.getElementById(`goal-${g}`).classList.toggle('active', p.goal === g);
+    });
+    document.getElementById('pf-cal-preview').textContent = p.dailyCalorieGoal || 2000;
+    ['age', 'weight', 'height'].forEach(f => {
+      if (p[f]) {
+        const tx = T[State.lang];
+        const units = { age: tx.years, weight: tx.kg, height: tx.cm };
+        const el = document.getElementById(`pf-${f}-val`);
+        if (el) el.textContent = `${Math.round(p[f])} ${units[f]}`;
+      }
+    });
+
+    document.getElementById('onboarding').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    updateUI();
+  } else {
+    // Show onboarding
+    Onboarding.render();
+    document.getElementById('ob-next').addEventListener('click', () => Onboarding.next());
+  }
+
+  // Voice init
+  Voice.init();
+});
