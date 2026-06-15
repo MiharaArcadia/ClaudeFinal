@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriVoice – App Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D0D;
+    --surface: #1A1A1A;
+    --card: #222222;
+    --ring-empty: #2A2A2A;
+    --orange: #FF6B35;
+    --green: #4CAF50;
+    --teal: #00BCD4;
+    --purple: #9C27B0;
+    --blue: #2196F3;
+    --pink: #E91E63;
+    --text: #FFFFFF;
+    --muted: #9E9E9E;
+  }
+
+  body {
+    background: #111;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .brand {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--orange), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+  }
+
+  /* Screen tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: var(--card);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab.active { background: var(--orange); color: #fff; }
+
+  /* Phone frame */
+  .screens {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .phone {
+    width: 375px;
+    background: var(--bg);
+    border-radius: 40px;
+    padding: 48px 0 32px;
+    position: relative;
+    box-shadow: 0 0 0 2px #333, 0 30px 80px rgba(0,0,0,.8);
+    overflow: hidden;
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 18px; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 6px;
+    background: #333;
+    border-radius: 3px;
+  }
+  .screen-label {
+    position: absolute;
+    top: -28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .phone-inner { padding: 0 20px; }
+
+  /* Status bar */
+  .statusbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  /* Appbar */
+  .appbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 20px;
+  }
+  .appbar-title { font-size: 18px; font-weight: 700; }
+  .icon-btn {
+    width: 38px; height: 38px;
+    background: var(--card);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-btn svg { width: 18px; height: 18px; fill: var(--muted); }
+
+  /* ──────────────── DASHBOARD ──────────────── */
+
+  /* Greeting */
+  .greeting { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+  .date { font-size: 12px; color: var(--muted); margin-bottom: 28px; }
+
+  /* Donut ring */
+  .ring-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+  .ring-container {
+    position: relative;
+    width: 200px; height: 200px;
+  }
+  .donut-svg { width: 200px; height: 200px; transform: rotate(-90deg); }
+  .ring-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .ring-kcal { font-size: 36px; font-weight: 900; line-height: 1; }
+  .ring-unit { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .ring-of { font-size: 11px; color: var(--muted); }
+
+  /* Macro row */
+  .macro-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .macro-card {
+    flex: 1;
+    background: var(--card);
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .macro-dot-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .macro-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .macro-label { font-size: 11px; color: var(--muted); }
+  .macro-val { font-size: 18px; font-weight: 800; margin-bottom: 1px; }
+  .macro-target { font-size: 10px; color: var(--muted); margin-bottom: 8px; }
+  .progress-bar { height: 4px; border-radius: 2px; background: var(--ring-empty); overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; }
+
+  /* Section heading */
+  .section-head {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  /* Nutrient gaps */
+  .gap-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .gap-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .gap-row:last-child { margin-bottom: 0; }
+  .gap-name { font-size: 12px; width: 90px; flex-shrink: 0; }
+  .gap-bar { flex: 1; height: 6px; border-radius: 3px; background: var(--ring-empty); overflow: hidden; }
+  .gap-fill { height: 100%; border-radius: 3px; }
+  .gap-val { font-size: 10px; color: var(--muted); width: 72px; text-align: right; flex-shrink: 0; }
+
+  /* Chip row */
+  .chip-row { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 80px; padding-bottom: 4px; }
+  .chip-row::-webkit-scrollbar { display: none; }
+  .chip {
+    background: var(--card);
+    border: 1px solid var(--orange);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* FAB mic */
+  .fab-wrap { display: flex; justify-content: center; }
+  .fab {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--pink));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(255,107,53,.5);
+    font-size: 28px;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 20px 4px;
+    background: var(--surface);
+    margin-top: 12px;
+  }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .nav-item svg { width: 22px; height: 22px; }
+  .nav-label { font-size: 10px; }
+  .nav-item.active .nav-label { color: var(--orange); }
+  .nav-item.active svg { fill: var(--orange); }
+  .nav-item:not(.active) .nav-label { color: var(--muted); }
+  .nav-item:not(.active) svg { fill: var(--muted); }
+
+  /* ──────────────── FOOD DETAIL ──────────────── */
+  .food-hero {
+    height: 180px;
+    background: linear-gradient(160deg, #2a2a2a, #1a1a1a);
+    margin: -48px 0 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    border-radius: 0 0 28px 28px;
+    margin-bottom: 20px;
+  }
+  .food-name { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .food-brand { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .chip-row-info { display: flex; gap: 12px; margin-bottom: 24px; }
+  .info-chip {
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .info-chip .ic-val { font-size: 20px; font-weight: 800; }
+  .info-chip .ic-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  .portion-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+  .portion-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .portion-label { font-size: 12px; color: var(--muted); }
+  .portion-val { font-size: 16px; font-weight: 700; }
+  .slider-track {
+    width: 100%; height: 4px;
+    background: var(--ring-empty);
+    border-radius: 2px;
+    position: relative;
+    margin: 12px 0;
+  }
+  .slider-fill { height: 100%; border-radius: 2px; background: var(--orange); width: 55%; }
+  .slider-thumb {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    left: 55%;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 8px rgba(255,107,53,.6);
+  }
+  .portion-kcal { text-align: center; font-size: 22px; font-weight: 800; color: var(--orange); }
+
+  .nutr-table {
+    background: var(--card);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .nutr-head {
+    display: flex;
+    padding: 10px 16px 8px;
+    border-bottom: 1px solid var(--ring-empty);
+  }
+  .nutr-head-label { flex: 1; }
+  .nutr-head-col { width: 80px; text-align: right; font-size: 11px; color: var(--muted); }
+  .nutr-head-col.active { color: var(--orange); font-weight: 600; }
+  .nutr-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--ring-empty);
+  }
+  .nutr-row:last-child { border-bottom: none; }
+  .nutr-bar { width: 4px; height: 14px; border-radius: 2px; margin-right: 8px; flex-shrink: 0; }
+  .nutr-name { flex: 1; font-size: 13px; }
+  .nutr-100 { width: 80px; text-align: right; font-size: 12px; color: var(--muted); }
+  .nutr-portion { width: 80px; text-align: right; font-size: 12px; font-weight: 600; }
+
+  .add-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 8px;
+  }
+
+  /* ──────────────── VOICE SEARCH ──────────────── */
+  .search-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .search-input {
+    flex: 1;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .search-input svg { width: 16px; height: 16px; fill: var(--muted); flex-shrink: 0; }
+  .mic-btn-sm {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--pink));
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+    box-shadow: 0 0 16px rgba(255,107,53,.4);
+  }
+  /* Pulsing rings */
+  .pulse-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    opacity: 0;
+    animation: pulse 1.8s ease-out infinite;
+  }
+  .pulse-ring:nth-child(1) { width: 70px; height: 70px; animation-delay: 0s; }
+  .pulse-ring:nth-child(2) { width: 95px; height: 95px; animation-delay: .4s; }
+  .pulse-ring:nth-child(3) { width: 120px; height: 120px; animation-delay: .8s; }
+  @keyframes pulse {
+    0% { transform: scale(.8); opacity: .6; }
+    100% { transform: scale(1.2); opacity: 0; }
+  }
+  .pulse-inner {
+    position: relative;
+    width: 120px; height: 120px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mic-center {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--orange), var(--pink));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 0 20px rgba(255,107,53,.5);
+    z-index: 1;
+  }
+  .listening-text {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .recognized-text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .result-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .result-img {
+    width: 52px; height: 52px;
+    background: var(--surface);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .result-info { flex: 1; }
+  .result-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .result-brand { font-size: 11px; color: var(--muted); }
+  .result-kcal { text-align: right; }
+  .result-kcal-val { font-size: 16px; font-weight: 800; color: var(--orange); }
+  .result-kcal-unit { font-size: 10px; color: var(--muted); }
+  .chevron { color: var(--muted); font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h1>App Mockup</h1>
+<div class="brand">NutriVoice</div>
+
+<div class="screens">
+
+  <!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+  <div style="position:relative; margin-top: 32px;">
+    <div class="screen-label">Dashboard</div>
+    <div class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>●●● 100%</span>
+      </div>
+      <div class="appbar">
+        <div>
+          <div class="greeting">Guten Morgen, Max! 👋</div>
+          <div class="date">Montag, 15. Juni 2026</div>
+        </div>
+        <div class="icon-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+        </div>
+      </div>
+      <div class="phone-inner">
+
+        <!-- Donut Ring -->
+        <div class="ring-wrap">
+          <div class="ring-container">
+            <svg class="donut-svg" viewBox="0 0 200 200">
+              <!-- empty -->
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#2A2A2A" stroke-width="28"/>
+              <!-- gradient ring via conic - use multiple arcs -->
+              <defs>
+                <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FF6B35"/>
+                  <stop offset="100%" stop-color="#E91E63"/>
+                </linearGradient>
+                <linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#E91E63"/>
+                  <stop offset="100%" stop-color="#9C27B0"/>
+                </linearGradient>
+                <linearGradient id="rg3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#9C27B0"/>
+                  <stop offset="100%" stop-color="#2196F3"/>
+                </linearGradient>
+              </defs>
+              <!-- 65% filled: 0.65 * 360 = 234 deg → stroke-dasharray on circumference 471.24 -->
+              <!-- circumference = 2π×75 = 471.24 -->
+              <!-- 65% = 306.3 -->
+              <circle cx="100" cy="100" r="75" fill="none"
+                stroke="url(#rg1)" stroke-width="28"
+                stroke-dasharray="160 471.24" stroke-dashoffset="0"
+                stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="75" fill="none"
+                stroke="url(#rg2)" stroke-width="28"
+                stroke-dasharray="100 471.24" stroke-dashoffset="-160"
+                stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="75" fill="none"
+                stroke="url(#rg3)" stroke-width="28"
+                stroke-dasharray="46 471.24" stroke-dashoffset="-260"
+                stroke-linecap="round"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-kcal">1.340</div>
+              <div class="ring-unit">kcal</div>
+              <div class="ring-of">von 2.000</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macro cards -->
+        <div class="macro-row">
+          <div class="macro-card">
+            <div class="macro-dot-row">
+              <div class="macro-dot" style="background:var(--blue)"></div>
+              <span class="macro-label">Protein</span>
+            </div>
+            <div class="macro-val">62g</div>
+            <div class="macro-target">/ 50g</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--green)"></div></div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-dot-row">
+              <div class="macro-dot" style="background:var(--orange)"></div>
+              <span class="macro-label">Kohlenhydrate</span>
+            </div>
+            <div class="macro-val">130g</div>
+            <div class="macro-target">/ 260g</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:50%;background:var(--orange)"></div></div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-dot-row">
+              <div class="macro-dot" style="background:var(--pink)"></div>
+              <span class="macro-label">Fett</span>
+            </div>
+            <div class="macro-val">38g</div>
+            <div class="macro-target">/ 65g</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:58%;background:var(--pink)"></div></div>
+          </div>
+        </div>
+
+        <!-- Nutrient gaps -->
+        <div class="section-head">Nährstoff-Status</div>
+        <div class="gap-card">
+          <div class="gap-row">
+            <span class="gap-name">Protein</span>
+            <div class="gap-bar"><div class="gap-fill" style="width:100%;background:var(--green)"></div></div>
+            <span class="gap-val">62 / 50g ✓</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-name">Kohlenhydrate</span>
+            <div class="gap-bar"><div class="gap-fill" style="width:50%;background:var(--orange)"></div></div>
+            <span class="gap-val">130 / 260g</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-name">Fett</span>
+            <div class="gap-bar"><div class="gap-fill" style="width:58%;background:var(--orange)"></div></div>
+            <span class="gap-val">38 / 65g</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-name">Ballaststoffe</span>
+            <div class="gap-bar"><div class="gap-fill" style="width:28%;background:var(--pink)"></div></div>
+            <span class="gap-val">7 / 25g</span>
+          </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="section-head">Was du noch essen solltest</div>
+        <div class="chip-row">
+          <div class="chip">🍎 Äpfel</div>
+          <div class="chip">🥦 Brokkoli</div>
+          <div class="chip">🌾 Haferflocken</div>
+          <div class="chip">🥑 Avocado</div>
+          <div class="chip">🫘 Linsen</div>
+        </div>
+
+        <!-- FAB -->
+        <div class="fab-wrap">
+          <div class="fab">🎙️</div>
+        </div>
+      </div>
+
+      <!-- Bottom nav -->
+      <div class="bottom-nav">
+        <div class="nav-item active">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+          <span class="nav-label">Dashboard</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          <span class="nav-label">Tagebuch</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span class="nav-label">Profil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ FOOD DETAIL ═══════════════════ -->
+  <div style="position:relative; margin-top: 32px;">
+    <div class="screen-label">Food Detail</div>
+    <div class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>●●● 100%</span>
+      </div>
+      <!-- Hero -->
+      <div class="food-hero">🍎</div>
+      <div class="phone-inner">
+        <div class="food-name">Apfel</div>
+        <div class="food-brand">Frisches Obst · Natur</div>
+
+        <div class="chip-row-info">
+          <div class="info-chip" style="background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3)">
+            <div class="ic-val" style="color:var(--orange)">52 kcal</div>
+            <div class="ic-label">pro 100g</div>
+          </div>
+          <div class="info-chip" style="background:rgba(0,188,212,.12);border:1px solid rgba(0,188,212,.3)">
+            <div class="ic-val" style="color:var(--teal)">182g</div>
+            <div class="ic-label">Ø Portion</div>
+          </div>
+        </div>
+
+        <!-- Portion slider -->
+        <div class="portion-card">
+          <div class="portion-header">
+            <span class="portion-label">Portionsgröße</span>
+            <span class="portion-val">182g</span>
+          </div>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:12px">
+            <span>10g</span><span>500g</span>
+          </div>
+          <div class="portion-kcal">= 95 kcal</div>
+        </div>
+
+        <!-- Nutrition table -->
+        <div class="section-head">Nährwerttabelle</div>
+        <div class="nutr-table">
+          <div class="nutr-head">
+            <div class="nutr-head-label"></div>
+            <div class="nutr-head-col">100g</div>
+            <div class="nutr-head-col active">182g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--orange)"></div>
+            <div class="nutr-name">Energie</div>
+            <div class="nutr-100">52 kcal</div>
+            <div class="nutr-portion">95 kcal</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--blue)"></div>
+            <div class="nutr-name">Protein</div>
+            <div class="nutr-100">0.3g</div>
+            <div class="nutr-portion">0.5g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--teal)"></div>
+            <div class="nutr-name">Kohlenhydrate</div>
+            <div class="nutr-100">14.0g</div>
+            <div class="nutr-portion">25.5g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:rgba(0,188,212,.4)"></div>
+            <div class="nutr-name" style="color:var(--muted);font-size:11px">  davon Zucker</div>
+            <div class="nutr-100">10.0g</div>
+            <div class="nutr-portion">18.2g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--pink)"></div>
+            <div class="nutr-name">Fett</div>
+            <div class="nutr-100">0.2g</div>
+            <div class="nutr-portion">0.4g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--green)"></div>
+            <div class="nutr-name">Ballaststoffe</div>
+            <div class="nutr-100">2.4g</div>
+            <div class="nutr-portion">4.4g</div>
+          </div>
+          <div class="nutr-row">
+            <div class="nutr-bar" style="background:var(--muted)"></div>
+            <div class="nutr-name">Salz</div>
+            <div class="nutr-100">0.00g</div>
+            <div class="nutr-portion">0.00g</div>
+          </div>
+        </div>
+
+        <div class="add-btn">➕ Zum Tagebuch hinzufügen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ VOICE SEARCH ═══════════════════ -->
+  <div style="position:relative; margin-top: 32px;">
+    <div class="screen-label">Voice Search</div>
+    <div class="phone">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>●●● 100%</span>
+      </div>
+      <div class="appbar">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:18px;color:var(--muted)">✕</span>
+          <span style="font-size:17px;font-weight:700">Lebensmittel suchen</span>
+        </div>
+      </div>
+      <div class="phone-inner">
+
+        <!-- Search field -->
+        <div class="search-field">
+          <div class="search-input">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <span>Apfel</span>
+          </div>
+          <div class="mic-btn-sm">🎙️</div>
+        </div>
+
+        <!-- Listening indicator -->
+        <div style="background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:20px">
+          <span style="color:var(--orange)">≋</span>
+          <span style="font-size:13px;color:var(--orange);font-weight:600">Erkannt: "Apfel"</span>
+        </div>
+
+        <!-- Pulsing mic visualization -->
+        <div class="pulse-wrap" style="height:130px;margin-bottom:12px">
+          <div class="pulse-inner">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="mic-center">🎙️</div>
+          </div>
+        </div>
+
+        <div class="listening-text">Höre zu...</div>
+        <div class="recognized-text">Apfel</div>
+
+        <!-- Results -->
+        <div class="section-head">Ergebnisse</div>
+
+        <div class="result-card" style="border:1px solid rgba(255,107,53,.3)">
+          <div class="result-img">🍎</div>
+          <div class="result-info">
+            <div class="result-name">Apfel</div>
+            <div class="result-brand">Frisches Obst</div>
+          </div>
+          <div class="result-kcal">
+            <div class="result-kcal-val">52</div>
+            <div class="result-kcal-unit">kcal/100g</div>
+          </div>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="result-card">
+          <div class="result-img">🥤</div>
+          <div class="result-info">
+            <div class="result-name">Apfelsaft</div>
+            <div class="result-brand">Naturtrüb</div>
+          </div>
+          <div class="result-kcal">
+            <div class="result-kcal-val">46</div>
+            <div class="result-kcal-unit">kcal/100g</div>
+          </div>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="result-card">
+          <div class="result-img">🍯</div>
+          <div class="result-info">
+            <div class="result-name">Apfelmus</div>
+            <div class="result-brand">Zuckerfrei</div>
+          </div>
+          <div class="result-kcal">
+            <div class="result-kcal-val">41</div>
+            <div class="result-kcal-unit">kcal/100g</div>
+          </div>
+          <span class="chevron">›</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;color:#444;font-size:11px;margin-top:48px;letter-spacing:1px">NutriVoice · Flutter App Mockup</p>
+
+</body>
+</html>
