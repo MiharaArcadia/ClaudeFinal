@@ -1,5 +1,5 @@
 name: nutri_voice
-description: Voice-powered nutrition tracking app
+description: A nutrition/calorie tracking app with voice input
 
 publish_to: 'none'
 
@@ -23,7 +23,7 @@ dependencies:
   fl_chart: ^0.66.2
   google_fonts: ^6.1.0
   cached_network_image: ^3.3.1
-  shimmer: ^3.0.0
+  lottie: ^3.0.0
 
   # Voice
   speech_to_text: ^6.6.0
@@ -32,7 +32,7 @@ dependencies:
   provider: ^6.1.1
 
   # Network
-  http: ^1.1.2
+  http: ^1.2.0
 
   # Storage
   shared_preferences: ^2.2.2
@@ -40,6 +40,11 @@ dependencies:
   # Utils
   intl: ^0.19.0
   uuid: ^4.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
