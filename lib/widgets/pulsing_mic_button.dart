@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class PulsingMicButton extends StatefulWidget {
   final bool listening;

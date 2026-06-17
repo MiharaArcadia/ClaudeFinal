@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/onboarding_screen.dart';
-import 'package:nutri_voice/screens/dashboard_screen.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/onboarding_screen.dart';
+import 'package:carby/screens/dashboard_screen.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 20),
               Text(
-                'NutriVoice',
+                'Carby',
                 style: GoogleFonts.inter(
                   fontSize: 36,
                   fontWeight: FontWeight.w800,

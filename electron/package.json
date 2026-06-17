@@ -1,9 +1,9 @@
 {
-  "name": "nutri-voice",
+  "name": "carby",
   "version": "1.0.0",
   "description": "Voice-powered nutrition tracking app",
   "main": "main.js",
-  "author": "NutriVoice",
+  "author": "Carby",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
@@ -19,9 +19,9 @@
     "electron-builder": "^24.9.1"
   },
   "build": {
-    "appId": "com.nutrivoice.app",
-    "productName": "NutriVoice",
-    "copyright": "Copyright © 2024 NutriVoice",
+    "appId": "com.carby.app",
+    "productName": "Carby",
+    "copyright": "Copyright © 2024 Carby",
     "directories": {
       "output": "dist"
     },
@@ -47,7 +47,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "NutriVoice",
+      "shortcutName": "Carby",
       "installerLanguages": ["de_DE", "en_US"],
       "language": "1031",
       "deleteAppDataOnUninstall": false

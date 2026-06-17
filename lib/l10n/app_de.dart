@@ -1,6 +1,6 @@
 class AppStrings {
   static const Map<String, String> de = {
-    'app_name': 'NutriVoice',
+    'app_name': 'Carby',
     'greeting_morning': 'Guten Morgen',
     'greeting_afternoon': 'Guten Nachmittag',
     'greeting_evening': 'Guten Abend',

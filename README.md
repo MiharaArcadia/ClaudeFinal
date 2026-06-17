@@ -1,4 +1,4 @@
-# NutriVoice
+# Carby
 
 A Flutter nutrition/calorie tracking app with voice input, built with Firebase and OpenFoodFacts.
 

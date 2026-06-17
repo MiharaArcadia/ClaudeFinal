@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nutri_voice/models/food_log_entry.dart';
-import 'package:nutri_voice/models/user_profile.dart';
+import 'package:carby/models/food_log_entry.dart';
+import 'package:carby/models/user_profile.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

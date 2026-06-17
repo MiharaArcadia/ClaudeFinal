@@ -1,4 +1,4 @@
-/* NutriVoice — Design Tokens */
+/* Carby — Design Tokens */
 :root {
   --bg:        #0D0D0D;
   --surface:   #1A1A1A;
@@ -252,6 +252,20 @@ a { color: var(--orange); text-decoration: none; }
 .mic-label { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 12px; }
 .mic-label.active { color: var(--orange); font-weight: 600; }
 
+.mic-device-select {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11px;
+  font-family: var(--font);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.mic-device-select:focus { outline: 1px solid var(--orange); }
+
 .recognized-badge {
   display: none;
   background: rgba(255,107,53,.1);
@@ -367,12 +381,12 @@ a { color: var(--orange); text-decoration: none; }
 /* ── Food Detail ─────────────────────────────────────────────── */
 #screen-detail { padding: 0; }
 .detail-hero {
-  height: 220px;
+  height: 176px;
   background: linear-gradient(160deg, #222, #1a1a1a);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
+  font-size: 64px;
   position: relative;
   overflow: hidden;
 }
@@ -391,20 +405,20 @@ a { color: var(--orange); text-decoration: none; }
   cursor: pointer;
   backdrop-filter: blur(4px);
 }
-.detail-body { padding: 24px; }
-.detail-name { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
-.detail-brand { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.detail-body { padding: 19px; }
+.detail-name { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
+.detail-brand { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
 
-.info-chips { display: flex; gap: 12px; margin-bottom: 24px; }
+.info-chips { display: flex; gap: 12px; margin-bottom: 19px; }
 .info-chip {
-  padding: 12px 18px;
+  padding: 10px 14px;
   border-radius: 14px;
   text-align: center;
 }
-.info-chip .ic-val { font-size: 22px; font-weight: 800; }
+.info-chip .ic-val { font-size: 18px; font-weight: 800; }
 .info-chip .ic-lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-.portion-card { margin-bottom: 24px; }
+.portion-card { margin-bottom: 19px; }
 .portion-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .portion-lbl { font-size: 12px; color: var(--muted); }
 .portion-val { font-size: 17px; font-weight: 700; }
@@ -429,10 +443,10 @@ a { color: var(--orange); text-decoration: none; }
 .portion-kcal-live { text-align: center; font-size: 24px; font-weight: 800; color: var(--orange); }
 
 /* Nutrition table */
-.nutr-table { background: var(--card); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px; }
+.nutr-table { background: var(--card); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 19px; }
 .nutr-head {
   display: flex;
-  padding: 10px 16px 8px;
+  padding: 8px 13px 6px;
   border-bottom: 1px solid var(--ring-empty);
   font-size: 11px;
   color: var(--muted);
@@ -443,7 +457,7 @@ a { color: var(--orange); text-decoration: none; }
 .nutr-row {
   display: flex;
   align-items: center;
-  padding: 10px 16px;
+  padding: 8px 13px;
   border-bottom: 1px solid var(--ring-empty);
 }
 .nutr-row:last-child { border-bottom: none; }
@@ -454,11 +468,11 @@ a { color: var(--orange); text-decoration: none; }
 
 .add-btn {
   width: 100%;
-  padding: 16px;
+  padding: 13px;
   border-radius: var(--radius-md);
   background: var(--orange);
   color: white;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: .3px;
   transition: opacity .15s;

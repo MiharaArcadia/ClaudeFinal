@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nutri_voice/models/food_model.dart';
-import 'package:nutri_voice/providers/nutrition_provider.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/services/open_food_facts_service.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/models/food_model.dart';
+import 'package:carby/providers/nutrition_provider.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/services/open_food_facts_service.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class FoodDetailScreen extends StatefulWidget {
   final Food food;

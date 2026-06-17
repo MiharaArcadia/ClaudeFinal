@@ -1,4 +1,4 @@
-import 'package:nutri_voice/models/food_model.dart';
+import 'package:carby/models/food_model.dart';
 
 class FoodLogEntry {
   final String id;

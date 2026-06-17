@@ -3,17 +3,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nutri_voice/layouts/desktop_layout.dart';
-import 'package:nutri_voice/providers/nutrition_provider.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/food_log_screen.dart';
-import 'package:nutri_voice/screens/profile_screen.dart';
-import 'package:nutri_voice/screens/voice_search_screen.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
-import 'package:nutri_voice/widgets/calorie_ring_chart.dart';
-import 'package:nutri_voice/widgets/macro_card.dart';
-import 'package:nutri_voice/widgets/nutrient_gap_row.dart';
-import 'package:nutri_voice/widgets/pulsing_mic_button.dart';
+import 'package:carby/layouts/desktop_layout.dart';
+import 'package:carby/providers/nutrition_provider.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/food_log_screen.dart';
+import 'package:carby/screens/profile_screen.dart';
+import 'package:carby/screens/voice_search_screen.dart';
+import 'package:carby/theme/app_theme.dart';
+import 'package:carby/widgets/calorie_ring_chart.dart';
+import 'package:carby/widgets/macro_card.dart';
+import 'package:carby/widgets/nutrient_gap_row.dart';
+import 'package:carby/widgets/pulsing_mic_button.dart';
 
 bool get _isDesktop =>
     !kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux);

@@ -1,11 +1,11 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-title NutriVoice - Build Windows Installer
+title Carby - Build Windows Installer
 
 echo.
 echo ============================================
-echo   NutriVoice - Windows Installer Builder
+echo   Carby - Windows Installer Builder
 echo ============================================
 echo.
 
@@ -43,7 +43,7 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 set BUILD_DIR=build\windows\x64\runner\Release
-if not exist "%BUILD_DIR%\nutri_voice.exe" (
+if not exist "%BUILD_DIR%\carby.exe" (
     echo [ERROR] Build output not found at %BUILD_DIR%
     echo         Check if the build completed successfully.
     pause
@@ -96,10 +96,10 @@ echo   SUCCESS!
 echo ============================================
 echo.
 echo   Installer created:
-echo   installer\NutriVoice_Setup.exe
+echo   installer\Carby_Setup.exe
 echo.
 echo   You can now:
 echo   - Run the installer to test it
-echo   - Distribute NutriVoice_Setup.exe to users
+echo   - Distribute Carby_Setup.exe to users
 echo.
 pause

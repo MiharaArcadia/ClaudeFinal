@@ -1,5 +1,5 @@
-import 'package:nutri_voice/models/food_log_entry.dart';
-import 'package:nutri_voice/models/nutrient_gap.dart';
+import 'package:carby/models/food_log_entry.dart';
+import 'package:carby/models/nutrient_gap.dart';
 
 class DailyNutrition {
   final List<FoodLogEntry> entries;

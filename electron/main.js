@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, session } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 
@@ -12,7 +12,7 @@ function createWindow() {
     minHeight: 600,
     backgroundColor: '#0D0D0D',
     titleBarStyle: 'default',
-    title: 'NutriVoice',
+    title: 'Carby',
     icon: path.join(__dirname, 'assets', 'icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -32,6 +32,11 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  // Allow microphone access for the Web Speech API (voice search)
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    callback(permission === 'media');
+  });
+
   createWindow();
 
   app.on('activate', () => {

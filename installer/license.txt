@@ -1,5 +1,5 @@
-NutriVoice - Nutrition Tracking App
-Copyright (c) 2024 NutriVoice
+Carby - Nutrition Tracking App
+Copyright (c) 2024 Carby
 
 MIT License
 

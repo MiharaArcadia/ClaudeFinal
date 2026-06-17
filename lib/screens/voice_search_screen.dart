@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nutri_voice/models/food_model.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/food_detail_screen.dart';
-import 'package:nutri_voice/services/open_food_facts_service.dart';
-import 'package:nutri_voice/services/speech_service.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
-import 'package:nutri_voice/widgets/pulsing_mic_button.dart';
+import 'package:carby/models/food_model.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/food_detail_screen.dart';
+import 'package:carby/services/open_food_facts_service.dart';
+import 'package:carby/services/speech_service.dart';
+import 'package:carby/theme/app_theme.dart';
+import 'package:carby/widgets/pulsing_mic_button.dart';
 
 class VoiceSearchScreen extends StatefulWidget {
   const VoiceSearchScreen({super.key});

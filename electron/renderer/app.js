@@ -32,6 +32,12 @@ const T = {
     lose: 'Abnehmen', maintain: 'Halten', gain: 'Zunehmen',
     added: 'Hinzugefügt!', saved: 'Gespeichert!',
     back: '← Zurück', years: 'Jahre', kg: 'kg', cm: 'cm',
+    mic_not_allowed: 'Mikrofonzugriff verweigert. Bitte in Windows-Einstellungen erlauben.',
+    mic_no_audio: 'Kein Mikrofon gefunden.',
+    mic_no_speech: 'Nichts verstanden. Bitte erneut versuchen.',
+    mic_error: 'Spracherkennung fehlgeschlagen.',
+    mic_loading: 'Mikrofon wird geladen...',
+    mic_default: 'Standard-Mikrofon',
   },
   en: {
     greeting_morning: 'Good morning', greeting_afternoon: 'Good afternoon', greeting_evening: 'Good evening',
@@ -52,6 +58,12 @@ const T = {
     lose: 'Lose weight', maintain: 'Maintain', gain: 'Gain weight',
     added: 'Added!', saved: 'Saved!',
     back: '← Back', years: 'years', kg: 'kg', cm: 'cm',
+    mic_not_allowed: 'Microphone access denied. Please allow it in Windows settings.',
+    mic_no_audio: 'No microphone found.',
+    mic_no_speech: 'Didn\'t catch that. Please try again.',
+    mic_error: 'Speech recognition failed.',
+    mic_loading: 'Loading microphones...',
+    mic_default: 'Default microphone',
   },
 };
 
@@ -69,6 +81,7 @@ const State = {
   prevScreen: 'dashboard',
   currentFood: null, // Food being viewed in detail
   currentPortion: 100,
+  micDeviceId: '',
 };
 
 // RDA values
@@ -133,12 +146,17 @@ const FoodAPI = {
     const n = name.toLowerCase();
     const map = {
       apfel: 182, apple: 182, banane: 120, banana: 120, orange: 130,
-      ei: 60, egg: 60, bread: 30, brot: 30, toast: 25,
+      ei: 60, egg: 60, bread: 30, brot: 30, toast: 25, brötchen: 50, bun: 50,
       hähnchen: 150, chicken: 150, lachs: 150, salmon: 150,
       kartoffel: 150, potato: 150, tomate: 100, tomato: 100,
       avocado: 150, joghurt: 150, yogurt: 150, milch: 240, milk: 240,
-      käse: 30, cheese: 30, reis: 180, rice: 180, pasta: 220,
+      käse: 30, cheese: 30, reis: 180, rice: 180, pasta: 220, nudeln: 220,
       haferflocken: 80, oats: 80, mandel: 28, almond: 28,
+      pizza: 300, müsli: 50, muesli: 50, cerealien: 40, cereal: 40,
+      birne: 178, pear: 178, traube: 92, grape: 92, erdbeere: 152, strawberry: 152,
+      pommes: 150, fries: 150, burger: 220, sandwich: 180,
+      gurke: 100, cucumber: 100, paprika: 120, pepper: 120,
+      schokolade: 25, chocolate: 25, keks: 12, cookie: 12,
     };
     for (const [k, v] of Object.entries(map)) {
       if (n.includes(k)) return v;
@@ -425,6 +443,7 @@ function renderRPLog(t, lang) {
 const Voice = {
   recognition: null,
   listening: false,
+  activeStream: null,
 
   init() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -451,12 +470,50 @@ const Voice = {
     };
 
     this.recognition.onend = () => this.stop();
-    this.recognition.onerror = () => this.stop();
+    this.recognition.onerror = (event) => {
+      const tx = T[State.lang];
+      const messages = {
+        'not-allowed': tx.mic_not_allowed,
+        'service-not-allowed': tx.mic_not_allowed,
+        'audio-capture': tx.mic_no_audio,
+        'no-speech': tx.mic_no_speech,
+      };
+      showToast(messages[event.error] || tx.mic_error);
+      this.stop();
+    };
   },
 
-  start() {
+  // Activates the chosen input device so Windows/Chromium routes
+  // the speech recognition through it instead of an arbitrary default.
+  async acquireDevice() {
+    if (!navigator.mediaDevices) return true;
+    try {
+      const constraints = State.micDeviceId
+        ? { audio: { deviceId: { exact: State.micDeviceId } } }
+        : { audio: true };
+      this.activeStream = await navigator.mediaDevices.getUserMedia(constraints);
+      return true;
+    } catch (e) {
+      const tx = T[State.lang];
+      showToast(e.name === 'NotFoundError' ? tx.mic_no_audio : tx.mic_not_allowed);
+      return false;
+    }
+  },
+
+  releaseDevice() {
+    if (this.activeStream) {
+      this.activeStream.getTracks().forEach(t => t.stop());
+      this.activeStream = null;
+    }
+  },
+
+  async start() {
     if (!this.recognition) this.init();
     if (!this.recognition) return;
+
+    const ok = await this.acquireDevice();
+    if (!ok) return;
+
     const lang = State.lang === 'de' ? 'de-DE' : 'en-US';
     this.recognition.lang = lang;
     try {
@@ -469,6 +526,7 @@ const Voice = {
       label.classList.add('active');
     } catch (e) {
       console.error(e);
+      this.releaseDevice();
     }
   },
 
@@ -477,6 +535,7 @@ const Voice = {
     if (this.recognition) {
       try { this.recognition.stop(); } catch (_) {}
     }
+    this.releaseDevice();
     const btn = document.getElementById('mic-btn');
     btn.classList.remove('listening');
     const label = document.getElementById('mic-label');
@@ -527,6 +586,12 @@ const App = {
       App.clearResults();
       Voice.start();
     }
+  },
+
+  selectMicDevice(deviceId) {
+    State.micDeviceId = deviceId;
+    if (window.electronAPI) window.electronAPI.storeSet('mic_device_id', deviceId);
+    else localStorage.setItem('nv_mic_device_id', deviceId);
   },
 
   // ── Search ──────────────────────────────────────────────────
@@ -688,6 +753,7 @@ const App = {
     State.lang = lang;
     App.saveProfile(true);
     updateUI();
+    populateMicDevices();
   },
 
   setGoal(goal) {
@@ -755,14 +821,18 @@ const App = {
       if (profile) State.profile = { ...State.profile, ...profile };
       if (lang) State.lang = lang;
       if (log) State.log = log;
+      const micId = await window.electronAPI.storeGet('mic_device_id');
+      if (micId) State.micDeviceId = micId;
     } else {
       try {
         const p = localStorage.getItem('nv_profile');
         const l = localStorage.getItem('nv_lang');
         const lg = localStorage.getItem('nv_log_' + todayKey());
+        const m = localStorage.getItem('nv_mic_device_id');
         if (p) State.profile = { ...State.profile, ...JSON.parse(p) };
         if (l) State.lang = l;
         if (lg) State.log = JSON.parse(lg);
+        if (m) State.micDeviceId = m;
       } catch (_) {}
     }
     return !!State.profile.name;
@@ -895,6 +965,38 @@ function todayKey() {
   return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
 }
 
+async function populateMicDevices() {
+  const select = document.getElementById('mic-device-select');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+
+  try {
+    // Unlock device labels (otherwise they show up blank until permission is granted)
+    const tmp = await navigator.mediaDevices.getUserMedia({ audio: true });
+    tmp.getTracks().forEach(t => t.stop());
+  } catch (_) {
+    // Permission not granted yet — device list will just show generic labels
+  }
+
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const inputs = devices.filter(d => d.kind === 'audioinput');
+    const tx = T[State.lang];
+    select.innerHTML = inputs.length
+      ? inputs.map((d, i) =>
+          `<option value="${d.deviceId}">${d.label || `${tx.mic_default} ${i + 1}`}</option>`).join('')
+      : `<option value="">${tx.mic_no_audio}</option>`;
+
+    if (State.micDeviceId && inputs.some(d => d.deviceId === State.micDeviceId)) {
+      select.value = State.micDeviceId;
+    } else if (inputs[0]) {
+      State.micDeviceId = inputs[0].deviceId;
+      select.value = inputs[0].deviceId;
+    }
+  } catch (e) {
+    console.error('Could not enumerate audio devices', e);
+  }
+}
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -953,4 +1055,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Voice init
   Voice.init();
+  populateMicDevices();
 });

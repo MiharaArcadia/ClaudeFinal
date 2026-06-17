@@ -1,6 +1,6 @@
 class AppStrings {
   static const _de = {
-    'appName': 'NutriVoice',
+    'appName': 'Carby',
     'greeting_morning': 'Guten Morgen',
     'greeting_afternoon': 'Guten Tag',
     'greeting_evening': 'Guten Abend',
@@ -35,7 +35,7 @@ class AppStrings {
     'portion_size': 'Portionsgröße',
     'grams': 'g',
     'nutrition_table': 'Nährwerttabelle',
-    'onboarding_welcome': 'Willkommen bei NutriVoice',
+    'onboarding_welcome': 'Willkommen bei Carby',
     'onboarding_name': 'Wie heißt du?',
     'onboarding_age': 'Wie alt bist du?',
     'onboarding_weight': 'Dein Gewicht (kg)',
@@ -59,7 +59,7 @@ class AppStrings {
   };
 
   static const _en = {
-    'appName': 'NutriVoice',
+    'appName': 'Carby',
     'greeting_morning': 'Good morning',
     'greeting_afternoon': 'Good afternoon',
     'greeting_evening': 'Good evening',
@@ -94,7 +94,7 @@ class AppStrings {
     'portion_size': 'Portion size',
     'grams': 'g',
     'nutrition_table': 'Nutrition facts',
-    'onboarding_welcome': 'Welcome to NutriVoice',
+    'onboarding_welcome': 'Welcome to Carby',
     'onboarding_name': 'What\'s your name?',
     'onboarding_age': 'How old are you?',
     'onboarding_weight': 'Your weight (kg)',

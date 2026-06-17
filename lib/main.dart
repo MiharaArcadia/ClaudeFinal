@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:nutri_voice/providers/nutrition_provider.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/splash_screen.dart';
-import 'package:nutri_voice/services/firebase_service.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/providers/nutrition_provider.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/splash_screen.dart';
+import 'package:carby/services/firebase_service.dart';
+import 'package:carby/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ void main() async {
       backgroundColor: Color(0xFF0D0D0D),
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
-      title: 'NutriVoice',
+      title: 'Carby',
     );
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
@@ -32,11 +32,11 @@ void main() async {
   }
 
   await Firebase.initializeApp();
-  runApp(const NutriVoiceApp());
+  runApp(const CarbyApp());
 }
 
-class NutriVoiceApp extends StatelessWidget {
-  const NutriVoiceApp({super.key});
+class CarbyApp extends StatelessWidget {
+  const CarbyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class NutriVoiceApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'NutriVoice',
+        title: 'Carby',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.dark,
         home: const SplashScreen(),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:nutri_voice/models/food_model.dart';
+import 'package:carby/models/food_model.dart';
 
 class OpenFoodFactsService {
   static const _base = 'https://world.openfoodfacts.org';

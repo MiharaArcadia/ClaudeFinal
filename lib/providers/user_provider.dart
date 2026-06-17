@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nutri_voice/models/user_profile.dart';
-import 'package:nutri_voice/services/firebase_service.dart';
+import 'package:carby/models/user_profile.dart';
+import 'package:carby/services/firebase_service.dart';
 
 class UserProvider extends ChangeNotifier {
   final FirebaseService _firebase;

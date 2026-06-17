@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nutri_voice/providers/nutrition_provider.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/voice_search_screen.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/providers/nutrition_provider.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/voice_search_screen.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class FoodLogScreen extends StatelessWidget {
   const FoodLogScreen({super.key});

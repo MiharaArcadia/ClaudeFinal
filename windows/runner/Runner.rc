@@ -51,13 +51,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "NutriVoice"
-            VALUE "FileDescription", "NutriVoice"
+            VALUE "CompanyName", "Carby"
+            VALUE "FileDescription", "Carby"
             VALUE "FileVersion", "1.0.0.0"
-            VALUE "InternalName", "nutri_voice"
-            VALUE "LegalCopyright", "Copyright (C) 2024 NutriVoice. All rights reserved."
-            VALUE "OriginalFilename", "nutri_voice.exe"
-            VALUE "ProductName", "NutriVoice"
+            VALUE "InternalName", "carby"
+            VALUE "LegalCopyright", "Copyright (C) 2024 Carby. All rights reserved."
+            VALUE "OriginalFilename", "carby.exe"
+            VALUE "ProductName", "Carby"
             VALUE "ProductVersion", "1.0.0.0"
         END
     END

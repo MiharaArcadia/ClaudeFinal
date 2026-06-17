@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nutri_voice/models/user_profile.dart';
-import 'package:nutri_voice/providers/user_provider.dart';
-import 'package:nutri_voice/screens/dashboard_screen.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/models/user_profile.dart';
+import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/dashboard_screen.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

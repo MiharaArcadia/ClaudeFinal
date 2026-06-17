@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:nutri_voice/models/food_log_entry.dart';
-import 'package:nutri_voice/models/food_model.dart';
-import 'package:nutri_voice/models/nutrient_gap.dart';
-import 'package:nutri_voice/services/firebase_service.dart';
+import 'package:carby/models/food_log_entry.dart';
+import 'package:carby/models/food_model.dart';
+import 'package:carby/models/nutrient_gap.dart';
+import 'package:carby/services/firebase_service.dart';
 
 class NutritionProvider extends ChangeNotifier {
   final FirebaseService _firebase;

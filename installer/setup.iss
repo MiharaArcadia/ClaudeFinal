@@ -1,16 +1,16 @@
-; NutriVoice Windows Installer Script
+; Carby Windows Installer Script
 ; Requires Inno Setup 6.x - https://jrsoftware.org/isinfo.php
 ;
 ; Build steps:
 ;   1. flutter build windows --release
 ;   2. Open this .iss in Inno Setup or run build_installer.bat
-;   3. Output: installer\NutriVoice_Setup.exe
+;   3. Output: installer\Carby_Setup.exe
 
-#define MyAppName      "NutriVoice"
+#define MyAppName      "Carby"
 #define MyAppVersion   "1.0.0"
-#define MyAppPublisher "NutriVoice"
+#define MyAppPublisher "Carby"
 #define MyAppURL       "https://github.com/MiharaArcadia/ClaudeFinal"
-#define MyAppExeName   "nutri_voice.exe"
+#define MyAppExeName   "carby.exe"
 #define MyAppId        "{A3F2C1D4-8B5E-4F9A-BC7D-12345678ABCD}"
 
 ; Source: Flutter Windows release build output folder (relative to this .iss file)
@@ -30,7 +30,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=license.txt
 OutputDir=.
-OutputBaseFilename=NutriVoice_Setup
+OutputBaseFilename=Carby_Setup
 SetupIconFile=..\windows\runner\resources\app_icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -106,8 +106,8 @@ Type: filesandordirs; Name: "{app}\data\flutter_assets\cache"
 
 [Registry]
 ; Register app in Windows "Apps & Features"
-Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\nutri_voice.exe"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName}"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\nutri_voice.exe"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\carby.exe"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName}"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\App Paths\carby.exe"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
 
 [Code]
 // Check Windows version at install time
@@ -118,8 +118,8 @@ begin
   GetWindowsVersionEx(Version);
   if Version.Major < 10 then
   begin
-    MsgBox('NutriVoice benötigt Windows 10 oder höher.' + #13#10 +
-           'NutriVoice requires Windows 10 or higher.', mbError, MB_OK);
+    MsgBox('Carby benötigt Windows 10 oder höher.' + #13#10 +
+           'Carby requires Windows 10 or higher.', mbError, MB_OK);
     Result := False;
   end
   else

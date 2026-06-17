@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutri_voice/theme/app_theme.dart';
+import 'package:carby/theme/app_theme.dart';
 
 class CalorieRingChart extends StatelessWidget {
   final double eaten;

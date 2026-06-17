@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NutriVoice</title>
+  <title>Carby</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -34,7 +34,7 @@
   <nav id="sidebar">
     <div class="sidebar-logo">
       <span class="logo-icon">◉</span>
-      <span>NutriVoice</span>
+      <span>Carby</span>
     </div>
     <div class="nav-items">
       <div class="nav-item active" data-screen="dashboard">
@@ -225,6 +225,9 @@
     <div class="rp-header" id="rp-title">Lebensmittel hinzufügen</div>
 
     <div class="rp-mic-section">
+      <select class="mic-device-select" id="mic-device-select" onchange="App.selectMicDevice(this.value)">
+        <option value="">Mikrofon wird geladen...</option>
+      </select>
       <button class="mic-btn" id="mic-btn" onclick="App.toggleMic()">🎙️</button>
       <div class="mic-label" id="mic-label">Klicken zum Sprechen</div>
       <div class="recognized-badge" id="recognized-badge"></div>
