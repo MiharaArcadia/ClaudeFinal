@@ -440,112 +440,153 @@ function renderRPLog(t, lang) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// VOICE
-// ─────────────────────────────────────────────────────────────────
-// VOICE
-// Root cause of Windows/Electron immediate-stop bug:
-//   Chromium's SpeechRecognition first calls setPermissionCheckHandler
-//   to see if mic permission is already granted. Without that handler
-//   returning true, it fires onend instantly with no audio captured.
-//   Fix is in main.js (setPermissionCheckHandler). This module adds
-//   full logging + robust error handling on top.
+// VOICE  — MediaRecorder + Hugging Face Whisper
+//
+// webkitSpeechRecognition is permanently broken in Electron because
+// Electron has no embedded Google Speech API key (HTTP 403 on every
+// request to speech.googleapis.com → onend fires instantly).
+//
+// This implementation uses:
+//   1. navigator.mediaDevices.getUserMedia  — mic access via OS
+//   2. MediaRecorder (WebM/Opus)            — audio capture
+//   3. HuggingFace Inference API (Whisper)  — free, no key needed
+//
+// Flow: click → getUserMedia → record → click again → stop →
+//       send blob to HF Whisper → fill search field → search
 // ─────────────────────────────────────────────────────────────────
 const Voice = {
-  recognition: null,
-  listening: false,
+  stream:     null,
+  recorder:   null,
+  chunks:     [],
+  listening:  false,
+  processing: false,
 
-  init() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      console.warn('[Voice] SpeechRecognition API not available in this context');
-      return;
+  _setUI(state) {
+    const btn   = document.getElementById('mic-btn');
+    const label = document.getElementById('mic-label');
+    const tx    = T[State.lang];
+    if (!btn || !label) return;
+    btn.classList.remove('listening', 'processing');
+    label.classList.remove('active');
+    if (state === 'listening') {
+      btn.classList.add('listening');
+      btn.textContent = '🎙️';
+      label.textContent = tx.listening;
+      label.classList.add('active');
+    } else if (state === 'processing') {
+      btn.classList.add('processing');
+      btn.textContent = '⏳';
+      label.textContent = tx.mic_processing || (State.lang === 'de' ? 'Verarbeite...' : 'Processing...');
+    } else {
+      btn.textContent = '🎙️';
+      label.textContent = tx.speak;
     }
-
-    this.recognition = new SpeechRecognition();
-    this.recognition.continuous = false;    // stop after one utterance
-    this.recognition.interimResults = true; // show words as they come in
-    this.recognition.maxAlternatives = 1;
-
-    this.recognition.onstart = () => {
-      console.log('[Voice] listening started');
-    };
-
-    this.recognition.onspeechstart = () => {
-      console.log('[Voice] speech detected');
-    };
-
-    this.recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map(r => r[0].transcript).join('').trim();
-      console.log('[Voice] transcription received:', transcript,
-        '| final:', event.results[event.results.length - 1].isFinal);
-
-      const input = document.getElementById('rp-search-input');
-      const badge = document.getElementById('recognized-badge');
-      if (input) input.value = transcript;
-      if (badge) { badge.textContent = `"${transcript}"`; badge.classList.add('visible'); }
-
-      if (event.results[event.results.length - 1].isFinal) {
-        console.log('[Voice] final result — stopping and searching');
-        this.stop();
-        if (transcript) App.searchFood(transcript);
-      }
-    };
-
-    // Only auto-stop if we are still in listening state.
-    // When the user manually clicks stop, listening is set to false first,
-    // so this guard prevents a redundant second stop call.
-    this.recognition.onend = () => {
-      console.log('[Voice] recognition ended (listening=' + this.listening + ')');
-      if (this.listening) this.stop();
-    };
-
-    this.recognition.onerror = (event) => {
-      console.error('[Voice] recognition error:', event.error, event.message);
-      const tx = T[State.lang];
-      const messages = {
-        'not-allowed':         tx.mic_not_allowed,
-        'service-not-allowed': tx.mic_not_allowed,
-        'audio-capture':       tx.mic_no_audio,
-        'no-speech':           tx.mic_no_speech,
-      };
-      const msg = messages[event.error] || tx.mic_error;
-      showToast(msg);
-      this.stop();
-    };
-
-    console.log('[Voice] SpeechRecognition initialised');
   },
 
-  start() {
-    if (!this.recognition) this.init();
-    if (!this.recognition) {
-      showToast(T[State.lang].mic_error);
+  async start() {
+    console.log('[Voice] button pressed — requesting mic access');
+    this._setUI('idle');
+
+    try {
+      const constraints = State.micDeviceId
+        ? { audio: { deviceId: { ideal: State.micDeviceId } }, video: false }
+        : { audio: true, video: false };
+      this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+      console.log('[Voice] mic access granted, tracks:', this.stream.getAudioTracks().map(t => t.label));
+    } catch (e) {
+      console.error('[Voice] getUserMedia error:', e.name, e.message);
+      const tx = T[State.lang];
+      showToast(e.name === 'NotFoundError' ? tx.mic_no_audio : tx.mic_not_allowed);
       return;
     }
 
-    this.recognition.lang = State.lang === 'de' ? 'de-DE' : 'en-US';
-    console.log('[Voice] mic button pressed — starting recognition, lang:', this.recognition.lang);
+    this.chunks = [];
+    const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+      ? 'audio/webm;codecs=opus'
+      : MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+    const opts = mimeType ? { mimeType } : {};
+    this.recorder = new MediaRecorder(this.stream, opts);
+    this.recorder.ondataavailable = e => { if (e.data && e.data.size > 0) this.chunks.push(e.data); };
+    this.recorder.onstop = () => this._transcribe();
+    this.recorder.start(200); // collect chunks every 200ms
 
-    try {
-      this.recognition.start();
-      this.listening = true;
-      document.getElementById('mic-btn').classList.add('listening');
-      const label = document.getElementById('mic-label');
-      if (label) { label.textContent = T[State.lang].listening; label.classList.add('active'); }
-    } catch (e) {
-      console.error('[Voice] recognition.start() threw:', e);
-      this.listening = false;
-    }
+    this.listening = true;
+    this._setUI('listening');
+    console.log('[Voice] recording started, mimeType:', this.recorder.mimeType);
   },
 
   stop() {
-    console.log('[Voice] listening stopped');
+    if (!this.listening) return;
+    console.log('[Voice] stopping recorder,', this.chunks.length, 'chunks so far');
     this.listening = false;
-    try { this.recognition?.stop(); } catch (_) {}
-    document.getElementById('mic-btn').classList.remove('listening');
-    const label = document.getElementById('mic-label');
-    if (label) { label.textContent = T[State.lang].speak; label.classList.remove('active'); }
+    try { this.recorder?.stop(); } catch (_) {}
+    this.stream?.getTracks().forEach(t => t.stop());
+    this.stream = null;
+    this._setUI('processing');
+  },
+
+  async _transcribe() {
+    if (this.chunks.length === 0) {
+      console.warn('[Voice] no audio chunks, aborting transcription');
+      this._setUI('idle');
+      return;
+    }
+
+    this.processing = true;
+    const mimeType = this.recorder?.mimeType || 'audio/webm';
+    const blob = new Blob(this.chunks, { type: mimeType });
+    console.log('[Voice] transcribing blob:', blob.size, 'bytes,', mimeType);
+
+    const HF_MODEL = 'openai/whisper-small';
+    const HF_URL   = `https://api-inference.huggingface.co/models/${HF_MODEL}`;
+
+    const doFetch = () => fetch(HF_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': mimeType, 'x-use-cache': 'false' },
+      body:    blob,
+    });
+
+    try {
+      let res = await doFetch();
+      console.log('[Voice] HF response status:', res.status);
+
+      // 503 = model cold start — retry once after 8s
+      if (res.status === 503) {
+        console.warn('[Voice] HF model cold-starting, retrying in 8s...');
+        await new Promise(r => setTimeout(r, 8000));
+        res = await doFetch();
+        console.log('[Voice] HF retry status:', res.status);
+      }
+
+      if (!res.ok) {
+        const err = await res.text();
+        console.error('[Voice] HF error body:', err);
+        throw new Error(`HF API ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('[Voice] HF result:', data);
+      const text = (data.text || '').trim();
+
+      if (text) {
+        console.log('[Voice] transcript:', JSON.stringify(text), '— executing search');
+        const input = document.getElementById('rp-search-input');
+        if (input) input.value = text;
+        const badge = document.getElementById('recognized-badge');
+        if (badge) { badge.textContent = `"${text}"`; badge.classList.add('visible'); }
+        App.searchFood(text);
+      } else {
+        console.warn('[Voice] empty transcript from HF');
+        showToast(T[State.lang].mic_no_speech);
+      }
+    } catch (e) {
+      console.error('[Voice] transcription error:', e.message);
+      showToast(T[State.lang].mic_error);
+    } finally {
+      this.processing = false;
+      this._setUI('idle');
+      console.log('[Voice] done');
+    }
   },
 };
 
@@ -583,13 +624,14 @@ const App = {
 
   // ── Mic ─────────────────────────────────────────────────────
   toggleMic() {
+    if (Voice.processing) return; // ignore clicks while transcribing
     if (Voice.listening) {
       Voice.stop();
     } else {
       document.getElementById('recognized-badge').classList.remove('visible');
       document.getElementById('rp-search-input').value = '';
       App.clearResults();
-      Voice.start();
+      Voice.start(); // async — does NOT block, errors handled inside
     }
   },
 
@@ -1058,7 +1100,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('ob-next').addEventListener('click', () => Onboarding.next());
   }
 
-  // Voice init
-  Voice.init();
+  // Populate mic device dropdown (getUserMedia permission unlocks labels)
   populateMicDevices();
 });

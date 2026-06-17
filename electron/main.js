@@ -4,10 +4,8 @@ const Store = require('electron-store');
 
 const store = new Store();
 
-// Chromium needs these switches to allow microphone access from file:// pages
+// Allow file:// pages to use getUserMedia (MediaRecorder voice capture)
 app.commandLine.appendSwitch('allow-file-access-from-files');
-app.commandLine.appendSwitch('enable-features', 'WebSpeechAPI');
-app.commandLine.appendSwitch('disable-features', 'AudioServiceSandbox');
 
 function createWindow() {
   const win = new BrowserWindow({

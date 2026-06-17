@@ -250,6 +250,15 @@ a { color: var(--orange); text-decoration: none; }
   animation: mic-pulse 0.9s ease-in-out infinite alternate;
   box-shadow: 0 0 24px rgba(255,107,53,.6);
 }
+.mic-btn.processing {
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  animation: mic-pulse-blue 1.2s ease-in-out infinite alternate;
+  cursor: default;
+}
+@keyframes mic-pulse-blue {
+  from { transform: scale(1);    box-shadow: 0 0 16px rgba(0,188,212,.4); }
+  to   { transform: scale(1.08); box-shadow: 0 0 28px rgba(0,188,212,.7); }
+}
 @keyframes mic-pulse {
   from { transform: scale(1); box-shadow: 0 0 16px rgba(255,107,53,.4); }
   to   { transform: scale(1.12); box-shadow: 0 0 32px rgba(255,107,53,.7); }
