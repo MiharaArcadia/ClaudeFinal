@@ -445,7 +445,6 @@ function renderRPLog(t, lang) {
 const Voice = {
   recognition: null,
   listening: false,
-  activeStream: null,
 
   init() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -471,7 +470,10 @@ const Voice = {
       }
     };
 
-    this.recognition.onend = () => this.stop();
+    // Guard: only stop if still listening (avoids double-stop when user
+    // manually clicks the button, which already sets listening=false first)
+    this.recognition.onend = () => { if (this.listening) this.stop(); };
+
     this.recognition.onerror = (event) => {
       const tx = T[State.lang];
       const messages = {
@@ -485,61 +487,26 @@ const Voice = {
     };
   },
 
-  // Activates the chosen input device so Windows/Chromium routes
-  // the speech recognition through it instead of an arbitrary default.
-  async acquireDevice() {
-    if (!navigator.mediaDevices) return true;
-    try {
-      const constraints = State.micDeviceId
-        ? { audio: { deviceId: { exact: State.micDeviceId } } }
-        : { audio: true };
-      this.activeStream = await navigator.mediaDevices.getUserMedia(constraints);
-      return true;
-    } catch (e) {
-      const tx = T[State.lang];
-      showToast(e.name === 'NotFoundError' ? tx.mic_no_audio : tx.mic_not_allowed);
-      return false;
-    }
-  },
-
-  releaseDevice() {
-    if (this.activeStream) {
-      this.activeStream.getTracks().forEach(t => t.stop());
-      this.activeStream = null;
-    }
-  },
-
-  async start() {
+  start() {
     if (!this.recognition) this.init();
     if (!this.recognition) return;
-
-    const ok = await this.acquireDevice();
-    if (!ok) return;
-
-    const lang = State.lang === 'de' ? 'de-DE' : 'en-US';
-    this.recognition.lang = lang;
+    this.recognition.lang = State.lang === 'de' ? 'de-DE' : 'en-US';
     try {
       this.recognition.start();
       this.listening = true;
-      const btn = document.getElementById('mic-btn');
-      btn.classList.add('listening');
+      document.getElementById('mic-btn').classList.add('listening');
       const label = document.getElementById('mic-label');
       label.textContent = T[State.lang].listening;
       label.classList.add('active');
     } catch (e) {
       console.error(e);
-      this.releaseDevice();
     }
   },
 
   stop() {
     this.listening = false;
-    if (this.recognition) {
-      try { this.recognition.stop(); } catch (_) {}
-    }
-    this.releaseDevice();
-    const btn = document.getElementById('mic-btn');
-    btn.classList.remove('listening');
+    try { this.recognition?.stop(); } catch (_) {}
+    document.getElementById('mic-btn').classList.remove('listening');
     const label = document.getElementById('mic-label');
     label.textContent = T[State.lang].speak;
     label.classList.remove('active');
