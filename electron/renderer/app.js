@@ -442,6 +442,14 @@ function renderRPLog(t, lang) {
 // ─────────────────────────────────────────────────────────────────
 // VOICE
 // ─────────────────────────────────────────────────────────────────
+// VOICE
+// Root cause of Windows/Electron immediate-stop bug:
+//   Chromium's SpeechRecognition first calls setPermissionCheckHandler
+//   to see if mic permission is already granted. Without that handler
+//   returning true, it fires onend instantly with no audio captured.
+//   Fix is in main.js (setPermissionCheckHandler). This module adds
+//   full logging + robust error handling on top.
+// ─────────────────────────────────────────────────────────────────
 const Voice = {
   recognition: null,
   listening: false,
@@ -449,67 +457,95 @@ const Voice = {
   init() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      console.warn('Speech recognition not available');
+      console.warn('[Voice] SpeechRecognition API not available in this context');
       return;
     }
+
     this.recognition = new SpeechRecognition();
-    this.recognition.continuous = false;
-    this.recognition.interimResults = true;
+    this.recognition.continuous = false;    // stop after one utterance
+    this.recognition.interimResults = true; // show words as they come in
     this.recognition.maxAlternatives = 1;
+
+    this.recognition.onstart = () => {
+      console.log('[Voice] listening started');
+    };
+
+    this.recognition.onspeechstart = () => {
+      console.log('[Voice] speech detected');
+    };
 
     this.recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
         .map(r => r[0].transcript).join('').trim();
-      document.getElementById('rp-search-input').value = transcript;
-      document.getElementById('recognized-badge').textContent = `"${transcript}"`;
-      document.getElementById('recognized-badge').classList.add('visible');
+      console.log('[Voice] transcription received:', transcript,
+        '| final:', event.results[event.results.length - 1].isFinal);
+
+      const input = document.getElementById('rp-search-input');
+      const badge = document.getElementById('recognized-badge');
+      if (input) input.value = transcript;
+      if (badge) { badge.textContent = `"${transcript}"`; badge.classList.add('visible'); }
 
       if (event.results[event.results.length - 1].isFinal) {
+        console.log('[Voice] final result — stopping and searching');
         this.stop();
         if (transcript) App.searchFood(transcript);
       }
     };
 
-    // Guard: only stop if still listening (avoids double-stop when user
-    // manually clicks the button, which already sets listening=false first)
-    this.recognition.onend = () => { if (this.listening) this.stop(); };
+    // Only auto-stop if we are still in listening state.
+    // When the user manually clicks stop, listening is set to false first,
+    // so this guard prevents a redundant second stop call.
+    this.recognition.onend = () => {
+      console.log('[Voice] recognition ended (listening=' + this.listening + ')');
+      if (this.listening) this.stop();
+    };
 
     this.recognition.onerror = (event) => {
+      console.error('[Voice] recognition error:', event.error, event.message);
       const tx = T[State.lang];
       const messages = {
-        'not-allowed': tx.mic_not_allowed,
+        'not-allowed':         tx.mic_not_allowed,
         'service-not-allowed': tx.mic_not_allowed,
-        'audio-capture': tx.mic_no_audio,
-        'no-speech': tx.mic_no_speech,
+        'audio-capture':       tx.mic_no_audio,
+        'no-speech':           tx.mic_no_speech,
       };
-      showToast(messages[event.error] || tx.mic_error);
+      const msg = messages[event.error] || tx.mic_error;
+      showToast(msg);
       this.stop();
     };
+
+    console.log('[Voice] SpeechRecognition initialised');
   },
 
   start() {
     if (!this.recognition) this.init();
-    if (!this.recognition) return;
+    if (!this.recognition) {
+      showToast(T[State.lang].mic_error);
+      return;
+    }
+
     this.recognition.lang = State.lang === 'de' ? 'de-DE' : 'en-US';
+    console.log('[Voice] mic button pressed — starting recognition, lang:', this.recognition.lang);
+
     try {
       this.recognition.start();
       this.listening = true;
       document.getElementById('mic-btn').classList.add('listening');
       const label = document.getElementById('mic-label');
-      label.textContent = T[State.lang].listening;
-      label.classList.add('active');
+      if (label) { label.textContent = T[State.lang].listening; label.classList.add('active'); }
     } catch (e) {
-      console.error(e);
+      console.error('[Voice] recognition.start() threw:', e);
+      this.listening = false;
     }
   },
 
   stop() {
+    console.log('[Voice] listening stopped');
     this.listening = false;
     try { this.recognition?.stop(); } catch (_) {}
     document.getElementById('mic-btn').classList.remove('listening');
     const label = document.getElementById('mic-label');
-    label.textContent = T[State.lang].speak;
-    label.classList.remove('active');
+    if (label) { label.textContent = T[State.lang].speak; label.classList.remove('active'); }
   },
 };
 

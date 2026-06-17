@@ -4,6 +4,11 @@ const Store = require('electron-store');
 
 const store = new Store();
 
+// Chromium needs these switches to allow microphone access from file:// pages
+app.commandLine.appendSwitch('allow-file-access-from-files');
+app.commandLine.appendSwitch('enable-features', 'WebSpeechAPI');
+app.commandLine.appendSwitch('disable-features', 'AudioServiceSandbox');
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
@@ -18,23 +23,28 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
-      // Allow Web Speech API
       webSecurity: false,
     },
   });
 
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 
-  // Remove menu bar in production
   if (app.isPackaged) {
     win.setMenuBarVisibility(false);
   }
 }
 
 app.whenReady().then(() => {
-  // Allow microphone access for the Web Speech API (voice search)
+  // setPermissionCheckHandler: Chromium's SpeechRecognition checks FIRST whether
+  // microphone permission is already granted. Without this returning true the
+  // recognition fires onend immediately without ever capturing audio.
+  session.defaultSession.setPermissionCheckHandler((webContents, permission) => {
+    return permission === 'microphone' || permission === 'media';
+  });
+
+  // setPermissionRequestHandler: handles the actual permission grant when asked.
   session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
-    callback(permission === 'media');
+    callback(permission === 'media' || permission === 'microphone');
   });
 
   createWindow();
@@ -48,8 +58,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// ── IPC: electron-store (persistent local storage) ──────────────────────────
-
+// ── IPC: electron-store ──────────────────────────────────────────────────────
 ipcMain.handle('store-get', (_event, key) => store.get(key));
 ipcMain.handle('store-set', (_event, key, value) => { store.set(key, value); });
 ipcMain.handle('store-delete', (_event, key) => { store.delete(key); });
