@@ -38,6 +38,12 @@ const T = {
     mic_error: 'Spracherkennung fehlgeschlagen.',
     mic_loading: 'Mikrofon wird geladen...',
     mic_default: 'Standard-Mikrofon',
+    support: 'Support',
+    support_tagline: 'Carby ist kostenlos und bleibt kostenlos.',
+    support_desc: 'Carby wird unabhängig entwickelt. Mit deiner Unterstützung können neue Funktionen, Fehlerbehebungen und zukünftige Updates finanziert werden.',
+    support_donate_btn: 'Jetzt via PayPal spenden',
+    support_note: 'Öffnet PayPal in deinem Browser. Kein Konto nötig.',
+    support_thanks: 'Danke, dass du Carby nutzt! 🦀',
   },
   en: {
     greeting_morning: 'Good morning', greeting_afternoon: 'Good afternoon', greeting_evening: 'Good evening',
@@ -64,6 +70,12 @@ const T = {
     mic_error: 'Speech recognition failed.',
     mic_loading: 'Loading microphones...',
     mic_default: 'Default microphone',
+    support: 'Support',
+    support_tagline: 'Carby is free and will stay free.',
+    support_desc: 'Carby is independently developed. Your support helps fund new features, bug fixes, and future updates.',
+    support_donate_btn: 'Donate via PayPal',
+    support_note: 'Opens PayPal in your browser. No account needed.',
+    support_thanks: 'Thank you for using Carby! 🦀',
   },
 };
 
@@ -324,6 +336,12 @@ function translateUI(lang, tx) {
   set('nav-dash', tx.dash);
   set('nav-log', tx.log);
   set('nav-profile', tx.profile);
+  set('nav-support', tx.support);
+  set('support-tagline', tx.support_tagline);
+  set('support-desc', tx.support_desc);
+  set('donate-btn-text', tx.support_donate_btn);
+  set('support-note', tx.support_note);
+  set('support-footer-text', tx.support_thanks);
   set('sc-lbl', tx.cal_today);
   set('title-gaps', tx.gaps);
   set('title-reco', tx.reco);
@@ -620,6 +638,24 @@ const App = {
   goBack() {
     Router.go(State.prevScreen || 'dashboard');
     updateUI();
+  },
+
+  // ── Support / Donation ───────────────────────────────────────
+  _selectedTierAmount: 3,
+
+  selectTier(btn) {
+    document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    this._selectedTierAmount = parseInt(btn.dataset.amount, 10);
+  },
+
+  openPayPal() {
+    const PAYPAL_URL = 'https://www.paypal.com/donate/?hosted_button_id=CARBY_PLACEHOLDER';
+    if (window.electronAPI?.openExternal) {
+      window.electronAPI.openExternal(PAYPAL_URL).catch(() => {});
+    } else {
+      window.open(PAYPAL_URL, '_blank');
+    }
   },
 
   // ── Mic ─────────────────────────────────────────────────────

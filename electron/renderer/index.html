@@ -46,6 +46,9 @@
       <div class="nav-item" data-screen="profile">
         <span class="nav-icon">◯</span> <span id="nav-profile">Profil</span>
       </div>
+      <div class="nav-item" data-screen="support">
+        <span class="nav-icon">♥</span> <span id="nav-support">Support</span>
+      </div>
     </div>
     <div class="sidebar-calorie-box">
       <div class="sct-label" id="sc-lbl">Kalorien heute</div>
@@ -215,6 +218,38 @@
         </div>
 
         <button class="add-btn" id="btn-add" onclick="App.addToLog()">➕ Zum Tagebuch hinzufügen</button>
+      </div>
+    </section>
+
+    <!-- Support Carby -->
+    <section class="screen" id="screen-support">
+      <div class="support-page">
+        <div class="support-hero">
+          <div class="support-crab">🦀</div>
+          <h1 class="support-title">Support Carby</h1>
+          <p class="support-tagline" id="support-tagline">Carby is free and will stay free.</p>
+        </div>
+
+        <div class="support-card">
+          <p class="support-desc" id="support-desc">Carby wird unabhängig entwickelt. Mit deiner Unterstützung können neue Funktionen, Fehlerbehebungen und zukünftige Updates finanziert werden.</p>
+
+          <div class="support-tiers">
+            <button class="tier-btn" data-amount="1" onclick="App.selectTier(this)">☕ 1€</button>
+            <button class="tier-btn active" data-amount="3" onclick="App.selectTier(this)">🍕 3€</button>
+            <button class="tier-btn" data-amount="5" onclick="App.selectTier(this)">🦀 5€</button>
+          </div>
+
+          <button class="donate-btn" id="donate-btn" onclick="App.openPayPal()">
+            <span class="donate-icon">❤</span>
+            <span id="donate-btn-text">Jetzt via PayPal spenden</span>
+          </button>
+
+          <p class="support-note" id="support-note">Öffnet PayPal in deinem Browser. Kein Konto nötig.</p>
+        </div>
+
+        <div class="support-footer">
+          <p class="support-footer-text" id="support-footer-text">Danke, dass du Carby nutzt! 🦀</p>
+        </div>
       </div>
     </section>
 
