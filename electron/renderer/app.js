@@ -302,8 +302,10 @@ function updateUI() {
   const recos = new Set();
   gaps.slice(0, 3).forEach(g => RECO[g.key].slice(0, 2).forEach(r => recos.add(r)));
   const chipRow = document.getElementById('reco-chips');
-  chipRow.innerHTML = [...recos].map(r =>
-    `<div class="chip">${r}</div>`).join('');
+  chipRow.innerHTML = [...recos].map(r => {
+    const query = r.replace(/\p{Emoji_Presentation}/gu, '').trim();
+    return `<div class="chip chip-link" onclick="App.searchFood('${query.replace(/'/g, "\\'")}')" title="${query}">${r}</div>`;
+  }).join('');
 
   // Log screen
   renderLog(t, lang);

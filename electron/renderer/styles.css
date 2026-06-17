@@ -214,6 +214,12 @@ a { color: var(--orange); text-decoration: none; }
   font-size: 12px;
   color: var(--text);
 }
+.chip-link {
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.chip-link:hover { background: rgba(255,107,53,.18); transform: translateY(-1px); }
+.chip-link:active { transform: translateY(0); opacity: .8; }
 
 /* ── Voice / Right Panel ─────────────────────────────────────── */
 .rp-mic-section {
