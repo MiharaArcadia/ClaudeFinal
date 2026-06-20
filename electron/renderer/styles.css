@@ -61,6 +61,13 @@ a { color: var(--orange); text-decoration: none; }
   gap: 10px;
   padding: 24px 20px 20px;
 }
+.sidebar-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(255,107,53,.4));
+  flex-shrink: 0;
+}
 .sidebar-logo .logo-icon {
   font-size: 24px;
   background: linear-gradient(135deg, var(--orange), var(--teal));
@@ -710,6 +717,16 @@ a { color: var(--orange); text-decoration: none; }
   margin-bottom: 16px;
   display: block;
   filter: drop-shadow(0 4px 16px rgba(255,107,53,.4));
+}
+.support-logo-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 20px rgba(255,107,53,.5));
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .support-title {
