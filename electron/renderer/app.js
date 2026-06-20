@@ -650,7 +650,7 @@ const App = {
   },
 
   openPayPal() {
-    const PAYPAL_URL = 'https://www.paypal.com/donate/?hosted_button_id=CARBY_PLACEHOLDER';
+    const PAYPAL_URL = 'https://paypal.me/FredericSchroer';
     if (window.electronAPI?.openExternal) {
       window.electronAPI.openExternal(PAYPAL_URL).catch(() => {});
     } else {
