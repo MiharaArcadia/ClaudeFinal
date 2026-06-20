@@ -87,17 +87,27 @@ const State = {
   profile: {
     name: '', age: 25, weight: 70, height: 175,
     goal: 'maintain', dailyCalorieGoal: 2000,
+    gender: 'male',
+    activity: 'moderate',
   },
-  log: [],           // { id, food, grams }
+  log: [],
+  water: 0,
+  recentFoods: [],
   currentScreen: 'dashboard',
   prevScreen: 'dashboard',
-  currentFood: null, // Food being viewed in detail
+  currentFood: null,
   currentPortion: 100,
   micDeviceId: '',
 };
 
-// RDA values
-const RDA = { protein: 50, carbs: 260, fat: 65, fiber: 25 };
+function getRDA(calGoal) {
+  return {
+    protein: Math.round(calGoal * 0.25 / 4),
+    carbs:   Math.round(calGoal * 0.45 / 4),
+    fat:     Math.round(calGoal * 0.30 / 9),
+    fiber:   25,
+  };
+}
 
 const RECO = {
   protein: ['🍗 Hähnchenbrust', '🥚 Eier', '🐟 Lachs', '🫘 Linsen', '🥛 Quark'],
@@ -114,12 +124,14 @@ const FoodAPI = {
     try {
       const url = `https://world.openfoodfacts.org/cgi/search.pl?` +
         `search_terms=${encodeURIComponent(query)}&search_simple=1&action=process` +
-        `&json=1&lc=${lang}&fields=product_name,nutriments,image_url,serving_size,brands,_id&page_size=10`;
+        `&json=1&lc=${lang}&fields=product_name,nutriments,image_url,serving_size,brands,_id&page_size=20`;
       const res = await fetch(url);
       const data = await res.json();
       return (data.products || [])
         .map(p => FoodAPI.parse(p))
-        .filter(f => f.name && f.calories > 0);
+        .filter(f => f.name && f.name.length > 2 && f.calories > 0)
+        .sort((a, b) => relevanceScore(b, query) - relevanceScore(a, query))
+        .slice(0, 8);
     } catch {
       return FoodAPI.fallback(query);
     }
@@ -257,9 +269,73 @@ function totals() {
 }
 
 function tdee(p) {
-  const bmr = 10 * p.weight + 6.25 * p.height - 5 * p.age + 5;
-  const t = Math.round(bmr * 1.55);
+  const bmr = p.gender === 'female'
+    ? 10 * p.weight + 6.25 * p.height - 5 * p.age - 161
+    : 10 * p.weight + 6.25 * p.height - 5 * p.age + 5;
+  const factors = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, veryActive: 1.9 };
+  const t = Math.round(bmr * (factors[p.activity] || 1.55));
   return p.goal === 'lose' ? t - 500 : p.goal === 'gain' ? t + 300 : t;
+}
+
+function bmi(p) {
+  const h = p.height / 100;
+  return (p.weight / (h * h)).toFixed(1);
+}
+
+function bmiLabel(val, lang) {
+  if (val < 18.5) return lang === 'de' ? 'Untergewicht' : 'Underweight';
+  if (val < 25)   return lang === 'de' ? 'Normalgewicht' : 'Normal weight';
+  if (val < 30)   return lang === 'de' ? 'Übergewicht' : 'Overweight';
+  return lang === 'de' ? 'Adipositas' : 'Obese';
+}
+
+function bmiColor(val) {
+  if (val < 18.5) return '#42a5f5';
+  if (val < 25)   return '#66bb6a';
+  if (val < 30)   return '#ffa726';
+  return '#ef5350';
+}
+
+function relevanceScore(food, query) {
+  const q = query.toLowerCase();
+  const n = (food.name || '').toLowerCase();
+  let score = 0;
+  if (n.startsWith(q)) score += 10;
+  else if (n.split(/\s+/).some(w => w === q)) score += 5;
+  else if (n.includes(q)) score += 2;
+  if (food.calories > 0 && food.calories < 600) score += 3;
+  if (food.protein > 0) score += 2;
+  if (/sauce|würze|fertig|pulver|mix|extrakt|gewürz/i.test(n)) score -= 3;
+  if (food.image) score += 1;
+  return score;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// WATER + RECENTS HELPERS
+// ─────────────────────────────────────────────────────────────────
+function updateWaterUI() {
+  const goal = 2000;
+  const el = document.getElementById('water-amount');
+  const bar = document.getElementById('water-bar');
+  if (!el || !bar) return;
+  el.textContent = `${State.water} / ${goal} ml`;
+  const pct = Math.min((State.water / goal) * 100, 100);
+  bar.style.width = pct + '%';
+  bar.style.background = State.water >= goal ? '#66bb6a' : '#1e88e5';
+}
+
+function renderRecents() {
+  const container = document.getElementById('recents-list');
+  const section = document.getElementById('rp-recents');
+  if (!container || !section) return;
+  if (!State.recentFoods || State.recentFoods.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+  container.innerHTML = State.recentFoods.map(f =>
+    `<button class="recent-chip" onclick="App.openDetail(${JSON.stringify(f).replace(/"/g, '&quot;')})">${f.name}</button>`
+  ).join('');
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -298,10 +374,17 @@ function updateUI() {
     el.style.background = gapColor(val, max);
     document.getElementById(valId).textContent = `${Math.round(val)} / ${max}${unit}`;
   };
+  const RDA = getRDA(goal);
   setGap('gap-protein', 'gv-protein', t.protein, RDA.protein, 'g');
   setGap('gap-carbs',   'gv-carbs',   t.carbs,   RDA.carbs,   'g');
   setGap('gap-fat',     'gv-fat',     t.fat,     RDA.fat,     'g');
   setGap('gap-fiber',   'gv-fiber',   t.fiber,   RDA.fiber,   'g');
+
+  // Water tracker
+  updateWaterUI();
+
+  // Recents
+  renderRecents();
 
   // Recommendations
   const gaps = [
@@ -819,6 +902,7 @@ const App = {
     };
     State.log.push(entry);
     App.saveLog();
+    App.saveRecent(State.currentFood);
     App.clearResults();
     showToast(T[State.lang].added);
     Router.go('dashboard');
@@ -866,6 +950,48 @@ const App = {
     const goal = tdee(p);
     document.getElementById('pf-cal-preview').textContent = goal;
     State.profile.dailyCalorieGoal = goal;
+    const b = parseFloat(bmi(p));
+    const bmiEl = document.getElementById('pf-bmi-val');
+    const bmiLblEl = document.getElementById('pf-bmi-label');
+    if (bmiEl) { bmiEl.textContent = b.toFixed(1); bmiEl.style.color = bmiColor(b); }
+    if (bmiLblEl) bmiLblEl.textContent = bmiLabel(b, State.lang);
+  },
+
+  setGender(g) {
+    State.profile.gender = g;
+    document.querySelectorAll('[id^="gender-"]').forEach(c => c.classList.remove('active'));
+    document.getElementById(`gender-${g}`)?.classList.add('active');
+    App.recalcCalGoal();
+  },
+
+  setActivity(a) {
+    State.profile.activity = a;
+    document.querySelectorAll('.activity-item').forEach(c => c.classList.remove('active'));
+    document.getElementById(`act-${a}`)?.classList.add('active');
+    App.recalcCalGoal();
+  },
+
+  addWater(ml) {
+    State.water = Math.min((State.water || 0) + ml, 5000);
+    if (window.electronAPI) window.electronAPI.storeSet('water_' + todayKey(), State.water);
+    else localStorage.setItem('nv_water_' + todayKey(), State.water);
+    if (State.water >= 2000 && State.water - ml < 2000) showToast('Tagesziel erreicht! 💧');
+    updateWaterUI();
+  },
+
+  resetWater() {
+    State.water = 0;
+    if (window.electronAPI) window.electronAPI.storeSet('water_' + todayKey(), 0);
+    else localStorage.setItem('nv_water_' + todayKey(), 0);
+    updateWaterUI();
+  },
+
+  saveRecent(food) {
+    let recents = State.recentFoods || [];
+    recents = [food, ...recents.filter(f => f.name !== food.name)].slice(0, 5);
+    State.recentFoods = recents;
+    if (window.electronAPI) window.electronAPI.storeSet('recent_foods', recents);
+    else localStorage.setItem('nv_recent_foods', JSON.stringify(recents));
   },
 
   saveProfile(silent = false) {
@@ -906,16 +1032,24 @@ const App = {
       if (log) State.log = log;
       const micId = await window.electronAPI.storeGet('mic_device_id');
       if (micId) State.micDeviceId = micId;
+      const water = await window.electronAPI.storeGet('water_' + todayKey());
+      if (water) State.water = water;
+      const recents = await window.electronAPI.storeGet('recent_foods');
+      if (recents) State.recentFoods = recents;
     } else {
       try {
         const p = localStorage.getItem('nv_profile');
         const l = localStorage.getItem('nv_lang');
         const lg = localStorage.getItem('nv_log_' + todayKey());
         const m = localStorage.getItem('nv_mic_device_id');
+        const w = localStorage.getItem('nv_water_' + todayKey());
+        const r = localStorage.getItem('nv_recent_foods');
         if (p) State.profile = { ...State.profile, ...JSON.parse(p) };
         if (l) State.lang = l;
         if (lg) State.log = JSON.parse(lg);
         if (m) State.micDeviceId = m;
+        if (w) State.water = parseInt(w);
+        if (r) State.recentFoods = JSON.parse(r);
       } catch (_) {}
     }
     return !!State.profile.name;
@@ -1117,7 +1251,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     ['lose', 'maintain', 'gain'].forEach(g => {
       document.getElementById(`goal-${g}`).classList.toggle('active', p.goal === g);
     });
+    // Gender
+    ['male', 'female'].forEach(g => {
+      document.getElementById(`gender-${g}`)?.classList.toggle('active', (p.gender || 'male') === g);
+    });
+    // Activity
+    ['sedentary','light','moderate','active','veryActive'].forEach(a => {
+      document.getElementById(`act-${a}`)?.classList.toggle('active', (p.activity || 'moderate') === a);
+    });
     document.getElementById('pf-cal-preview').textContent = p.dailyCalorieGoal || 2000;
+    // BMI
+    const b = parseFloat(bmi(p));
+    const bmiEl = document.getElementById('pf-bmi-val');
+    const bmiLblEl = document.getElementById('pf-bmi-label');
+    if (bmiEl) { bmiEl.textContent = b.toFixed(1); bmiEl.style.color = bmiColor(b); }
+    if (bmiLblEl) bmiLblEl.textContent = bmiLabel(b, State.lang);
     ['age', 'weight', 'height'].forEach(f => {
       if (p[f]) {
         const tx = T[State.lang];
