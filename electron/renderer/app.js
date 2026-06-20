@@ -358,6 +358,7 @@ function updateUI() {
   document.getElementById('sc-rem').textContent = `${Math.round(rem)} ${tx.remaining}`;
 
   // Macros
+  const RDA = getRDA(goal);
   const setMacro = (id, barId, val, max) => {
     document.getElementById(id).textContent = `${Math.round(val)}g`;
     document.getElementById(barId).style.width = Math.min((val / max) * 100, 100) + '%';
@@ -374,7 +375,6 @@ function updateUI() {
     el.style.background = gapColor(val, max);
     document.getElementById(valId).textContent = `${Math.round(val)} / ${max}${unit}`;
   };
-  const RDA = getRDA(goal);
   setGap('gap-protein', 'gv-protein', t.protein, RDA.protein, 'g');
   setGap('gap-carbs',   'gv-carbs',   t.carbs,   RDA.carbs,   'g');
   setGap('gap-fat',     'gv-fat',     t.fat,     RDA.fat,     'g');
