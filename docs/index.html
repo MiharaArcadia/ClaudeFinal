@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carby – Dein smarter Ernährungs-Tracker</title>
-  <meta name="description" content="Carby ist dein kostenloser Ernährungs-Tracker mit Spracheingabe, Makro-Tracking, Wasser-Tracker und BMI-Rechner. Für Windows, Android und iOS.">
+  <meta name="description" content="Carby ist dein kostenloser Ernährungs-Tracker mit KI-Spracheingabe, Makro-Tracking, Wasser-Tracker und BMI-Rechner. Für Windows, Android und iOS.">
   <meta property="og:title" content="Carby – Dein smarter Ernährungs-Tracker">
   <meta property="og:description" content="Kostenloser Ernährungs-Tracker mit KI-Spracheingabe, Millionen Lebensmitteln und personalisierten Zielen.">
   <meta property="og:image" content="assets/logo.png">
@@ -17,60 +17,91 @@
 <body>
 
 <!-- ── NAVBAR ──────────────────────────────────────────────── -->
-<nav>
-  <div class="nav-brand">
-    <img src="assets/logo.png" class="nav-logo" alt="Carby Logo">
-    <span class="nav-name">Carby</span>
-  </div>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#mockup">App</a>
-    <a href="#platforms">Download</a>
-    <a href="#support">Support</a>
-    <a href="privacy-policy.html">Datenschutz</a>
-    <a href="#platforms" class="nav-cta">Jetzt laden</a>
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="assets/logo.png" class="nav-logo" alt="Carby Logo">
+      <span class="nav-name">Carby</span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#features">Features</a>
+      <a href="#mockup">App</a>
+      <a href="#platforms">Download</a>
+      <a href="#support">Support</a>
+      <a href="privacy-policy.html">Datenschutz</a>
+      <a href="https://github.com/miharaarcadia/claudefinal/releases" class="nav-cta">⬇ Download</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <!-- ── HERO ────────────────────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-badge">🦀 Kostenlos &amp; Open Source</div>
-  <img src="assets/logo.png" class="hero-logo" alt="Carby Krabben-Maskottchen">
-  <h1>Dein smarter<br>Ernährungs-Tracker</h1>
-  <p class="hero-sub">
-    Sag einfach, was du gegessen hast. Carby erkennt Lebensmittel per Stimme,
-    trackt Kalorien, Makros und Wasser – und berechnet deinen persönlichen
-    Kalorienbedarf anhand deines Aktivitätsniveaus.
-  </p>
-  <div class="hero-btns">
-    <a href="https://github.com/miharaarcadia/claudefinal/releases" class="btn-primary">
-      🪟 Für Windows herunterladen
-    </a>
-    <a href="#platforms" class="btn-secondary">
-      📱 Weitere Plattformen
-    </a>
+  <!-- Animated gradient blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      🦀 Kostenlos &amp; Open Source
+    </div>
+    <img src="assets/logo.png" class="hero-logo" alt="Carby Krabben-Maskottchen">
+    <h1>Dein smarter<br><span class="gradient-text">Ernährungs-Tracker</span></h1>
+    <p class="hero-sub">
+      Sag einfach, was du gegessen hast. Carby erkennt Lebensmittel per Stimme,
+      trackt Kalorien, Makros &amp; Wasser – und berechnet deinen persönlichen
+      Kalorienbedarf anhand deines Aktivitätsniveaus.
+    </p>
+    <div class="hero-btns">
+      <a href="https://github.com/miharaarcadia/claudefinal/releases" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17 13H13V7H11V13H7L12 18L17 13ZM5 20V22H19V20H5Z"/></svg>
+        Für Windows herunterladen
+      </a>
+      <a href="#platforms" class="btn-ghost">
+        📱 Weitere Plattformen
+      </a>
+    </div>
+    <p class="hero-note">
+      <span>✓ Keine Werbung</span>
+      <span>✓ Kein Abo</span>
+      <span>✓ Deine Daten bleiben bei dir</span>
+    </p>
   </div>
-  <p class="hero-note">Kostenlos · Keine Werbung · Kein Abo · Deine Daten bleiben bei dir</p>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
 <!-- ── STATS ────────────────────────────────────────────────── -->
 <div class="stats-bar">
   <div class="stats-grid">
     <div class="stat">
-      <div class="stat-num">3M+</div>
-      <div class="stat-label">Lebensmittel in der Datenbank</div>
+      <div class="stat-num" data-target="3">0</div>
+      <div class="stat-suffix">M+</div>
+      <div class="stat-label">Lebensmittel</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Kostenlos & werbefrei</div>
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-suffix">%</div>
+      <div class="stat-label">Kostenlos</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">DE/EN</div>
-      <div class="stat-label">Vollständig zweisprachig</div>
+      <div class="stat-num stat-text">DE/EN</div>
+      <div class="stat-suffix"></div>
+      <div class="stat-label">Zweisprachig</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">0€</div>
-      <div class="stat-label">Für immer kostenlos</div>
+      <div class="stat-num stat-text">0€</div>
+      <div class="stat-suffix"></div>
+      <div class="stat-label">Für immer</div>
     </div>
   </div>
 </div>
@@ -78,68 +109,88 @@
 <!-- ── FEATURES ─────────────────────────────────────────────── -->
 <section id="features">
   <div class="container">
-    <span class="section-label">Features</span>
-    <h2 class="section-title">Alles was du brauchst,<br>nichts was du nicht brauchst.</h2>
-    <p class="section-sub">Carby ist schlank, schnell und fokussiert auf das Wesentliche: deinen Alltag gesünder machen – ohne dich zu überfordern.</p>
+    <div class="section-header fade-up">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Alles was du brauchst,<br>nichts was du nicht brauchst.</h2>
+      <p class="section-sub">Carby ist schlank, schnell und fokussiert auf das Wesentliche: deinen Alltag gesünder machen – ohne dich zu überfordern.</p>
+    </div>
 
     <div class="features-grid">
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.05s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🎙️</span>
         <div class="feat-title">KI-Spracheingabe</div>
         <div class="feat-desc">Sag einfach "Hähnchenbrust 150g" und Carby fügt es automatisch hinzu. Kein Tippen, kein Suchen – powered by Whisper AI.</div>
+        <div class="feat-tag">Whisper AI</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.1s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">📊</span>
         <div class="feat-title">Makro-Tracking</div>
-        <div class="feat-desc">Protein, Kohlenhydrate, Fett und Ballaststoffe in Echtzeit. Deine RDA-Ziele werden automatisch an dein Kalorienziel angepasst.</div>
+        <div class="feat-desc">Protein, Kohlenhydrate, Fett und Ballaststoffe in Echtzeit. RDA-Ziele werden automatisch an dein Kalorienziel angepasst.</div>
+        <div class="feat-tag">Echtzeit</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.15s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">💧</span>
         <div class="feat-title">Wasser-Tracker</div>
         <div class="feat-desc">Behalte deine Flüssigkeitszufuhr im Blick. +150ml, +250ml oder +500ml mit einem Klick – Tagesziel 2 Liter.</div>
+        <div class="feat-tag">Täglich</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.2s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🔍</span>
-        <div class="feat-title">Riesige Lebensmitteldatenbank</div>
-        <div class="feat-desc">Über 3 Millionen Produkte aus aller Welt via OpenFoodFacts. Intelligente Sortierung zeigt zuerst, was du wirklich meinst.</div>
+        <div class="feat-title">3M+ Lebensmittel</div>
+        <div class="feat-desc">Über 3 Millionen Produkte via OpenFoodFacts. Intelligente Sortierung zeigt zuerst, was du wirklich meinst.</div>
+        <div class="feat-tag">OpenFoodFacts</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.25s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🧮</span>
-        <div class="feat-title">BMI &amp; TDEE-Rechner</div>
+        <div class="feat-title">BMI &amp; TDEE</div>
         <div class="feat-desc">Dein Kalorienbedarf wird mit der Mifflin-St.-Jeor-Formel berechnet – individuell nach Alter, Gewicht, Größe, Geschlecht und Aktivität.</div>
+        <div class="feat-tag">Mifflin-St. Jeor</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.3s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🔒</span>
-        <div class="feat-title">Datenschutz zuerst</div>
+        <div class="feat-title">Privacy First</div>
         <div class="feat-desc">Keine Werbung, kein Tracking, keine versteckten Kosten. Deine Ernährungsdaten bleiben auf deinem Gerät.</div>
+        <div class="feat-tag">DSGVO</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.35s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">⚡</span>
         <div class="feat-title">Zuletzt gegessen</div>
-        <div class="feat-desc">Schnellzugriff auf deine letzten 5 Lebensmittel. Dein Mittagessen vom Montag ist Dienstag schon per Chip erreichbar.</div>
+        <div class="feat-desc">Schnellzugriff auf deine letzten 5 Lebensmittel. Dein Mittagessen vom Montag ist Dienstag per Chip erreichbar.</div>
+        <div class="feat-tag">Schnellzugriff</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.4s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🎯</span>
         <div class="feat-title">Persönliche Ziele</div>
-        <div class="feat-desc">Abnehmen, Gewicht halten oder zunehmen – Carby berechnet automatisch das richtige Defizit oder den Überschuss.</div>
+        <div class="feat-desc">Abnehmen, halten oder zunehmen – Carby berechnet automatisch das richtige Defizit oder den Überschuss.</div>
+        <div class="feat-tag">Automatisch</div>
       </div>
-      <div class="feat-card fade-up">
+      <div class="feat-card glass fade-up" style="--delay:.45s">
+        <div class="feat-glow"></div>
         <span class="feat-icon">🌍</span>
         <div class="feat-title">Deutsch &amp; Englisch</div>
-        <div class="feat-desc">Die gesamte UI ist auf Knopfdruck zwischen Deutsch und Englisch umschaltbar – inklusive Empfehlungen und Hinweistexten.</div>
+        <div class="feat-desc">Die gesamte UI ist auf Knopfdruck zwischen DE und EN umschaltbar – inklusive Empfehlungen und Hinweistexten.</div>
+        <div class="feat-tag">i18n</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── APP MOCKUP ────────────────────────────────────────────── -->
-<section id="mockup">
+<section id="mockup" class="mockup-section">
   <div class="container">
     <div class="mockup-wrap">
       <div class="mockup-text fade-up">
-        <span class="section-label">Dashboard</span>
-        <h2 class="section-title">Dein Tag auf einen Blick</h2>
-        <p class="section-sub">Das Carby-Dashboard zeigt dir in Sekunden, wie du liegst – Kalorienring, Makro-Bars, Nährstoff-Status und Trinkprotokoll auf einen Blick.</p>
+        <span class="section-label">Live Preview</span>
+        <h2 class="section-title">Dein Tag auf<br>einen Blick</h2>
+        <p class="section-sub">Das Dashboard zeigt dir in Sekunden, wie du liegst – Kalorienring, Makro-Bars, Empfehlungen und Wasser-Tracker auf einen Blick.</p>
         <ul class="mockup-bullets">
           <li>Animierter Kalorienring mit Restanzeige</li>
           <li>Protein, Kohlenhydrate &amp; Fett im Vergleich</li>
@@ -149,150 +200,179 @@
           <li>Tagebuch mit allen heutigen Einträgen</li>
         </ul>
       </div>
-      <!-- CSS-only App Mockup -->
-      <div class="app-frame fade-up">
-        <div class="app-topbar">
-          <img src="assets/logo.png" class="app-logo-sm" alt="Logo">
-          <span class="app-title-sm">Carby</span>
-        </div>
-        <div style="font-size:11px;color:#666;margin-bottom:12px;">Guten Morgen, Max! ☀️</div>
-        <!-- Calorie Ring -->
-        <div class="ring-wrap">
-          <div class="ring-outer">
-            <div class="ring-inner">
-              <span class="ring-kcal">1.340</span>
-              <span class="ring-label">kcal</span>
-              <span class="ring-of">von 2.000</span>
+
+      <!-- Phone frame mockup -->
+      <div class="phone-wrap fade-up">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-btn phone-btn-vol1"></div>
+          <div class="phone-btn phone-btn-vol2"></div>
+          <div class="phone-btn phone-btn-power"></div>
+          <div class="phone-screen">
+            <div class="ps-topbar">
+              <img src="assets/logo.png" class="ps-logo" alt="Logo">
+              <span class="ps-title">Carby</span>
+              <span class="ps-date">Mo, 21. Jun</span>
+            </div>
+            <div class="ps-greeting">Guten Morgen, Max! ☀️</div>
+            <!-- Calorie Ring -->
+            <div class="ps-ring-wrap">
+              <div class="ps-ring">
+                <div class="ps-ring-center">
+                  <span class="ps-kcal">1.340</span>
+                  <span class="ps-kcal-lbl">kcal</span>
+                  <span class="ps-kcal-of">von 2.000</span>
+                </div>
+              </div>
+              <div class="ps-ring-badge">67%</div>
+            </div>
+            <!-- Macros -->
+            <div class="ps-macros">
+              <div class="ps-macro">
+                <span class="ps-mc-val" style="color:#4FC3F7">68g</span>
+                <div class="ps-mc-bar"><div style="width:54%;background:#4FC3F7"></div></div>
+                <span class="ps-mc-lbl">Protein</span>
+              </div>
+              <div class="ps-macro">
+                <span class="ps-mc-val" style="color:#FF6B35">142g</span>
+                <div class="ps-mc-bar"><div style="width:61%;background:#FF6B35"></div></div>
+                <span class="ps-mc-lbl">Carbs</span>
+              </div>
+              <div class="ps-macro">
+                <span class="ps-mc-val" style="color:#F06292">38g</span>
+                <div class="ps-mc-bar"><div style="width:44%;background:#F06292"></div></div>
+                <span class="ps-mc-lbl">Fett</span>
+              </div>
+            </div>
+            <!-- Log -->
+            <div class="ps-section-lbl">Heute gegessen</div>
+            <div class="ps-log">
+              <div class="ps-log-item">
+                <span class="ps-log-emoji">🍗</span>
+                <div class="ps-log-info">
+                  <div class="ps-log-name">Hähnchenbrust</div>
+                  <div class="ps-log-meta">150g · Mittag</div>
+                </div>
+                <span class="ps-log-kcal">165</span>
+              </div>
+              <div class="ps-log-item">
+                <span class="ps-log-emoji">🥣</span>
+                <div class="ps-log-info">
+                  <div class="ps-log-name">Haferflocken</div>
+                  <div class="ps-log-meta">80g · Frühstück</div>
+                </div>
+                <span class="ps-log-kcal">296</span>
+              </div>
+              <div class="ps-log-item">
+                <span class="ps-log-emoji">🍎</span>
+                <div class="ps-log-info">
+                  <div class="ps-log-name">Apfel</div>
+                  <div class="ps-log-meta">1 Stück · Snack</div>
+                </div>
+                <span class="ps-log-kcal">52</span>
+              </div>
+            </div>
+            <!-- Water -->
+            <div class="ps-water">
+              <div class="ps-water-top">
+                <span>💧 Wasser</span>
+                <span style="color:#42A5F5;font-weight:700">1.200 / 2.000 ml</span>
+              </div>
+              <div class="ps-water-bg"><div class="ps-water-fill"></div></div>
             </div>
           </div>
         </div>
-        <!-- Macro Cards -->
-        <div class="macro-row">
-          <div class="macro-card-sm">
-            <div class="mc-label">Protein</div>
-            <div class="mc-val" style="color:#2196F3">68g</div>
-            <div class="mc-bar"><div class="mc-fill" style="width:54%;background:#2196F3"></div></div>
-          </div>
-          <div class="macro-card-sm">
-            <div class="mc-label">Kohlenhydrate</div>
-            <div class="mc-val" style="color:#FF6B35">142g</div>
-            <div class="mc-bar"><div class="mc-fill" style="width:61%;background:#FF6B35"></div></div>
-          </div>
-          <div class="macro-card-sm">
-            <div class="mc-label">Fett</div>
-            <div class="mc-val" style="color:#E91E63">38g</div>
-            <div class="mc-bar"><div class="mc-fill" style="width:44%;background:#E91E63"></div></div>
-          </div>
-        </div>
-        <!-- Log items -->
-        <div style="font-size:11px;color:#666;margin-bottom:8px;">Heute gegessen</div>
-        <div class="log-items">
-          <div class="log-item">
-            <div>
-              <div class="log-name">Hähnchenbrust</div>
-              <div style="font-size:10px;color:#666">150g · Mittagessen</div>
-            </div>
-            <div class="log-kcal">165 kcal</div>
-          </div>
-          <div class="log-item">
-            <div>
-              <div class="log-name">Haferflocken</div>
-              <div style="font-size:10px;color:#666">80g · Frühstück</div>
-            </div>
-            <div class="log-kcal">296 kcal</div>
-          </div>
-          <div class="log-item">
-            <div>
-              <div class="log-name">Apfel</div>
-              <div style="font-size:10px;color:#666">1 Stück · Snack</div>
-            </div>
-            <div class="log-kcal">52 kcal</div>
-          </div>
-        </div>
-        <!-- Water -->
-        <div class="water-mini">
-          <div class="water-mini-label">
-            <span>💧 Wasser</span>
-            <span style="color:#1e88e5">1.200 / 2.000 ml</span>
-          </div>
-          <div class="water-bar-bg"><div class="water-bar-f"></div></div>
-        </div>
+        <div class="phone-glow"></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── PLATFORMS ─────────────────────────────────────────────── -->
-<section id="platforms">
+<section id="platforms" class="platforms-section">
   <div class="container">
-    <span class="section-label">Download</span>
-    <h2 class="section-title">Verfügbar auf deiner Plattform</h2>
-    <p class="section-sub">Carby läuft auf Windows, Android und iOS. Dein Ernährungs-Tracker, überall dabei.</p>
+    <div class="section-header fade-up">
+      <span class="section-label">Download</span>
+      <h2 class="section-title">Verfügbar auf deiner Plattform</h2>
+      <p class="section-sub">Carby läuft auf Windows, Android und iOS. Dein Ernährungs-Tracker, überall dabei.</p>
+    </div>
 
     <div class="platforms-grid">
-      <div class="platform-card fade-up">
-        <span class="platform-icon">🪟</span>
+      <div class="platform-card glass fade-up platform-featured">
+        <div class="platform-glow"></div>
+        <div class="platform-icon-wrap">
+          <span class="platform-icon">🪟</span>
+        </div>
         <div class="platform-name">Windows</div>
-        <div class="platform-desc">Desktop-App mit vollem Funktionsumfang, Spracheingabe und Offline-Unterstützung. Windows 10/11.</div>
-        <a href="https://github.com/miharaarcadia/claudefinal/releases" class="btn-primary" style="display:inline-flex;font-size:13px;padding:10px 20px;margin-bottom:12px;">
-          ⬇ Setup herunterladen
+        <div class="platform-version">v1.0.0 · Windows 10/11</div>
+        <div class="platform-desc">Desktop-App mit vollem Funktionsumfang, KI-Spracheingabe (Whisper) und Offline-Unterstützung.</div>
+        <a href="https://github.com/miharaarcadia/claudefinal/releases" class="btn-primary" style="width:100%;justify-content:center;margin-bottom:12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 13H13V7H11V13H7L12 18L17 13ZM5 20V22H19V20H5Z"/></svg>
+          Setup herunterladen (.exe)
         </a>
-        <div><span class="platform-badge badge-available">✓ Verfügbar</span></div>
+        <span class="platform-badge badge-available">✓ Jetzt verfügbar</span>
       </div>
-      <div class="platform-card fade-up">
+      <div class="platform-card glass fade-up" style="--delay:.1s">
         <span class="platform-icon">🤖</span>
         <div class="platform-name">Android</div>
-        <div class="platform-desc">Native Flutter-App für Android 8.0+. Inklusive Google-Spracheingabe, Firebase-Sync und Material Design.</div>
-        <div style="color:#666;font-size:13px;margin-bottom:12px;">Coming soon im Play Store</div>
+        <div class="platform-version">Android 8.0+ · Flutter</div>
+        <div class="platform-desc">Native Flutter-App mit Material Design, Firebase-Sync und Google-Spracheingabe. Play Store coming soon.</div>
         <span class="platform-badge badge-soon">⏳ In Kürze</span>
       </div>
-      <div class="platform-card fade-up">
+      <div class="platform-card glass fade-up" style="--delay:.2s">
         <span class="platform-icon">🍎</span>
         <div class="platform-name">iOS</div>
-        <div class="platform-desc">Native Flutter-App für iPhone &amp; iPad. iOS 14+, Siri-Integration und iCloud-Sync geplant.</div>
-        <div style="color:#666;font-size:13px;margin-bottom:12px;">Coming soon im App Store</div>
+        <div class="platform-version">iOS 14+ · Flutter</div>
+        <div class="platform-desc">Native Flutter-App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant. App Store coming soon.</div>
         <span class="platform-badge badge-soon">⏳ In Kürze</span>
       </div>
     </div>
 
-    <div style="margin-top:40px;padding:24px;background:#1a1a1a;border-radius:16px;border:1px solid #2a2a2a;">
-      <div style="font-size:13px;color:#9e9e9e;margin-bottom:8px;">Windows Installation</div>
-      <code style="font-size:13px;color:#FF6B35;">
-        1. Carby Setup 1.0.0.exe herunterladen &nbsp;→&nbsp;
-        2. Installer starten (SmartScreen: "Trotzdem ausführen") &nbsp;→&nbsp;
-        3. Fertig ✓
-      </code>
+    <div class="install-hint fade-up">
+      <div class="install-hint-label">Windows Installation</div>
+      <div class="install-steps">
+        <div class="install-step"><span class="install-num">1</span> Setup.exe herunterladen</div>
+        <div class="install-arrow">→</div>
+        <div class="install-step"><span class="install-num">2</span> Installer starten<br><span style="font-size:11px;color:#666">(SmartScreen: "Trotzdem ausführen")</span></div>
+        <div class="install-arrow">→</div>
+        <div class="install-step"><span class="install-num">3</span> <span style="color:#4CAF50">✓ Fertig</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── SUPPORT ───────────────────────────────────────────────── -->
-<section id="support">
+<section id="support" class="support-section">
   <div class="container">
-    <span class="section-label">Support Carby</span>
-    <h2 class="section-title">Carby ist frei.<br>Und bleibt es.</h2>
-    <p class="section-sub">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung – damit neue Features entstehen können.</p>
+    <div class="section-header fade-up">
+      <span class="section-label">Support Carby</span>
+      <h2 class="section-title">Carby ist frei.<br><span class="gradient-text">Und bleibt es.</span></h2>
+      <p class="section-sub">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung.</p>
+    </div>
 
     <div class="support-inner">
-      <div class="support-card fade-up">
-        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">❤️ Einmal spenden</h3>
-        <p style="color:#9e9e9e;font-size:14px;margin-bottom:4px;">Wähle einen Betrag und spende direkt über PayPal.</p>
-        <p style="color:#9e9e9e;font-size:14px;">Kein Konto notwendig – Kreditkarte reicht.</p>
+      <div class="support-card glass fade-up">
+        <div class="support-glow"></div>
+        <h3>❤️ Einmal spenden</h3>
+        <p>Wähle einen Betrag und spende direkt über PayPal. Kein Konto notwendig – Kreditkarte reicht.</p>
         <div class="tier-row">
           <button class="tier-btn">☕ 1€</button>
           <button class="tier-btn active">🍕 3€</button>
           <button class="tier-btn">🦀 5€</button>
         </div>
         <a href="https://paypal.me/FredericSchroer" target="_blank" class="donate-btn">
-          ❤ Jetzt via PayPal spenden
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.7C6.6 21.7 2.3 17.4 2.3 12S6.6 2.3 12 2.3 21.7 6.6 21.7 12 17.4 21.7 12 21.7zM12 4.3C7.7 4.3 4.3 7.7 4.3 12s3.4 7.7 7.7 7.7 7.7-3.4 7.7-7.7S16.3 4.3 12 4.3zM10 16.5V11h-1.5v-1.5H10V8.3C10 6.8 11 6 12.5 6c.7 0 1.5.1 1.5.1v1.5h-.8c-.8 0-1 .4-1 1v1.9h1.8l-.3 1.5H12.2V16.5H10z"/></svg>
+          Jetzt via PayPal spenden
         </a>
-        <div class="donate-note">Öffnet PayPal in deinem Browser.</div>
+        <div class="donate-note">Öffnet PayPal in deinem Browser · 100% sicher</div>
       </div>
-      <div class="qr-card fade-up">
+      <div class="qr-card glass fade-up" style="--delay:.1s">
         <h3>📱 Mit Handy scannen</h3>
-        <p>Einfach QR-Code scannen und direkt in der PayPal-App spenden.</p>
-        <img src="assets/paypal-qr.png" class="qr-img" alt="PayPal QR Code">
-        <div style="margin-top:16px;font-size:13px;color:#666;">paypal.me/FredericSchroer</div>
+        <p>Einfach QR-Code scannen und direkt in der PayPal-App spenden – keine Eingaben nötig.</p>
+        <div class="qr-frame">
+          <img src="assets/paypal-qr.png" class="qr-img" alt="PayPal QR Code">
+        </div>
+        <div class="qr-url">paypal.me/FredericSchroer</div>
       </div>
     </div>
   </div>
@@ -308,6 +388,7 @@
           <span class="footer-logo-name">Carby</span>
         </div>
         <div class="footer-tagline">Dein smarter, kostenloser Ernährungs-Tracker. Für Windows, Android und iOS.</div>
+        <div class="footer-badge">Open Source · DSGVO-konform · Kostenlos</div>
       </div>
       <div class="footer-links">
         <h4>App</h4>
@@ -322,7 +403,7 @@
         <ul>
           <li><a href="privacy-policy.html">Datenschutzerklärung</a></li>
           <li><a href="mailto:ArcadiaApps@proton.me">Kontakt</a></li>
-          <li><a href="https://github.com/miharaarcadia/claudefinal" target="_blank">Open Source (GitHub)</a></li>
+          <li><a href="https://github.com/miharaarcadia/claudefinal" target="_blank">GitHub</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -345,16 +426,73 @@
 
 <script>
 // Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      const delay = e.target.style.getPropertyValue('--delay') || '0s';
+      e.target.style.transitionDelay = delay;
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-// Tier button toggle
+// Stat counter animation
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    if (isNaN(target)) return;
+    let current = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.round(current);
+      if (current >= target) clearInterval(timer);
+    }, 30);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
+
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Mobile hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+document.querySelectorAll('#nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+// Tier buttons
 document.querySelectorAll('.tier-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+  });
+});
+
+// Feature card glow follows mouse
+document.querySelectorAll('.feat-card, .platform-card, .support-card, .qr-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
   });
 });
 </script>
