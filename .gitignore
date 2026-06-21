@@ -1,2 +1,42 @@
+# Electron
 electron/dist/
 electron/node_modules/
+
+# Flutter build output
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# Android secrets (NIEMALS ins Repo!)
+android/key.properties
+android/carby-release.jks
+*.jks
+*.keystore
+
+# Android local config (wird lokal generiert)
+android/local.properties
+android/.gradle/
+
+# iOS (wird von CocoaPods generiert)
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Podfile.lock
+
+# Firebase config (von Firebase Console herunterladen)
+# android/app/google-services.json   ← auskommentiert: Platzhalter ist im Repo
+# ios/Runner/GoogleService-Info.plist ← auskommentiert: Platzhalter ist im Repo
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# macOS
+.DS_Store
+
+# Misc
+*.log
