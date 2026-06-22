@@ -82,7 +82,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _finish() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid ?? 'anon';
+    String uid = 'anon';
+    try {
+      uid = FirebaseAuth.instance.currentUser?.uid ?? 'anon';
+    } catch (_) {}
     final profile = UserProfile(
       uid: uid,
       name: _name.isEmpty ? 'User' : _name,
