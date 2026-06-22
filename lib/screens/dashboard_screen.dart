@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:carby/layouts/desktop_layout.dart';
 import 'package:carby/providers/nutrition_provider.dart';
 import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/favorites_screen.dart';
 import 'package:carby/screens/food_log_screen.dart';
 import 'package:carby/screens/profile_screen.dart';
 import 'package:carby/screens/voice_search_screen.dart';
@@ -28,6 +29,7 @@ class DashboardScreen extends StatefulWidget {
 final _dashKey = GlobalKey<NavigatorState>();
 final _logKey = GlobalKey<NavigatorState>();
 final _profileKey = GlobalKey<NavigatorState>();
+final _favKey = GlobalKey<NavigatorState>();
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _navIndex = 0;
@@ -92,6 +94,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: const FoodLogScreen(),
               ),
               _TabNavigator(
+                navigatorKey: _favKey,
+                child: const FavoritesScreen(),
+              ),
+              _TabNavigator(
                 navigatorKey: _profileKey,
                 child: const ProfileScreen(),
               ),
@@ -107,6 +113,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: Icon(Icons.donut_large), label: 'Dashboard'),
           BottomNavigationBarItem(
               icon: Icon(Icons.list_alt), label: 'Tagebuch'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.star_outline), label: 'Favoriten'),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), label: 'Profil'),
         ],

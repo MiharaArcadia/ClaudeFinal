@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:carby/models/food_model.dart';
+import 'package:carby/providers/favorites_provider.dart';
 import 'package:carby/providers/nutrition_provider.dart';
 import 'package:carby/providers/user_provider.dart';
 import 'package:carby/services/open_food_facts_service.dart';
@@ -134,6 +135,33 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
               ),
               onPressed: () => Navigator.pop(context),
             ),
+            actions: [
+              Consumer<FavoritesProvider>(
+                builder: (_, favs, __) {
+                  final isFav = favs.isFavorite(food.id);
+                  return IconButton(
+                    icon: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(
+                        isFav ? Icons.star : Icons.star_border,
+                        color: isFav ? AppColors.orange : Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (isFav) {
+                        favs.removeFavorite(food.id);
+                      } else {
+                        favs.addFavorite(food);
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
           ),
 
           SliverToBoxAdapter(

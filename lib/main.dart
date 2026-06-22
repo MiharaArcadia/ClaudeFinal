@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:carby/providers/favorites_provider.dart';
 import 'package:carby/providers/nutrition_provider.dart';
 import 'package:carby/providers/user_provider.dart';
 import 'package:carby/screens/splash_screen.dart';
@@ -56,6 +57,9 @@ class CarbyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => NutritionProvider(firebaseService),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavoritesProvider()..init(),
         ),
       ],
       child: MaterialApp(
