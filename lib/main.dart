@@ -31,12 +31,19 @@ void main() async {
     });
   }
 
-  await Firebase.initializeApp();
-  runApp(const CarbyApp());
+  bool firebaseReady = false;
+  try {
+    await Firebase.initializeApp();
+    firebaseReady = true;
+  } catch (e) {
+    debugPrint('[Firebase] Init skipped: $e');
+  }
+  runApp(CarbyApp(firebaseReady: firebaseReady));
 }
 
 class CarbyApp extends StatelessWidget {
-  const CarbyApp({super.key});
+  final bool firebaseReady;
+  const CarbyApp({super.key, this.firebaseReady = false});
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,4 @@
+storePassword=DEIN_KEYSTORE_PASSWORT
+keyPassword=DEIN_KEY_PASSWORT
+keyAlias=carby
+storeFile=C:\\Users\\DEIN_WINDOWS_USERNAME\\carby-release.jks
