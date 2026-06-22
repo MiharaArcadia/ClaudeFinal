@@ -102,11 +102,16 @@ class NutritionProvider extends ChangeNotifier {
       grams: grams,
       timestamp: DateTime.now(),
     );
+    // Optimistic local update so UI works without Firebase
+    _log = [..._log, entry];
+    notifyListeners();
     await _firebase.addFoodLog(uid, entry);
-    // stream will update _log
   }
 
   Future<void> removeEntry(String uid, String entryId) async {
+    // Optimistic local update
+    _log = _log.where((e) => e.id != entryId).toList();
+    notifyListeners();
     await _firebase.deleteFoodLog(uid, entryId);
   }
 

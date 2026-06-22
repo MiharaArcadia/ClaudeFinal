@@ -25,6 +25,10 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
+final _dashKey = GlobalKey<NavigatorState>();
+final _logKey = GlobalKey<NavigatorState>();
+final _profileKey = GlobalKey<NavigatorState>();
+
 class _DashboardScreenState extends State<DashboardScreen> {
   int _navIndex = 0;
 
@@ -74,12 +78,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: IndexedStack(
-        index: _navIndex,
+      body: Stack(
         children: [
-          _DashboardBody(greeting: _greeting),
-          const FoodLogScreen(),
-          const ProfileScreen(),
+          IndexedStack(
+            index: _navIndex,
+            children: [
+              _TabNavigator(
+                navigatorKey: _dashKey,
+                child: _DashboardBody(greeting: _greeting),
+              ),
+              _TabNavigator(
+                navigatorKey: _logKey,
+                child: const FoodLogScreen(),
+              ),
+              _TabNavigator(
+                navigatorKey: _profileKey,
+                child: const ProfileScreen(),
+              ),
+            ],
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -259,12 +276,18 @@ class _DashboardBody extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                     itemCount: recommendations.length,
                     separatorBuilder: (_, __) => const SizedBox(width: 8),
-                    itemBuilder: (_, i) => Chip(
+                    itemBuilder: (_, i) => ActionChip(
                       label: Text(recommendations[i],
                           style: GoogleFonts.inter(
                               color: AppColors.textPrimary, fontSize: 13)),
                       backgroundColor: AppColors.card,
                       side: const BorderSide(color: AppColors.orange, width: 1),
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => VoiceSearchScreen(
+                              initialSearch: recommendations[i]),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -302,5 +325,20 @@ class _DashboardBody extends StatelessWidget {
       ];
       return '${months_en[now.month]} ${now.day}, ${now.year}';
     }
+  }
+}
+
+class _TabNavigator extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+  final Widget child;
+
+  const _TabNavigator({required this.navigatorKey, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
+      key: navigatorKey,
+      onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => child),
+    );
   }
 }

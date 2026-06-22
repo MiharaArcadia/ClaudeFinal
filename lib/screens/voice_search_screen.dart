@@ -10,7 +10,8 @@ import 'package:carby/theme/app_theme.dart';
 import 'package:carby/widgets/pulsing_mic_button.dart';
 
 class VoiceSearchScreen extends StatefulWidget {
-  const VoiceSearchScreen({super.key});
+  final String? initialSearch;
+  const VoiceSearchScreen({super.key, this.initialSearch});
 
   @override
   State<VoiceSearchScreen> createState() => _VoiceSearchScreenState();
@@ -31,6 +32,12 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
   void initState() {
     super.initState();
     _speech.initialize();
+    if (widget.initialSearch != null && widget.initialSearch!.isNotEmpty) {
+      _textController.text = widget.initialSearch!;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _search(widget.initialSearch!);
+      });
+    }
   }
 
   @override
