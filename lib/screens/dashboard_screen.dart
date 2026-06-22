@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:carby/layouts/desktop_layout.dart';
 import 'package:carby/providers/nutrition_provider.dart';
+import 'package:carby/widgets/donation_sheet.dart';
 import 'package:carby/providers/user_provider.dart';
 import 'package:carby/screens/favorites_screen.dart';
 import 'package:carby/screens/food_log_screen.dart';
@@ -44,6 +45,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       if (uid != null) {
         nutritionProvider.startListening(uid);
       }
+      nutritionProvider.onFifthEntry = () {
+        if (mounted) maybeShowDonationSheet(context);
+      };
     });
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:carby/models/food_log_entry.dart';
 import 'package:carby/models/food_model.dart';
@@ -95,6 +96,9 @@ class NutritionProvider extends ChangeNotifier {
     );
   }
 
+  // Fires when total entry count reaches 5 (donation nudge trigger)
+  VoidCallback? onFifthEntry;
+
   Future<void> addEntry(String uid, Food food, double grams) async {
     final entry = FoodLogEntry(
       id: _uuid.v4(),
@@ -106,6 +110,15 @@ class NutritionProvider extends ChangeNotifier {
     _log = [..._log, entry];
     notifyListeners();
     await _firebase.addFoodLog(uid, entry);
+    // Check total lifetime entry count for donation nudge
+    _checkDonationNudge();
+  }
+
+  Future<void> _checkDonationNudge() async {
+    final prefs = await SharedPreferences.getInstance();
+    final count = (prefs.getInt('total_entries') ?? 0) + 1;
+    await prefs.setInt('total_entries', count);
+    if (count == 5) onFifthEntry?.call();
   }
 
   Future<void> removeEntry(String uid, String entryId) async {
