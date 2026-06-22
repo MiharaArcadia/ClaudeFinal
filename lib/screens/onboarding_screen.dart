@@ -96,7 +96,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       language: _lang,
       dailyCalorieGoal: _calorieGoal,
     );
-    await context.read<UserProvider>().saveProfile(profile);
+    try {
+      await context.read<UserProvider>().saveProfile(profile);
+    } catch (_) {}
     if (!mounted) return;
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => const DashboardScreen()),
