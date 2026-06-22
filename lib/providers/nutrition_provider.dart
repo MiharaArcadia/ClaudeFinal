@@ -118,7 +118,8 @@ class NutritionProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final count = (prefs.getInt('total_entries') ?? 0) + 1;
     await prefs.setInt('total_entries', count);
-    if (count == 5) onFifthEntry?.call();
+    final nextTrigger = prefs.getInt('donation_next_trigger') ?? 5;
+    if (count >= nextTrigger) onFifthEntry?.call();
   }
 
   Future<void> removeEntry(String uid, String entryId) async {
