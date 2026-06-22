@@ -26,6 +26,7 @@ class NutrientGapRow extends StatelessWidget {
               gap.name,
               style: GoogleFonts.inter(
                   color: AppColors.textPrimary, fontSize: 13),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Expanded(

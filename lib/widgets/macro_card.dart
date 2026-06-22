@@ -41,9 +41,14 @@ class MacroCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Text(label,
+              Expanded(
+                child: Text(
+                  label,
                   style: GoogleFonts.inter(
-                      color: AppColors.textSecondary, fontSize: 12)),
+                      color: AppColors.textSecondary, fontSize: 12),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
