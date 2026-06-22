@@ -101,8 +101,14 @@ class FirebaseService {
               isGreaterThanOrEqualTo: startOfDay.toIso8601String())
           .where('timestamp', isLessThan: endOfDay.toIso8601String())
           .snapshots()
-          .map((snap) =>
-              snap.docs.map((d) => FoodLogEntry.fromMap(d.data())).toList());
+          .map((snap) {
+            try {
+              return snap.docs.map((d) => FoodLogEntry.fromMap(d.data())).toList();
+            } catch (e) {
+              debugPrint('[Firebase] streamTodayLog deserialize failed: $e');
+              return <FoodLogEntry>[];
+            }
+          });
     } catch (e) {
       debugPrint('[Firebase] streamTodayLog failed: $e');
       return Stream.value([]);

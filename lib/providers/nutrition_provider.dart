@@ -82,10 +82,17 @@ class NutritionProvider extends ChangeNotifier {
 
   void startListening(String uid) {
     _sub?.cancel();
-    _sub = _firebase.streamTodayLog(uid).listen((entries) {
-      _log = entries;
-      notifyListeners();
-    });
+    _sub = _firebase.streamTodayLog(uid).listen(
+      (entries) {
+        _log = entries;
+        notifyListeners();
+      },
+      onError: (e) {
+        _log = [];
+        notifyListeners();
+      },
+      cancelOnError: false,
+    );
   }
 
   Future<void> addEntry(String uid, Food food, double grams) async {

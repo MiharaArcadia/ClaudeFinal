@@ -28,10 +28,22 @@ class FoodLogEntry {
         'timestamp': timestamp.toIso8601String(),
       };
 
-  factory FoodLogEntry.fromMap(Map<String, dynamic> m) => FoodLogEntry(
-        id: m['id'] ?? '',
-        food: Food.fromMap(m['food'] as Map<String, dynamic>),
-        grams: (m['grams'] as num?)?.toDouble() ?? 100,
-        timestamp: DateTime.parse(m['timestamp'] as String),
-      );
+  factory FoodLogEntry.fromMap(Map<String, dynamic> m) {
+    DateTime timestamp = DateTime.now();
+    try {
+      if (m['timestamp'] != null) timestamp = DateTime.parse(m['timestamp'] as String);
+    } catch (_) {}
+    Food food;
+    try {
+      food = Food.fromMap(m['food'] as Map<String, dynamic>);
+    } catch (_) {
+      food = Food(id: '', name: 'Unknown', imageUrl: '', brand: '', calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0, sugar: 0, salt: 0);
+    }
+    return FoodLogEntry(
+      id: m['id'] ?? '',
+      food: food,
+      grams: (m['grams'] as num?)?.toDouble() ?? 100,
+      timestamp: timestamp,
+    );
+  }
 }
