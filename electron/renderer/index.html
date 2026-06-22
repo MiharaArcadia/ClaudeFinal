@@ -47,6 +47,9 @@
       <div class="nav-item" data-screen="profile">
         <span class="nav-icon">◯</span> <span id="nav-profile">Profil</span>
       </div>
+      <div class="nav-item" data-screen="favorites">
+        <span class="nav-icon">☆</span> <span id="nav-favorites">Favoriten</span>
+      </div>
       <div class="nav-item" data-screen="support">
         <span class="nav-icon">♥</span> <span id="nav-support">Support</span>
       </div>
@@ -260,8 +263,17 @@
           <div id="nutr-rows"></div>
         </div>
 
-        <button class="add-btn" id="btn-add" onclick="App.addToLog()">➕ Zum Tagebuch hinzufügen</button>
+        <div class="detail-actions">
+          <button class="add-btn" id="btn-add" onclick="App.addToLog()">➕ Zum Tagebuch hinzufügen</button>
+          <button class="fav-star-btn" id="btn-fav-star" onclick="App.toggleFavorite()" title="Zu Favoriten">☆</button>
+        </div>
       </div>
+    </section>
+
+    <!-- Favorites -->
+    <section class="screen" id="screen-favorites">
+      <div class="section-title" id="title-favorites">Favoriten</div>
+      <div id="favorites-list" style="margin-top:16px"></div>
     </section>
 
     <!-- Support Carby -->
@@ -340,6 +352,31 @@
       <div id="rp-log-items"></div>
     </div>
   </aside>
+</div>
+
+<!-- Donation Nudge Overlay -->
+<div id="donation-nudge" class="donation-overlay" style="display:none">
+  <div class="donation-nudge-card">
+    <div class="donation-nudge-handle"></div>
+    <div style="font-size:48px;text-align:center">🦀</div>
+    <h2 class="donation-nudge-title">Carby ist kostenlos.<br>Das hat einen Preis. 🙂</h2>
+    <p class="donation-nudge-desc">Ich entwickle Carby alleine, in meiner Freizeit. Google Play kostet Geld, iOS-Veröffentlichung 99$ pro Jahr — und Updates schreiben sich nicht von selbst.<br><br>Wenn dir die App gefällt und du mich unterstützen möchtest, freue ich mich über jede Spende. Muss nicht sein. Aber tut gut.</p>
+    <button class="donation-nudge-btn" onclick="App.nudgePayPal()">❤️ Via PayPal spenden</button>
+    <button class="donation-nudge-dismiss" onclick="App.dismissNudge()">Vielleicht später</button>
+  </div>
+</div>
+
+<!-- Donation Thanks Dialog -->
+<div id="donation-thanks" class="donation-overlay" style="display:none">
+  <div class="donation-thanks-card">
+    <h3 class="donation-thanks-title">❤️ Vielen Dank!</h3>
+    <p class="donation-thanks-desc">Wie viel hast du gespendet?</p>
+    <div class="donation-thanks-btns">
+      <button class="donation-amount-btn" onclick="App.setDonationAmount(1)">1 €</button>
+      <button class="donation-amount-btn" onclick="App.setDonationAmount(3)">3 €</button>
+      <button class="donation-amount-btn" onclick="App.setDonationAmount(5)">5 €</button>
+    </div>
+  </div>
 </div>
 
 <!-- Toast -->

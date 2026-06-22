@@ -44,6 +44,10 @@ const T = {
     support_donate_btn: 'Jetzt via PayPal spenden',
     support_note: 'Öffnet PayPal in deinem Browser. Kein Konto nötig.',
     support_thanks: 'Danke, dass du Carby nutzt! 🦀',
+    nav_favorites: 'Favoriten',
+    favorites_empty: 'Noch keine Favoriten.\nTippe ☆ auf einem Lebensmittel.',
+    fav_add: 'Hinzufügen',
+    fav_remove: '✕',
   },
   en: {
     greeting_morning: 'Good morning', greeting_afternoon: 'Good afternoon', greeting_evening: 'Good evening',
@@ -76,6 +80,10 @@ const T = {
     support_donate_btn: 'Donate via PayPal',
     support_note: 'Opens PayPal in your browser. No account needed.',
     support_thanks: 'Thank you for using Carby! 🦀',
+    nav_favorites: 'Favorites',
+    favorites_empty: 'No favorites yet.\nClick ☆ on a food item.',
+    fav_add: 'Add',
+    fav_remove: '✕',
   },
 };
 
@@ -93,6 +101,7 @@ const State = {
   log: [],
   water: 0,
   recentFoods: [],
+  favorites: [],
   currentScreen: 'dashboard',
   prevScreen: 'dashboard',
   currentFood: null,
@@ -420,6 +429,7 @@ function translateUI(lang, tx) {
   set('nav-log', tx.log);
   set('nav-profile', tx.profile);
   set('nav-support', tx.support);
+  set('nav-favorites', tx.nav_favorites || 'Favoriten');
   set('support-tagline', tx.support_tagline);
   set('support-desc', tx.support_desc);
   set('donate-btn-text', tx.support_donate_btn);
@@ -704,6 +714,7 @@ const Router = {
     if (el) el.classList.add('active');
     State.prevScreen = State.currentScreen;
     State.currentScreen = screen;
+    if (screen === 'favorites') App.renderFavorites();
   },
 };
 
@@ -865,6 +876,7 @@ const App = {
     }).join('');
 
     Router.go('detail');
+    App._updateStarBtn(State.currentFood);
   },
 
   updatePortion(grams) {
@@ -903,6 +915,7 @@ const App = {
     State.log.push(entry);
     App.saveLog();
     App.saveRecent(State.currentFood);
+    App.checkDonationNudge();
     App.clearResults();
     showToast(T[State.lang].added);
     Router.go('dashboard');
@@ -994,6 +1007,108 @@ const App = {
     else localStorage.setItem('nv_recent_foods', JSON.stringify(recents));
   },
 
+  // ── Favorites ────────────────────────────────────────────────
+  isFavorite(food) {
+    return State.favorites.some(f => f.name === food.name);
+  },
+
+  saveFavorites() {
+    if (window.electronAPI) window.electronAPI.storeSet('favorites', State.favorites);
+    else localStorage.setItem('nv_favorites', JSON.stringify(State.favorites));
+  },
+
+  toggleFavorite() {
+    const food = State.currentFood;
+    if (!food) return;
+    if (App.isFavorite(food)) {
+      State.favorites = State.favorites.filter(f => f.name !== food.name);
+    } else {
+      State.favorites = [food, ...State.favorites];
+    }
+    App.saveFavorites();
+    App._updateStarBtn(food);
+    if (State.currentScreen === 'favorites') App.renderFavorites();
+  },
+
+  _updateStarBtn(food) {
+    const btn = document.getElementById('btn-fav-star');
+    if (!btn) return;
+    btn.textContent = App.isFavorite(food) ? '★' : '☆';
+    btn.classList.toggle('fav-star-active', App.isFavorite(food));
+  },
+
+  renderFavorites() {
+    const el = document.getElementById('favorites-list');
+    if (!el) return;
+    const tx = T[State.lang];
+    if (!State.favorites.length) {
+      el.innerHTML = `<div class="fav-empty">${(tx.favorites_empty || 'Keine Favoriten.').replace('\n','<br>')}</div>`;
+      return;
+    }
+    el.innerHTML = State.favorites.map((food, i) => `
+      <div class="fav-card">
+        <div class="fav-card-emoji">${food.imageUrl ? `<img src="${food.imageUrl}" class="fav-thumb">` : '🥗'}</div>
+        <div class="fav-card-info">
+          <div class="fav-card-name">${food.name}</div>
+          <div class="fav-card-cal">${Math.round(food.calories)} kcal / 100g</div>
+        </div>
+        <div class="fav-card-actions">
+          <button class="fav-action-btn fav-add-btn" onclick="App.openFavoriteDetail(${i})">${tx.fav_add || 'Add'}</button>
+          <button class="fav-action-btn fav-remove-btn" onclick="App.removeFavorite(${i})">${tx.fav_remove || '✕'}</button>
+        </div>
+      </div>`).join('');
+  },
+
+  openFavoriteDetail(idx) {
+    const food = State.favorites[idx];
+    if (!food) return;
+    App._lastResults = [food];
+    App.openDetail(0);
+  },
+
+  removeFavorite(idx) {
+    State.favorites.splice(idx, 1);
+    App.saveFavorites();
+    App.renderFavorites();
+  },
+
+  // ── Donation Nudge ───────────────────────────────────────────
+  checkDonationNudge() {
+    const count = parseInt(localStorage.getItem('nv_total_entries') || '0') + 1;
+    localStorage.setItem('nv_total_entries', count);
+    if (window.electronAPI) window.electronAPI.storeSet('total_entries', count);
+    const nextTrigger = parseInt(localStorage.getItem('nv_donation_next_trigger') || '5');
+    if (count >= nextTrigger) App.showDonationNudge();
+  },
+
+  showDonationNudge() {
+    localStorage.setItem('nv_donation_next_trigger', '999999');
+    if (window.electronAPI) window.electronAPI.storeSet('donation_next_trigger', 999999);
+    const el = document.getElementById('donation-nudge');
+    if (el) el.style.display = 'flex';
+  },
+
+  dismissNudge() {
+    const el = document.getElementById('donation-nudge');
+    if (el) el.style.display = 'none';
+  },
+
+  nudgePayPal() {
+    App.openPayPal();
+    document.getElementById('donation-nudge').style.display = 'none';
+    document.getElementById('donation-thanks').style.display = 'flex';
+  },
+
+  setDonationAmount(euros) {
+    const offsets = { 1: 50, 3: 150, 5: 1000 };
+    const offset = offsets[euros] || 50;
+    const count = parseInt(localStorage.getItem('nv_total_entries') || '0');
+    const next = count + offset;
+    localStorage.setItem('nv_donation_next_trigger', next);
+    if (window.electronAPI) window.electronAPI.storeSet('donation_next_trigger', next);
+    document.getElementById('donation-thanks').style.display = 'none';
+  },
+
   saveProfile(silent = false) {
     State.profile.name = document.getElementById('pf-name').value.trim();
     State.profile.age = parseFloat(document.getElementById('pf-age').value);
@@ -1036,6 +1151,12 @@ const App = {
       if (water) State.water = water;
       const recents = await window.electronAPI.storeGet('recent_foods');
       if (recents) State.recentFoods = recents;
+      const favs = await window.electronAPI.storeGet('favorites');
+      if (favs) State.favorites = favs;
+      const donationNext = await window.electronAPI.storeGet('donation_next_trigger');
+      if (donationNext) localStorage.setItem('nv_donation_next_trigger', donationNext);
+      const totalEntries = await window.electronAPI.storeGet('total_entries');
+      if (totalEntries) localStorage.setItem('nv_total_entries', totalEntries);
     } else {
       try {
         const p = localStorage.getItem('nv_profile');
@@ -1044,12 +1165,14 @@ const App = {
         const m = localStorage.getItem('nv_mic_device_id');
         const w = localStorage.getItem('nv_water_' + todayKey());
         const r = localStorage.getItem('nv_recent_foods');
+        const fv = localStorage.getItem('nv_favorites');
         if (p) State.profile = { ...State.profile, ...JSON.parse(p) };
         if (l) State.lang = l;
         if (lg) State.log = JSON.parse(lg);
         if (m) State.micDeviceId = m;
         if (w) State.water = parseInt(w);
         if (r) State.recentFoods = JSON.parse(r);
+        if (fv) State.favorites = JSON.parse(fv);
       } catch (_) {}
     }
     return !!State.profile.name;
