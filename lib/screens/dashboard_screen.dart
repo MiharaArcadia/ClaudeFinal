@@ -10,6 +10,7 @@ import 'package:carby/providers/user_provider.dart';
 import 'package:carby/screens/favorites_screen.dart';
 import 'package:carby/screens/food_log_screen.dart';
 import 'package:carby/screens/profile_screen.dart';
+import 'package:carby/screens/support_screen.dart';
 import 'package:carby/screens/voice_search_screen.dart';
 import 'package:carby/theme/app_theme.dart';
 import 'package:carby/widgets/calorie_ring_chart.dart';
@@ -31,6 +32,7 @@ final _dashKey = GlobalKey<NavigatorState>();
 final _logKey = GlobalKey<NavigatorState>();
 final _profileKey = GlobalKey<NavigatorState>();
 final _favKey = GlobalKey<NavigatorState>();
+final _supportKey = GlobalKey<NavigatorState>();
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _navIndex = 0;
@@ -67,7 +69,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget get _currentPage {
     return switch (_navIndex) {
       1 => const FoodLogScreen(),
-      2 => const ProfileScreen(),
+      2 => const FavoritesScreen(),
+      3 => const ProfileScreen(),
+      4 => const SupportScreen(),
       _ => _DashboardBody(greeting: _greeting),
     };
   }
@@ -105,6 +109,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 navigatorKey: _profileKey,
                 child: const ProfileScreen(),
               ),
+              _TabNavigator(
+                navigatorKey: _supportKey,
+                child: const SupportScreen(),
+              ),
             ],
           ),
         ],
@@ -121,6 +129,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: Icon(Icons.star_outline), label: 'Favoriten'),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), label: 'Profil'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border), label: 'Support'),
         ],
       ),
     );
