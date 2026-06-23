@@ -1,7 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:carby/theme/app_theme.dart';
+
+// Replace with your Discord webhook URL after creating it in Discord
+const _discordWebhook = 'YOUR_DISCORD_WEBHOOK_URL';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -90,27 +97,26 @@ class SupportScreen extends StatelessWidget {
                     const SizedBox(height: 28),
                     const Divider(color: Color(0xFF2A2A2A)),
                     const SizedBox(height: 20),
-                    Text(
-                      'Bug melden oder Feedback geben:',
-                      style: GoogleFonts.inter(
-                        color: AppColors.textSecondary,
-                        fontSize: 13,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: () async {
-                        final uri = Uri.parse('mailto:ArcadiaApps@proton.me?subject=Carby%20Feedback');
-                        if (await canLaunchUrl(uri)) launchUrl(uri);
-                      },
-                      child: Text(
-                        'ArcadiaApps@proton.me',
-                        style: GoogleFonts.inter(
-                          color: AppColors.orange,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColors.orange,
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: OutlinedButton.icon(
+                        onPressed: () => _showFeedbackSheet(context),
+                        icon: const Icon(Icons.bug_report_outlined,
+                            color: Color(0xFFFFC107), size: 18),
+                        label: Text(
+                          '🐛  Problem melden / Feedback',
+                          style: GoogleFonts.inter(
+                            color: const Color(0xFFFFC107),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(
+                              color: Color(0xFFFFC107), width: 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
                         ),
                       ),
                     ),
@@ -120,6 +126,197 @@ class SupportScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+void _showFeedbackSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: const Color(0xFF1A1A1A),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (_) => const _FeedbackSheet(),
+  );
+}
+
+class _FeedbackSheet extends StatefulWidget {
+  const _FeedbackSheet();
+  @override
+  State<_FeedbackSheet> createState() => _FeedbackSheetState();
+}
+
+class _FeedbackSheetState extends State<_FeedbackSheet> {
+  final _ctrl = TextEditingController();
+  XFile? _image;
+  bool _sending = false;
+  bool _sent = false;
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
+    if (picked != null) setState(() => _image = picked);
+  }
+
+  Future<void> _submit() async {
+    final text = _ctrl.text.trim();
+    if (text.isEmpty) return;
+    setState(() => _sending = true);
+
+    try {
+      if (_discordWebhook == 'YOUR_DISCORD_WEBHOOK_URL') {
+        // Fallback: open mailto if webhook not configured
+        final uri = Uri.parse(
+            'mailto:ArcadiaApps@proton.me?subject=Carby%20Feedback&body=${Uri.encodeComponent(text)}');
+        if (await canLaunchUrl(uri)) await launchUrl(uri);
+        if (mounted) Navigator.pop(context);
+        return;
+      }
+
+      final payload = jsonEncode({
+        'embeds': [
+          {
+            'title': '🐛 Carby Feedback',
+            'description': text,
+            'color': 16737843,
+            'fields': [
+              {'name': 'Platform', 'value': Platform.operatingSystem, 'inline': true},
+              {'name': 'Version', 'value': '1.0.0', 'inline': true},
+            ],
+            'footer': {'text': 'Carby In-App Feedback'},
+          }
+        ],
+      });
+
+      if (_image != null) {
+        final req = http.MultipartRequest('POST', Uri.parse(_discordWebhook));
+        req.fields['payload_json'] = payload;
+        req.files.add(await http.MultipartFile.fromPath(
+          'file', _image!.path,
+          filename: 'screenshot.jpg',
+        ));
+        await req.send();
+      } else {
+        await http.post(
+          Uri.parse(_discordWebhook),
+          headers: {'Content-Type': 'application/json'},
+          body: payload,
+        );
+      }
+      setState(() => _sent = true);
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) Navigator.pop(context);
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Feedback konnte nicht gesendet werden.'),
+        ));
+      }
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 24, right: 24, top: 24,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40, height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white24,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text('Problem melden',
+              style: GoogleFonts.inter(
+                  color: AppColors.textPrimary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700)),
+          const SizedBox(height: 4),
+          Text('Dein Feedback hilft Carby besser zu machen.',
+              style: GoogleFonts.inter(
+                  color: AppColors.textSecondary, fontSize: 13)),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _ctrl,
+            maxLines: 5,
+            style: GoogleFonts.inter(color: AppColors.textPrimary, fontSize: 14),
+            decoration: InputDecoration(
+              hintText: 'Was ist passiert?',
+              hintStyle: GoogleFonts.inter(color: AppColors.textSecondary),
+              filled: true,
+              fillColor: AppColors.card,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          if (_image != null)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.file(File(_image!.path),
+                  height: 80, fit: BoxFit.cover),
+            ),
+          Row(
+            children: [
+              TextButton.icon(
+                onPressed: _pickImage,
+                icon: const Icon(Icons.image_outlined,
+                    color: AppColors.textSecondary, size: 16),
+                label: Text(
+                  _image == null ? 'Screenshot anhängen' : 'Bild ändern',
+                  style: GoogleFonts.inter(
+                      color: AppColors.textSecondary, fontSize: 13),
+                ),
+              ),
+              const Spacer(),
+              if (_sent)
+                Row(children: [
+                  const Icon(Icons.check_circle,
+                      color: Colors.greenAccent, size: 18),
+                  const SizedBox(width: 6),
+                  Text('Gesendet!',
+                      style: GoogleFonts.inter(
+                          color: Colors.greenAccent, fontSize: 13)),
+                ])
+              else
+                ElevatedButton(
+                  onPressed: _sending ? null : _submit,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                  child: _sending
+                      ? const SizedBox(
+                          width: 18, height: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white))
+                      : Text('Absenden',
+                          style: GoogleFonts.inter(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1034,6 +1034,91 @@ const App = {
     updateWaterUI();
   },
 
+  // ── Feedback ──────────────────────────────────────────────────
+  _feedbackFile: null,
+
+  openFeedback() {
+    this._feedbackFile = null;
+    document.getElementById('feedback-text').value = '';
+    document.getElementById('feedback-filename').textContent = '';
+    document.getElementById('feedback-preview').style.display = 'none';
+    document.getElementById('feedback-send-btn').textContent = 'Absenden';
+    document.getElementById('feedback-send-btn').disabled = false;
+    document.getElementById('feedback-modal').style.display = 'flex';
+  },
+
+  closeFeedback() {
+    document.getElementById('feedback-modal').style.display = 'none';
+  },
+
+  feedbackFileChosen(input) {
+    const file = input.files[0];
+    if (!file) return;
+    this._feedbackFile = file;
+    document.getElementById('feedback-filename').textContent = file.name;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('feedback-preview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  },
+
+  async sendFeedback() {
+    const text = document.getElementById('feedback-text').value.trim();
+    if (!text) { showToast('Bitte beschreibe das Problem.'); return; }
+
+    const btn = document.getElementById('feedback-send-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Sende...';
+
+    // Replace with your Discord webhook URL
+    const WEBHOOK = 'YOUR_DISCORD_WEBHOOK_URL';
+
+    if (WEBHOOK === 'YOUR_DISCORD_WEBHOOK_URL') {
+      // Fallback: open mailto
+      window.open(`mailto:ArcadiaApps@proton.me?subject=Carby%20Feedback&body=${encodeURIComponent(text)}`);
+      this.closeFeedback();
+      return;
+    }
+
+    const payload = JSON.stringify({
+      embeds: [{
+        title: '🐛 Carby Feedback (Windows)',
+        description: text,
+        color: 0xFF6B35,
+        fields: [
+          { name: 'Platform', value: 'Windows', inline: true },
+          { name: 'Version', value: '1.0.0', inline: true },
+          { name: 'Sprache', value: State.lang.toUpperCase(), inline: true },
+        ],
+        footer: { text: 'Carby In-App Feedback' },
+      }],
+    });
+
+    try {
+      if (this._feedbackFile) {
+        const formData = new FormData();
+        formData.append('payload_json', payload);
+        formData.append('file', this._feedbackFile, 'screenshot.png');
+        await fetch(WEBHOOK, { method: 'POST', body: formData });
+      } else {
+        await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+        });
+      }
+      btn.textContent = '✓ Gesendet!';
+      setTimeout(() => this.closeFeedback(), 1500);
+    } catch (e) {
+      btn.disabled = false;
+      btn.textContent = 'Absenden';
+      showToast('Feedback konnte nicht gesendet werden.');
+    }
+  },
+
   dismissBetaBanner() {
     if (window.electronAPI) window.electronAPI.storeSet('beta_dismissed', true);
     else localStorage.setItem('nv_beta_dismissed', 'true');

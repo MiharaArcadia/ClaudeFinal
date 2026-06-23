@@ -315,8 +315,7 @@
 
         <div class="support-footer">
           <p class="support-footer-text" id="support-footer-text">Danke, dass du Carby nutzt! 🦀</p>
-          <p style="margin:8px 0 4px;font-size:13px;opacity:0.6">Bug melden oder Feedback:</p>
-          <a href="mailto:ArcadiaApps@proton.me?subject=Carby%20Feedback" style="color:var(--orange);font-size:13px;text-decoration:none">ArcadiaApps@proton.me</a>
+          <button class="feedback-trigger-btn" onclick="App.openFeedback()">🐛 Problem melden / Feedback</button>
           <p style="margin:16px 0 0;font-size:11px;opacity:0.3">Carby v1.0.0</p>
         </div>
       </div>
@@ -383,6 +382,30 @@
       <button class="donation-amount-btn" onclick="App.setDonationAmount(1)">1 €</button>
       <button class="donation-amount-btn" onclick="App.setDonationAmount(3)">3 €</button>
       <button class="donation-amount-btn" onclick="App.setDonationAmount(5)">5 €</button>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Modal -->
+<div id="feedback-modal" class="feedback-overlay" style="display:none" onclick="if(event.target===this)App.closeFeedback()">
+  <div class="feedback-card">
+    <div class="feedback-header">
+      <h3 class="feedback-title">🐛 Problem melden</h3>
+      <button class="feedback-close" onclick="App.closeFeedback()">✕</button>
+    </div>
+    <p class="feedback-sub">Dein Feedback hilft Carby besser zu machen.</p>
+    <textarea id="feedback-text" class="feedback-textarea" placeholder="Was ist passiert?" rows="5"></textarea>
+    <div class="feedback-file-row">
+      <label class="feedback-file-btn" for="feedback-file-input">
+        📎 Screenshot anhängen
+      </label>
+      <input type="file" id="feedback-file-input" accept="image/*" style="display:none" onchange="App.feedbackFileChosen(this)">
+      <span id="feedback-filename" class="feedback-filename"></span>
+    </div>
+    <img id="feedback-preview" class="feedback-preview" style="display:none" alt="Screenshot preview">
+    <div class="feedback-actions">
+      <button class="feedback-cancel-btn" onclick="App.closeFeedback()">Abbrechen</button>
+      <button class="feedback-send-btn" id="feedback-send-btn" onclick="App.sendFeedback()">Absenden</button>
     </div>
   </div>
 </div>

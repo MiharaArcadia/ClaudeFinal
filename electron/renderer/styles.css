@@ -1233,3 +1233,69 @@ a { color: var(--orange); text-decoration: none; }
   opacity: .7;
 }
 #beta-banner button:hover { opacity: 1; }
+
+/* Feedback trigger button */
+.feedback-trigger-btn {
+  margin-top: 14px;
+  background: none;
+  border: 1px solid rgba(255,193,7,0.4);
+  border-radius: 10px;
+  color: #ffc107;
+  font-size: 13px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.feedback-trigger-btn:hover { background: rgba(255,193,7,0.08); }
+
+/* Feedback modal overlay */
+.feedback-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+}
+.feedback-card {
+  background: #1c1c1c;
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 16px;
+  padding: 28px;
+  width: min(480px, 90vw);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feedback-header { display: flex; align-items: center; justify-content: space-between; }
+.feedback-title { margin: 0; font-size: 17px; color: #fff; font-weight: 700; }
+.feedback-close { background: none; border: none; color: #888; font-size: 18px; cursor: pointer; line-height: 1; }
+.feedback-close:hover { color: #fff; }
+.feedback-sub { margin: 0; font-size: 13px; color: var(--text-muted); }
+.feedback-textarea {
+  width: 100%; box-sizing: border-box;
+  background: #0d0d0d; border: 1px solid #2a2a2a;
+  border-radius: 10px; color: #fff; font-size: 14px;
+  padding: 12px; resize: vertical; font-family: inherit;
+  outline: none;
+}
+.feedback-textarea:focus { border-color: var(--orange); }
+.feedback-file-row { display: flex; align-items: center; gap: 10px; }
+.feedback-file-btn {
+  background: #2a2a2a; border-radius: 8px;
+  padding: 6px 14px; font-size: 12px; color: #aaa;
+  cursor: pointer; white-space: nowrap;
+}
+.feedback-file-btn:hover { background: #333; color: #fff; }
+.feedback-filename { font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.feedback-preview { max-height: 100px; border-radius: 8px; object-fit: cover; border: 1px solid #2a2a2a; }
+.feedback-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+.feedback-cancel-btn {
+  background: none; border: 1px solid #2a2a2a;
+  border-radius: 8px; color: #888; font-size: 13px;
+  padding: 8px 18px; cursor: pointer;
+}
+.feedback-cancel-btn:hover { border-color: #555; color: #fff; }
+.feedback-send-btn {
+  background: var(--orange); border: none;
+  border-radius: 8px; color: #fff; font-size: 13px;
+  font-weight: 700; padding: 8px 22px; cursor: pointer;
+  transition: opacity .2s;
+}
+.feedback-send-btn:disabled { opacity: 0.6; cursor: default; }
+.feedback-send-btn:not(:disabled):hover { opacity: 0.88; }
