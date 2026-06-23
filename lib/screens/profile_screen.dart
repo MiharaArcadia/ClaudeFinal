@@ -312,6 +312,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 32),
+          Text(
+            'Carby v1.0.0',
+            style: GoogleFonts.inter(
+              color: AppColors.textSecondary.withOpacity(0.4),
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(height: 8),
         ],
       ),
     );

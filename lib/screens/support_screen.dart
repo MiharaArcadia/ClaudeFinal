@@ -87,6 +87,33 @@ class SupportScreen extends StatelessWidget {
                         fontSize: 13,
                       ),
                     ),
+                    const SizedBox(height: 28),
+                    const Divider(color: Color(0xFF2A2A2A)),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Bug melden oder Feedback geben:',
+                      style: GoogleFonts.inter(
+                        color: AppColors.textSecondary,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    GestureDetector(
+                      onTap: () async {
+                        final uri = Uri.parse('mailto:ArcadiaApps@proton.me?subject=Carby%20Feedback');
+                        if (await canLaunchUrl(uri)) launchUrl(uri);
+                      },
+                      child: Text(
+                        'ArcadiaApps@proton.me',
+                        style: GoogleFonts.inter(
+                          color: AppColors.orange,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.orange,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
