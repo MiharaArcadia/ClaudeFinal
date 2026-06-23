@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:carby/theme/app_theme.dart';
 
 // Replace with your Discord webhook URL after creating it in Discord
-const _discordWebhook = 'YOUR_DISCORD_WEBHOOK_URL';
+const _discordWebhook = 'https://discord.com/api/webhooks/1519057810275438784/_5KMfihPPBbIljR7XvteDHCBqCwqdfKwtVUsMD5K9zU_37IukLgdnVDut_RDPPs0FpIm';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});

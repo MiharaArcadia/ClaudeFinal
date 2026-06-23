@@ -1074,7 +1074,7 @@ const App = {
     btn.textContent = '⏳ Sende...';
 
     // Replace with your Discord webhook URL
-    const WEBHOOK = 'YOUR_DISCORD_WEBHOOK_URL';
+    const WEBHOOK = 'https://discord.com/api/webhooks/1519057810275438784/_5KMfihPPBbIljR7XvteDHCBqCwqdfKwtVUsMD5K9zU_37IukLgdnVDut_RDPPs0FpIm';
 
     if (WEBHOOK === 'YOUR_DISCORD_WEBHOOK_URL') {
       // Fallback: open mailto
