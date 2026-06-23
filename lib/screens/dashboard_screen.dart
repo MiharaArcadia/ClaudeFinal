@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carby/layouts/desktop_layout.dart';
 import 'package:carby/providers/nutrition_provider.dart';
 import 'package:carby/widgets/donation_sheet.dart';
@@ -156,6 +157,7 @@ class _DashboardBody extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
+            _BetaBanner(lang: lang),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
@@ -347,6 +349,76 @@ class _DashboardBody extends StatelessWidget {
       ];
       return '${months_en[now.month]} ${now.day}, ${now.year}';
     }
+  }
+}
+
+class _BetaBanner extends StatefulWidget {
+  final String lang;
+  const _BetaBanner({required this.lang});
+  @override
+  State<_BetaBanner> createState() => _BetaBannerState();
+}
+
+class _BetaBannerState extends State<_BetaBanner> {
+  bool _visible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('beta_banner_dismissed') != true) {
+      if (mounted) setState(() => _visible = true);
+    }
+  }
+
+  Future<void> _dismiss() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('beta_banner_dismissed', true);
+    if (mounted) setState(() => _visible = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_visible) return const SliverToBoxAdapter(child: SizedBox.shrink());
+    final text = widget.lang == 'de'
+        ? 'Carby befindet sich im Aufbau. Es kann noch zu Fehlern kommen.'
+        : 'Carby is still in development. You may encounter bugs.';
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          color: const Color(0xFF2A2000),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFFFC107).withOpacity(0.4)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.construction_rounded,
+                color: Color(0xFFFFC107), size: 16),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                text,
+                style: GoogleFonts.inter(
+                    color: const Color(0xFFFFC107),
+                    fontSize: 12,
+                    height: 1.4),
+              ),
+            ),
+            GestureDetector(
+              onTap: _dismiss,
+              child: const Icon(Icons.close,
+                  color: Color(0xFFFFC107), size: 16),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

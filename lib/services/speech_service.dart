@@ -36,7 +36,7 @@ class SpeechService {
       },
       localeId: localeId,
       listenFor: const Duration(seconds: 15),
-      pauseFor: const Duration(seconds: 3),
+      pauseFor: const Duration(seconds: 2),
       partialResults: true,
       cancelOnError: true,
     );

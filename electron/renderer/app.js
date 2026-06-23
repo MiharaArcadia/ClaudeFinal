@@ -44,6 +44,7 @@ const T = {
     support_donate_btn: 'Jetzt via PayPal spenden',
     support_note: 'Öffnet PayPal in deinem Browser. Kein Konto nötig.',
     support_thanks: 'Danke, dass du Carby nutzt! 🦀',
+    beta_banner_text: 'Carby befindet sich im Aufbau. Es kann noch zu Fehlern kommen.',
     nav_favorites: 'Favoriten',
     favorites_empty: 'Noch keine Favoriten.\nTippe ☆ auf einem Lebensmittel.',
     fav_add: 'Hinzufügen',
@@ -80,6 +81,7 @@ const T = {
     support_donate_btn: 'Donate via PayPal',
     support_note: 'Opens PayPal in your browser. No account needed.',
     support_thanks: 'Thank you for using Carby! 🦀',
+    beta_banner_text: 'Carby is still in development. You may encounter bugs.',
     nav_favorites: 'Favorites',
     favorites_empty: 'No favorites yet.\nClick ☆ on a food item.',
     fav_add: 'Add',
@@ -130,19 +132,25 @@ const RECO = {
 // ─────────────────────────────────────────────────────────────────
 const FoodAPI = {
   async search(query, lang = 'de') {
+    const results = await FoodAPI._fetch(query);
+    if (results.length > 0) return results;
+    return FoodAPI.fallback(query);
+  },
+
+  async _fetch(query) {
     try {
       const url = `https://world.openfoodfacts.org/cgi/search.pl?` +
         `search_terms=${encodeURIComponent(query)}&search_simple=1&action=process` +
-        `&json=1&lc=${lang}&fields=product_name,nutriments,image_url,serving_size,brands,_id&page_size=20`;
+        `&json=1&fields=product_name,nutriments,image_url,serving_size,brands,_id&page_size=30`;
       const res = await fetch(url);
       const data = await res.json();
       return (data.products || [])
         .map(p => FoodAPI.parse(p))
-        .filter(f => f.name && f.name.length > 2 && f.calories > 0)
+        .filter(f => f.name && f.name.length > 2)
         .sort((a, b) => relevanceScore(b, query) - relevanceScore(a, query))
-        .slice(0, 8);
+        .slice(0, 10);
     } catch {
-      return FoodAPI.fallback(query);
+      return [];
     }
   },
 
@@ -435,6 +443,7 @@ function translateUI(lang, tx) {
   set('donate-btn-text', tx.support_donate_btn);
   set('support-note', tx.support_note);
   set('support-footer-text', tx.support_thanks);
+  set('beta-banner-text', tx.beta_banner_text);
   set('sc-lbl', tx.cal_today);
   set('title-gaps', tx.gaps);
   set('title-reco', tx.reco);
@@ -621,6 +630,29 @@ const Voice = {
     this.recorder.onstop = () => this._transcribe();
     this.recorder.start(200); // collect chunks every 200ms
 
+    // Silence detection — auto-stop after 1.5s of quiet
+    try {
+      this._audioCtx = new AudioContext();
+      this._analyser = this._audioCtx.createAnalyser();
+      this._analyser.fftSize = 512;
+      const src = this._audioCtx.createMediaStreamSource(this.stream);
+      src.connect(this._analyser);
+      this._silenceStart = Date.now();
+      this._silenceTimer = setInterval(() => {
+        if (!this.listening) return;
+        const buf = new Uint8Array(this._analyser.frequencyBinCount);
+        this._analyser.getByteTimeDomainData(buf);
+        const rms = Math.sqrt(buf.reduce((s, v) => s + (v - 128) ** 2, 0) / buf.length);
+        if (rms < 6) {
+          if (Date.now() - this._silenceStart > 1500) App.toggleMic();
+        } else {
+          this._silenceStart = Date.now();
+        }
+      }, 200);
+    } catch (e) {
+      console.warn('[Voice] silence detection unavailable:', e.message);
+    }
+
     this.listening = true;
     this._setUI('listening');
     console.log('[Voice] recording started, mimeType:', this.recorder.mimeType);
@@ -630,6 +662,9 @@ const Voice = {
     if (!this.listening) return;
     console.log('[Voice] stopping recorder,', this.chunks.length, 'chunks so far');
     this.listening = false;
+    clearInterval(this._silenceTimer);
+    try { this._audioCtx?.close(); } catch (_) {}
+    this._audioCtx = null;
     try { this.recorder?.stop(); } catch (_) {}
     this.stream?.getTracks().forEach(t => t.stop());
     this.stream = null;
@@ -999,6 +1034,13 @@ const App = {
     updateWaterUI();
   },
 
+  dismissBetaBanner() {
+    if (window.electronAPI) window.electronAPI.storeSet('beta_dismissed', true);
+    else localStorage.setItem('nv_beta_dismissed', 'true');
+    const el = document.getElementById('beta-banner');
+    if (el) el.style.display = 'none';
+  },
+
   saveRecent(food) {
     let recents = State.recentFoods || [];
     recents = [food, ...recents.filter(f => f.name !== food.name)].slice(0, 5);
@@ -1175,6 +1217,15 @@ const App = {
         if (fv) State.favorites = JSON.parse(fv);
       } catch (_) {}
     }
+    // Show beta banner if not dismissed
+    const dismissed = window.electronAPI
+      ? await window.electronAPI.storeGet('beta_dismissed')
+      : localStorage.getItem('nv_beta_dismissed') === 'true';
+    if (!dismissed) {
+      const el = document.getElementById('beta-banner');
+      if (el) el.style.display = 'flex';
+    }
+
     return !!State.profile.name;
   },
 };

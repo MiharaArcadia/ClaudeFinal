@@ -67,6 +67,11 @@
 
     <!-- Dashboard -->
     <section class="screen active" id="screen-dashboard">
+      <div id="beta-banner" style="display:none">
+        <span>⚠️</span>
+        <span id="beta-banner-text">Carby befindet sich im Aufbau. Es kann noch zu Fehlern kommen.</span>
+        <button onclick="App.dismissBetaBanner()" title="Schließen">✕</button>
+      </div>
       <div class="dash-header">
         <div class="dash-greeting" id="dash-greeting">Guten Morgen!</div>
         <div class="dash-date" id="dash-date"></div>

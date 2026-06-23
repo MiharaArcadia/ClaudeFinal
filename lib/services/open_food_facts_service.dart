@@ -8,14 +8,20 @@ class OpenFoodFactsService {
       'product_name,nutriments,image_url,serving_size,brands,_id';
 
   Future<List<Food>> searchFood(String query, {String lang = 'de'}) async {
+    final results = await _fetch(query);
+    if (results.isNotEmpty) return results;
+    // Retry without language filter if nothing found
+    return _fallbackSearch(query);
+  }
+
+  Future<List<Food>> _fetch(String query) async {
     final uri = Uri.parse('$_base/cgi/search.pl').replace(queryParameters: {
       'search_terms': query,
       'search_simple': '1',
       'action': 'process',
       'json': '1',
-      'lc': lang,
       'fields': _fields,
-      'page_size': '10',
+      'page_size': '30',
     });
 
     try {
@@ -26,13 +32,26 @@ class OpenFoodFactsService {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final products = (data['products'] as List?) ?? [];
 
-      return products
+      final results = products
           .map((p) => Food.fromOpenFoodFacts(p as Map<String, dynamic>))
-          .where((f) => f.name.isNotEmpty && f.calories > 0)
+          .where((f) => f.name.isNotEmpty)
           .toList();
+
+      results.sort((a, b) =>
+          _relevance(b.name, query).compareTo(_relevance(a.name, query)));
+      return results;
     } catch (_) {
-      return _fallbackSearch(query);
+      return [];
     }
+  }
+
+  int _relevance(String name, String query) {
+    final n = name.toLowerCase();
+    final q = query.toLowerCase();
+    if (n == q) return 3;
+    if (n.startsWith(q)) return 2;
+    if (n.contains(q)) return 1;
+    return 0;
   }
 
   // Offline fallback with common foods
