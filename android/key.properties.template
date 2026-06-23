@@ -1,4 +1,4 @@
-storePassword=DEIN_KEYSTORE_PASSWORT
-keyPassword=DEIN_KEY_PASSWORT
+storePassword=f9128666f666S
+keyPassword=f9128666f666S
 keyAlias=carby
-storeFile=C:\\Users\\DEIN_WINDOWS_USERNAME\\carby-release.jks
+storeFile=C:\Users\fredd\carby-release.jks
