@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:carby/theme/app_theme.dart';
 
@@ -156,6 +157,18 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
   bool _sent = false;
 
   Future<void> _pickImage() async {
+    final status = await Permission.photos.request();
+    if (!status.isGranted) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Galerie-Zugriff nicht erlaubt.'),
+          action: SnackBarAction(
+              label: 'Einstellungen',
+              onPressed: openAppSettings),
+        ));
+      }
+      return;
+    }
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
     if (picked != null) setState(() => _image = picked);

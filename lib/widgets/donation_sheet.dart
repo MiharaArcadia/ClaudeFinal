@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:carby/providers/user_provider.dart';
 import 'package:carby/theme/app_theme.dart';
 
 const _nextTriggerKey = 'donation_next_trigger';
@@ -19,12 +21,15 @@ Future<void> maybeShowDonationSheet(BuildContext context) async {
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
-    builder: (_) => const _DonationSheet(),
+    builder: (_) => _DonationSheet(
+      lang: context.read<UserProvider>().profile?.language ?? 'de',
+    ),
   );
 }
 
 class _DonationSheet extends StatelessWidget {
-  const _DonationSheet();
+  final String lang;
+  const _DonationSheet({required this.lang});
 
   Future<void> _openPayPal(BuildContext context) async {
     final uri = Uri.parse('https://paypal.me/FredericSchroer');
@@ -40,18 +45,18 @@ class _DonationSheet extends StatelessWidget {
         backgroundColor: const Color(0xFF1A1A1A),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(
-          '❤️ Vielen Dank!',
+          lang == 'de' ? '❤️ Vielen Dank!' : '❤️ Thank you!',
           style: GoogleFonts.inter(
               color: AppColors.textPrimary, fontWeight: FontWeight.w700),
         ),
         content: Text(
-          'Wie viel hast du gespendet?',
+          lang == 'de' ? 'Wie viel hast du gespendet?' : 'How much did you donate?',
           style: GoogleFonts.inter(color: AppColors.textSecondary),
         ),
         actions: [
-          _AmountButton(label: '1 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 50),
-          _AmountButton(label: '3 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 150),
-          _AmountButton(label: '5 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 1000),
+          _AmountButton(label: '1 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 50, lang: lang),
+          _AmountButton(label: '3 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 150, lang: lang),
+          _AmountButton(label: '5 €', dialogCtx: dialogCtx, sheetCtx: context, offset: 1000, lang: lang),
         ],
       ),
     );
@@ -85,7 +90,9 @@ class _DonationSheet extends StatelessWidget {
           const Text('🦀', style: TextStyle(fontSize: 48)),
           const SizedBox(height: 12),
           Text(
-            'Carby ist kostenlos.\nDas hat einen Preis. 🙂',
+            lang == 'de'
+                ? 'Carby ist kostenlos.\nDas hat einen Preis. 🙂'
+                : 'Carby is free.\nThat comes at a cost. 🙂',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               color: AppColors.textPrimary,
@@ -96,7 +103,9 @@ class _DonationSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Ich entwickle Carby alleine, in meiner Freizeit. Google Play kostet Geld, iOS-Veröffentlichung 99\$ pro Jahr — und Updates schreiben sich nicht von selbst.\n\nWenn dir die App gefällt und du mich unterstützen möchtest, freue ich mich über jede Spende. Muss nicht sein. Aber tut gut.',
+            lang == 'de'
+                ? 'Ich entwickle Carby alleine, in meiner Freizeit. Google Play kostet Geld, iOS-Veröffentlichung 99\$ pro Jahr — und Updates schreiben sich nicht von selbst.\n\nWenn dir die App gefällt und du mich unterstützen möchtest, freue ich mich über jede Spende. Muss nicht sein. Aber tut gut.'
+                : 'I develop Carby alone, in my spare time. Google Play costs money, iOS publishing \$99/year — and updates don\'t write themselves.\n\nIf you enjoy the app and want to support me, any donation is appreciated. No pressure. But it helps.',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               color: AppColors.textSecondary,
@@ -116,7 +125,7 @@ class _DonationSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14)),
               ),
               child: Text(
-                '❤️  Via PayPal spenden',
+                lang == 'de' ? '❤️  Via PayPal spenden' : '❤️  Donate via PayPal',
                 style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 16,
@@ -129,7 +138,7 @@ class _DonationSheet extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Vielleicht später',
+              lang == 'de' ? 'Vielleicht später' : 'Maybe later',
               style: GoogleFonts.inter(
                   color: AppColors.textSecondary, fontSize: 14),
             ),
@@ -145,12 +154,14 @@ class _AmountButton extends StatelessWidget {
   final BuildContext dialogCtx;
   final BuildContext sheetCtx;
   final int offset;
+  final String lang;
 
   const _AmountButton({
     required this.label,
     required this.dialogCtx,
     required this.sheetCtx,
     required this.offset,
+    required this.lang,
   });
 
   @override

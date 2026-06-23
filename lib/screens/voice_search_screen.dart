@@ -55,6 +55,17 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
       await _speech.stopListening();
       setState(() => _listening = false);
     } else {
+      final ok = await _speech.initialize();
+      if (!ok) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(_lang == 'de'
+                ? 'Mikrofon nicht verfügbar. Bitte Berechtigung prüfen.'
+                : 'Microphone unavailable. Please check permissions.'),
+          ));
+        }
+        return;
+      }
       setState(() {
         _listening = true;
         _recognizedText = '';

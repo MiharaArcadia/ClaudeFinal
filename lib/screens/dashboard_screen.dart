@@ -118,22 +118,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _navIndex,
-        onTap: (i) => setState(() => _navIndex = i),
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.donut_large), label: 'Dashboard'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt), label: 'Tagebuch'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.star_outline), label: 'Favoriten'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: 'Profil'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: 'Support'),
-        ],
-      ),
+      bottomNavigationBar: Builder(builder: (ctx) {
+        final lang = ctx.watch<UserProvider>().profile?.language ?? 'de';
+        return BottomNavigationBar(
+          currentIndex: _navIndex,
+          onTap: (i) => setState(() => _navIndex = i),
+          items: [
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.donut_large), label: 'Dashboard'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.list_alt),
+                label: lang == 'de' ? 'Tagebuch' : 'Food Log'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.star_outline),
+                label: lang == 'de' ? 'Favoriten' : 'Favorites'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                label: lang == 'de' ? 'Profil' : 'Profile'),
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border), label: 'Support'),
+          ],
+        );
+      }),
     );
   }
 }
