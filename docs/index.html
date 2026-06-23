@@ -13,6 +13,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .lang-toggle{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:3px;margin-left:8px}
+    .lang-toggle button{background:none;border:none;color:#888;font-size:12px;font-weight:700;font-family:inherit;padding:4px 9px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.04em}
+    .lang-toggle button.active{background:#FF6B35;color:#fff}
+    .lang-toggle button:hover:not(.active){color:#fff}
+  </style>
 </head>
 <body>
 
@@ -27,16 +33,22 @@
       <span>Carby</span>
     </a>
     <div class="nav-center" id="navLinks">
-      <a href="#features">Features</a>
-      <a href="#mockup">Preview</a>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#mockup" data-i18n="nav_preview">Preview</a>
       <a href="#download">Download</a>
       <a href="#support">Support</a>
-      <a href="privacy-policy.html">Privacy</a>
+      <a href="privacy-policy.html" data-i18n="nav_privacy">Privacy</a>
     </div>
-    <a href="https://github.com/miharaarcadia/claudefinal/releases" class="nav-btn" target="_blank">
-      Download
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="https://github.com/miharaarcadia/claudefinal/releases" class="nav-btn" target="_blank" data-i18n="nav_download">
+        Download
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="lang-toggle">
+        <button id="btn-de" class="active" onclick="setLang('de')">DE</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span>
     </button>
@@ -51,45 +63,41 @@
   <div class="hero-inner">
     <a href="https://github.com/miharaarcadia/claudefinal" target="_blank" class="hero-chip">
       <span class="chip-dot"></span>
-      Open Source auf GitHub
+      <span data-i18n="hero_chip">Open Source auf GitHub</span>
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
 
     <h1 class="hero-h1">
-      Tracke smarter,<br>
-      <span class="hero-gradient">nicht mehr.</span>
+      <span data-i18n="hero_h1_line1">Tracke smarter,</span><br>
+      <span class="hero-gradient" data-i18n="hero_h1_line2">nicht mehr.</span>
     </h1>
 
     <p class="hero-p">
-      Sag einfach <em>"Hähnchenbrust 150g"</em> — Carby erkennt es per KI,<br class="br-lg">
-      trackt Kalorien, Makros &amp; Wasser und berechnet deinen Bedarf<br class="br-lg">
-      automatisch. Kostenlos. Werbefrei. Immer.
+      <span data-i18n-html="hero_p">Sag einfach <em>&ldquo;Hähnchenbrust 150g&rdquo;</em> — Carby erkennt es per KI,<br class="br-lg"> trackt Kalorien, Makros &amp; Wasser und berechnet deinen Bedarf<br class="br-lg"> automatisch. Kostenlos. Werbefrei. Immer.</span>
     </p>
 
     <div class="hero-actions">
       <a href="https://github.com/miharaarcadia/claudefinal/releases" class="btn-hero">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>
-        Für Windows herunterladen
+        <span data-i18n="hero_cta_win">Für Windows herunterladen</span>
       </a>
-      <a href="#mockup" class="btn-ghost-hero">
-        App Preview ansehen
-      </a>
+      <a href="#mockup" class="btn-ghost-hero" data-i18n="hero_cta_preview">App Preview ansehen</a>
     </div>
 
     <div class="hero-proof">
       <div class="proof-item">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Keine Werbung
+        <span data-i18n="proof_1">Keine Werbung</span>
       </div>
       <div class="proof-dot"></div>
       <div class="proof-item">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Kein Abo
+        <span data-i18n="proof_2">Kein Abo</span>
       </div>
       <div class="proof-dot"></div>
       <div class="proof-item">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Deine Daten bleiben bei dir
+        <span data-i18n="proof_3">Deine Daten bleiben bei dir</span>
       </div>
     </div>
   </div>
@@ -97,9 +105,7 @@
   <!-- Hero Dashboard Preview -->
   <div class="hero-preview">
     <div class="preview-chrome">
-      <div class="chrome-dots">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="chrome-dots"><span></span><span></span><span></span></div>
       <div class="chrome-title">Carby — Dashboard</div>
     </div>
     <div class="preview-body">
@@ -116,8 +122,8 @@
       </div>
       <div class="preview-main">
         <div class="pm-header">
-          <div class="pm-greeting">Guten Morgen, Max ☀️</div>
-          <div class="pm-date">Samstag, 21. Juni</div>
+          <div class="pm-greeting" data-i18n="preview_greeting">Guten Morgen, Max ☀️</div>
+          <div class="pm-date" data-i18n="preview_date">Samstag, 21. Juni</div>
         </div>
         <div class="pm-ring-row">
           <div class="pm-ring">
@@ -130,7 +136,7 @@
             <div class="ring-center">
               <div class="ring-num">1.340</div>
               <div class="ring-lbl">kcal</div>
-              <div class="ring-of">von 2.000</div>
+              <div class="ring-of" data-i18n="preview_of">von 2.000</div>
             </div>
           </div>
           <div class="pm-macros">
@@ -139,47 +145,39 @@
                 <span class="macro-name">Protein</span>
                 <span class="macro-val" style="color:#4FC3F7">68g</span>
               </div>
-              <div class="macro-track">
-                <div class="macro-fill" style="width:54%;background:#4FC3F7"></div>
-              </div>
+              <div class="macro-track"><div class="macro-fill" style="width:54%;background:#4FC3F7"></div></div>
             </div>
             <div class="pm-macro">
               <div class="macro-top">
-                <span class="macro-name">Kohlenhydrate</span>
+                <span class="macro-name" data-i18n="preview_carbs">Kohlenhydrate</span>
                 <span class="macro-val" style="color:#FF6B35">142g</span>
               </div>
-              <div class="macro-track">
-                <div class="macro-fill" style="width:61%;background:#FF6B35"></div>
-              </div>
+              <div class="macro-track"><div class="macro-fill" style="width:61%;background:#FF6B35"></div></div>
             </div>
             <div class="pm-macro">
               <div class="macro-top">
-                <span class="macro-name">Fett</span>
+                <span class="macro-name" data-i18n="preview_fat">Fett</span>
                 <span class="macro-val" style="color:#F48FB1">38g</span>
               </div>
-              <div class="macro-track">
-                <div class="macro-fill" style="width:44%;background:#F48FB1"></div>
-              </div>
+              <div class="macro-track"><div class="macro-fill" style="width:44%;background:#F48FB1"></div></div>
             </div>
             <div class="pm-macro" style="margin-top:4px">
               <div class="macro-top">
-                <span class="macro-name">💧 Wasser</span>
+                <span class="macro-name">💧 <span data-i18n="preview_water">Wasser</span></span>
                 <span class="macro-val" style="color:#42A5F5">1.2L / 2L</span>
               </div>
-              <div class="macro-track">
-                <div class="macro-fill" style="width:60%;background:linear-gradient(90deg,#1565C0,#42A5F5)"></div>
-              </div>
+              <div class="macro-track"><div class="macro-fill" style="width:60%;background:linear-gradient(90deg,#1565C0,#42A5F5)"></div></div>
             </div>
           </div>
         </div>
         <div class="pm-log">
-          <div class="pm-log-title">Heute gegessen</div>
+          <div class="pm-log-title" data-i18n="preview_eaten">Heute gegessen</div>
           <div class="pm-log-item"><span>🍗 Hähnchenbrust 150g</span><span style="color:#FF6B35">165 kcal</span></div>
           <div class="pm-log-item"><span>🥣 Haferflocken 80g</span><span style="color:#FF6B35">296 kcal</span></div>
           <div class="pm-log-item"><span>🍎 Apfel</span><span style="color:#FF6B35">52 kcal</span></div>
         </div>
         <div class="pm-chips">
-          <div class="pm-chip">+ Protein</div>
+          <div class="pm-chip" data-i18n="preview_chip1">+ Protein</div>
           <div class="pm-chip">+ Omega-3</div>
           <div class="pm-chip">+ Magnesium</div>
         </div>
@@ -187,14 +185,14 @@
       <div class="preview-rp">
         <div class="rp-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span style="color:#444">Lebensmittel suchen...</span>
+          <span style="color:#444" data-i18n="preview_search">Lebensmittel suchen...</span>
         </div>
         <div class="rp-mic">
           <div class="rp-mic-btn">🎙️</div>
-          <div style="font-size:10px;color:#444;margin-top:4px">Sprechen</div>
+          <div style="font-size:10px;color:#444;margin-top:4px" data-i18n="preview_speak">Sprechen</div>
         </div>
         <div class="rp-recents">
-          <div style="font-size:10px;color:#444;margin-bottom:6px">Zuletzt gegessen</div>
+          <div style="font-size:10px;color:#444;margin-bottom:6px" data-i18n="preview_recents">Zuletzt gegessen</div>
           <div class="rp-chip">🍗 Hähnchen</div>
           <div class="rp-chip">🥦 Brokkoli</div>
           <div class="rp-chip">🍳 Ei</div>
@@ -207,33 +205,33 @@
 <!-- STATS TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span>3M+ Lebensmittel</span>
+    <span data-i18n="tick_foods">3M+ Lebensmittel</span>
     <span class="tick-sep">✦</span>
-    <span>100% Kostenlos</span>
+    <span data-i18n="tick_free">100% Kostenlos</span>
     <span class="tick-sep">✦</span>
-    <span>KI-Spracheingabe</span>
+    <span data-i18n="tick_voice">KI-Spracheingabe</span>
     <span class="tick-sep">✦</span>
-    <span>DSGVO-konform</span>
-    <span class="tick-sep">✦</span>
-    <span>Windows, Android, iOS</span>
-    <span class="tick-sep">✦</span>
-    <span>Open Source</span>
-    <span class="tick-sep">✦</span>
-    <span>Kein Abo</span>
-    <span class="tick-sep">✦</span>
-    <span>3M+ Lebensmittel</span>
-    <span class="tick-sep">✦</span>
-    <span>100% Kostenlos</span>
-    <span class="tick-sep">✦</span>
-    <span>KI-Spracheingabe</span>
-    <span class="tick-sep">✦</span>
-    <span>DSGVO-konform</span>
+    <span data-i18n="tick_gdpr">DSGVO-konform</span>
     <span class="tick-sep">✦</span>
     <span>Windows, Android, iOS</span>
     <span class="tick-sep">✦</span>
     <span>Open Source</span>
     <span class="tick-sep">✦</span>
-    <span>Kein Abo</span>
+    <span data-i18n="tick_nosub">Kein Abo</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_foods">3M+ Lebensmittel</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_free">100% Kostenlos</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_voice">KI-Spracheingabe</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_gdpr">DSGVO-konform</span>
+    <span class="tick-sep">✦</span>
+    <span>Windows, Android, iOS</span>
+    <span class="tick-sep">✦</span>
+    <span>Open Source</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_nosub">Kein Abo</span>
     <span class="tick-sep">✦</span>
   </div>
 </div>
@@ -242,8 +240,8 @@
 <section id="features" class="features-section">
   <div class="section-wrap">
     <div class="section-eyebrow reveal">Features</div>
-    <h2 class="section-h2 reveal">Alles. Eingebaut.</h2>
-    <p class="section-p reveal">Carby bringt alles mit was du brauchst — ohne Bloat, ohne Paywall.</p>
+    <h2 class="section-h2 reveal" data-i18n="feat_h2">Alles. Eingebaut.</h2>
+    <p class="section-p reveal" data-i18n="feat_p">Carby bringt alles mit was du brauchst — ohne Bloat, ohne Paywall.</p>
 
     <div class="bento">
       <!-- Big card: Voice -->
@@ -257,37 +255,37 @@
           </div>
           <div class="bento-text">
             <div class="bento-tag">Powered by Whisper AI</div>
-            <h3>Spracheingabe</h3>
-            <p>Sag einfach was du gegessen hast. Carby erkennt Lebensmittel, Mengen und Mahlzeiten — kein Tippen nötig.</p>
+            <h3 data-i18n="voice_h3">Spracheingabe</h3>
+            <p data-i18n="voice_p">Sag einfach was du gegessen hast. Carby erkennt Lebensmittel, Mengen und Mahlzeiten — kein Tippen nötig.</p>
           </div>
         </div>
       </div>
 
       <!-- Card: Macros -->
       <div class="bento-card bento-macro reveal">
-        <div class="bento-tag">Echtzeit</div>
-        <h3>📊 Makro-Tracking</h3>
-        <p>Protein, Carbs, Fett & Ballaststoffe. RDA-Ziele passen sich automatisch deinem Kalorienziel an.</p>
+        <div class="bento-tag" data-i18n="macro_tag">Echtzeit</div>
+        <h3 data-i18n="macro_h3">📊 Makro-Tracking</h3>
+        <p data-i18n="macro_p">Protein, Carbs, Fett &amp; Ballaststoffe. RDA-Ziele passen sich automatisch deinem Kalorienziel an.</p>
         <div class="macro-mini-bars">
           <div><span style="color:#4FC3F7">P</span><div class="mmb"><div style="width:68%;background:#4FC3F7"></div></div><span style="color:#4FC3F7">68g</span></div>
-          <div><span style="color:#FF6B35">K</span><div class="mmb"><div style="width:55%;background:#FF6B35"></div></div><span style="color:#FF6B35">142g</span></div>
-          <div><span style="color:#F48FB1">F</span><div class="mmb"><div style="width:42%;background:#F48FB1"></div></div><span style="color:#F48FB1">38g</span></div>
+          <div><span style="color:#FF6B35" data-i18n="macro_k_label">K</span><div class="mmb"><div style="width:55%;background:#FF6B35"></div></div><span style="color:#FF6B35">142g</span></div>
+          <div><span style="color:#F48FB1" data-i18n="macro_f_label">F</span><div class="mmb"><div style="width:42%;background:#F48FB1"></div></div><span style="color:#F48FB1">38g</span></div>
         </div>
       </div>
 
       <!-- Card: Database -->
       <div class="bento-card bento-db reveal">
         <div class="bento-tag">OpenFoodFacts</div>
-        <h3>🔍 3 Millionen<br>Lebensmittel</h3>
-        <p>Intelligente Sortierung zeigt dir zuerst was du wirklich meinst.</p>
+        <h3 data-i18n-html="db_h3">🔍 3 Millionen<br>Lebensmittel</h3>
+        <p data-i18n="db_p">Intelligente Sortierung zeigt dir zuerst was du wirklich meinst.</p>
         <div class="db-number">3.000.000+</div>
       </div>
 
       <!-- Card: BMI -->
       <div class="bento-card bento-bmi reveal">
         <div class="bento-tag">Mifflin-St. Jeor</div>
-        <h3>🧮 BMI & TDEE</h3>
-        <p>Dein Kalorienbedarf individuell berechnet — nach Alter, Gewicht, Größe, Geschlecht & Aktivität.</p>
+        <h3>🧮 BMI &amp; TDEE</h3>
+        <p data-i18n="bmi_p">Dein Kalorienbedarf individuell berechnet — nach Alter, Gewicht, Größe, Geschlecht &amp; Aktivität.</p>
         <div class="bmi-ring-mini">
           <svg width="80" height="80" viewBox="0 0 80 80">
             <circle cx="40" cy="40" r="32" fill="none" stroke="#1e1e1e" stroke-width="8"/>
@@ -295,15 +293,15 @@
               stroke-dasharray="160 42" stroke-dashoffset="50"
               stroke-linecap="round" transform="rotate(-90 40 40)"/>
           </svg>
-          <div class="bmi-center">22.9<br><span>Normal</span></div>
+          <div class="bmi-center">22.9<br><span data-i18n="bmi_normal">Normal</span></div>
         </div>
       </div>
 
       <!-- Card: Water -->
       <div class="bento-card bento-water reveal">
-        <div class="bento-tag">Täglich</div>
-        <h3>💧 Wasser-Tracker</h3>
-        <p>+150 / +250 / +500ml mit einem Klick. Tagesziel 2 Liter.</p>
+        <div class="bento-tag" data-i18n="water_tag">Täglich</div>
+        <h3 data-i18n="water_h3">💧 Wasser-Tracker</h3>
+        <p data-i18n="water_p">+150 / +250 / +500ml mit einem Klick. Tagesziel 2 Liter.</p>
         <div class="water-vis">
           <div class="water-fill-vis"></div>
           <div class="water-label-vis">1.200 / 2.000 ml</div>
@@ -312,21 +310,21 @@
 
       <!-- Card: Privacy -->
       <div class="bento-card bento-privacy reveal">
-        <div class="bento-tag">DSGVO</div>
+        <div class="bento-tag" data-i18n="priv_tag">DSGVO</div>
         <h3>🔒 Privacy First</h3>
-        <p>Keine Werbung. Kein Tracking. Keine Datenweitergabe. Deine Daten bleiben auf deinem Gerät.</p>
+        <p data-i18n="priv_p">Keine Werbung. Kein Tracking. Keine Datenweitergabe. Deine Daten bleiben auf deinem Gerät.</p>
         <div class="privacy-badges">
-          <span>✓ Werbefrei</span>
-          <span>✓ Kein Tracking</span>
-          <span>✓ DSGVO</span>
+          <span data-i18n="priv_b1">✓ Werbefrei</span>
+          <span data-i18n="priv_b2">✓ Kein Tracking</span>
+          <span data-i18n="priv_b3">✓ DSGVO</span>
         </div>
       </div>
 
       <!-- Card: Recents -->
       <div class="bento-card bento-recents reveal">
-        <div class="bento-tag">Schnellzugriff</div>
-        <h3>⚡ Zuletzt gegessen</h3>
-        <p>Deine letzten 5 Lebensmittel als Chips — ein Klick und du bist fertig.</p>
+        <div class="bento-tag" data-i18n="rec_tag">Schnellzugriff</div>
+        <h3 data-i18n="rec_h3">⚡ Zuletzt gegessen</h3>
+        <p data-i18n="rec_p">Deine letzten 5 Lebensmittel als Chips — ein Klick und du bist fertig.</p>
         <div class="recent-chips-demo">
           <div class="rcd">🍗 Hähnchen</div>
           <div class="rcd">🥦 Brokkoli</div>
@@ -339,7 +337,7 @@
       <div class="bento-card bento-lang reveal">
         <div class="bento-tag">i18n</div>
         <h3>🌍 DE / EN</h3>
-        <p>Vollständig zweisprachig — auf Knopfdruck umschaltbar.</p>
+        <p data-i18n="lang_p">Vollständig zweisprachig — auf Knopfdruck umschaltbar.</p>
         <div class="lang-switch-demo">
           <div class="lsd active">DE</div>
           <div class="lsd">EN</div>
@@ -355,15 +353,15 @@
     <div class="mockup-grid">
       <div class="mockup-copy">
         <div class="section-eyebrow reveal">Live Preview</div>
-        <h2 class="section-h2 reveal" style="text-align:left">Dein Tag auf<br>einen Blick.</h2>
-        <p class="section-p reveal" style="text-align:left">Das Dashboard zeigt alles was zählt — sofort, übersichtlich, ohne Ablenkung.</p>
+        <h2 class="section-h2 reveal" style="text-align:left" data-i18n-html="mockup_h2">Dein Tag auf<br>einen Blick.</h2>
+        <p class="section-p reveal" style="text-align:left" data-i18n="mockup_p">Das Dashboard zeigt alles was zählt — sofort, übersichtlich, ohne Ablenkung.</p>
         <ul class="feature-list">
-          <li class="reveal"><span class="fl-dot" style="background:#FF6B35"></span>Animierter Kalorienring</li>
-          <li class="reveal"><span class="fl-dot" style="background:#4FC3F7"></span>Protein, Carbs & Fett in Echtzeit</li>
-          <li class="reveal"><span class="fl-dot" style="background:#42A5F5"></span>Wasser-Tracker mit Fortschrittsbalken</li>
-          <li class="reveal"><span class="fl-dot" style="background:#00BCD4"></span>Personalisierte Empfehlungs-Chips</li>
-          <li class="reveal"><span class="fl-dot" style="background:#F48FB1"></span>Vollständiges Tagebuch</li>
-          <li class="reveal"><span class="fl-dot" style="background:#4CAF50"></span>KI-Spracheingabe per Knopfdruck</li>
+          <li class="reveal"><span class="fl-dot" style="background:#FF6B35"></span><span data-i18n="fl1">Animierter Kalorienring</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#4FC3F7"></span><span data-i18n="fl2">Protein, Carbs &amp; Fett in Echtzeit</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#42A5F5"></span><span data-i18n="fl3">Wasser-Tracker mit Fortschrittsbalken</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#00BCD4"></span><span data-i18n="fl4">Personalisierte Empfehlungs-Chips</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#F48FB1"></span><span data-i18n="fl5">Vollständiges Tagebuch</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#4CAF50"></span><span data-i18n="fl6">KI-Spracheingabe per Knopfdruck</span></li>
         </ul>
       </div>
       <!-- Phone -->
@@ -379,9 +377,9 @@
                 <img src="assets/logo.png" width="14" height="14" alt="" style="object-fit:contain">
                 <span style="font-size:9px;font-weight:800;background:linear-gradient(90deg,#FF6B35,#00BCD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Carby</span>
               </div>
-              <span style="font-size:8px;color:#444">21. Jun</span>
+              <span style="font-size:8px;color:#444" data-i18n="phone_date">21. Jun</span>
             </div>
-            <div style="font-size:8px;color:#555;margin-bottom:8px">Guten Morgen ☀️</div>
+            <div style="font-size:8px;color:#555;margin-bottom:8px" data-i18n="phone_greeting">Guten Morgen ☀️</div>
             <div class="psc-ring-wrap">
               <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;margin:0 auto">
                 <circle cx="40" cy="40" r="32" fill="none" stroke="#1a1a1a" stroke-width="9"/>
@@ -398,22 +396,25 @@
               <div class="psc-ring-center">
                 <div style="font-size:13px;font-weight:800;color:#fff">1.340</div>
                 <div style="font-size:7px;color:#555">kcal</div>
-                <div style="font-size:7px;color:#FF6B35">von 2.000</div>
+                <div style="font-size:7px;color:#FF6B35" data-i18n="phone_of">von 2.000</div>
               </div>
             </div>
             <div class="psc-macros">
               <div class="pscm"><span style="color:#4FC3F7;font-size:8px;font-weight:700">68g</span><div class="pscm-b"><div style="width:54%;background:#4FC3F7"></div></div><span style="font-size:7px;color:#444">P</span></div>
-              <div class="pscm"><span style="color:#FF6B35;font-size:8px;font-weight:700">142g</span><div class="pscm-b"><div style="width:61%;background:#FF6B35"></div></div><span style="font-size:7px;color:#444">K</span></div>
-              <div class="pscm"><span style="color:#F48FB1;font-size:8px;font-weight:700">38g</span><div class="pscm-b"><div style="width:44%;background:#F48FB1"></div></div><span style="font-size:7px;color:#444">F</span></div>
+              <div class="pscm"><span style="color:#FF6B35;font-size:8px;font-weight:700">142g</span><div class="pscm-b"><div style="width:61%;background:#FF6B35"></div></div><span style="font-size:7px;color:#444" data-i18n="phone_k">K</span></div>
+              <div class="pscm"><span style="color:#F48FB1;font-size:8px;font-weight:700">38g</span><div class="pscm-b"><div style="width:44%;background:#F48FB1"></div></div><span style="font-size:7px;color:#444" data-i18n="phone_f">F</span></div>
             </div>
-            <div style="font-size:7px;color:#444;margin-bottom:4px">Heute</div>
+            <div style="font-size:7px;color:#444;margin-bottom:4px" data-i18n="phone_today">Heute</div>
             <div class="psc-log">
               <div class="psc-item"><span>🍗 Hähnchenbrust 150g</span><span style="color:#FF6B35">165</span></div>
               <div class="psc-item"><span>🥣 Haferflocken 80g</span><span style="color:#FF6B35">296</span></div>
               <div class="psc-item"><span>🍎 Apfel</span><span style="color:#FF6B35">52</span></div>
             </div>
             <div class="psc-water">
-              <div style="display:flex;justify-content:space-between;font-size:7px;color:#444;margin-bottom:3px"><span>💧 Wasser</span><span style="color:#42A5F5">1.2L / 2L</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:7px;color:#444;margin-bottom:3px">
+                <span>💧 <span data-i18n="phone_water">Wasser</span></span>
+                <span style="color:#42A5F5">1.2L / 2L</span>
+              </div>
               <div style="height:3px;background:#1a1a1a;border-radius:99px;overflow:hidden"><div style="width:60%;height:100%;background:linear-gradient(90deg,#1565C0,#42A5F5)"></div></div>
             </div>
           </div>
@@ -428,8 +429,8 @@
 <section id="download" class="download-section">
   <div class="section-wrap">
     <div class="section-eyebrow reveal">Download</div>
-    <h2 class="section-h2 reveal">Hol dir Carby.</h2>
-    <p class="section-p reveal">Kostenlos. Keine Registrierung. Kein Bullshit.</p>
+    <h2 class="section-h2 reveal" data-i18n="dl_h2">Hol dir Carby.</h2>
+    <p class="section-p reveal" data-i18n="dl_p">Kostenlos. Keine Registrierung. Kein Bullshit.</p>
 
     <div class="dl-grid">
       <div class="dl-card dl-featured reveal">
@@ -437,39 +438,39 @@
         <div class="dl-icon">🪟</div>
         <div class="dl-platform">Windows</div>
         <div class="dl-sub">v1.0.0 · Windows 10 / 11</div>
-        <div class="dl-desc">Desktop-App mit vollem Funktionsumfang, Whisper-Spracheingabe und Offline-Unterstützung.</div>
+        <div class="dl-desc" data-i18n="dl_win_desc">Desktop-App mit vollem Funktionsumfang, Whisper-Spracheingabe und Offline-Unterstützung.</div>
         <a href="https://github.com/miharaarcadia/claudefinal/releases" class="dl-btn" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>
-          Setup.exe herunterladen
+          <span data-i18n="dl_win_btn">Setup.exe herunterladen</span>
         </a>
-        <div class="dl-avail">✓ Jetzt verfügbar</div>
+        <div class="dl-avail" data-i18n="dl_win_avail">✓ Jetzt verfügbar</div>
       </div>
 
       <div class="dl-card reveal">
         <div class="dl-icon">🤖</div>
         <div class="dl-platform">Android</div>
         <div class="dl-sub">Android 8.0+ · Flutter</div>
-        <div class="dl-desc">Native App mit Material Design, Firebase-Sync und Google-Spracheingabe.</div>
-        <div class="dl-soon">Demnächst im Play Store</div>
+        <div class="dl-desc" data-i18n="dl_and_desc">Native App mit Material Design, Firebase-Sync und Google-Spracheingabe.</div>
+        <div class="dl-soon" data-i18n="dl_and_soon">Demnächst im Play Store</div>
       </div>
 
       <div class="dl-card reveal">
         <div class="dl-icon">🍎</div>
         <div class="dl-platform">iOS</div>
         <div class="dl-sub">iOS 14+ · Flutter</div>
-        <div class="dl-desc">Native App für iPhone & iPad. Siri-Integration und iCloud-Sync geplant.</div>
-        <div class="dl-soon">Demnächst im App Store</div>
+        <div class="dl-desc" data-i18n="dl_ios_desc">Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.</div>
+        <div class="dl-soon" data-i18n="dl_ios_soon">Demnächst im App Store</div>
       </div>
     </div>
 
     <div class="install-box reveal">
-      <div class="ib-label">Windows Quick-Install</div>
+      <div class="ib-label" data-i18n="ib_label">Windows Quick-Install</div>
       <div class="ib-steps">
-        <div class="ib-step"><div class="ib-num">1</div><div>Setup.exe<br>herunterladen</div></div>
+        <div class="ib-step"><div class="ib-num">1</div><div data-i18n-html="ib_step1">Setup.exe<br>herunterladen</div></div>
         <div class="ib-arrow">→</div>
-        <div class="ib-step"><div class="ib-num">2</div><div>Installer starten<br><span style="color:#555;font-size:11px">SmartScreen → "Trotzdem ausführen"</span></div></div>
+        <div class="ib-step"><div class="ib-num">2</div><div data-i18n-html="ib_step2">Installer starten<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Trotzdem ausführen&rdquo;</span></div></div>
         <div class="ib-arrow">→</div>
-        <div class="ib-step"><div class="ib-num">3</div><div style="color:#4CAF50;font-weight:700">✓ Fertig<br>Carby starten</div></div>
+        <div class="ib-step"><div class="ib-num">3</div><div style="color:#4CAF50;font-weight:700" data-i18n-html="ib_step3">✓ Fertig<br>Carby starten</div></div>
       </div>
     </div>
   </div>
@@ -481,14 +482,14 @@
     <div class="support-grid">
       <div class="support-copy">
         <div class="section-eyebrow reveal">Support Carby</div>
-        <h2 class="section-h2 reveal" style="text-align:left">Carby ist frei.<br>Bleibt frei.</h2>
-        <p class="section-p reveal" style="text-align:left">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.</p>
+        <h2 class="section-h2 reveal" style="text-align:left" data-i18n-html="sup_h2">Carby ist frei.<br>Bleibt frei.</h2>
+        <p class="section-p reveal" style="text-align:left" data-i18n="sup_p">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.</p>
 
         <div class="tier-cards">
           <button class="tier-card reveal" onclick="selectTier(this, 1)">
             <div class="tc-emoji">☕</div>
             <div class="tc-amount">1€</div>
-            <div class="tc-label">Kaffee</div>
+            <div class="tc-label" data-i18n="tier1">Kaffee</div>
           </button>
           <button class="tier-card tc-active reveal" onclick="selectTier(this, 3)">
             <div class="tc-emoji">🍕</div>
@@ -504,9 +505,9 @@
 
         <a href="https://paypal.me/FredericSchroer" target="_blank" class="paypal-btn reveal">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="opacity:.9"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c1.379 3.468-.558 6.957-5.907 6.957h-2.19a2.642 2.642 0 0 0-2.607 2.236l-1.12 7.106H5.048l-.037.236a.641.641 0 0 0 .634.74h4.027c.524 0 .968-.382 1.05-.9l.894-5.658a1.06 1.06 0 0 1 1.048-.9h.666c4.298 0 7.664-1.747 8.647-6.797.378-1.944.113-3.466-.755-4.479z"/></svg>
-          Jetzt via PayPal spenden
+          <span data-i18n="paypal_btn">Jetzt via PayPal spenden</span>
         </a>
-        <div class="paypal-note reveal">Öffnet PayPal in deinem Browser · Kein Konto nötig</div>
+        <div class="paypal-note reveal" data-i18n="paypal_note">Öffnet PayPal in deinem Browser · Kein Konto nötig</div>
       </div>
 
       <div class="support-qr reveal">
@@ -514,7 +515,7 @@
           <div class="qr-frame-outer">
             <img src="assets/paypal-qr.png" alt="PayPal QR Code" class="qr-image">
           </div>
-          <div class="qr-label">Mit Handy scannen</div>
+          <div class="qr-label" data-i18n="qr_label">Mit Handy scannen</div>
           <div class="qr-sublabel">paypal.me/FredericSchroer</div>
         </div>
       </div>
@@ -531,8 +532,8 @@
           <img src="assets/logo.png" alt="🦀" width="32" onerror="this.textContent='🦀'">
           <span>Carby</span>
         </div>
-        <div class="fb-tag">Tracke smarter, nicht mehr.</div>
-        <div class="fb-badge">Open Source · DSGVO · Kostenlos</div>
+        <div class="fb-tag" data-i18n="footer_tag">Tracke smarter, nicht mehr.</div>
+        <div class="fb-badge" data-i18n="footer_badge">Open Source · DSGVO · Kostenlos</div>
       </div>
       <div class="footer-links">
         <div class="fl-group">
@@ -543,15 +544,15 @@
         </div>
         <div class="fl-group">
           <div class="fl-title">Legal</div>
-          <a href="privacy-policy.html">Datenschutz</a>
-          <a href="mailto:ArcadiaApps@proton.me">Kontakt</a>
+          <a href="privacy-policy.html" data-i18n="footer_privacy">Datenschutz</a>
+          <a href="mailto:ArcadiaApps@proton.me" data-i18n="footer_contact">Kontakt</a>
           <a href="https://github.com/miharaarcadia/claudefinal" target="_blank">GitHub</a>
         </div>
         <div class="fl-group">
           <div class="fl-title">Support</div>
-          <a href="#support">Spenden</a>
+          <a href="#support" data-i18n="footer_donate">Spenden</a>
           <a href="https://paypal.me/FredericSchroer" target="_blank">PayPal</a>
-          <a href="mailto:ArcadiaApps@proton.me">Bug melden</a>
+          <a href="mailto:ArcadiaApps@proton.me" data-i18n="footer_bug">Bug melden</a>
         </div>
       </div>
     </div>
@@ -563,7 +564,251 @@
 </footer>
 
 <script>
-// Reveal on scroll
+// ─── Translations ────────────────────────────────────────────────────────────
+const T = {
+  de: {
+    // Nav
+    nav_features: 'Features',
+    nav_preview: 'Preview',
+    nav_privacy: 'Datenschutz',
+    nav_download: 'Download',
+    // Hero
+    hero_chip: 'Open Source auf GitHub',
+    hero_h1_line1: 'Tracke smarter,',
+    hero_h1_line2: 'nicht mehr.',
+    hero_p: 'Sag einfach <em>&ldquo;Hähnchenbrust 150g&rdquo;</em> — Carby erkennt es per KI,<br class="br-lg"> trackt Kalorien, Makros &amp; Wasser und berechnet deinen Bedarf<br class="br-lg"> automatisch. Kostenlos. Werbefrei. Immer.',
+    hero_cta_win: 'Für Windows herunterladen',
+    hero_cta_preview: 'App Preview ansehen',
+    proof_1: 'Keine Werbung',
+    proof_2: 'Kein Abo',
+    proof_3: 'Deine Daten bleiben bei dir',
+    // Dashboard preview
+    preview_greeting: 'Guten Morgen, Max ☀️',
+    preview_date: 'Samstag, 21. Juni',
+    preview_of: 'von 2.000',
+    preview_carbs: 'Kohlenhydrate',
+    preview_fat: 'Fett',
+    preview_water: 'Wasser',
+    preview_eaten: 'Heute gegessen',
+    preview_chip1: '+ Protein',
+    preview_search: 'Lebensmittel suchen...',
+    preview_speak: 'Sprechen',
+    preview_recents: 'Zuletzt gegessen',
+    // Ticker
+    tick_foods: '3M+ Lebensmittel',
+    tick_free: '100% Kostenlos',
+    tick_voice: 'KI-Spracheingabe',
+    tick_gdpr: 'DSGVO-konform',
+    tick_nosub: 'Kein Abo',
+    // Features
+    feat_h2: 'Alles. Eingebaut.',
+    feat_p: 'Carby bringt alles mit was du brauchst — ohne Bloat, ohne Paywall.',
+    voice_h3: 'Spracheingabe',
+    voice_p: 'Sag einfach was du gegessen hast. Carby erkennt Lebensmittel, Mengen und Mahlzeiten — kein Tippen nötig.',
+    macro_tag: 'Echtzeit',
+    macro_h3: '📊 Makro-Tracking',
+    macro_p: 'Protein, Carbs, Fett &amp; Ballaststoffe. RDA-Ziele passen sich automatisch deinem Kalorienziel an.',
+    macro_k_label: 'K',
+    macro_f_label: 'F',
+    db_h3: '🔍 3 Millionen<br>Lebensmittel',
+    db_p: 'Intelligente Sortierung zeigt dir zuerst was du wirklich meinst.',
+    bmi_p: 'Dein Kalorienbedarf individuell berechnet — nach Alter, Gewicht, Größe, Geschlecht &amp; Aktivität.',
+    bmi_normal: 'Normal',
+    water_tag: 'Täglich',
+    water_h3: '💧 Wasser-Tracker',
+    water_p: '+150 / +250 / +500ml mit einem Klick. Tagesziel 2 Liter.',
+    priv_tag: 'DSGVO',
+    priv_p: 'Keine Werbung. Kein Tracking. Keine Datenweitergabe. Deine Daten bleiben auf deinem Gerät.',
+    priv_b1: '✓ Werbefrei',
+    priv_b2: '✓ Kein Tracking',
+    priv_b3: '✓ DSGVO',
+    rec_tag: 'Schnellzugriff',
+    rec_h3: '⚡ Zuletzt gegessen',
+    rec_p: 'Deine letzten 5 Lebensmittel als Chips — ein Klick und du bist fertig.',
+    lang_p: 'Vollständig zweisprachig — auf Knopfdruck umschaltbar.',
+    // Mockup
+    mockup_h2: 'Dein Tag auf<br>einen Blick.',
+    mockup_p: 'Das Dashboard zeigt alles was zählt — sofort, übersichtlich, ohne Ablenkung.',
+    fl1: 'Animierter Kalorienring',
+    fl2: 'Protein, Carbs &amp; Fett in Echtzeit',
+    fl3: 'Wasser-Tracker mit Fortschrittsbalken',
+    fl4: 'Personalisierte Empfehlungs-Chips',
+    fl5: 'Vollständiges Tagebuch',
+    fl6: 'KI-Spracheingabe per Knopfdruck',
+    phone_date: '21. Jun',
+    phone_greeting: 'Guten Morgen ☀️',
+    phone_of: 'von 2.000',
+    phone_k: 'K',
+    phone_f: 'F',
+    phone_today: 'Heute',
+    phone_water: 'Wasser',
+    // Download
+    dl_h2: 'Hol dir Carby.',
+    dl_p: 'Kostenlos. Keine Registrierung. Kein Bullshit.',
+    dl_win_desc: 'Desktop-App mit vollem Funktionsumfang, Whisper-Spracheingabe und Offline-Unterstützung.',
+    dl_win_btn: 'Setup.exe herunterladen',
+    dl_win_avail: '✓ Jetzt verfügbar',
+    dl_and_desc: 'Native App mit Material Design, Firebase-Sync und Google-Spracheingabe.',
+    dl_and_soon: 'Demnächst im Play Store',
+    dl_ios_desc: 'Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.',
+    dl_ios_soon: 'Demnächst im App Store',
+    ib_label: 'Windows Quick-Install',
+    ib_step1: 'Setup.exe<br>herunterladen',
+    ib_step2: 'Installer starten<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Trotzdem ausführen&rdquo;</span>',
+    ib_step3: '✓ Fertig<br>Carby starten',
+    // Support
+    sup_h2: 'Carby ist frei.<br>Bleibt frei.',
+    sup_p: 'Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.',
+    tier1: 'Kaffee',
+    paypal_btn: 'Jetzt via PayPal spenden',
+    paypal_note: 'Öffnet PayPal in deinem Browser · Kein Konto nötig',
+    qr_label: 'Mit Handy scannen',
+    // Footer
+    footer_tag: 'Tracke smarter, nicht mehr.',
+    footer_badge: 'Open Source · DSGVO · Kostenlos',
+    footer_privacy: 'Datenschutz',
+    footer_contact: 'Kontakt',
+    footer_donate: 'Spenden',
+    footer_bug: 'Bug melden',
+  },
+  en: {
+    // Nav
+    nav_features: 'Features',
+    nav_preview: 'Preview',
+    nav_privacy: 'Privacy',
+    nav_download: 'Download',
+    // Hero
+    hero_chip: 'Open Source on GitHub',
+    hero_h1_line1: 'Track smarter,',
+    hero_h1_line2: 'not harder.',
+    hero_p: 'Just say <em>&ldquo;Chicken breast 150g&rdquo;</em> — Carby recognizes it with AI,<br class="br-lg"> tracks calories, macros &amp; water, and calculates your needs<br class="br-lg"> automatically. Free. Ad-free. Always.',
+    hero_cta_win: 'Download for Windows',
+    hero_cta_preview: 'See App Preview',
+    proof_1: 'No Ads',
+    proof_2: 'No Subscription',
+    proof_3: 'Your data stays with you',
+    // Dashboard preview
+    preview_greeting: 'Good morning, Max ☀️',
+    preview_date: 'Saturday, June 21',
+    preview_of: 'of 2,000',
+    preview_carbs: 'Carbs',
+    preview_fat: 'Fat',
+    preview_water: 'Water',
+    preview_eaten: 'Eaten today',
+    preview_chip1: '+ Protein',
+    preview_search: 'Search food...',
+    preview_speak: 'Speak',
+    preview_recents: 'Recently eaten',
+    // Ticker
+    tick_foods: '3M+ Foods',
+    tick_free: '100% Free',
+    tick_voice: 'AI Voice Input',
+    tick_gdpr: 'GDPR-compliant',
+    tick_nosub: 'No Subscription',
+    // Features
+    feat_h2: 'Everything. Built-in.',
+    feat_p: 'Carby comes with everything you need — no bloat, no paywall.',
+    voice_h3: 'Voice Input',
+    voice_p: 'Just say what you ate. Carby recognizes foods, quantities, and meals — no typing required.',
+    macro_tag: 'Real-time',
+    macro_h3: '📊 Macro Tracking',
+    macro_p: 'Protein, carbs, fat &amp; fiber. RDA targets adjust automatically to your calorie goal.',
+    macro_k_label: 'C',
+    macro_f_label: 'F',
+    db_h3: '🔍 3 Million<br>Foods',
+    db_p: 'Smart ranking shows you what you actually mean first.',
+    bmi_p: 'Your calorie needs calculated individually — by age, weight, height, gender &amp; activity level.',
+    bmi_normal: 'Normal',
+    water_tag: 'Daily',
+    water_h3: '💧 Water Tracker',
+    water_p: '+150 / +250 / +500ml in one tap. Daily goal: 2 liters.',
+    priv_tag: 'GDPR',
+    priv_p: 'No ads. No tracking. No data sharing. Your data stays on your device.',
+    priv_b1: '✓ Ad-free',
+    priv_b2: '✓ No Tracking',
+    priv_b3: '✓ GDPR',
+    rec_tag: 'Quick Access',
+    rec_h3: '⚡ Recently Eaten',
+    rec_p: 'Your last 5 foods as chips — one tap and you\'re done.',
+    lang_p: 'Fully bilingual — switch languages with one tap.',
+    // Mockup
+    mockup_h2: 'Your day at<br>a glance.',
+    mockup_p: 'The dashboard shows everything that matters — instantly, clearly, without distraction.',
+    fl1: 'Animated calorie ring',
+    fl2: 'Protein, carbs &amp; fat in real-time',
+    fl3: 'Water tracker with progress bar',
+    fl4: 'Personalized recommendation chips',
+    fl5: 'Complete food journal',
+    fl6: 'AI voice input at the tap of a button',
+    phone_date: 'Jun 21',
+    phone_greeting: 'Good morning ☀️',
+    phone_of: 'of 2,000',
+    phone_k: 'C',
+    phone_f: 'F',
+    phone_today: 'Today',
+    phone_water: 'Water',
+    // Download
+    dl_h2: 'Get Carby.',
+    dl_p: 'Free. No sign-up. No bullshit.',
+    dl_win_desc: 'Desktop app with full feature set, Whisper voice input, and offline support.',
+    dl_win_btn: 'Download Setup.exe',
+    dl_win_avail: '✓ Available now',
+    dl_and_desc: 'Native app with Material Design, Firebase sync, and Google voice input.',
+    dl_and_soon: 'Coming soon to the Play Store',
+    dl_ios_desc: 'Native app for iPhone &amp; iPad. Siri integration and iCloud sync planned.',
+    dl_ios_soon: 'Coming soon to the App Store',
+    ib_label: 'Windows Quick Install',
+    ib_step1: 'Download<br>Setup.exe',
+    ib_step2: 'Run the installer<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Run anyway&rdquo;</span>',
+    ib_step3: '✓ Done<br>Launch Carby',
+    // Support
+    sup_h2: 'Carby is free.<br>Stays free.',
+    sup_p: 'No ads, no subscription, no premium wall. If Carby helps you, we appreciate any support — so new features can keep coming.',
+    tier1: 'Coffee',
+    paypal_btn: 'Donate via PayPal',
+    paypal_note: 'Opens PayPal in your browser · No account needed',
+    qr_label: 'Scan with your phone',
+    // Footer
+    footer_tag: 'Track smarter, not harder.',
+    footer_badge: 'Open Source · GDPR · Free',
+    footer_privacy: 'Privacy',
+    footer_contact: 'Contact',
+    footer_donate: 'Donate',
+    footer_bug: 'Report a Bug',
+  }
+};
+
+// ─── Language switcher ────────────────────────────────────────────────────────
+function setLang(lang) {
+  const t = T[lang];
+  if (!t) return;
+  // text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // innerHTML nodes (contain HTML tags)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // <html lang> attr + page title
+  document.documentElement.lang = lang;
+  document.title = lang === 'de'
+    ? 'Carby — Tracke smarter, nicht mehr.'
+    : 'Carby — Track smarter, not harder.';
+  // toggle buttons
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  // persist
+  localStorage.setItem('carby_lang', lang);
+}
+
+// Apply saved language on load
+const savedLang = localStorage.getItem('carby_lang') || 'de';
+setLang(savedLang);
+
+// ─── Reveal on scroll ────────────────────────────────────────────────────────
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); }
@@ -571,17 +816,17 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// Nav scroll
+// ─── Nav scroll ──────────────────────────────────────────────────────────────
 const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('nav-solid', scrollY > 60), { passive: true });
 
-// Hamburger
+// ─── Hamburger ───────────────────────────────────────────────────────────────
 const hb = document.getElementById('hamburger');
 const nl = document.getElementById('navLinks');
 hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
 document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
 
-// Tier selection
+// ─── Tier selection ──────────────────────────────────────────────────────────
 function selectTier(el, amt) {
   document.querySelectorAll('.tier-card').forEach(t => t.classList.remove('tc-active'));
   el.classList.add('tc-active');
