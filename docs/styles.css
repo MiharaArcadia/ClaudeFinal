@@ -661,6 +661,32 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 6
 .footer-bottom a { color: var(--muted); transition: color .2s; }
 .footer-bottom a:hover { color: var(--orange); }
 
+/* Instagram */
+.ig-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 20px;
+  padding: 11px 22px; border-radius: 99px;
+  font-weight: 700; font-size: 14px; color: #fff;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background-size: 200% 200%;
+  animation: igShimmer 3s ease infinite;
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none;
+}
+.ig-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 24px rgba(220,39,67,.45); }
+@keyframes igShimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ig-footer-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; color: var(--muted);
+  transition: color .2s;
+  text-decoration: none;
+}
+.ig-footer-link:hover { color: #e6683c; }
+
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .bento { grid-template-columns: repeat(2, 1fr); }
