@@ -1,4 +1,4 @@
-package com.carby.app
+package io.arcadiaapps.carby
 
 import io.flutter.embedding.android.FlutterActivity
 

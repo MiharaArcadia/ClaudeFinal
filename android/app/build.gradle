@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.carby.app"
+    namespace "io.arcadiaapps.carby"
     compileSdkVersion 36
     ndkVersion flutter.ndkVersion
 
@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.carby.app"
+        applicationId "io.arcadiaapps.carby"
         minSdkVersion 26
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
@@ -61,7 +61,7 @@ android {
             if (keystorePropertiesFile.exists()) {
                 keyAlias keystoreProperties["keyAlias"]
                 keyPassword keystoreProperties["keyPassword"]
-                storeFile file(keystoreProperties["storeFile"])
+                storeFile new File(keystoreProperties["storeFile"])
                 storePassword keystoreProperties["storePassword"]
             }
         }
