@@ -73,6 +73,16 @@ img { display: block; }
   flex-shrink: 0;
 }
 .nav-btn:hover { background: var(--orange2); transform: scale(1.03); }
+.nav-ig {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background-size: 200% 200%;
+  animation: igShimmer 3s ease infinite;
+  transition: transform .2s, box-shadow .2s;
+  flex-shrink: 0;
+}
+.nav-ig:hover { transform: scale(1.12); box-shadow: 0 4px 16px rgba(220,39,67,.5); }
 .nav-hamburger {
   display: none; background: none; border: none;
   cursor: pointer; padding: 4px; flex-direction: column; gap: 5px;
