@@ -9,14 +9,35 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
+
       - name: Generate Xcode project
         script: |
           flutter create --platforms=ios --project-name carby --org io.arcadiaapps .
-          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' ios/Runner.xcodeproj/project.pbxproj
+          # Fix bundle ID (flutter create sets it to plain 'carby')
+          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' \
+            ios/Runner.xcodeproj/project.pbxproj
+          # Raise minimum iOS to 13.0 (required by mobile_scanner 7.x)
+          sed -i '' "s/platform :ios, '12.0'/platform :ios, '13.0'/" ios/Podfile
+          sed -i '' "s/platform :ios, '11.0'/platform :ios, '13.0'/" ios/Podfile
+
+      - name: Restore Info.plist permissions
+        # flutter create regenerates Info.plist — put back all required usage keys
+        script: |
+          PLIST=ios/Runner/Info.plist
+          add_or_set() {
+            /usr/libexec/PlistBuddy -c "Add :$1 string '$2'" "$PLIST" 2>/dev/null || \
+            /usr/libexec/PlistBuddy -c "Set :$1 '$2'" "$PLIST"
+          }
+          add_or_set NSCameraUsageDescription        "Carby uses the camera to scan food barcodes."
+          add_or_set NSMicrophoneUsageDescription    "Carby benötigt Zugriff auf das Mikrofon, um Lebensmittel per Sprache zu erkennen."
+          add_or_set NSSpeechRecognitionUsageDescription "Carby verwendet Spracherkennung, um Lebensmittel schnell zu suchen."
+          add_or_set NSPhotoLibraryUsageDescription  "Carby benötigt Zugriff auf die Fotos, um einen Screenshot anzuhängen."
+
       - name: Install pods
         script: cd ios && pod install && cd ..
+
       - name: Build iOS (no codesign)
-        script: flutter build ios --release --no-codesign --no-tree-shake-icons
+        script: flutter build ios --release --no-codesign
     artifacts:
       - build/ios/iphoneos/Runner.app
     triggering:
