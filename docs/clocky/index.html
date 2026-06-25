@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clocky — Zeittracking ohne Bullshit.</title>
+  <meta name="description" content="Clocky ist dein kostenloser Zeittracker für Android. Offline, werbefrei, DSGVO-konform. Erfasse Arbeitszeiten, exportiere PDF-Stundenzettel und verwalte Projekte — ohne Account.">
+  <meta property="og:title" content="Clocky — Zeittracking ohne Bullshit.">
+  <meta property="og:description" content="Kostenloser Android-Zeittracker für Freelancer. Offline, werbefrei, kein Account. PDF &amp; CSV Export.">
+  <meta property="og:image" content="https://miharaarcadia.github.io/ClaudeFinal/clocky/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://miharaarcadia.github.io/ClaudeFinal/clocky/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NOISE OVERLAY -->
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-icon">⏱</span>
+      <span>Clocky</span>
+    </a>
+    <div class="nav-center" id="navLinks">
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#preview" data-i18n="nav_preview">Preview</a>
+      <a href="#download">Download</a>
+      <a href="privacy-policy.html" data-i18n="nav_privacy">Datenschutz</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="#download" class="nav-btn" data-i18n="nav_download">
+        Für Android herunterladen
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="lang-toggle">
+        <button id="btn-de" class="active" onclick="setLang('de')">DE</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ANNOUNCEMENT BANNER -->
+<div class="announce-bar" id="announce-bar">
+  <div class="announce-inner">
+    <span class="announce-badge" data-i18n="ann_badge">Neu</span>
+    <span data-i18n="ann_text">🎉 Clocky 1.0 ist da — jetzt kostenlos herunterladen!</span>
+    <button class="announce-close" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Schließen">✕</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-inner">
+    <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener" class="hero-chip">
+      <span class="chip-dot"></span>
+      <span data-i18n="hero_chip">Open Source auf GitHub</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <h1 class="hero-h1">
+      <span data-i18n="hero_h1_line1">Deine Zeit.</span><br>
+      <span class="hero-gradient" data-i18n="hero_h1_line2">Dein Geld. Dein Überblick.</span>
+    </h1>
+
+    <p class="hero-p">
+      <span data-i18n-html="hero_p">Clocky trackt deine Arbeitszeit <em>vollständig offline</em>, generiert professionelle Stundenzettel als PDF<br class="br-lg"> und schickt sie direkt an deinen Kunden. Kostenlos. Werbefrei. Immer.</span>
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://github.com/MiharaArcadia/ClaudeFinal/releases" class="btn-hero" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        <span data-i18n="hero_cta_apk">APK herunterladen</span>
+      </a>
+      <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener" class="btn-ghost-hero">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span data-i18n="hero_cta_github">Quellcode ansehen</span>
+      </a>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="proof_1">100% Offline</span>
+      </div>
+      <div class="proof-dot"></div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="proof_2">Werbefrei</span>
+      </div>
+      <div class="proof-dot"></div>
+      <div class="proof-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="proof_3">DSGVO-konform</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span data-i18n="tick_offline">100% Offline</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_free">Kostenlos</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_pdf">PDF-Export</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_csv">CSV-Export</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_widget">Home-Widget</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_gdpr">DSGVO-konform</span>
+    <span class="tick-sep">✦</span>
+    <span>Open Source</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_noaccount">Kein Account</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_noad">Werbefrei</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_android">Android 8.0+</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_offline">100% Offline</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_free">Kostenlos</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_pdf">PDF-Export</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_csv">CSV-Export</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_widget">Home-Widget</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_gdpr">DSGVO-konform</span>
+    <span class="tick-sep">✦</span>
+    <span>Open Source</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_noaccount">Kein Account</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_noad">Werbefrei</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_android">Android 8.0+</span>
+    <span class="tick-sep">✦</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="features-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow reveal">Features</div>
+    <h2 class="section-h2 reveal" data-i18n="feat_h2">Alles was du brauchst.<br>Nichts was du nicht brauchst.</h2>
+    <p class="section-p reveal" data-i18n="feat_p">Clocky kommt mit allem was ein Freelancer braucht — ohne Abo, ohne Cloud, ohne Kompromisse.</p>
+
+    <div class="features-grid">
+
+      <!-- Wide card: Stopwatch -->
+      <div class="feat-card feat-card-wide reveal">
+        <div class="feat-wide-inner">
+          <div class="stopwatch-vis">
+            <div class="sw-ring"></div>
+            <div class="sw-ring-anim"></div>
+            <div class="sw-ring-anim-2"></div>
+            <div class="sw-time">01:23:45</div>
+          </div>
+          <div class="feat-wide-text">
+            <div class="feat-tag" data-i18n="feat1_tag">Stoppuhr</div>
+            <h3 data-i18n="feat1_h3">⏱ Zeiterfassung per Tap</h3>
+            <p data-i18n="feat1_p">Starte, pausiere und stoppe deine Arbeitszeit mit einem einzigen Tap. Clocky speichert jeden Eintrag automatisch — kein Datenverlust, kein Stress. Lauf die Stoppuhr im Hintergrund weiter, während du arbeitest.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Projects -->
+      <div class="feat-card reveal">
+        <div class="feat-icon">📋</div>
+        <div class="feat-tag" data-i18n="feat2_tag">Projekte</div>
+        <h3 data-i18n="feat2_h3">Projektmanagement</h3>
+        <p data-i18n="feat2_p">Verwalte beliebig viele Kunden, Projekte und Stundensätze an einem Ort. Weise jeden Zeiteintrag einem Projekt zu — Clocky rechnet dein Honorar automatisch aus.</p>
+      </div>
+
+      <!-- Card: PDF Export -->
+      <div class="feat-card reveal">
+        <div class="feat-icon">📄</div>
+        <div class="feat-tag" data-i18n="feat3_tag">Export</div>
+        <h3 data-i18n="feat3_h3">PDF-Stundenzettel</h3>
+        <p data-i18n="feat3_p">Professionelle Stundennachweise auf Knopfdruck. Generiere fertige Abrechnungen für deine Kunden — direkt per E-Mail versendbar, ohne Umweg über den PC.</p>
+      </div>
+
+      <!-- Card: CSV Export -->
+      <div class="feat-card reveal">
+        <div class="feat-icon">📊</div>
+        <div class="feat-tag" data-i18n="feat4_tag">Buchhaltung</div>
+        <h3 data-i18n="feat4_h3">CSV-Export</h3>
+        <p data-i18n="feat4_p">Excel- und Google-Sheets-kompatible Exporte für deine Buchhaltung oder deinen Steuerberater. Alle Daten strukturiert auf einen Blick.</p>
+      </div>
+
+      <!-- Card: Widget -->
+      <div class="feat-card reveal">
+        <div class="feat-icon">🔲</div>
+        <div class="feat-tag" data-i18n="feat5_tag">Widget</div>
+        <h3 data-i18n="feat5_h3">Home-Widget</h3>
+        <p data-i18n="feat5_p">Starte den Timer direkt vom Android-Homescreen — ohne die App zu öffnen. Das Widget zeigt die laufende Zeit und dein aktives Projekt in Echtzeit.</p>
+      </div>
+
+      <!-- Card: Privacy -->
+      <div class="feat-card reveal">
+        <div class="feat-icon">🔒</div>
+        <div class="feat-tag" data-i18n="feat6_tag">Privatsphäre</div>
+        <h3 data-i18n="feat6_h3">Privacy First</h3>
+        <p data-i18n="feat6_p">Alle Daten bleiben ausschließlich auf deinem Gerät. Kein Server. Kein Account. Kein Tracking. Keine Werbung. Keine Datenweitergabe. Fertig.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- APP PREVIEW (Phone Mockup) -->
+<section id="preview" class="mockup-section">
+  <div class="section-wrap">
+    <div class="mockup-grid">
+      <div class="mockup-copy">
+        <div class="section-eyebrow reveal">Live Preview</div>
+        <h2 class="section-h2 reveal" style="text-align:left" data-i18n-html="mockup_h2">Dein Projektstatus.<br>Immer im Blick.</h2>
+        <p class="section-p reveal" style="text-align:left;margin-left:0" data-i18n="mockup_p">Clocky hält sich aus dem Weg, bis du es brauchst — und liefert dann genau die Zahlen die du für deine Abrechnung brauchst.</p>
+        <ul class="feature-list">
+          <li class="reveal"><span class="fl-dot" style="background:#FF6B35"></span><span data-i18n="fl1">Animierte Stoppuhr mit Hintergrundlauf</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#4CAF50"></span><span data-i18n="fl2">Projekte mit individuellem Stundensatz</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#42A5F5"></span><span data-i18n="fl3">Automatische Honorarberechnung</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#FF4081"></span><span data-i18n="fl4">PDF direkt per E-Mail versenden</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#00BCD4"></span><span data-i18n="fl5">Home-Widget für schnellen Zugriff</span></li>
+          <li class="reveal"><span class="fl-dot" style="background:#9C27B0"></span><span data-i18n="fl6">Vollständig offline — kein Internet nötig</span></li>
+        </ul>
+      </div>
+
+      <!-- Phone -->
+      <div class="phone-outer reveal">
+        <div class="phone-body">
+          <div class="phone-notch"><div class="phone-cam"></div></div>
+          <div class="phone-vol pv1"></div>
+          <div class="phone-vol pv2"></div>
+          <div class="phone-power"></div>
+          <div class="phone-screen">
+            <div class="psc-header">
+              <span class="psc-app-name">⏱ Clocky</span>
+              <span class="psc-date" data-i18n="phone_date">25. Jun</span>
+            </div>
+            <div class="psc-project-badge" data-i18n="phone_project">📋 Projekt: Webdesign GmbH</div>
+            <div class="psc-timer-display">
+              <div class="psc-timer-big">02:34:17</div>
+              <div class="psc-timer-label" data-i18n="phone_running">Läuft seit 09:15 Uhr</div>
+            </div>
+            <div class="psc-controls">
+              <div class="psc-btn-stop">⏸</div>
+              <div class="psc-btn-play">⏹</div>
+              <div class="psc-btn-stop">+</div>
+            </div>
+            <div class="psc-divider"></div>
+            <div class="psc-entries-label" data-i18n="phone_today">Heute</div>
+            <div class="psc-entry">
+              <span class="psc-entry-proj" data-i18n="phone_proj1">App-Entwicklung</span>
+              <span class="psc-entry-time">03:15</span>
+            </div>
+            <div class="psc-entry">
+              <span class="psc-entry-proj" data-i18n="phone_proj2">Kundengespräch</span>
+              <span class="psc-entry-time">01:00</span>
+            </div>
+            <div class="psc-entry">
+              <span class="psc-entry-proj" data-i18n="phone_proj3">Code-Review</span>
+              <span class="psc-entry-time">00:45</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENS PREVIEW -->
+<section class="screens-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow reveal" style="display:block;text-align:center" data-i18n="screens_eyebrow">App Screenshots</div>
+    <h2 class="section-h2 reveal" data-i18n="screens_h2">Clocky in Action</h2>
+    <p class="section-p reveal" data-i18n="screens_p">Fünf Screens. Alles was du brauchst. Nichts was dich ablenkt.</p>
+
+    <div class="screens-row">
+      <!-- Screen 1: Timer -->
+      <div class="screen-card reveal">
+        <div class="screen-label">
+          <div class="screen-label-dot"></div>
+          <span data-i18n="sc1_label">Timer</span>
+        </div>
+        <div class="screen-body">
+          <div class="sc-timer-display">
+            <div class="sc-timer-big">01:23:45</div>
+            <div class="sc-timer-proj" data-i18n="sc1_proj">📋 Webdesign GmbH · 85€/h</div>
+          </div>
+          <div class="sc-timer-controls">
+            <div class="sc-btn-primary" data-i18n="sc1_pause">⏸ Pause</div>
+            <div class="sc-btn-secondary" data-i18n="sc1_stop">⏹ Stop</div>
+          </div>
+          <div class="sc-stats-row">
+            <div class="sc-stat">
+              <div class="sc-stat-val">6:32</div>
+              <div class="sc-stat-lbl" data-i18n="sc1_stat1">Heute gesamt</div>
+            </div>
+            <div class="sc-stat">
+              <div class="sc-stat-val" style="color:#FF6B35">555€</div>
+              <div class="sc-stat-lbl" data-i18n="sc1_stat2">Verdient heute</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 2: Entries -->
+      <div class="screen-card reveal">
+        <div class="screen-label">
+          <div class="screen-label-dot"></div>
+          <span data-i18n="sc2_label">Einträge</span>
+        </div>
+        <div class="screen-body">
+          <div class="sc-entry-item">
+            <div class="sc-entry-left">
+              <div class="sc-entry-proj" data-i18n="sc2_e1_proj">Webdesign GmbH</div>
+              <div class="sc-entry-date" data-i18n="sc2_e1_date">Heute · 09:15–11:38</div>
+            </div>
+            <div class="sc-entry-dur">2:23</div>
+          </div>
+          <div class="sc-entry-item">
+            <div class="sc-entry-left">
+              <div class="sc-entry-proj" data-i18n="sc2_e2_proj">App-Entwicklung</div>
+              <div class="sc-entry-date" data-i18n="sc2_e2_date">Gestern · 14:00–17:15</div>
+            </div>
+            <div class="sc-entry-dur">3:15</div>
+          </div>
+          <div class="sc-entry-item">
+            <div class="sc-entry-left">
+              <div class="sc-entry-proj" data-i18n="sc2_e3_proj">Kundengespräch</div>
+              <div class="sc-entry-date" data-i18n="sc2_e3_date">Mo · 10:00–11:00</div>
+            </div>
+            <div class="sc-entry-dur">1:00</div>
+          </div>
+          <div class="sc-entry-item">
+            <div class="sc-entry-left">
+              <div class="sc-entry-proj" data-i18n="sc2_e4_proj">Webdesign GmbH</div>
+              <div class="sc-entry-date" data-i18n="sc2_e4_date">Mo · 08:30–12:00</div>
+            </div>
+            <div class="sc-entry-dur">3:30</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 3: Export -->
+      <div class="screen-card reveal">
+        <div class="screen-label">
+          <div class="screen-label-dot"></div>
+          <span data-i18n="sc3_label">Export</span>
+        </div>
+        <div class="screen-body">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px" data-i18n="sc3_period">Juni 2025 · 42:30h · 3.612€</div>
+          <div class="sc-export-card">
+            <div class="sc-export-icon sc-export-icon-pdf">📄</div>
+            <div class="sc-export-info">
+              <div class="sc-export-title" data-i18n="sc3_pdf_title">PDF-Stundenzettel</div>
+              <div class="sc-export-sub" data-i18n="sc3_pdf_sub">Professionell · E-Mail-fertig</div>
+            </div>
+            <div class="sc-export-arrow">→</div>
+          </div>
+          <div class="sc-export-card">
+            <div class="sc-export-icon sc-export-icon-csv">📊</div>
+            <div class="sc-export-info">
+              <div class="sc-export-title" data-i18n="sc3_csv_title">CSV-Export</div>
+              <div class="sc-export-sub" data-i18n="sc3_csv_sub">Excel-kompatibel · Alle Daten</div>
+            </div>
+            <div class="sc-export-arrow">→</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center" data-i18n="sc3_note">Direkt per E-Mail versendbar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow reveal" style="display:block;text-align:center">Download</div>
+    <h2 class="section-h2 reveal" data-i18n="dl_h2">Kostenlos für Android.</h2>
+    <p class="section-p reveal" data-i18n="dl_p">Keine Anmeldung. Kein Abo. Nur dein Zeittracker.</p>
+
+    <div class="dl-hero-card reveal">
+      <div class="dl-hero-glow"></div>
+      <div class="dl-hero-icon">🤖</div>
+      <div class="dl-hero-title" data-i18n="dl_title">Clocky für Android</div>
+      <div class="dl-hero-sub" data-i18n="dl_subtitle">Erfordert Android 8.0 (API 26) oder höher · Open Source · DSGVO-konform</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+        <a href="https://github.com/MiharaArcadia/ClaudeFinal/releases" class="dl-btn-primary" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="dl_btn">APK herunterladen</span>
+        </a>
+        <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener" class="gh-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span data-i18n="dl_github">GitHub — Quellcode ansehen</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="dl-meta" style="margin-top:28px">
+        <span data-i18n="dl_meta1">Alternativ: APK direkt aus dem Quellcode bauen</span><br>
+        <span data-i18n="dl_meta2">Benötigt Android Studio · <a href="https://github.com/MiharaArcadia/ClaudeFinal#readme" target="_blank">Anleitung auf GitHub</a></span>
+      </div>
+    </div>
+
+    <div class="dl-info-row reveal">
+      <div class="dl-info-card">
+        <div class="dl-info-icon">📱</div>
+        <div class="dl-info-title" data-i18n="dl_info1_title">Android 8.0+</div>
+        <div class="dl-info-text" data-i18n="dl_info1_text">Clocky läuft auf allen Android-Geräten ab API 26. Getestet auf Android 12, 13 und 14.</div>
+      </div>
+      <div class="dl-info-card">
+        <div class="dl-info-icon">🔓</div>
+        <div class="dl-info-title" data-i18n="dl_info2_title">Open Source</div>
+        <div class="dl-info-text" data-i18n="dl_info2_text">Der vollständige Quellcode ist auf GitHub verfügbar. Sieh selbst nach, was die App tut — und was nicht.</div>
+      </div>
+      <div class="dl-info-card">
+        <div class="dl-info-icon">✈️</div>
+        <div class="dl-info-title" data-i18n="dl_info3_title">Offline-First</div>
+        <div class="dl-info-text" data-i18n="dl_info3_text">Clocky benötigt nach der Installation keine Internetverbindung. Alle Daten bleiben auf deinem Gerät.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON: Warum Clocky? -->
+<section class="compare-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow reveal" style="display:block;text-align:center" data-i18n="cmp_eyebrow">Warum Clocky?</div>
+    <h2 class="section-h2 reveal" data-i18n="cmp_h2">Der Unterschied liegt im Detail.</h2>
+    <p class="section-p reveal" data-i18n="cmp_p">Die meisten Zeittracking-Apps wollen dein Geld oder deine Daten. Clocky will beides nicht.</p>
+
+    <div class="compare-grid reveal">
+      <!-- Other apps -->
+      <div class="compare-col">
+        <div class="compare-col-header">
+          <div class="compare-col-icon">🔗</div>
+          <div>
+            <div class="compare-col-title" data-i18n="cmp_other_title">Andere Apps</div>
+            <div class="compare-col-sub" data-i18n="cmp_other_sub">Typische Zeittracker am Markt</div>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">❌</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_o1_title">Abo-Modell</strong>
+            <span data-i18n="cmp_o1_sub">5–30€/Monat für volle Funktionen</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">❌</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_o2_title">Cloud-Pflicht</strong>
+            <span data-i18n="cmp_o2_sub">Account erforderlich, Daten auf fremden Servern</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">❌</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_o3_title">Werbung</strong>
+            <span data-i18n="cmp_o3_sub">Banner und Interstitials in der Gratis-Version</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">❌</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_o4_title">Datenweitergabe</strong>
+            <span data-i18n="cmp_o4_sub">Nutzungsdaten an Drittanbieter-Analysen</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">❌</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_o5_title">Exportsperre</strong>
+            <span data-i18n="cmp_o5_sub">PDF/CSV nur in der Premium-Version</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clocky -->
+      <div class="compare-col compare-col-clocky">
+        <div class="compare-col-header">
+          <div class="compare-col-icon">⏱</div>
+          <div>
+            <div class="compare-col-title" style="background:linear-gradient(135deg,#FF6B35,#FF4081);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Clocky</div>
+            <div class="compare-col-sub" data-i18n="cmp_clocky_sub">Zeittracking ohne Bullshit</div>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">✅</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_c1_title">Kostenlos</strong>
+            <span data-i18n="cmp_c1_sub">Für immer. Kein verstecktes Abo.</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">✅</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_c2_title">Vollständig offline</strong>
+            <span data-i18n="cmp_c2_sub">Kein Account, kein Server, keine Cloud</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">✅</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_c3_title">Werbefrei</strong>
+            <span data-i18n="cmp_c3_sub">Keine Banner, keine Unterbrechungen</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">✅</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_c4_title">Alles lokal</strong>
+            <span data-i18n="cmp_c4_sub">Deine Daten bleiben auf deinem Gerät</span>
+          </div>
+        </div>
+        <div class="compare-item">
+          <div class="compare-check">✅</div>
+          <div class="compare-text">
+            <strong data-i18n="cmp_c5_title">Voller Export inklusive</strong>
+            <span data-i18n="cmp_c5_sub">PDF & CSV ohne Paywall — immer kostenlos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="fb-logo">
+          <span class="fb-logo-icon">⏱</span>
+          <span>Clocky</span>
+        </div>
+        <div class="fb-tag" data-i18n="footer_tag">Zeittracking ohne Bullshit.</div>
+        <div class="fb-badge" data-i18n="footer_badge">Open Source · DSGVO · Kostenlos</div>
+        <div class="footer-made" style="margin-top:16px">Made with <span>♥</span> by ArcadiaApps</div>
+      </div>
+      <div class="footer-links">
+        <div class="fl-group">
+          <div class="fl-title">App</div>
+          <a href="#features" data-i18n="footer_features">Features</a>
+          <a href="#preview" data-i18n="footer_preview">Preview</a>
+          <a href="#download">Download</a>
+        </div>
+        <div class="fl-group">
+          <div class="fl-title">Legal</div>
+          <a href="privacy-policy.html" data-i18n="footer_privacy">Datenschutz</a>
+          <a href="impressum.html" data-i18n="footer_impressum">Impressum</a>
+          <a href="mailto:ArcadiaApps@proton.me" data-i18n="footer_contact">Kontakt</a>
+          <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="fl-group">
+          <div class="fl-title">ArcadiaApps</div>
+          <a href="../index.html" data-i18n="footer_carby">Carby (Schwesterapp)</a>
+          <a href="mailto:ArcadiaApps@proton.me" data-i18n="footer_bug">Bug melden</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 Clocky · ArcadiaApps · <a href="impressum.html" style="color:inherit;opacity:0.6" data-i18n="footer_impressum">Impressum</a></div>
+      <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── Translations ─────────────────────────────────────────────────────────────
+const T = {
+  de: {
+    // Announcement
+    ann_badge: 'Neu',
+    ann_text: '🎉 Clocky 1.0 ist da — jetzt kostenlos herunterladen!',
+    // Nav
+    nav_features: 'Features',
+    nav_preview: 'Preview',
+    nav_privacy: 'Datenschutz',
+    nav_download: 'Für Android herunterladen',
+    // Hero
+    hero_chip: 'Open Source auf GitHub',
+    hero_h1_line1: 'Deine Zeit.',
+    hero_h1_line2: 'Dein Geld. Dein Überblick.',
+    hero_p: 'Clocky trackt deine Arbeitszeit <em>vollständig offline</em>, generiert professionelle Stundenzettel als PDF<br class="br-lg"> und schickt sie direkt an deinen Kunden. Kostenlos. Werbefrei. Immer.',
+    hero_cta_apk: 'APK herunterladen',
+    hero_cta_github: 'Quellcode ansehen',
+    proof_1: '100% Offline',
+    proof_2: 'Werbefrei',
+    proof_3: 'DSGVO-konform',
+    // Ticker
+    tick_offline: '100% Offline',
+    tick_free: 'Kostenlos',
+    tick_pdf: 'PDF-Export',
+    tick_csv: 'CSV-Export',
+    tick_widget: 'Home-Widget',
+    tick_gdpr: 'DSGVO-konform',
+    tick_noaccount: 'Kein Account',
+    tick_noad: 'Werbefrei',
+    tick_android: 'Android 8.0+',
+    // Features
+    feat_h2: 'Alles was du brauchst. Nichts was du nicht brauchst.',
+    feat_p: 'Clocky kommt mit allem was ein Freelancer braucht — ohne Abo, ohne Cloud, ohne Kompromisse.',
+    feat1_tag: 'Stoppuhr',
+    feat1_h3: '⏱ Zeiterfassung per Tap',
+    feat1_p: 'Starte, pausiere und stoppe deine Arbeitszeit mit einem einzigen Tap. Clocky speichert jeden Eintrag automatisch — kein Datenverlust, kein Stress. Lauf die Stoppuhr im Hintergrund weiter, während du arbeitest.',
+    feat2_tag: 'Projekte',
+    feat2_h3: 'Projektmanagement',
+    feat2_p: 'Verwalte beliebig viele Kunden, Projekte und Stundensätze an einem Ort. Weise jeden Zeiteintrag einem Projekt zu — Clocky rechnet dein Honorar automatisch aus.',
+    feat3_tag: 'Export',
+    feat3_h3: 'PDF-Stundenzettel',
+    feat3_p: 'Professionelle Stundennachweise auf Knopfdruck. Generiere fertige Abrechnungen für deine Kunden — direkt per E-Mail versendbar, ohne Umweg über den PC.',
+    feat4_tag: 'Buchhaltung',
+    feat4_h3: 'CSV-Export',
+    feat4_p: 'Excel- und Google-Sheets-kompatible Exporte für deine Buchhaltung oder deinen Steuerberater. Alle Daten strukturiert auf einen Blick.',
+    feat5_tag: 'Widget',
+    feat5_h3: 'Home-Widget',
+    feat5_p: 'Starte den Timer direkt vom Android-Homescreen — ohne die App zu öffnen. Das Widget zeigt die laufende Zeit und dein aktives Projekt in Echtzeit.',
+    feat6_tag: 'Privatsphäre',
+    feat6_h3: 'Privacy First',
+    feat6_p: 'Alle Daten bleiben ausschließlich auf deinem Gerät. Kein Server. Kein Account. Kein Tracking. Keine Werbung. Keine Datenweitergabe. Fertig.',
+    // Mockup
+    mockup_h2: 'Dein Projektstatus.<br>Immer im Blick.',
+    mockup_p: 'Clocky hält sich aus dem Weg, bis du es brauchst — und liefert dann genau die Zahlen die du für deine Abrechnung brauchst.',
+    fl1: 'Animierte Stoppuhr mit Hintergrundlauf',
+    fl2: 'Projekte mit individuellem Stundensatz',
+    fl3: 'Automatische Honorarberechnung',
+    fl4: 'PDF direkt per E-Mail versenden',
+    fl5: 'Home-Widget für schnellen Zugriff',
+    fl6: 'Vollständig offline — kein Internet nötig',
+    phone_date: '25. Jun',
+    phone_project: '📋 Projekt: Webdesign GmbH',
+    phone_running: 'Läuft seit 09:15 Uhr',
+    phone_today: 'Heute',
+    phone_proj1: 'App-Entwicklung',
+    phone_proj2: 'Kundengespräch',
+    phone_proj3: 'Code-Review',
+    // Screens
+    screens_eyebrow: 'App Screenshots',
+    screens_h2: 'Clocky in Action',
+    screens_p: 'Fünf Screens. Alles was du brauchst. Nichts was dich ablenkt.',
+    sc1_label: 'Timer',
+    sc1_proj: '📋 Webdesign GmbH · 85€/h',
+    sc1_pause: '⏸ Pause',
+    sc1_stop: '⏹ Stop',
+    sc1_stat1: 'Heute gesamt',
+    sc1_stat2: 'Verdient heute',
+    sc2_label: 'Einträge',
+    sc2_e1_proj: 'Webdesign GmbH',
+    sc2_e1_date: 'Heute · 09:15–11:38',
+    sc2_e2_proj: 'App-Entwicklung',
+    sc2_e2_date: 'Gestern · 14:00–17:15',
+    sc2_e3_proj: 'Kundengespräch',
+    sc2_e3_date: 'Mo · 10:00–11:00',
+    sc2_e4_proj: 'Webdesign GmbH',
+    sc2_e4_date: 'Mo · 08:30–12:00',
+    sc3_label: 'Export',
+    sc3_period: 'Juni 2025 · 42:30h · 3.612€',
+    sc3_pdf_title: 'PDF-Stundenzettel',
+    sc3_pdf_sub: 'Professionell · E-Mail-fertig',
+    sc3_csv_title: 'CSV-Export',
+    sc3_csv_sub: 'Excel-kompatibel · Alle Daten',
+    sc3_note: 'Direkt per E-Mail versendbar',
+    // Download
+    dl_h2: 'Kostenlos für Android.',
+    dl_p: 'Keine Anmeldung. Kein Abo. Nur dein Zeittracker.',
+    dl_title: 'Clocky für Android',
+    dl_subtitle: 'Erfordert Android 8.0 (API 26) oder höher · Open Source · DSGVO-konform',
+    dl_btn: 'APK herunterladen',
+    dl_github: 'GitHub — Quellcode ansehen',
+    dl_meta1: 'Alternativ: APK direkt aus dem Quellcode bauen',
+    dl_meta2: 'Benötigt Android Studio · Anleitung auf GitHub',
+    dl_info1_title: 'Android 8.0+',
+    dl_info1_text: 'Clocky läuft auf allen Android-Geräten ab API 26. Getestet auf Android 12, 13 und 14.',
+    dl_info2_title: 'Open Source',
+    dl_info2_text: 'Der vollständige Quellcode ist auf GitHub verfügbar. Sieh selbst nach, was die App tut — und was nicht.',
+    dl_info3_title: 'Offline-First',
+    dl_info3_text: 'Clocky benötigt nach der Installation keine Internetverbindung. Alle Daten bleiben auf deinem Gerät.',
+    // Comparison
+    cmp_eyebrow: 'Warum Clocky?',
+    cmp_h2: 'Der Unterschied liegt im Detail.',
+    cmp_p: 'Die meisten Zeittracking-Apps wollen dein Geld oder deine Daten. Clocky will beides nicht.',
+    cmp_other_title: 'Andere Apps',
+    cmp_other_sub: 'Typische Zeittracker am Markt',
+    cmp_o1_title: 'Abo-Modell',
+    cmp_o1_sub: '5–30€/Monat für volle Funktionen',
+    cmp_o2_title: 'Cloud-Pflicht',
+    cmp_o2_sub: 'Account erforderlich, Daten auf fremden Servern',
+    cmp_o3_title: 'Werbung',
+    cmp_o3_sub: 'Banner und Interstitials in der Gratis-Version',
+    cmp_o4_title: 'Datenweitergabe',
+    cmp_o4_sub: 'Nutzungsdaten an Drittanbieter-Analysen',
+    cmp_o5_title: 'Exportsperre',
+    cmp_o5_sub: 'PDF/CSV nur in der Premium-Version',
+    cmp_clocky_sub: 'Zeittracking ohne Bullshit',
+    cmp_c1_title: 'Kostenlos',
+    cmp_c1_sub: 'Für immer. Kein verstecktes Abo.',
+    cmp_c2_title: 'Vollständig offline',
+    cmp_c2_sub: 'Kein Account, kein Server, keine Cloud',
+    cmp_c3_title: 'Werbefrei',
+    cmp_c3_sub: 'Keine Banner, keine Unterbrechungen',
+    cmp_c4_title: 'Alles lokal',
+    cmp_c4_sub: 'Deine Daten bleiben auf deinem Gerät',
+    cmp_c5_title: 'Voller Export inklusive',
+    cmp_c5_sub: 'PDF & CSV ohne Paywall — immer kostenlos',
+    // Footer
+    footer_tag: 'Zeittracking ohne Bullshit.',
+    footer_badge: 'Open Source · DSGVO · Kostenlos',
+    footer_features: 'Features',
+    footer_preview: 'Preview',
+    footer_privacy: 'Datenschutz',
+    footer_impressum: 'Impressum',
+    footer_contact: 'Kontakt',
+    footer_carby: 'Carby (Schwesterapp)',
+    footer_bug: 'Bug melden',
+  },
+  en: {
+    // Announcement
+    ann_badge: 'New',
+    ann_text: '🎉 Clocky 1.0 is here — download for free now!',
+    // Nav
+    nav_features: 'Features',
+    nav_preview: 'Preview',
+    nav_privacy: 'Privacy',
+    nav_download: 'Download for Android',
+    // Hero
+    hero_chip: 'Open Source on GitHub',
+    hero_h1_line1: 'Your Time.',
+    hero_h1_line2: 'Your Money. Your Overview.',
+    hero_p: 'Clocky tracks your work time <em>completely offline</em>, generates professional timesheets as PDF<br class="br-lg"> and sends them directly to your client. Free. Ad-free. Always.',
+    hero_cta_apk: 'Download APK',
+    hero_cta_github: 'View Source Code',
+    proof_1: '100% Offline',
+    proof_2: 'Ad-free',
+    proof_3: 'GDPR-compliant',
+    // Ticker
+    tick_offline: '100% Offline',
+    tick_free: 'Free',
+    tick_pdf: 'PDF Export',
+    tick_csv: 'CSV Export',
+    tick_widget: 'Home Widget',
+    tick_gdpr: 'GDPR-compliant',
+    tick_noaccount: 'No Account',
+    tick_noad: 'Ad-free',
+    tick_android: 'Android 8.0+',
+    // Features
+    feat_h2: 'Everything you need. Nothing you don\'t.',
+    feat_p: 'Clocky comes with everything a freelancer needs — no subscription, no cloud, no compromises.',
+    feat1_tag: 'Stopwatch',
+    feat1_h3: '⏱ Time Tracking with One Tap',
+    feat1_p: 'Start, pause and stop your work time with a single tap. Clocky saves every entry automatically — no data loss, no stress. The stopwatch keeps running in the background while you work.',
+    feat2_tag: 'Projects',
+    feat2_h3: 'Project Management',
+    feat2_p: 'Manage unlimited clients, projects and hourly rates in one place. Assign each time entry to a project — Clocky calculates your fee automatically.',
+    feat3_tag: 'Export',
+    feat3_h3: 'PDF Timesheets',
+    feat3_p: 'Professional timesheets at the tap of a button. Generate ready-to-send invoices for your clients — directly via email, no PC required.',
+    feat4_tag: 'Accounting',
+    feat4_h3: 'CSV Export',
+    feat4_p: 'Excel and Google Sheets compatible exports for your bookkeeping or accountant. All data structured at a glance.',
+    feat5_tag: 'Widget',
+    feat5_h3: 'Home Screen Widget',
+    feat5_p: 'Start the timer directly from the Android home screen — without opening the app. The widget shows the running time and active project in real time.',
+    feat6_tag: 'Privacy',
+    feat6_h3: 'Privacy First',
+    feat6_p: 'All data stays exclusively on your device. No server. No account. No tracking. No ads. No data sharing. Period.',
+    // Mockup
+    mockup_h2: 'Your project status.<br>Always in view.',
+    mockup_p: 'Clocky stays out of your way until you need it — then delivers exactly the numbers you need for your invoice.',
+    fl1: 'Animated stopwatch with background mode',
+    fl2: 'Projects with individual hourly rate',
+    fl3: 'Automatic fee calculation',
+    fl4: 'Send PDF directly via email',
+    fl5: 'Home widget for quick access',
+    fl6: 'Fully offline — no internet needed',
+    phone_date: 'Jun 25',
+    phone_project: '📋 Project: Web Design LLC',
+    phone_running: 'Running since 09:15',
+    phone_today: 'Today',
+    phone_proj1: 'App Development',
+    phone_proj2: 'Client Meeting',
+    phone_proj3: 'Code Review',
+    // Screens
+    screens_eyebrow: 'App Screenshots',
+    screens_h2: 'Clocky in Action',
+    screens_p: 'Five screens. Everything you need. Nothing to distract you.',
+    sc1_label: 'Timer',
+    sc1_proj: '📋 Web Design LLC · €85/h',
+    sc1_pause: '⏸ Pause',
+    sc1_stop: '⏹ Stop',
+    sc1_stat1: 'Total today',
+    sc1_stat2: 'Earned today',
+    sc2_label: 'Entries',
+    sc2_e1_proj: 'Web Design LLC',
+    sc2_e1_date: 'Today · 09:15–11:38',
+    sc2_e2_proj: 'App Development',
+    sc2_e2_date: 'Yesterday · 14:00–17:15',
+    sc2_e3_proj: 'Client Meeting',
+    sc2_e3_date: 'Mon · 10:00–11:00',
+    sc2_e4_proj: 'Web Design LLC',
+    sc2_e4_date: 'Mon · 08:30–12:00',
+    sc3_label: 'Export',
+    sc3_period: 'June 2025 · 42:30h · €3,612',
+    sc3_pdf_title: 'PDF Timesheet',
+    sc3_pdf_sub: 'Professional · Email-ready',
+    sc3_csv_title: 'CSV Export',
+    sc3_csv_sub: 'Excel-compatible · All data',
+    sc3_note: 'Send directly via email',
+    // Download
+    dl_h2: 'Free for Android.',
+    dl_p: 'No sign-up. No subscription. Just your time tracker.',
+    dl_title: 'Clocky for Android',
+    dl_subtitle: 'Requires Android 8.0 (API 26) or higher · Open Source · GDPR-compliant',
+    dl_btn: 'Download APK',
+    dl_github: 'GitHub — View Source Code',
+    dl_meta1: 'Alternative: Build APK directly from source code',
+    dl_meta2: 'Requires Android Studio · Instructions on GitHub',
+    dl_info1_title: 'Android 8.0+',
+    dl_info1_text: 'Clocky runs on all Android devices from API 26. Tested on Android 12, 13 and 14.',
+    dl_info2_title: 'Open Source',
+    dl_info2_text: 'The full source code is available on GitHub. See for yourself what the app does — and what it doesn\'t.',
+    dl_info3_title: 'Offline-First',
+    dl_info3_text: 'Clocky requires no internet connection after installation. All data stays on your device.',
+    // Comparison
+    cmp_eyebrow: 'Why Clocky?',
+    cmp_h2: 'The difference is in the details.',
+    cmp_p: 'Most time tracking apps want your money or your data. Clocky wants neither.',
+    cmp_other_title: 'Other Apps',
+    cmp_other_sub: 'Typical time trackers on the market',
+    cmp_o1_title: 'Subscription Model',
+    cmp_o1_sub: '€5–30/month for full features',
+    cmp_o2_title: 'Cloud Required',
+    cmp_o2_sub: 'Account needed, data on foreign servers',
+    cmp_o3_title: 'Ads',
+    cmp_o3_sub: 'Banners and interstitials in the free version',
+    cmp_o4_title: 'Data Sharing',
+    cmp_o4_sub: 'Usage data sent to third-party analytics',
+    cmp_o5_title: 'Export Lock',
+    cmp_o5_sub: 'PDF/CSV only in the premium version',
+    cmp_clocky_sub: 'Time tracking without bullshit',
+    cmp_c1_title: 'Free',
+    cmp_c1_sub: 'Forever. No hidden subscription.',
+    cmp_c2_title: 'Fully Offline',
+    cmp_c2_sub: 'No account, no server, no cloud',
+    cmp_c3_title: 'Ad-free',
+    cmp_c3_sub: 'No banners, no interruptions',
+    cmp_c4_title: 'All Local',
+    cmp_c4_sub: 'Your data stays on your device',
+    cmp_c5_title: 'Full Export Included',
+    cmp_c5_sub: 'PDF & CSV without paywall — always free',
+    // Footer
+    footer_tag: 'Time tracking without bullshit.',
+    footer_badge: 'Open Source · GDPR · Free',
+    footer_features: 'Features',
+    footer_preview: 'Preview',
+    footer_privacy: 'Privacy',
+    footer_impressum: 'Imprint',
+    footer_contact: 'Contact',
+    footer_carby: 'Carby (Sister App)',
+    footer_bug: 'Report a Bug',
+  }
+};
+
+// ─── Language switcher ────────────────────────────────────────────────────────
+function setLang(lang) {
+  const t = T[lang];
+  if (!t) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang;
+  document.title = lang === 'de'
+    ? 'Clocky — Zeittracking ohne Bullshit.'
+    : 'Clocky — Time tracking without bullshit.';
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  localStorage.setItem('clocky_lang', lang);
+}
+
+// Apply saved language on load
+const savedLang = localStorage.getItem('clocky_lang') || 'de';
+setLang(savedLang);
+
+// ─── Reveal on scroll ─────────────────────────────────────────────────────────
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ─── Nav scroll ───────────────────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('nav-solid', scrollY > 60), { passive: true });
+
+// ─── Hamburger ────────────────────────────────────────────────────────────────
+const hb = document.getElementById('hamburger');
+const nl = document.getElementById('navLinks');
+hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+
+// ─── Animated timer in hero stopwatch ─────────────────────────────────────────
+(function() {
+  let seconds = 5025; // start at 01:23:45
+  const display = document.querySelector('.sw-time');
+  if (!display) return;
+  setInterval(() => {
+    seconds++;
+    const h = Math.floor(seconds / 3600).toString().padStart(2,'0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2,'0');
+    const s = (seconds % 60).toString().padStart(2,'0');
+    display.textContent = `${h}:${m}:${s}`;
+  }, 1000);
+})();
+</script>
+</body>
+</html>

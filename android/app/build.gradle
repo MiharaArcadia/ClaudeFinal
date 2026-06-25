@@ -2,7 +2,6 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()
@@ -30,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "io.arcadiaapps.carby"
+    namespace "io.arcadiaapps.clocky"
     compileSdkVersion 36
     ndkVersion flutter.ndkVersion
 
@@ -48,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "io.arcadiaapps.carby"
+        applicationId "io.arcadiaapps.clocky"
         minSdkVersion 26
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
@@ -83,6 +82,4 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.20"
-    implementation platform("com.google.firebase:firebase-bom:32.7.0")
-    implementation "com.google.firebase:firebase-analytics"
 }

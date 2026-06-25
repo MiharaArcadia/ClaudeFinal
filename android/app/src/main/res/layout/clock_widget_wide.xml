@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root_wide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/widget_bg"
+    android:padding="10dp"
+    android:gravity="center_vertical">
+
+    <!-- Timer section (left) -->
+    <TextView
+        android:id="@+id/widget_timer_wide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="00:00:00"
+        android:textColor="#FF6B35"
+        android:textSize="22sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:includeFontPadding="false" />
+
+    <!-- Info section (center) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <TextView
+            android:id="@+id/widget_today_wide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heute: 0h 0m"
+            android:textColor="#9E9E9E"
+            android:textSize="11sp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/widget_project_wide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#9E9E9E"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- Button section (right) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btn_start_wide"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn_start"
+            android:src="@android:drawable/ic_media_play"
+            android:contentDescription="@string/btn_start"
+            android:scaleType="centerInside"
+            android:padding="6dp" />
+
+        <ImageButton
+            android:id="@+id/btn_pause_wide"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn_outline"
+            android:src="@android:drawable/ic_media_pause"
+            android:contentDescription="@string/btn_pause"
+            android:scaleType="centerInside"
+            android:padding="6dp" />
+
+        <ImageButton
+            android:id="@+id/btn_stop_wide"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/widget_btn_outline"
+            android:src="@android:drawable/ic_delete"
+            android:contentDescription="@string/btn_stop"
+            android:scaleType="centerInside"
+            android:padding="6dp" />
+    </LinearLayout>
+
+</LinearLayout>

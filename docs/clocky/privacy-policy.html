@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clocky – Datenschutzerklärung</title>
+  <meta name="description" content="Datenschutzerklärung für Clocky — die kostenlose Android-Zeittracking-App von ArcadiaApps.">
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --bg2: #0e0e0e;
+      --card: #111111;
+      --border: rgba(255,255,255,.07);
+      --orange: #FF6B35;
+      --green: #4CAF50;
+      --text: #EDEDED;
+      --muted: #888;
+      --font: 'Inter', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 32px 100px;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 14px; font-weight: 500;
+      margin-bottom: 48px;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--text); text-decoration: none; }
+
+    .page-header { margin-bottom: 48px; }
+    .page-icon { font-size: 48px; margin-bottom: 16px; }
+    h1 {
+      font-size: 2.2rem; font-weight: 900; letter-spacing: -.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--orange), #FF4081);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-sub { color: var(--muted); font-size: 14px; }
+    .last-updated { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    .highlight-box {
+      background: rgba(76,175,80,.08);
+      border: 1px solid rgba(76,175,80,.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .highlight-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .highlight-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.6; }
+    .highlight-text span { color: var(--green); }
+
+    h2 {
+      font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em;
+      margin-top: 48px; margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1rem; font-weight: 700;
+      margin-top: 24px; margin-bottom: 10px;
+      color: var(--text);
+    }
+    p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+    ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    ul li {
+      font-size: 15px; color: #b0b0b0;
+      padding: 6px 0 6px 24px;
+      position: relative;
+    }
+    ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--orange); font-weight: 700;
+    }
+    strong { color: var(--text); font-weight: 600; }
+
+    .permission-grid {
+      display: grid; gap: 12px; margin-top: 12px;
+    }
+    .perm-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .perm-icon { font-size: 22px; flex-shrink: 0; }
+    .perm-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .perm-desc { font-size: 13px; color: var(--muted); }
+
+    .contact-box {
+      background: var(--card); border: 1px solid rgba(255,107,53,.2);
+      border-radius: 12px; padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-box p { margin: 0; }
+
+    hr {
+      border: none; border-top: 1px solid var(--border);
+      margin: 48px 0 32px;
+    }
+    .footer-links { font-size: 13px; color: var(--muted); }
+    .footer-links a { margin-right: 16px; }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <a href="index.html" class="back-link">
+    ← Zurück zur Clocky-Startseite
+  </a>
+
+  <div class="page-header">
+    <div class="page-icon">⏱</div>
+    <h1>Datenschutzerklärung</h1>
+    <div class="page-sub">Clocky Android-App · ArcadiaApps</div>
+    <div class="last-updated">Zuletzt aktualisiert: Juni 2025</div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">🔒</div>
+    <div class="highlight-text">
+      <span>Kurzfassung:</span> Clocky speichert alle deine Daten ausschließlich lokal auf deinem Gerät. Es werden keine Daten an Server übertragen. Es gibt keine Analysen, keine Werbung, kein Tracking und keinen Account.
+    </div>
+  </div>
+
+  <h2>1. Überblick</h2>
+  <p>Clocky ist eine kostenlose Android-App zur Zeiterfassung für Freelancer, entwickelt von ArcadiaApps. Der Datenschutz deiner Daten liegt uns am Herzen. Diese Datenschutzerklärung beschreibt vollständig und transparent, welche Daten Clocky erhebt (Spoiler: fast keine), wie sie verwendet werden und welche Rechte du hast.</p>
+  <p>Clocky wurde von Grund auf als <strong>Offline-First-App</strong> entwickelt. Die App benötigt nach der Installation keine Internetverbindung und sendet unter keinen Umständen Zeiterfassungsdaten an externe Server.</p>
+
+  <h2>2. Verantwortlicher</h2>
+  <p>
+    Frederic Schroer<br>
+    ArcadiaApps<br>
+    Deutschland<br>
+    E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+  </p>
+
+  <h2>3. Welche Daten werden gespeichert?</h2>
+
+  <h3>Daten, die lokal auf deinem Gerät gespeichert werden</h3>
+  <p>Clocky speichert ausschließlich folgende Daten <strong>lokal auf deinem Gerät</strong> — niemals auf externen Servern:</p>
+  <ul>
+    <li><strong>Zeiteinträge:</strong> Startzeit, Endzeit, Dauer und Notizen zu deinen Arbeitssessions.</li>
+    <li><strong>Projekte:</strong> Projektname, Kundename und Stundensatz, die du selbst angelegt hast.</li>
+    <li><strong>Einstellungen:</strong> App-Präferenzen wie Sprache und Anzeigeoptionen.</li>
+    <li><strong>Exportierte Dateien:</strong> Generierte PDF- und CSV-Dateien bleiben auf deinem Gerät und werden nur geteilt, wenn du es aktiv veranlasst.</li>
+  </ul>
+
+  <h3>Daten, die NICHT erhoben werden</h3>
+  <ul>
+    <li>Keine Nutzungsstatistiken oder Analysedaten</li>
+    <li>Keine Absturzberichte an externe Dienste</li>
+    <li>Keine Gerätekennungen (IMEI, Advertising ID etc.)</li>
+    <li>Keine Standortdaten</li>
+    <li>Keine Kontaktdaten</li>
+    <li>Keine Kamera- oder Mikrofondaten</li>
+    <li>Kein Profil- oder Accountsystem</li>
+  </ul>
+
+  <h2>4. Externe Dienste</h2>
+  <p>Clocky kontaktiert <strong>keine externen Server</strong> und nutzt <strong>keine Drittanbieter-Dienste</strong> wie Google Analytics, Firebase Analytics, Crashlytics, Facebook SDK, Adjust, AppsFlyer oder ähnliches.</p>
+  <p>Die einzige Netzwerkkommunikation, die Clocky initiieren kann, ist das Teilen von PDF- und CSV-Dateien über Androids nativen Share-Sheet — dabei wird lediglich eine Datei an die von dir gewählte App (z. B. Gmail, WhatsApp) übergeben. Diese Weitergabe liegt ausschließlich in deiner Kontrolle.</p>
+
+  <h2>5. App-Berechtigungen</h2>
+  <div class="permission-grid">
+    <div class="perm-card">
+      <div class="perm-icon">💾</div>
+      <div>
+        <div class="perm-name">Speicher (READ/WRITE_EXTERNAL_STORAGE)</div>
+        <div class="perm-desc">Nur für Android &lt; 10: Zum Speichern exportierter PDF- und CSV-Dateien im Downloads-Ordner. Wird nicht für andere Zwecke verwendet.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">📳</div>
+      <div>
+        <div class="perm-name">Benachrichtigungen (POST_NOTIFICATIONS)</div>
+        <div class="perm-desc">Nur ab Android 13: Für die optionale Benachrichtigung, die den laufenden Timer im Hintergrund anzeigt. Kann jederzeit in den Systemeinstellungen deaktiviert werden.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">🔲</div>
+      <div>
+        <div class="perm-name">Widget (RECEIVE_BOOT_COMPLETED)</div>
+        <div class="perm-desc">Nur wenn das Home-Widget verwendet wird: Stellt sicher, dass das Widget nach einem Geräteneustart wieder korrekt angezeigt wird.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">Clocky fordert <strong>keinerlei Berechtigungen</strong> für Kamera, Mikrofon, Standort, Kontakte, Kalender oder Telefon.</p>
+
+  <h2>6. Datensicherheit</h2>
+  <p>Da alle Daten ausschließlich auf deinem Android-Gerät gespeichert werden, profitierst du vom integrierten Sicherheitssystem von Android:</p>
+  <ul>
+    <li>Clockys Daten sind durch die Android-App-Sandbox geschützt — andere Apps können nicht darauf zugreifen.</li>
+    <li>Bei aktivierter Bildschirmsperre oder Geräteverschlüsselung sind deine Daten entsprechend geschützt.</li>
+    <li>Android-Backups (Google Drive Backup) können Clocky-Daten umfassen, sofern du dieses Feature in den Android-Einstellungen aktiviert hast. Clocky hat darauf keinen Einfluss.</li>
+  </ul>
+
+  <h2>7. Datenlöschung</h2>
+  <p>Du hast jederzeit die volle Kontrolle über deine Daten:</p>
+  <ul>
+    <li><strong>Einzelne Einträge löschen:</strong> Direkt in der App unter "Einträge".</li>
+    <li><strong>Alle Daten löschen:</strong> Über Einstellungen → App-Daten löschen (oder Deinstallation der App). Damit werden alle lokal gespeicherten Daten unwiderruflich gelöscht.</li>
+    <li><strong>Exportierte Dateien:</strong> Gespeicherte PDF- und CSV-Dateien können über deinen Dateimanager gelöscht werden.</li>
+  </ul>
+
+  <h2>8. Deine Rechte (DSGVO)</h2>
+  <p>Als betroffene Person hast du gemäß DSGVO folgende Rechte:</p>
+  <ul>
+    <li><strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Du hast das Recht zu erfahren, welche Daten über dich gespeichert sind. Da alle Daten auf deinem Gerät liegen, kannst du sie jederzeit direkt in der App einsehen.</li>
+    <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Daten können jederzeit in der App bearbeitet werden.</li>
+    <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Daten können jederzeit in der App oder durch Deinstallation gelöscht werden.</li>
+    <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Export deiner Daten als CSV jederzeit möglich.</li>
+    <li><strong>Beschwerderecht:</strong> Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</li>
+  </ul>
+  <p>Da wir keine personenbezogenen Daten auf eigenen Servern speichern, ist die Ausübung dieser Rechte in der Regel direkt in der App möglich.</p>
+
+  <h2>9. Kinder</h2>
+  <p>Clocky richtet sich primär an Freelancer und Selbstständige. Die App erhebt keine personenbezogenen Daten von Personen unter 13 Jahren. Solltest du der Meinung sein, dass eine Person unter 13 Jahren die App nutzt und Daten gespeichert wurden, kontaktiere uns bitte.</p>
+
+  <h2>10. Open Source</h2>
+  <p>Clocky ist Open Source. Der vollständige Quellcode ist auf <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener">GitHub</a> verfügbar. Du kannst jederzeit selbst überprüfen, welche Netzwerkanfragen die App stellt (Spoiler: keine) und wie deine Daten gespeichert werden.</p>
+
+  <h2>11. Änderungen dieser Datenschutzerklärung</h2>
+  <p>Änderungen dieser Datenschutzerklärung werden auf dieser Seite und auf <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener">GitHub</a> veröffentlicht. Das Datum der letzten Änderung wird oben auf dieser Seite angezeigt.</p>
+
+  <h2>12. Kontakt</h2>
+  <p>Bei Fragen zum Datenschutz oder zu Clocky allgemein:</p>
+  <div class="contact-box">
+    <p>
+      <strong>ArcadiaApps</strong><br>
+      E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a><br>
+      GitHub: <a href="https://github.com/MiharaArcadia/ClaudeFinal" target="_blank" rel="noopener">github.com/MiharaArcadia/ClaudeFinal</a>
+    </p>
+  </div>
+
+  <hr>
+  <div class="footer-links">
+    <a href="index.html">⏱ Clocky Startseite</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="../privacy-policy.html">Carby Datenschutz</a>
+    <a href="mailto:ArcadiaApps@proton.me">Kontakt</a>
+  </div>
+
+</div>
+</body>
+</html>

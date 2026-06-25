@@ -1,8 +1,7 @@
-name: carby
-description: A nutrition/calorie tracking app with voice input
+name: clocky
+description: Freelancer time tracking — kostenlos, werbefrei, offline.
 
 publish_to: 'none'
-
 version: 1.0.0+1
 
 environment:
@@ -14,38 +13,36 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # Firebase
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.16.0
-  cloud_firestore: ^4.14.0
-
-  # UI
-  fl_chart: ^0.66.2
-  google_fonts: ^6.1.0
-  cached_network_image: ^3.3.1
-  lottie: ^3.0.0
-
-  # Voice
-  speech_to_text: ^7.0.0
-
   # State
   provider: ^6.1.1
 
-  # Network
-  http: ^1.2.0
+  # Database
+  sqflite: ^2.3.2
+  path: ^1.9.0
 
-  # Storage
-  shared_preferences: ^2.2.2
+  # PDF export
+  pdf: ^3.10.8
+  printing: ^5.12.0
+
+  # CSV
+  csv: ^6.0.0
+
+  # File system
+  path_provider: ^2.1.2
+
+  # Share / email
+  share_plus: ^9.0.0
+
+  # UI
+  google_fonts: ^6.1.0
 
   # Utils
-  intl: ^0.20.2
-  uuid: ^4.2.2
+  intl: ^0.20.0
+  shared_preferences: ^2.2.2
   url_launcher: ^6.2.5
   image_picker: ^1.0.7
   permission_handler: ^12.0.3
-
-  # Desktop (Windows/macOS/Linux)
-  window_manager: ^0.3.8
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:
@@ -55,13 +52,11 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: true
-  ios: true
+  ios: false
   image_path: "assets/images/icon.png"
-  adaptive_icon_background: "#0D0D0D"
+  adaptive_icon_background: "#1A1A1A"
   adaptive_icon_foreground: "assets/images/icon.png"
   min_sdk_android: 26
-  web:
-    generate: false
 
 flutter:
   uses-material-design: true
