@@ -71,9 +71,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget get _currentPage {
     return switch (_navIndex) {
       1 => const FoodLogScreen(),
-      2 => const FavoritesScreen(),
-      3 => const ProfileScreen(),
-      4 => const SupportScreen(),
+      3 => const FavoritesScreen(),
+      4 => const ProfileScreen(),
+      5 => const SupportScreen(),
       _ => _DashboardBody(greeting: _greeting),
     };
   }
@@ -103,6 +103,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 navigatorKey: _logKey,
                 child: const FoodLogScreen(),
               ),
+              // index 2 = Scan (modal, never shown as tab)
+              const SizedBox.shrink(),
               _TabNavigator(
                 navigatorKey: _favKey,
                 child: const FavoritesScreen(),
@@ -121,67 +123,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: Builder(builder: (ctx) {
         final lang = ctx.watch<UserProvider>().profile?.language ?? 'de';
-        return Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topCenter,
-          children: [
-            BottomNavigationBar(
-              currentIndex: _navIndex > 1 ? _navIndex + 1 : _navIndex,
-              onTap: (i) {
-                if (i == 2) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => const BarcodeScannerScreen()));
-                } else {
-                  setState(() => _navIndex = i > 2 ? i - 1 : i);
-                }
-              },
-              items: [
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.donut_large), label: 'Dashboard'),
-                BottomNavigationBarItem(
-                    icon: const Icon(Icons.list_alt),
-                    label: lang == 'de' ? 'Tagebuch' : 'Food Log'),
-                BottomNavigationBarItem(
-                    icon: SizedBox(
-                      height: 28,
-                      child: Icon(Icons.qr_code_scanner,
-                          color: Colors.transparent),
-                    ),
-                    label: lang == 'de' ? 'Scannen' : 'Scan'),
-                BottomNavigationBarItem(
-                    icon: const Icon(Icons.star_outline),
-                    label: lang == 'de' ? 'Favoriten' : 'Favorites'),
-                BottomNavigationBarItem(
-                    icon: const Icon(Icons.person),
-                    label: lang == 'de' ? 'Profil' : 'Profile'),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_border), label: 'Support'),
-              ],
-            ),
-            Positioned(
-              top: -20,
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (_) => const BarcodeScannerScreen())),
-                child: Container(
-                  width: 56,
-                  height: 56,
-                  decoration: const BoxDecoration(
-                    color: AppColors.orange,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColors.orange,
-                          blurRadius: 16,
-                          spreadRadius: -4)
-                    ],
-                  ),
-                  child: const Icon(Icons.qr_code_scanner,
-                      color: Colors.white, size: 26),
-                ),
-              ),
-            ),
+        return BottomNavigationBar(
+          currentIndex: _navIndex,
+          onTap: (i) {
+            if (i == 2) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => const BarcodeScannerScreen()));
+            } else {
+              setState(() => _navIndex = i);
+            }
+          },
+          items: [
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.donut_large), label: 'Dashboard'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.list_alt),
+                label: lang == 'de' ? 'Tagebuch' : 'Food Log'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.qr_code_scanner),
+                label: lang == 'de' ? 'Scannen' : 'Scan'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.star_outline),
+                label: lang == 'de' ? 'Favoriten' : 'Favorites'),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                label: lang == 'de' ? 'Profil' : 'Profile'),
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border), label: 'Support'),
           ],
         );
       }),
