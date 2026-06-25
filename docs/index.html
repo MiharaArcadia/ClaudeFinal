@@ -463,6 +463,16 @@
         <div class="dl-sub">iOS 14+ · Flutter</div>
         <div class="dl-desc" data-i18n="dl_ios_desc">Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.</div>
         <div class="dl-soon" data-i18n="dl_ios_soon">Demnächst im App Store</div>
+        <div class="ios-goal">
+          <div class="ios-goal-labels">
+            <span id="ios-goal-amount">$0</span>
+            <span data-i18n="ios_goal_target">Ziel: $100</span>
+          </div>
+          <div class="ios-goal-bar">
+            <div class="ios-goal-fill" id="ios-goal-fill"></div>
+          </div>
+          <div class="ios-goal-sub" data-i18n="ios_goal_sub">für iOS-Entwicklung</div>
+        </div>
       </div>
     </div>
 
@@ -577,6 +587,16 @@
 </footer>
 
 <script>
+// ─── iOS Donation Goal ───────────────────────────────────────────────────────
+// UPDATE THIS NUMBER when a donation arrives (in USD)
+const IOS_DONATIONS = 0;
+const IOS_GOAL = 100;
+(function() {
+  const pct = Math.min(IOS_DONATIONS / IOS_GOAL * 100, 100).toFixed(1);
+  document.getElementById('ios-goal-fill').style.width = pct + '%';
+  document.getElementById('ios-goal-amount').textContent = '$' + IOS_DONATIONS;
+})();
+
 // ─── Translations ────────────────────────────────────────────────────────────
 const T = {
   de: {
@@ -665,6 +685,8 @@ const T = {
     dl_and_soon: '🧪 Aktuell in der Beta-Testphase im Play Store',
     dl_ios_desc: 'Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.',
     dl_ios_soon: '🎯 iOS-Version startet ab 100 $ Spendeneingang',
+    ios_goal_target: 'Ziel: $100',
+    ios_goal_sub: 'für iOS-Entwicklung',
     ib_label: 'Windows Quick-Install',
     ib_step1: 'Setup.exe<br>herunterladen',
     ib_step2: 'Installer starten<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Trotzdem ausführen&rdquo;</span>',
@@ -771,6 +793,8 @@ const T = {
     dl_and_soon: '🧪 Currently in beta testing on the Play Store',
     dl_ios_desc: 'Native app for iPhone &amp; iPad. Siri integration and iCloud sync planned.',
     dl_ios_soon: '🎯 iOS version launches once $100 in donations is reached',
+    ios_goal_target: 'Goal: $100',
+    ios_goal_sub: 'for iOS development',
     ib_label: 'Windows Quick Install',
     ib_step1: 'Download<br>Setup.exe',
     ib_step2: 'Run the installer<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Run anyway&rdquo;</span>',
