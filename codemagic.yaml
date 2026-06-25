@@ -9,6 +9,10 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
+      - name: Generate Xcode project
+        script: |
+          flutter create --platforms=ios --project-name carby --org io.arcadiaapps .
+          sed -i 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' ios/Runner.xcodeproj/project.pbxproj
       - name: Install pods
         script: cd ios && pod install && cd ..
       - name: Build iOS (no codesign)
