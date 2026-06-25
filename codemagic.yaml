@@ -15,21 +15,7 @@ workflows:
           flutter create --platforms=ios --project-name carby --org io.arcadiaapps .
           sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' \
             ios/Runner.xcodeproj/project.pbxproj
-
-      - name: Fix Podfile for iOS 14.0
-        script: |
-          python3 -c "
-          import re
-          pf = open('ios/Podfile').read()
-          pf = re.sub(r'#?\s*platform :ios,.*', \"platform :ios, '14.0'\", pf, count=1)
-          if 'IPHONEOS_DEPLOYMENT_TARGET' not in pf:
-              pf = pf.replace(
-                  'flutter_additional_ios_build_settings(target)',
-                  'flutter_additional_ios_build_settings(target)\n        target.build_configurations.each do |config|\n          config.build_settings[\"IPHONEOS_DEPLOYMENT_TARGET\"] = \"14.0\"\n        end'
-              )
-          open('ios/Podfile', 'w').write(pf)
-          print('Podfile patched')
-          "
+          cp ios/Podfile.ci ios/Podfile
 
       - name: Restore Info.plist permissions
         script: |
