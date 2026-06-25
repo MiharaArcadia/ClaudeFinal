@@ -58,6 +58,15 @@
   </div>
 </nav>
 
+<!-- ANNOUNCEMENT BANNER -->
+<div class="announce-bar" id="announce-bar">
+  <div class="announce-inner">
+    <span class="announce-badge" data-i18n="ann_badge">In Entwicklung</span>
+    <span data-i18n="ann_text">🔍 Barcode-Scanner kommt in v2.0 — Lebensmittel einfach abscannen statt tippen.</span>
+    <button class="announce-close" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Schließen">✕</button>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-orb hero-orb-1"></div>
@@ -601,6 +610,8 @@ const IOS_GOAL = 100;
 const T = {
   de: {
     // Nav
+    ann_badge: 'In Entwicklung',
+    ann_text: '🔍 Barcode-Scanner kommt in v2.0 — Lebensmittel einfach abscannen statt tippen.',
     nav_features: 'Features',
     nav_preview: 'Preview',
     nav_privacy: 'Datenschutz',
@@ -709,6 +720,8 @@ const T = {
   },
   en: {
     // Nav
+    ann_badge: 'In Development',
+    ann_text: '🔍 Barcode Scanner coming in v2.0 — scan food instead of typing.',
     nav_features: 'Features',
     nav_preview: 'Preview',
     nav_privacy: 'Privacy',
