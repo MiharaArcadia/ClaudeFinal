@@ -16,11 +16,8 @@ workflows:
           # Fix bundle ID (flutter create sets it to plain 'carby')
           sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' \
             ios/Runner.xcodeproj/project.pbxproj
-
-      - name: Write Podfile with iOS 14.0 minimum
-        # flutter create generates a Podfile with the platform line commented out.
-        # We overwrite it entirely so mobile_scanner 6.x pod resolves correctly.
-        script: |
+          # Overwrite Podfile — flutter create generates a commented-out platform line
+          # mobile_scanner 6.x requires iOS 14.0+
           cat > ios/Podfile << 'PODFILE'
           platform :ios, '14.0'
 
@@ -37,6 +34,7 @@ workflows:
             unless File.exist?(generated_xcode_build_settings_path)
               raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
             end
+
             File.foreach(generated_xcode_build_settings_path) do |line|
               matches = line.match(/FLUTTER_ROOT\=(.*)/)
               return matches[1].strip if matches
