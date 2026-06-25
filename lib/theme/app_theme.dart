@@ -34,7 +34,6 @@ class AppTheme {
         primary: AppColors.orange,
         secondary: AppColors.teal,
         surface: AppColors.surface,
-        background: AppColors.background,
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       appBarTheme: const AppBarTheme(
@@ -42,7 +41,7 @@ class AppTheme {
         elevation: 0,
         iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),
-      cardTheme: const CardTheme(
+      cardTheme: CardTheme(
         color: AppColors.card,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

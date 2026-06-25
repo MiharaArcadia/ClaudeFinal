@@ -413,7 +413,7 @@ class _BetaBannerState extends State<_BetaBanner> {
         decoration: BoxDecoration(
           color: const Color(0xFF2A2000),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFFFC107).withOpacity(0.4)),
+          border: Border.all(color: Color(0xFFFFC107).withOpacity(0.4)),
         ),
         child: Row(
           children: [
