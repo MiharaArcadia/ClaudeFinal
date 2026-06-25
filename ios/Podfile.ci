@@ -40,5 +40,15 @@ post_install do |installer|
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
     end
+    # Fix: BoringSSL-GRPC (Firebase) passes -G to Clang which Xcode 16 rejects
+    if target.name == 'BoringSSL-GRPC'
+      target.source_build_phase.files.each do |file|
+        if file.settings && file.settings['COMPILER_FLAGS']
+          flags = file.settings['COMPILER_FLAGS'].split
+          flags.reject! { |f| f == '-G' || (f.start_with?('-G') && f.length > 2) }
+          file.settings['COMPILER_FLAGS'] = flags.join(' ')
+        end
+      end
+    end
   end
 end
