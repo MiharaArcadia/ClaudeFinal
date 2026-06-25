@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:carby/models/food_model.dart';
 import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/barcode_scanner_screen.dart';
 import 'package:carby/screens/food_detail_screen.dart';
 import 'package:carby/services/open_food_facts_service.dart';
 import 'package:carby/services/speech_service.dart';
@@ -166,7 +167,24 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
                     onSubmitted: _search,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 8),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) => const BarcodeScannerScreen()),
+                  ),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: AppColors.card,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(Icons.qr_code_scanner,
+                        color: AppColors.orange, size: 24),
+                  ),
+                ),
+                const SizedBox(width: 8),
                 PulsingMicButton(
                   listening: _listening,
                   onPressed: _toggleListening,
