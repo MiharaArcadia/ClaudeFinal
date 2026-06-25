@@ -16,9 +16,8 @@ workflows:
           # Fix bundle ID (flutter create sets it to plain 'carby')
           sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' \
             ios/Runner.xcodeproj/project.pbxproj
-          # Raise minimum iOS to 13.0 (required by mobile_scanner 7.x)
-          sed -i '' "s/platform :ios, '12.0'/platform :ios, '13.0'/" ios/Podfile
-          sed -i '' "s/platform :ios, '11.0'/platform :ios, '13.0'/" ios/Podfile
+          # Raise minimum iOS to 14.0 (required by mobile_scanner 6.x)
+          sed -i '' "s/platform :ios, '[0-9.]*'/platform :ios, '14.0'/" ios/Podfile
 
       - name: Restore Info.plist permissions
         # flutter create regenerates Info.plist — put back all required usage keys
