@@ -26,6 +26,8 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Carby benötigt Zugriff auf das Mikrofon, um Lebensmittel per Sprache zu erkennen.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Carby uses the camera to scan food barcodes.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Carby verwendet Spracherkennung, um Lebensmittel schnell zu suchen.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
