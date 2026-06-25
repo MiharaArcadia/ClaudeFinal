@@ -3,7 +3,7 @@ workflows:
     name: iOS Build
     max_build_duration: 60
     environment:
-      flutter: stable
+      flutter: 3.24.5
       xcode: latest
       cocoapods: default
     scripts:
@@ -16,7 +16,7 @@ workflows:
       - name: Install pods
         script: cd ios && pod install && cd ..
       - name: Build iOS (no codesign)
-        script: flutter build ios --release --no-codesign
+        script: flutter build ios --release --no-codesign --no-tree-shake-icons
     artifacts:
       - build/ios/iphoneos/Runner.app
     triggering:
