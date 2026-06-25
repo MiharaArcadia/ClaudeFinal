@@ -13,71 +13,35 @@ workflows:
       - name: Generate Xcode project
         script: |
           flutter create --platforms=ios --project-name carby --org io.arcadiaapps .
-          # Fix bundle ID (flutter create sets it to plain 'carby')
           sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = carby;/PRODUCT_BUNDLE_IDENTIFIER = io.arcadiaapps.carby;/g' \
             ios/Runner.xcodeproj/project.pbxproj
-          # Overwrite Podfile — flutter create generates a commented-out platform line
-          # mobile_scanner 6.x requires iOS 14.0+
-          cat > ios/Podfile << 'PODFILE'
-          platform :ios, '14.0'
 
-          ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-
-          project 'Runner', {
-            'Debug' => :debug,
-            'Profile' => :release,
-            'Release' => :release,
-          }
-
-          def flutter_root
-            generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-            unless File.exist?(generated_xcode_build_settings_path)
-              raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
-            end
-
-            File.foreach(generated_xcode_build_settings_path) do |line|
-              matches = line.match(/FLUTTER_ROOT\=(.*)/)
-              return matches[1].strip if matches
-            end
-            raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig and running flutter pub get"
-          end
-
-          require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
-
-          flutter_ios_podfile_setup
-
-          target 'Runner' do
-            use_frameworks!
-            use_modular_headers!
-
-            flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-            target 'RunnerTests' do
-              inherit! :search_paths
-            end
-          end
-
-          post_install do |installer|
-            installer.pods_project.targets.each do |target|
-              flutter_additional_ios_build_settings(target)
-              target.build_configurations.each do |config|
-                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-              end
-            end
-          end
-          PODFILE
+      - name: Fix Podfile for iOS 14.0
+        script: |
+          python3 -c "
+          import re
+          pf = open('ios/Podfile').read()
+          pf = re.sub(r'#?\s*platform :ios,.*', \"platform :ios, '14.0'\", pf, count=1)
+          if 'IPHONEOS_DEPLOYMENT_TARGET' not in pf:
+              pf = pf.replace(
+                  'flutter_additional_ios_build_settings(target)',
+                  'flutter_additional_ios_build_settings(target)\n        target.build_configurations.each do |config|\n          config.build_settings[\"IPHONEOS_DEPLOYMENT_TARGET\"] = \"14.0\"\n        end'
+              )
+          open('ios/Podfile', 'w').write(pf)
+          print('Podfile patched')
+          "
 
       - name: Restore Info.plist permissions
-        # flutter create regenerates Info.plist — put back all required usage keys
         script: |
           PLIST=ios/Runner/Info.plist
           add_or_set() {
             /usr/libexec/PlistBuddy -c "Add :$1 string '$2'" "$PLIST" 2>/dev/null || \
             /usr/libexec/PlistBuddy -c "Set :$1 '$2'" "$PLIST"
           }
-          add_or_set NSCameraUsageDescription        "Carby uses the camera to scan food barcodes."
-          add_or_set NSMicrophoneUsageDescription    "Carby benötigt Zugriff auf das Mikrofon, um Lebensmittel per Sprache zu erkennen."
-          add_or_set NSSpeechRecognitionUsageDescription "Carby verwendet Spracherkennung, um Lebensmittel schnell zu suchen."
-          add_or_set NSPhotoLibraryUsageDescription  "Carby benötigt Zugriff auf die Fotos, um einen Screenshot anzuhängen."
+          add_or_set NSCameraUsageDescription "Carby uses the camera to scan food barcodes."
+          add_or_set NSMicrophoneUsageDescription "Carby benoetigt Zugriff auf das Mikrofon."
+          add_or_set NSSpeechRecognitionUsageDescription "Carby verwendet Spracherkennung."
+          add_or_set NSPhotoLibraryUsageDescription "Carby benoetigt Zugriff auf die Fotos."
 
       - name: Install pods
         script: cd ios && pod install && cd ..
