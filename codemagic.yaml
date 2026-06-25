@@ -17,6 +17,9 @@ workflows:
             ios/Runner.xcodeproj/project.pbxproj
           cp ios/Podfile.ci ios/Podfile
 
+      - name: Generate app icons
+        script: dart run flutter_launcher_icons
+
       - name: Restore Info.plist permissions
         script: |
           PLIST=ios/Runner/Info.plist
