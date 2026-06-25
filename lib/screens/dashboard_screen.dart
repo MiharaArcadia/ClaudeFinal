@@ -8,6 +8,7 @@ import 'package:carby/layouts/desktop_layout.dart';
 import 'package:carby/providers/nutrition_provider.dart';
 import 'package:carby/widgets/donation_sheet.dart';
 import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/barcode_scanner_screen.dart';
 import 'package:carby/screens/favorites_screen.dart';
 import 'package:carby/screens/food_log_screen.dart';
 import 'package:carby/screens/profile_screen.dart';
@@ -120,23 +121,67 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: Builder(builder: (ctx) {
         final lang = ctx.watch<UserProvider>().profile?.language ?? 'de';
-        return BottomNavigationBar(
-          currentIndex: _navIndex,
-          onTap: (i) => setState(() => _navIndex = i),
-          items: [
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.donut_large), label: 'Dashboard'),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.list_alt),
-                label: lang == 'de' ? 'Tagebuch' : 'Food Log'),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.star_outline),
-                label: lang == 'de' ? 'Favoriten' : 'Favorites'),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.person),
-                label: lang == 'de' ? 'Profil' : 'Profile'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border), label: 'Support'),
+        return Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.topCenter,
+          children: [
+            BottomNavigationBar(
+              currentIndex: _navIndex > 1 ? _navIndex + 1 : _navIndex,
+              onTap: (i) {
+                if (i == 2) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const BarcodeScannerScreen()));
+                } else {
+                  setState(() => _navIndex = i > 2 ? i - 1 : i);
+                }
+              },
+              items: [
+                const BottomNavigationBarItem(
+                    icon: Icon(Icons.donut_large), label: 'Dashboard'),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.list_alt),
+                    label: lang == 'de' ? 'Tagebuch' : 'Food Log'),
+                BottomNavigationBarItem(
+                    icon: SizedBox(
+                      height: 28,
+                      child: Icon(Icons.qr_code_scanner,
+                          color: Colors.transparent),
+                    ),
+                    label: lang == 'de' ? 'Scannen' : 'Scan'),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.star_outline),
+                    label: lang == 'de' ? 'Favoriten' : 'Favorites'),
+                BottomNavigationBarItem(
+                    icon: const Icon(Icons.person),
+                    label: lang == 'de' ? 'Profil' : 'Profile'),
+                const BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border), label: 'Support'),
+              ],
+            ),
+            Positioned(
+              top: -20,
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) => const BarcodeScannerScreen())),
+                child: Container(
+                  width: 56,
+                  height: 56,
+                  decoration: const BoxDecoration(
+                    color: AppColors.orange,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColors.orange,
+                          blurRadius: 16,
+                          spreadRadius: -4)
+                    ],
+                  ),
+                  child: const Icon(Icons.qr_code_scanner,
+                      color: Colors.white, size: 26),
+                ),
+              ),
+            ),
           ],
         );
       }),
