@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carby — Tracke smarter, nicht mehr.</title>
-  <meta name="description" content="Carby ist dein kostenloser Ernährungs-Tracker mit KI-Spracheingabe. Sag einfach was du gegessen hast — Carby erledigt den Rest.">
-  <meta property="og:title" content="Carby — Tracke smarter, nicht mehr.">
-  <meta property="og:description" content="Kostenloser Ernährungs-Tracker mit KI-Spracheingabe für Windows, Android & iOS.">
+  <title>ArcadiaApps — Einfache Apps. Echter Mehrwert.</title>
+  <meta name="description" content="ArcadiaApps baut einfache, werbfreie Apps für den Alltag. Carby, Clocky und ClockIN — kostenlos, datenschutzfreundlich, immer.">
+  <meta property="og:title" content="ArcadiaApps — Einfache Apps. Echter Mehrwert.">
+  <meta property="og:description" content="Carby (Ernährungs-Tracker), Clocky (Zeiterfassung für Freelancer), ClockIN (Praxisverwaltung) — alle kostenlos.">
   <meta property="og:image" content="assets/logo.png">
   <meta name="theme-color" content="#FF6B35">
   <link rel="icon" type="image/png" href="assets/logo.png">
@@ -18,6 +18,103 @@
     .lang-toggle button{background:none;border:none;color:#888;font-size:12px;font-weight:700;font-family:inherit;padding:4px 9px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.04em}
     .lang-toggle button.active{background:#FF6B35;color:#fff}
     .lang-toggle button:hover:not(.active){color:#fff}
+
+    /* ── App Cards ─────────────────────────────────────── */
+    .apps-section{padding:80px 0 60px}
+    .app-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    @media(max-width:860px){.app-cards{grid-template-columns:1fr}}
+    .app-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:16px;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .app-card::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s}
+    .app-card:hover{transform:translateY(-4px)}
+    .app-card.ac-carby{border-color:rgba(255,107,53,.2)}
+    .app-card.ac-carby::before{background:radial-gradient(ellipse at top,rgba(255,107,53,.06),transparent 70%);opacity:1}
+    .app-card.ac-carby:hover{border-color:rgba(255,107,53,.5);box-shadow:0 0 40px rgba(255,107,53,.12)}
+    .app-card.ac-clocky{border-color:rgba(255,184,0,.2)}
+    .app-card.ac-clocky::before{background:radial-gradient(ellipse at top,rgba(255,184,0,.06),transparent 70%);opacity:1}
+    .app-card.ac-clocky:hover{border-color:rgba(255,184,0,.5);box-shadow:0 0 40px rgba(255,184,0,.12)}
+    .app-card.ac-clockin{border-color:rgba(0,188,212,.2)}
+    .app-card.ac-clockin::before{background:radial-gradient(ellipse at top,rgba(0,188,212,.06),transparent 70%);opacity:1}
+    .app-card.ac-clockin:hover{border-color:rgba(0,188,212,.5);box-shadow:0 0 40px rgba(0,188,212,.12)}
+    .ac-icon{font-size:42px;line-height:1}
+    .ac-name{font-size:22px;font-weight:800;color:#fff}
+    .ac-tag{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;display:inline-block;margin-top:-4px}
+    .ac-carby .ac-tag{background:rgba(255,107,53,.15);color:#FF6B35}
+    .ac-clocky .ac-tag{background:rgba(255,184,0,.15);color:#FFB800}
+    .ac-clockin .ac-tag{background:rgba(0,188,212,.15);color:#00BCD4}
+    .ac-tagline{font-size:15px;color:#aaa;line-height:1.5}
+    .ac-features{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:8px}
+    .ac-features li{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+    .ac-features li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+    .ac-carby .ac-features li::before{background:#FF6B35}
+    .ac-clocky .ac-features li::before{background:#FFB800}
+    .ac-clockin .ac-features li::before{background:#00BCD4}
+    .ac-cta{margin-top:auto;padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .ac-cta a{font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:5px;text-decoration:none;transition:opacity .2s}
+    .ac-cta a:hover{opacity:.75}
+    .ac-carby .ac-cta a{color:#FF6B35}
+    .ac-clocky .ac-cta a{color:#FFB800}
+    .ac-clockin .ac-cta a{color:#00BCD4}
+    .ac-status{font-size:11px;font-weight:600;letter-spacing:.04em;padding:3px 8px;border-radius:6px}
+    .status-live{background:rgba(76,175,80,.15);color:#4CAF50}
+    .status-beta{background:rgba(255,184,0,.12);color:#FFB800}
+    .status-dev{background:rgba(0,188,212,.12);color:#00BCD4}
+
+    /* ── Clocky teaser ─────────────────────────────────── */
+    .teaser-section{padding:80px 0;border-top:1px solid rgba(255,255,255,.05)}
+    .teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    @media(max-width:860px){.teaser-grid{grid-template-columns:1fr}}
+    .teaser-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:99px;margin-bottom:16px}
+    .tb-orange{background:rgba(255,184,0,.12);color:#FFB800;border:1px solid rgba(255,184,0,.25)}
+    .tb-teal{background:rgba(0,188,212,.12);color:#00BCD4;border:1px solid rgba(0,188,212,.25)}
+    .teaser-h2{font-size:36px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
+    .teaser-p{font-size:16px;color:#888;line-height:1.7;margin-bottom:24px}
+    .teaser-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+    .teaser-pill{font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);color:#aaa}
+    .teaser-mockup{position:relative}
+    .tm-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:14px}
+    .tm-card.tm-clocky{border-color:rgba(255,184,0,.2)}
+    .tm-card.tm-clockin{border-color:rgba(0,188,212,.2)}
+    .tm-header{display:flex;align-items:center;gap:10px}
+    .tm-icon{font-size:24px}
+    .tm-name{font-size:15px;font-weight:700;color:#fff}
+    .tm-ring-wrap{display:flex;justify-content:center;padding:8px 0;position:relative}
+    .tm-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .tm-stat{background:rgba(255,255,255,.04);border-radius:10px;padding:12px;text-align:center}
+    .tm-stat-val{font-size:18px;font-weight:800}
+    .tm-stat-lbl{font-size:11px;color:#666;margin-top:2px}
+    .tm-clocky .tm-stat-val{color:#FFB800}
+    .tm-clockin .tm-stat-val{color:#00BCD4}
+    .tm-entries{display:flex;flex-direction:column;gap:6px}
+    .tm-entry{display:flex;align-items:center;justify-content:space-between;font-size:12px;padding:8px 10px;background:rgba(255,255,255,.03);border-radius:8px}
+    .tm-entry-label{color:#aaa}
+    .tm-entry-val{font-weight:700}
+    .tm-clocky .tm-entry-val{color:#FFB800}
+    .tm-clockin .tm-entry-val{color:#00BCD4}
+    .tm-pillars{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .tm-pillar{background:rgba(0,188,212,.05);border:1px solid rgba(0,188,212,.12);border-radius:12px;padding:16px 12px;text-align:center}
+    .tm-pillar-icon{font-size:22px;margin-bottom:6px}
+    .tm-pillar-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
+    .tm-pillar-sub{font-size:11px;color:#555}
+    .teaser-cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .teaser-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;text-decoration:none;transition:opacity .2s}
+    .teaser-cta:hover{opacity:.8}
+    .tc-orange{background:rgba(255,184,0,.15);color:#FFB800;border:1px solid rgba(255,184,0,.3)}
+    .tc-teal{background:rgba(0,188,212,.15);color:#00BCD4;border:1px solid rgba(0,188,212,.3)}
+    .teaser-note{font-size:12px;color:#555}
+
+    /* ── Section divider ────────────────────────────────── */
+    .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:0 auto;max-width:800px}
+
+    /* ── Hero ArcadiaApps ────────────────────────────────── */
+    .hero-brand-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#888;margin-bottom:16px}
+    .hero-app-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .hero-app-chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:7px 14px;border-radius:99px;text-decoration:none;transition:all .2s;cursor:pointer}
+    .hac-carby{background:rgba(255,107,53,.1);color:#FF6B35;border:1px solid rgba(255,107,53,.25)}
+    .hac-carby:hover{background:rgba(255,107,53,.2)}
+    .hac-clocky{background:rgba(255,184,0,.1);color:#FFB800;border:1px solid rgba(255,184,0,.25)}
+    .hac-clocky:hover{background:rgba(255,184,0,.2)}
+    .hac-clockin{background:rgba(0,188,212,.1);color:#00BCD4;border:1px solid rgba(0,188,212,.25)}
+    .hac-clockin:hover{background:rgba(0,188,212,.2)}
   </style>
 </head>
 <body>
@@ -30,14 +127,15 @@
   <div class="nav-wrap">
     <a href="#" class="nav-logo">
       <img src="assets/logo.png" alt="🦀" onerror="this.style.display='none'">
-      <span>Carby</span>
+      <span>ArcadiaApps</span>
     </a>
     <div class="nav-center" id="navLinks">
-      <a href="#features" data-i18n="nav_features">Features</a>
-      <a href="#mockup" data-i18n="nav_preview">Preview</a>
-      <a href="#download">Download</a>
+      <a href="#apps" data-i18n="nav_apps">Apps</a>
+      <a href="#carby">Carby</a>
+      <a href="#clocky">Clocky</a>
+      <a href="#clockin">ClockIN</a>
       <a href="#support">Support</a>
-      <a href="privacy-policy.html" data-i18n="nav_privacy">Privacy</a>
+      <a href="privacy-policy.html" data-i18n="nav_privacy">Datenschutz</a>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
       <a href="https://instagram.com/getcarby" target="_blank" class="nav-ig" aria-label="Instagram">
@@ -61,8 +159,8 @@
 <!-- ANNOUNCEMENT BANNER -->
 <div class="announce-bar" id="announce-bar">
   <div class="announce-inner">
-    <span class="announce-badge" data-i18n="ann_badge">In Entwicklung</span>
-    <span data-i18n="ann_text">🔍 Barcode-Scanner kommt in v2.0 — Lebensmittel einfach abscannen statt tippen.</span>
+    <span class="announce-badge" data-i18n="ann_badge">Neu</span>
+    <span data-i18n="ann_text">⏱️ Clocky ist live — Zeiterfassung für Freelancer. Kostenlos & offline-first.</span>
     <button class="announce-close" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Schließen">✕</button>
   </div>
 </div>
@@ -73,30 +171,27 @@
   <div class="hero-orb hero-orb-2"></div>
 
   <div class="hero-inner">
-    <a href="https://github.com/miharaarcadia/claudefinal" target="_blank" class="hero-chip">
-      <span class="chip-dot"></span>
-      <span data-i18n="hero_chip">Open Source auf GitHub</span>
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <div class="hero-brand-chip">
+      <span>⬡</span>
+      <span data-i18n="hero_brand">ArcadiaApps</span>
+    </div>
 
     <h1 class="hero-h1">
-      <span data-i18n="hero_h1_line1">Tracke smarter,</span><br>
-      <span class="hero-gradient" data-i18n="hero_h1_line2">nicht mehr.</span>
+      <span data-i18n="hero_h1_line1">Einfache Apps.</span><br>
+      <span class="hero-gradient" data-i18n="hero_h1_line2">Echter Mehrwert.</span>
     </h1>
 
     <p class="hero-p">
-      <span data-i18n-html="hero_p">Sag einfach <em>&ldquo;Hähnchenbrust 150g&rdquo;</em> — Carby erkennt es per KI,<br class="br-lg"> trackt Kalorien, Makros &amp; Wasser und berechnet deinen Bedarf<br class="br-lg"> automatisch. Kostenlos. Werbefrei. Immer.</span>
+      <span data-i18n-html="hero_p">Wir bauen Apps die deinen Alltag einfacher machen — <strong>kostenlos</strong>, ohne Werbung, ohne Abo. Ernährungs-Tracker, Zeiterfassung, Praxisverwaltung — alles unter einem Dach.</span>
     </p>
 
-    <div class="hero-actions">
-      <a href="https://github.com/MiharaArcadia/ClaudeFinal/releases/download/Health/Carby.Setup.1.0.0.exe" class="btn-hero" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>
-        <span data-i18n="hero_cta_win">Für Windows herunterladen</span>
-      </a>
-      <a href="#mockup" class="btn-ghost-hero" data-i18n="hero_cta_preview">App Preview ansehen</a>
+    <div class="hero-app-chips">
+      <a href="#carby" class="hero-app-chip hac-carby">🦀 Carby</a>
+      <a href="#clocky" class="hero-app-chip hac-clocky">⏱️ Clocky</a>
+      <a href="#clockin" class="hero-app-chip hac-clockin">🏥 ClockIN</a>
     </div>
 
-    <div class="hero-proof">
+    <div class="hero-proof" style="margin-top:32px">
       <div class="proof-item">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span data-i18n="proof_1">Keine Werbung</span>
@@ -114,7 +209,7 @@
     </div>
   </div>
 
-  <!-- Hero Dashboard Preview -->
+  <!-- Hero Dashboard Preview (Carby) -->
   <div class="hero-preview">
     <div class="preview-chrome">
       <div class="chrome-dots"><span></span><span></span><span></span></div>
@@ -217,41 +312,128 @@
 <!-- STATS TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span data-i18n="tick_foods">3M+ Lebensmittel</span>
+    <span>🦀 Carby</span>
+    <span class="tick-sep">✦</span>
+    <span>⏱️ Clocky</span>
+    <span class="tick-sep">✦</span>
+    <span>🏥 ClockIN</span>
     <span class="tick-sep">✦</span>
     <span data-i18n="tick_free">100% Kostenlos</span>
     <span class="tick-sep">✦</span>
-    <span data-i18n="tick_voice">KI-Spracheingabe</span>
-    <span class="tick-sep">✦</span>
     <span data-i18n="tick_gdpr">DSGVO-konform</span>
-    <span class="tick-sep">✦</span>
-    <span>Windows, Android, iOS</span>
-    <span class="tick-sep">✦</span>
-    <span>Open Source</span>
     <span class="tick-sep">✦</span>
     <span data-i18n="tick_nosub">Kein Abo</span>
     <span class="tick-sep">✦</span>
-    <span data-i18n="tick_foods">3M+ Lebensmittel</span>
+    <span data-i18n="tick_noad">Keine Werbung</span>
+    <span class="tick-sep">✦</span>
+    <span>Open Source</span>
+    <span class="tick-sep">✦</span>
+    <span>🦀 Carby</span>
+    <span class="tick-sep">✦</span>
+    <span>⏱️ Clocky</span>
+    <span class="tick-sep">✦</span>
+    <span>🏥 ClockIN</span>
     <span class="tick-sep">✦</span>
     <span data-i18n="tick_free">100% Kostenlos</span>
     <span class="tick-sep">✦</span>
-    <span data-i18n="tick_voice">KI-Spracheingabe</span>
-    <span class="tick-sep">✦</span>
     <span data-i18n="tick_gdpr">DSGVO-konform</span>
     <span class="tick-sep">✦</span>
-    <span>Windows, Android, iOS</span>
+    <span data-i18n="tick_nosub">Kein Abo</span>
+    <span class="tick-sep">✦</span>
+    <span data-i18n="tick_noad">Keine Werbung</span>
     <span class="tick-sep">✦</span>
     <span>Open Source</span>
-    <span class="tick-sep">✦</span>
-    <span data-i18n="tick_nosub">Kein Abo</span>
     <span class="tick-sep">✦</span>
   </div>
 </div>
 
-<!-- BENTO FEATURES -->
-<section id="features" class="features-section">
+<!-- OUR APPS -->
+<section id="apps" class="apps-section">
   <div class="section-wrap">
-    <div class="section-eyebrow reveal">Features</div>
+    <div class="section-eyebrow reveal" data-i18n="apps_eyebrow">Unsere Apps</div>
+    <h2 class="section-h2 reveal" data-i18n="apps_h2">Drei Apps. Ein Anspruch.</h2>
+    <p class="section-p reveal" data-i18n="apps_p">Jede App löst ein echtes Problem — einfach, werbefrei, kostenlos.</p>
+
+    <div class="app-cards">
+      <!-- Carby -->
+      <div class="app-card ac-carby reveal">
+        <div class="ac-icon">🦀</div>
+        <div>
+          <div class="ac-name">Carby</div>
+          <div class="ac-tag" data-i18n="carby_tag">Ernährungs-Tracker</div>
+        </div>
+        <div class="ac-tagline" data-i18n="carby_tagline">Tracke Kalorien und Makros per KI-Spracheingabe — sag einfach was du gegessen hast.</div>
+        <ul class="ac-features">
+          <li data-i18n="carby_f1">KI-Spracheingabe (Whisper)</li>
+          <li data-i18n="carby_f2">3M+ Lebensmittel (OpenFoodFacts)</li>
+          <li data-i18n="carby_f3">BMI & TDEE Rechner</li>
+          <li data-i18n="carby_f4">Windows, Android, iOS</li>
+        </ul>
+        <div class="ac-cta">
+          <a href="#carby">
+            <span data-i18n="app_more">Mehr erfahren</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="ac-status status-live" data-i18n="status_live">Live</span>
+        </div>
+      </div>
+
+      <!-- Clocky -->
+      <div class="app-card ac-clocky reveal">
+        <div class="ac-icon">⏱️</div>
+        <div>
+          <div class="ac-name">Clocky</div>
+          <div class="ac-tag" data-i18n="clocky_tag">Zeiterfassung</div>
+        </div>
+        <div class="ac-tagline" data-i18n="clocky_tagline">Zeiterfassung für Freelancer — Projekte anlegen, Zeiten tracken, PDF/CSV exportieren.</div>
+        <ul class="ac-features">
+          <li data-i18n="clocky_f1">Timer-Ring UI, Pause & Stop</li>
+          <li data-i18n="clocky_f2">Projekt-Verwaltung mit Stundensatz</li>
+          <li data-i18n="clocky_f3">PDF & CSV Export</li>
+          <li data-i18n="clocky_f4">Offline-First, kein Server</li>
+        </ul>
+        <div class="ac-cta">
+          <a href="#clocky">
+            <span data-i18n="app_more">Mehr erfahren</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="ac-status status-beta" data-i18n="status_beta">Beta</span>
+        </div>
+      </div>
+
+      <!-- ClockIN -->
+      <div class="app-card ac-clockin reveal">
+        <div class="ac-icon">🏥</div>
+        <div>
+          <div class="ac-name">ClockIN</div>
+          <div class="ac-tag" data-i18n="clockin_tag">Praxisverwaltung</div>
+        </div>
+        <div class="ac-tagline" data-i18n="clockin_tagline">Alles in einem für Praxen — Zeiterfassung, Dienstplan, Patienten und Abrechnung.</div>
+        <ul class="ac-features">
+          <li data-i18n="clockin_f1">Digitale Zeiterfassung & Dienstplan</li>
+          <li data-i18n="clockin_f2">Kunden- & Patientenverwaltung</li>
+          <li data-i18n="clockin_f3">Integrierte Abrechnung</li>
+          <li data-i18n="clockin_f4">Alles offline, kein Cloud-Zwang</li>
+        </ul>
+        <div class="ac-cta">
+          <a href="#clockin">
+            <span data-i18n="app_more">Mehr erfahren</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="ac-status status-dev" data-i18n="status_dev">In Entwicklung</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider"></div>
+
+<!-- ══════════════════════ CARBY ══════════════════════ -->
+<section id="carby" class="features-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow reveal">🦀 Carby</div>
     <h2 class="section-h2 reveal" data-i18n="feat_h2">Alles. Eingebaut.</h2>
     <p class="section-p reveal" data-i18n="feat_p">Carby bringt alles mit was du brauchst — ohne Bloat, ohne Paywall.</p>
 
@@ -359,7 +541,7 @@
   </div>
 </section>
 
-<!-- APP MOCKUP SECTION -->
+<!-- CARBY PHONE MOCKUP -->
 <section id="mockup" class="mockup-section">
   <div class="section-wrap">
     <div class="mockup-grid">
@@ -437,7 +619,7 @@
   </div>
 </section>
 
-<!-- DOWNLOAD -->
+<!-- CARBY DOWNLOAD -->
 <section id="download" class="download-section">
   <div class="section-wrap">
     <div class="section-eyebrow reveal">Download</div>
@@ -463,15 +645,15 @@
         <div class="dl-platform">Android</div>
         <div class="dl-sub">Android 8.0+ · Flutter</div>
         <div class="dl-desc" data-i18n="dl_and_desc">Native App mit Material Design, Firebase-Sync und Google-Spracheingabe.</div>
-        <div class="dl-soon" data-i18n="dl_and_soon">Demnächst im Play Store</div>
+        <div class="dl-soon" data-i18n="dl_and_soon">🧪 Aktuell in der Beta-Testphase im Play Store</div>
       </div>
 
       <div class="dl-card reveal">
         <div class="dl-icon">🍎</div>
         <div class="dl-platform">iOS</div>
-        <div class="dl-sub">iOS 14+ · Flutter</div>
+        <div class="dl-sub">iOS 13+ · Flutter</div>
         <div class="dl-desc" data-i18n="dl_ios_desc">Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.</div>
-        <div class="dl-soon" data-i18n="dl_ios_soon">Demnächst im App Store</div>
+        <div class="dl-soon" data-i18n="dl_ios_soon">🎯 iOS-Version kommt demnächst</div>
         <div class="ios-goal">
           <div class="ios-goal-labels">
             <span id="ios-goal-amount">$0</span>
@@ -498,14 +680,167 @@
   </div>
 </section>
 
+<!-- SECTION DIVIDER -->
+<div class="section-divider" style="margin:0 auto 0"></div>
+
+<!-- ══════════════════════ CLOCKY ══════════════════════ -->
+<section id="clocky" class="teaser-section">
+  <div class="section-wrap">
+    <div class="teaser-grid">
+      <div class="teaser-copy">
+        <div class="teaser-badge tb-orange reveal">
+          <span>⏱️</span>
+          <span data-i18n="clocky_eyebrow">Clocky — Zeiterfassung</span>
+        </div>
+        <h2 class="teaser-h2 reveal" data-i18n-html="clocky_h2">Deine Zeit.<br>Dein Geld.</h2>
+        <p class="teaser-p reveal" data-i18n="clocky_p">Clocky ist die einfachste Zeiterfassung für Freelancer und Selbstständige. Projekte anlegen, Timer starten, Rechnung exportieren — fertig. Kein Server, kein Abo, 100% offline.</p>
+        <div class="teaser-pills reveal">
+          <span class="teaser-pill" data-i18n="clocky_pill1">⏱️ Timer-Ring UI</span>
+          <span class="teaser-pill" data-i18n="clocky_pill2">📁 Projekte & Stundensatz</span>
+          <span class="teaser-pill" data-i18n="clocky_pill3">📄 PDF & CSV Export</span>
+          <span class="teaser-pill" data-i18n="clocky_pill4">📱 Android</span>
+          <span class="teaser-pill" data-i18n="clocky_pill5">🔌 Offline-First</span>
+          <span class="teaser-pill">DM Sans Font</span>
+        </div>
+        <div class="teaser-cta-row reveal">
+          <span class="ac-status status-beta" style="font-size:12px;padding:5px 12px" data-i18n="clocky_status">Beta — Android Play Store</span>
+          <span class="teaser-note" data-i18n="clocky_note">Weitere Plattformen in Planung</span>
+        </div>
+      </div>
+      <div class="teaser-mockup reveal">
+        <div class="tm-card tm-clocky">
+          <div class="tm-header">
+            <div class="tm-icon">⏱️</div>
+            <div class="tm-name">Clocky</div>
+          </div>
+          <!-- Timer Ring mockup -->
+          <div class="tm-ring-wrap">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="44" fill="none" stroke="#1e1e1e" stroke-width="10"/>
+              <circle cx="55" cy="55" r="44" fill="none" stroke="#FFB800" stroke-width="10"
+                stroke-dasharray="180 97" stroke-dashoffset="70"
+                stroke-linecap="round" transform="rotate(-90 55 55)"/>
+            </svg>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+              <div style="font-size:20px;font-weight:800;color:#fff">02:34:17</div>
+              <div style="font-size:10px;color:#FFB800;font-weight:600" data-i18n="clocky_running">Läuft</div>
+            </div>
+          </div>
+          <div class="tm-stats">
+            <div class="tm-stat tm-clocky">
+              <div class="tm-stat-val">8,5h</div>
+              <div class="tm-stat-lbl" data-i18n="clocky_stat1">Heute</div>
+            </div>
+            <div class="tm-stat tm-clocky">
+              <div class="tm-stat-val">42,3h</div>
+              <div class="tm-stat-lbl" data-i18n="clocky_stat2">Diese Woche</div>
+            </div>
+          </div>
+          <div class="tm-entries">
+            <div class="tm-entry">
+              <span class="tm-entry-label">📱 App-Entwicklung</span>
+              <span class="tm-entry-val">3:12h</span>
+            </div>
+            <div class="tm-entry">
+              <span class="tm-entry-label">🎨 UI Design</span>
+              <span class="tm-entry-val">1:45h</span>
+            </div>
+            <div class="tm-entry">
+              <span class="tm-entry-label">📞 Kunden-Meeting</span>
+              <span class="tm-entry-val">0:30h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider"></div>
+
+<!-- ══════════════════════ ClockIN ══════════════════════ -->
+<section id="clockin" class="teaser-section">
+  <div class="section-wrap">
+    <div class="teaser-grid" style="direction:ltr">
+      <div class="teaser-mockup reveal" style="order:1">
+        <div class="tm-card tm-clockin">
+          <div class="tm-header">
+            <div class="tm-icon">🏥</div>
+            <div class="tm-name">ClockIN</div>
+          </div>
+          <div class="tm-pillars">
+            <div class="tm-pillar">
+              <div class="tm-pillar-icon">🕐</div>
+              <div class="tm-pillar-name" data-i18n="clockin_p1_name">Zeiterfassung</div>
+              <div class="tm-pillar-sub" data-i18n="clockin_p1_sub">Digital & lückenlos</div>
+            </div>
+            <div class="tm-pillar">
+              <div class="tm-pillar-icon">📅</div>
+              <div class="tm-pillar-name" data-i18n="clockin_p2_name">Dienstplan</div>
+              <div class="tm-pillar-sub" data-i18n="clockin_p2_sub">Schichten planen</div>
+            </div>
+            <div class="tm-pillar">
+              <div class="tm-pillar-icon">👥</div>
+              <div class="tm-pillar-name" data-i18n="clockin_p3_name">Patienten</div>
+              <div class="tm-pillar-sub" data-i18n="clockin_p3_sub">Stammdaten & Termine</div>
+            </div>
+            <div class="tm-pillar">
+              <div class="tm-pillar-icon">💶</div>
+              <div class="tm-pillar-name" data-i18n="clockin_p4_name">Abrechnung</div>
+              <div class="tm-pillar-sub" data-i18n="clockin_p4_sub">Rechnungen & Export</div>
+            </div>
+          </div>
+          <div class="tm-entries">
+            <div class="tm-entry">
+              <span class="tm-entry-label">👤 Müller, Hans</span>
+              <span class="tm-entry-val">10:30 Uhr</span>
+            </div>
+            <div class="tm-entry">
+              <span class="tm-entry-label">👤 Schmidt, Petra</span>
+              <span class="tm-entry-val">11:00 Uhr</span>
+            </div>
+            <div class="tm-entry">
+              <span class="tm-entry-label">👤 Weber, Klaus</span>
+              <span class="tm-entry-val">11:30 Uhr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teaser-copy" style="order:2">
+        <div class="teaser-badge tb-teal reveal">
+          <span>🏥</span>
+          <span data-i18n="clockin_eyebrow">ClockIN — Praxisverwaltung</span>
+        </div>
+        <h2 class="teaser-h2 reveal" data-i18n-html="clockin_h2">Alles für<br>deine Praxis.</h2>
+        <p class="teaser-p reveal" data-i18n="clockin_p">ClockIN vereint alles was eine Praxis braucht in einer App — digitale Zeiterfassung, Dienstplanung, Patienten- und Kundenverwaltung sowie integrierte Abrechnung. Ohne Cloud-Zwang, ohne monatliche Kosten.</p>
+        <div class="teaser-pills reveal">
+          <span class="teaser-pill" data-i18n="clockin_pill1">🕐 Digitale Zeiterfassung</span>
+          <span class="teaser-pill" data-i18n="clockin_pill2">📅 Dienstplan</span>
+          <span class="teaser-pill" data-i18n="clockin_pill3">👥 Patientenverwaltung</span>
+          <span class="teaser-pill" data-i18n="clockin_pill4">💶 Abrechnung</span>
+          <span class="teaser-pill" data-i18n="clockin_pill5">🔌 Offline-First</span>
+        </div>
+        <div class="teaser-cta-row reveal">
+          <span class="ac-status status-dev" style="font-size:12px;padding:5px 12px" data-i18n="clockin_status">In Entwicklung</span>
+          <a href="mailto:ArcadiaApps@proton.me" class="teaser-cta tc-teal" data-i18n="clockin_interest">Interesse melden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider"></div>
+
 <!-- SUPPORT -->
 <section id="support" class="support-section">
   <div class="section-wrap">
     <div class="support-grid">
       <div class="support-copy">
-        <div class="section-eyebrow reveal">Support Carby</div>
-        <h2 class="section-h2 reveal" style="text-align:left" data-i18n-html="sup_h2">Carby ist frei.<br>Bleibt frei.</h2>
-        <p class="section-p reveal" style="text-align:left" data-i18n="sup_p">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.</p>
+        <div class="section-eyebrow reveal">Support ArcadiaApps</div>
+        <h2 class="section-h2 reveal" style="text-align:left" data-i18n-html="sup_h2">Unsere Apps sind frei.<br>Bleiben frei.</h2>
+        <p class="section-p reveal" style="text-align:left" data-i18n="sup_p">Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir unsere Apps helfen, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.</p>
 
         <div class="tier-cards">
           <button class="tier-card reveal" onclick="selectTier(this, 1)">
@@ -532,7 +867,7 @@
         <div class="paypal-note reveal" data-i18n="paypal_note">Öffnet PayPal in deinem Browser · Kein Konto nötig</div>
 
         <a href="https://instagram.com/getcarby" target="_blank" class="ig-btn reveal">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
           <span>@getcarby</span>
         </a>
       </div>
@@ -556,17 +891,18 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="fb-logo">
-          <img src="assets/logo.png" alt="🦀" width="32" onerror="this.textContent='🦀'">
-          <span>Carby</span>
+          <img src="assets/logo.png" alt="⬡" width="32" onerror="this.textContent='⬡'">
+          <span>ArcadiaApps</span>
         </div>
-        <div class="fb-tag" data-i18n="footer_tag">Tracke smarter, nicht mehr.</div>
+        <div class="fb-tag" data-i18n="footer_tag">Einfache Apps. Echter Mehrwert.</div>
         <div class="fb-badge" data-i18n="footer_badge">Open Source · DSGVO · Kostenlos</div>
       </div>
       <div class="footer-links">
         <div class="fl-group">
-          <div class="fl-title">App</div>
-          <a href="#features">Features</a>
-          <a href="#mockup">Preview</a>
+          <div class="fl-title">Apps</div>
+          <a href="#carby">Carby</a>
+          <a href="#clocky">Clocky</a>
+          <a href="#clockin">ClockIN</a>
           <a href="#download">Download</a>
         </div>
         <div class="fl-group">
@@ -589,15 +925,14 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2025 Carby · ArcadiaApps · <a href="impressum.html" style="color:inherit;opacity:0.6">Impressum</a></div>
+      <div>© 2025 ArcadiaApps · <a href="impressum.html" style="color:inherit;opacity:0.6">Impressum</a></div>
       <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
     </div>
   </div>
 </footer>
 
 <script>
-// ─── iOS Donation Goal ───────────────────────────────────────────────────────
-// UPDATE THIS NUMBER when a donation arrives (in USD)
+// ─── iOS Donation Goal ─────────────────────────────────────────────────────
 const IOS_DONATIONS = 0;
 const IOS_GOAL = 100;
 (function() {
@@ -606,23 +941,21 @@ const IOS_GOAL = 100;
   document.getElementById('ios-goal-amount').textContent = '$' + IOS_DONATIONS;
 })();
 
-// ─── Translations ────────────────────────────────────────────────────────────
+// ─── Translations ─────────────────────────────────────────────────────────
 const T = {
   de: {
     // Nav
-    ann_badge: 'In Entwicklung',
-    ann_text: '🔍 Barcode-Scanner kommt in v2.0 — Lebensmittel einfach abscannen statt tippen.',
-    nav_features: 'Features',
-    nav_preview: 'Preview',
+    nav_apps: 'Apps',
     nav_privacy: 'Datenschutz',
     nav_download: 'Download',
+    // Announcement
+    ann_badge: 'Neu',
+    ann_text: '⏱️ Clocky ist live — Zeiterfassung für Freelancer. Kostenlos & offline-first.',
     // Hero
-    hero_chip: 'Open Source auf GitHub',
-    hero_h1_line1: 'Tracke smarter,',
-    hero_h1_line2: 'nicht mehr.',
-    hero_p: 'Sag einfach <em>&ldquo;Hähnchenbrust 150g&rdquo;</em> — Carby erkennt es per KI,<br class="br-lg"> trackt Kalorien, Makros &amp; Wasser und berechnet deinen Bedarf<br class="br-lg"> automatisch. Kostenlos. Werbefrei. Immer.',
-    hero_cta_win: 'Für Windows herunterladen',
-    hero_cta_preview: 'App Preview ansehen',
+    hero_brand: 'ArcadiaApps',
+    hero_h1_line1: 'Einfache Apps.',
+    hero_h1_line2: 'Echter Mehrwert.',
+    hero_p: 'Wir bauen Apps die deinen Alltag einfacher machen — <strong>kostenlos</strong>, ohne Werbung, ohne Abo. Ernährungs-Tracker, Zeiterfassung, Praxisverwaltung — alles unter einem Dach.',
     proof_1: 'Keine Werbung',
     proof_2: 'Kein Abo',
     proof_3: 'Deine Daten bleiben bei dir',
@@ -639,12 +972,37 @@ const T = {
     preview_speak: 'Sprechen',
     preview_recents: 'Zuletzt gegessen',
     // Ticker
-    tick_foods: '3M+ Lebensmittel',
     tick_free: '100% Kostenlos',
-    tick_voice: 'KI-Spracheingabe',
     tick_gdpr: 'DSGVO-konform',
     tick_nosub: 'Kein Abo',
-    // Features
+    tick_noad: 'Keine Werbung',
+    // Our Apps
+    apps_eyebrow: 'Unsere Apps',
+    apps_h2: 'Drei Apps. Ein Anspruch.',
+    apps_p: 'Jede App löst ein echtes Problem — einfach, werbefrei, kostenlos.',
+    carby_tag: 'Ernährungs-Tracker',
+    carby_tagline: 'Tracke Kalorien und Makros per KI-Spracheingabe — sag einfach was du gegessen hast.',
+    carby_f1: 'KI-Spracheingabe (Whisper)',
+    carby_f2: '3M+ Lebensmittel (OpenFoodFacts)',
+    carby_f3: 'BMI & TDEE Rechner',
+    carby_f4: 'Windows, Android, iOS',
+    clocky_tag: 'Zeiterfassung',
+    clocky_tagline: 'Zeiterfassung für Freelancer — Projekte anlegen, Zeiten tracken, PDF/CSV exportieren.',
+    clocky_f1: 'Timer-Ring UI, Pause & Stop',
+    clocky_f2: 'Projekt-Verwaltung mit Stundensatz',
+    clocky_f3: 'PDF & CSV Export',
+    clocky_f4: 'Offline-First, kein Server',
+    clockin_tag: 'Praxisverwaltung',
+    clockin_tagline: 'Alles in einem für Praxen — Zeiterfassung, Dienstplan, Patienten und Abrechnung.',
+    clockin_f1: 'Digitale Zeiterfassung & Dienstplan',
+    clockin_f2: 'Kunden- & Patientenverwaltung',
+    clockin_f3: 'Integrierte Abrechnung',
+    clockin_f4: 'Alles offline, kein Cloud-Zwang',
+    app_more: 'Mehr erfahren',
+    status_live: 'Live',
+    status_beta: 'Beta',
+    status_dev: 'In Entwicklung',
+    // Features (Carby)
     feat_h2: 'Alles. Eingebaut.',
     feat_p: 'Carby bringt alles mit was du brauchst — ohne Bloat, ohne Paywall.',
     voice_h3: 'Spracheingabe',
@@ -694,23 +1052,56 @@ const T = {
     dl_win_avail: '✓ Jetzt verfügbar',
     dl_and_desc: 'Native App mit Material Design, Firebase-Sync und Google-Spracheingabe.',
     dl_and_soon: '🧪 Aktuell in der Beta-Testphase im Play Store',
-    dl_ios_desc: 'Native App für iPhone &amp; iPad. Siri-Integration und iCloud-Sync geplant.',
-    dl_ios_soon: '🎯 iOS-Version startet ab 100 $ Spendeneingang',
+    dl_ios_desc: 'Native App für iPhone &amp; iPad.',
+    dl_ios_soon: '🎯 iOS-Version kommt demnächst',
     ios_goal_target: 'Ziel: $100',
     ios_goal_sub: 'für iOS-Entwicklung',
     ib_label: 'Windows Quick-Install',
     ib_step1: 'Setup.exe<br>herunterladen',
     ib_step2: 'Installer starten<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Trotzdem ausführen&rdquo;</span>',
     ib_step3: '✓ Fertig<br>Carby starten',
+    // Clocky teaser
+    clocky_eyebrow: 'Clocky — Zeiterfassung',
+    clocky_h2: 'Deine Zeit.<br>Dein Geld.',
+    clocky_p: 'Clocky ist die einfachste Zeiterfassung für Freelancer und Selbstständige. Projekte anlegen, Timer starten, Rechnung exportieren — fertig. Kein Server, kein Abo, 100% offline.',
+    clocky_pill1: '⏱️ Timer-Ring UI',
+    clocky_pill2: '📁 Projekte & Stundensatz',
+    clocky_pill3: '📄 PDF & CSV Export',
+    clocky_pill4: '📱 Android',
+    clocky_pill5: '🔌 Offline-First',
+    clocky_running: 'Läuft',
+    clocky_stat1: 'Heute',
+    clocky_stat2: 'Diese Woche',
+    clocky_status: 'Beta — Android Play Store',
+    clocky_note: 'Weitere Plattformen in Planung',
+    // ClockIN teaser
+    clockin_eyebrow: 'ClockIN — Praxisverwaltung',
+    clockin_h2: 'Alles für<br>deine Praxis.',
+    clockin_p: 'ClockIN vereint alles was eine Praxis braucht in einer App — digitale Zeiterfassung, Dienstplanung, Patienten- und Kundenverwaltung sowie integrierte Abrechnung. Ohne Cloud-Zwang, ohne monatliche Kosten.',
+    clockin_pill1: '🕐 Digitale Zeiterfassung',
+    clockin_pill2: '📅 Dienstplan',
+    clockin_pill3: '👥 Patientenverwaltung',
+    clockin_pill4: '💶 Abrechnung',
+    clockin_pill5: '🔌 Offline-First',
+    clockin_p1_name: 'Zeiterfassung',
+    clockin_p1_sub: 'Digital & lückenlos',
+    clockin_p2_name: 'Dienstplan',
+    clockin_p2_sub: 'Schichten planen',
+    clockin_p3_name: 'Patienten',
+    clockin_p3_sub: 'Stammdaten & Termine',
+    clockin_p4_name: 'Abrechnung',
+    clockin_p4_sub: 'Rechnungen & Export',
+    clockin_status: 'In Entwicklung',
+    clockin_interest: 'Interesse melden',
     // Support
-    sup_h2: 'Carby ist frei.<br>Bleibt frei.',
-    sup_p: 'Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir Carby hilft, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.',
+    sup_h2: 'Unsere Apps sind frei.<br>Bleiben frei.',
+    sup_p: 'Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir unsere Apps helfen, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.',
     tier1: 'Kaffee',
     paypal_btn: 'Jetzt via PayPal spenden',
     paypal_note: 'Öffnet PayPal in deinem Browser · Kein Konto nötig',
     qr_label: 'Mit Handy scannen',
     // Footer
-    footer_tag: 'Tracke smarter, nicht mehr.',
+    footer_tag: 'Einfache Apps. Echter Mehrwert.',
     footer_badge: 'Open Source · DSGVO · Kostenlos',
     footer_privacy: 'Datenschutz',
     footer_impressum: 'Impressum',
@@ -719,24 +1110,18 @@ const T = {
     footer_bug: 'Bug melden',
   },
   en: {
-    // Nav
-    ann_badge: 'In Development',
-    ann_text: '🔍 Barcode Scanner coming in v2.0 — scan food instead of typing.',
-    nav_features: 'Features',
-    nav_preview: 'Preview',
+    nav_apps: 'Apps',
     nav_privacy: 'Privacy',
     nav_download: 'Download',
-    // Hero
-    hero_chip: 'Open Source on GitHub',
-    hero_h1_line1: 'Track smarter,',
-    hero_h1_line2: 'not harder.',
-    hero_p: 'Just say <em>&ldquo;Chicken breast 150g&rdquo;</em> — Carby recognizes it with AI,<br class="br-lg"> tracks calories, macros &amp; water, and calculates your needs<br class="br-lg"> automatically. Free. Ad-free. Always.',
-    hero_cta_win: 'Download for Windows',
-    hero_cta_preview: 'See App Preview',
+    ann_badge: 'New',
+    ann_text: '⏱️ Clocky is live — time tracking for freelancers. Free & offline-first.',
+    hero_brand: 'ArcadiaApps',
+    hero_h1_line1: 'Simple Apps.',
+    hero_h1_line2: 'Real Value.',
+    hero_p: 'We build apps that make your daily life easier — <strong>free</strong>, no ads, no subscription. Nutrition tracker, time tracking, practice management — all under one roof.',
     proof_1: 'No Ads',
     proof_2: 'No Subscription',
     proof_3: 'Your data stays with you',
-    // Dashboard preview
     preview_greeting: 'Good morning, Max ☀️',
     preview_date: 'Saturday, June 21',
     preview_of: 'of 2,000',
@@ -748,13 +1133,35 @@ const T = {
     preview_search: 'Search food...',
     preview_speak: 'Speak',
     preview_recents: 'Recently eaten',
-    // Ticker
-    tick_foods: '3M+ Foods',
     tick_free: '100% Free',
-    tick_voice: 'AI Voice Input',
     tick_gdpr: 'GDPR-compliant',
     tick_nosub: 'No Subscription',
-    // Features
+    tick_noad: 'No Ads',
+    apps_eyebrow: 'Our Apps',
+    apps_h2: 'Three Apps. One Standard.',
+    apps_p: 'Each app solves a real problem — simple, ad-free, free.',
+    carby_tag: 'Nutrition Tracker',
+    carby_tagline: 'Track calories and macros with AI voice input — just say what you ate.',
+    carby_f1: 'AI Voice Input (Whisper)',
+    carby_f2: '3M+ Foods (OpenFoodFacts)',
+    carby_f3: 'BMI & TDEE Calculator',
+    carby_f4: 'Windows, Android, iOS',
+    clocky_tag: 'Time Tracking',
+    clocky_tagline: 'Time tracking for freelancers — create projects, track time, export invoices.',
+    clocky_f1: 'Timer Ring UI, Pause & Stop',
+    clocky_f2: 'Project Management with Hourly Rate',
+    clocky_f3: 'PDF & CSV Export',
+    clocky_f4: 'Offline-First, No Server',
+    clockin_tag: 'Practice Management',
+    clockin_tagline: 'All-in-one for practices — time tracking, shift planning, patients, and billing.',
+    clockin_f1: 'Digital Time Tracking & Shift Planning',
+    clockin_f2: 'Client & Patient Management',
+    clockin_f3: 'Integrated Billing',
+    clockin_f4: 'Fully offline, no cloud required',
+    app_more: 'Learn more',
+    status_live: 'Live',
+    status_beta: 'Beta',
+    status_dev: 'In Development',
     feat_h2: 'Everything. Built-in.',
     feat_p: 'Carby comes with everything you need — no bloat, no paywall.',
     voice_h3: 'Voice Input',
@@ -780,7 +1187,6 @@ const T = {
     rec_h3: '⚡ Recently Eaten',
     rec_p: 'Your last 5 foods as chips — one tap and you\'re done.',
     lang_p: 'Fully bilingual — switch languages with one tap.',
-    // Mockup
     mockup_h2: 'Your day at<br>a glance.',
     mockup_p: 'The dashboard shows everything that matters — instantly, clearly, without distraction.',
     fl1: 'Animated calorie ring',
@@ -796,7 +1202,6 @@ const T = {
     phone_f: 'F',
     phone_today: 'Today',
     phone_water: 'Water',
-    // Download
     dl_h2: 'Get Carby.',
     dl_p: 'Free. No sign-up. No bullshit.',
     dl_win_desc: 'Desktop app with full feature set, Whisper voice input, and offline support.',
@@ -804,23 +1209,52 @@ const T = {
     dl_win_avail: '✓ Available now',
     dl_and_desc: 'Native app with Material Design, Firebase sync, and Google voice input.',
     dl_and_soon: '🧪 Currently in beta testing on the Play Store',
-    dl_ios_desc: 'Native app for iPhone &amp; iPad. Siri integration and iCloud sync planned.',
-    dl_ios_soon: '🎯 iOS version launches once $100 in donations is reached',
+    dl_ios_desc: 'Native app for iPhone &amp; iPad.',
+    dl_ios_soon: '🎯 iOS version coming soon',
     ios_goal_target: 'Goal: $100',
     ios_goal_sub: 'for iOS development',
     ib_label: 'Windows Quick Install',
     ib_step1: 'Download<br>Setup.exe',
     ib_step2: 'Run the installer<br><span style="color:#555;font-size:11px">SmartScreen → &ldquo;Run anyway&rdquo;</span>',
     ib_step3: '✓ Done<br>Launch Carby',
-    // Support
-    sup_h2: 'Carby is free.<br>Stays free.',
-    sup_p: 'No ads, no subscription, no premium wall. If Carby helps you, we appreciate any support — so new features can keep coming.',
+    clocky_eyebrow: 'Clocky — Time Tracking',
+    clocky_h2: 'Your time.<br>Your money.',
+    clocky_p: 'Clocky is the simplest time tracker for freelancers and self-employed. Create projects, start the timer, export invoices — done. No server, no subscription, 100% offline.',
+    clocky_pill1: '⏱️ Timer Ring UI',
+    clocky_pill2: '📁 Projects & Hourly Rate',
+    clocky_pill3: '📄 PDF & CSV Export',
+    clocky_pill4: '📱 Android',
+    clocky_pill5: '🔌 Offline-First',
+    clocky_running: 'Running',
+    clocky_stat1: 'Today',
+    clocky_stat2: 'This Week',
+    clocky_status: 'Beta — Android Play Store',
+    clocky_note: 'More platforms planned',
+    clockin_eyebrow: 'ClockIN — Practice Management',
+    clockin_h2: 'Everything for<br>your practice.',
+    clockin_p: 'ClockIN combines everything a practice needs in one app — digital time tracking, shift planning, patient and client management, and integrated billing. No cloud required, no monthly costs.',
+    clockin_pill1: '🕐 Digital Time Tracking',
+    clockin_pill2: '📅 Shift Planning',
+    clockin_pill3: '👥 Patient Management',
+    clockin_pill4: '💶 Billing',
+    clockin_pill5: '🔌 Offline-First',
+    clockin_p1_name: 'Time Tracking',
+    clockin_p1_sub: 'Digital & complete',
+    clockin_p2_name: 'Shift Planning',
+    clockin_p2_sub: 'Schedule shifts',
+    clockin_p3_name: 'Patients',
+    clockin_p3_sub: 'Records & appointments',
+    clockin_p4_name: 'Billing',
+    clockin_p4_sub: 'Invoices & export',
+    clockin_status: 'In Development',
+    clockin_interest: 'Express Interest',
+    sup_h2: 'Our apps are free.<br>Stay free.',
+    sup_p: 'No ads, no subscription, no premium wall. If our apps help you, we appreciate any support — so new features can keep coming.',
     tier1: 'Coffee',
     paypal_btn: 'Donate via PayPal',
     paypal_note: 'Opens PayPal in your browser · No account needed',
     qr_label: 'Scan with your phone',
-    // Footer
-    footer_tag: 'Track smarter, not harder.',
+    footer_tag: 'Simple apps. Real value.',
     footer_badge: 'Open Source · GDPR · Free',
     footer_privacy: 'Privacy',
     footer_impressum: 'Imprint',
@@ -830,37 +1264,31 @@ const T = {
   }
 };
 
-// ─── Language switcher ────────────────────────────────────────────────────────
+// ─── Language switcher ────────────────────────────────────────────────────
 function setLang(lang) {
   const t = T[lang];
   if (!t) return;
-  // text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) el.textContent = t[key];
   });
-  // innerHTML nodes (contain HTML tags)
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.dataset.i18nHtml;
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
-  // <html lang> attr + page title
   document.documentElement.lang = lang;
   document.title = lang === 'de'
-    ? 'Carby — Tracke smarter, nicht mehr.'
-    : 'Carby — Track smarter, not harder.';
-  // toggle buttons
+    ? 'ArcadiaApps — Einfache Apps. Echter Mehrwert.'
+    : 'ArcadiaApps — Simple Apps. Real Value.';
   document.getElementById('btn-de').classList.toggle('active', lang === 'de');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  // persist
   localStorage.setItem('carby_lang', lang);
 }
 
-// Apply saved language on load
 const savedLang = localStorage.getItem('carby_lang') || 'de';
 setLang(savedLang);
 
-// ─── Reveal on scroll ────────────────────────────────────────────────────────
+// ─── Reveal on scroll ────────────────────────────────────────────────────
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); }
@@ -868,17 +1296,17 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// ─── Nav scroll ──────────────────────────────────────────────────────────────
+// ─── Nav scroll ──────────────────────────────────────────────────────────
 const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('nav-solid', scrollY > 60), { passive: true });
 
-// ─── Hamburger ───────────────────────────────────────────────────────────────
+// ─── Hamburger ───────────────────────────────────────────────────────────
 const hb = document.getElementById('hamburger');
 const nl = document.getElementById('navLinks');
 hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
 document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
 
-// ─── Tier selection ──────────────────────────────────────────────────────────
+// ─── Tier selection ──────────────────────────────────────────────────────
 function selectTier(el, amt) {
   document.querySelectorAll('.tier-card').forEach(t => t.classList.remove('tc-active'));
   el.classList.add('tc-active');
