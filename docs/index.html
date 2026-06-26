@@ -19,6 +19,11 @@
     .lang-toggle button.active{background:#FF6B35;color:#fff}
     .lang-toggle button:hover:not(.active){color:#fff}
 
+    /* ── Hero logo display ──────────────────────────────── */
+    .hero-logo-display{display:flex;align-items:center;justify-content:center;flex:1;min-width:280px;padding:40px 0}
+    .hero-brand-logo{width:min(420px,90vw);height:auto;border-radius:28px;filter:drop-shadow(0 0 80px rgba(255,107,53,.3)) drop-shadow(0 0 30px rgba(201,168,76,.2))}
+    @media(max-width:900px){.hero-logo-display{padding:24px 0}}
+
     /* ── App Cards ─────────────────────────────────────── */
     .apps-section{padding:80px 0 60px}
     .app-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
@@ -209,103 +214,9 @@
     </div>
   </div>
 
-  <!-- Hero Dashboard Preview (Carby) -->
-  <div class="hero-preview">
-    <div class="preview-chrome">
-      <div class="chrome-dots"><span></span><span></span><span></span></div>
-      <div class="chrome-title">Carby — Dashboard</div>
-    </div>
-    <div class="preview-body">
-      <div class="preview-sidebar">
-        <div class="psb-logo">
-          <img src="assets/logo.png" alt="🦀" width="20" height="20" onerror="this.textContent='🦀'">
-        </div>
-        <div class="psb-nav">
-          <div class="psb-item active">📊</div>
-          <div class="psb-item">📖</div>
-          <div class="psb-item">👤</div>
-          <div class="psb-item">❤️</div>
-        </div>
-      </div>
-      <div class="preview-main">
-        <div class="pm-header">
-          <div class="pm-greeting" data-i18n="preview_greeting">Guten Morgen, Max ☀️</div>
-          <div class="pm-date" data-i18n="preview_date">Samstag, 21. Juni</div>
-        </div>
-        <div class="pm-ring-row">
-          <div class="pm-ring">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-              <circle cx="60" cy="60" r="48" fill="none" stroke="#1e1e1e" stroke-width="12"/>
-              <circle cx="60" cy="60" r="48" fill="none" stroke="#FF6B35" stroke-width="12"
-                stroke-dasharray="201 100" stroke-dashoffset="75"
-                stroke-linecap="round" transform="rotate(-90 60 60)"/>
-            </svg>
-            <div class="ring-center">
-              <div class="ring-num">1.340</div>
-              <div class="ring-lbl">kcal</div>
-              <div class="ring-of" data-i18n="preview_of">von 2.000</div>
-            </div>
-          </div>
-          <div class="pm-macros">
-            <div class="pm-macro">
-              <div class="macro-top">
-                <span class="macro-name">Protein</span>
-                <span class="macro-val" style="color:#4FC3F7">68g</span>
-              </div>
-              <div class="macro-track"><div class="macro-fill" style="width:54%;background:#4FC3F7"></div></div>
-            </div>
-            <div class="pm-macro">
-              <div class="macro-top">
-                <span class="macro-name" data-i18n="preview_carbs">Kohlenhydrate</span>
-                <span class="macro-val" style="color:#FF6B35">142g</span>
-              </div>
-              <div class="macro-track"><div class="macro-fill" style="width:61%;background:#FF6B35"></div></div>
-            </div>
-            <div class="pm-macro">
-              <div class="macro-top">
-                <span class="macro-name" data-i18n="preview_fat">Fett</span>
-                <span class="macro-val" style="color:#F48FB1">38g</span>
-              </div>
-              <div class="macro-track"><div class="macro-fill" style="width:44%;background:#F48FB1"></div></div>
-            </div>
-            <div class="pm-macro" style="margin-top:4px">
-              <div class="macro-top">
-                <span class="macro-name">💧 <span data-i18n="preview_water">Wasser</span></span>
-                <span class="macro-val" style="color:#42A5F5">1.2L / 2L</span>
-              </div>
-              <div class="macro-track"><div class="macro-fill" style="width:60%;background:linear-gradient(90deg,#1565C0,#42A5F5)"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="pm-log">
-          <div class="pm-log-title" data-i18n="preview_eaten">Heute gegessen</div>
-          <div class="pm-log-item"><span>🍗 Hähnchenbrust 150g</span><span style="color:#FF6B35">165 kcal</span></div>
-          <div class="pm-log-item"><span>🥣 Haferflocken 80g</span><span style="color:#FF6B35">296 kcal</span></div>
-          <div class="pm-log-item"><span>🍎 Apfel</span><span style="color:#FF6B35">52 kcal</span></div>
-        </div>
-        <div class="pm-chips">
-          <div class="pm-chip" data-i18n="preview_chip1">+ Protein</div>
-          <div class="pm-chip">+ Omega-3</div>
-          <div class="pm-chip">+ Magnesium</div>
-        </div>
-      </div>
-      <div class="preview-rp">
-        <div class="rp-search">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span style="color:#444" data-i18n="preview_search">Lebensmittel suchen...</span>
-        </div>
-        <div class="rp-mic">
-          <div class="rp-mic-btn">🎙️</div>
-          <div style="font-size:10px;color:#444;margin-top:4px" data-i18n="preview_speak">Sprechen</div>
-        </div>
-        <div class="rp-recents">
-          <div style="font-size:10px;color:#444;margin-bottom:6px" data-i18n="preview_recents">Zuletzt gegessen</div>
-          <div class="rp-chip">🍗 Hähnchen</div>
-          <div class="rp-chip">🥦 Brokkoli</div>
-          <div class="rp-chip">🍳 Ei</div>
-        </div>
-      </div>
-    </div>
+  <!-- ArcadiaApps Logo -->
+  <div class="hero-logo-display">
+    <img src="assets/arcadia-logo.png" alt="ArcadiaApps" class="hero-brand-logo">
   </div>
 </section>
 
