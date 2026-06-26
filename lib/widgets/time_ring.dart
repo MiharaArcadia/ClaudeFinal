@@ -7,6 +7,7 @@ class TimeRing extends StatelessWidget {
   final String timeString; // 'HH:MM:SS'
   final Color color;
   final double size;
+  final Color? textColor;
 
   const TimeRing({
     super.key,
@@ -14,10 +15,14 @@ class TimeRing extends StatelessWidget {
     required this.timeString,
     this.color = const Color(0xFFFF6B35),
     this.size = 280,
+    this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final resolvedTextColor = textColor ?? (isDark ? Colors.white : const Color(0xFF1A1A1A));
+    final trackColor = isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE0E0E0);
     return SizedBox(
       width: size,
       height: size,
@@ -25,13 +30,14 @@ class TimeRing extends StatelessWidget {
         painter: _RingPainter(
           progress: progress.clamp(0.0, 1.0),
           color: color,
+          trackColor: trackColor,
         ),
         child: Center(
           child: Text(
             timeString,
             style: GoogleFonts.bebasNeue(
               fontSize: 72,
-              color: Colors.white,
+              color: resolvedTextColor,
               letterSpacing: 4,
             ),
           ),
@@ -44,8 +50,9 @@ class TimeRing extends StatelessWidget {
 class _RingPainter extends CustomPainter {
   final double progress;
   final Color color;
+  final Color trackColor;
 
-  const _RingPainter({required this.progress, required this.color});
+  const _RingPainter({required this.progress, required this.color, required this.trackColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -56,7 +63,7 @@ class _RingPainter extends CustomPainter {
 
     // Background track
     final trackPaint = Paint()
-      ..color = const Color(0xFF2A2A2A)
+      ..color = trackColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
@@ -102,5 +109,5 @@ class _RingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_RingPainter oldDelegate) =>
-      oldDelegate.progress != progress || oldDelegate.color != color;
+      oldDelegate.progress != progress || oldDelegate.color != color || oldDelegate.trackColor != trackColor;
 }

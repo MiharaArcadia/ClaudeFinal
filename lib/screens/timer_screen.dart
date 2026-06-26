@@ -105,7 +105,7 @@ class _TimerScreenState extends State<TimerScreen> {
                   progress: progress,
                   timeString: timerProvider.formattedTime,
                   color: timerProvider.state == TimerState.paused
-                      ? AppColors.textSecondaryDark
+                      ? secondaryText
                       : AppColors.primaryOrange,
                   size: 280,
                 ),
@@ -203,7 +203,7 @@ class _TimerScreenState extends State<TimerScreen> {
             ),
             decoration: InputDecoration(
               hintText: 'Was hast du gearbeitet?',
-              hintStyle: GoogleFonts.dmSans(color: AppColors.textSecondaryDark),
+              hintStyle: GoogleFonts.dmSans(color: secondaryText),
             ),
           ),
         ],
