@@ -157,11 +157,11 @@ class SettingsScreen extends StatelessWidget {
                     color: AppColors.primaryOrange, size: 20),
                 title: Text('GitHub',
                     style: GoogleFonts.dmSans(color: primaryText)),
-                trailing: const Icon(Icons.open_in_new_rounded,
-                    size: 16, color: AppColors.textSecondaryDark),
+                trailing: Icon(Icons.open_in_new_rounded,
+                    size: 16, color: secondaryText),
                 onTap: () async {
                   final uri = Uri.parse('https://github.com');
-                  if (await canLaunchUrl(uri)) launchUrl(uri);
+                  if (await canLaunchUrl(uri)) launchUrl(uri, mode: LaunchMode.externalApplication);
                 },
               ),
               _Divider(isDark: isDark),
@@ -170,8 +170,8 @@ class SettingsScreen extends StatelessWidget {
                     color: AppColors.primaryOrange, size: 20),
                 title: Text('Datenschutz',
                     style: GoogleFonts.dmSans(color: primaryText)),
-                trailing: const Icon(Icons.chevron_right_rounded,
-                    size: 20, color: AppColors.textSecondaryDark),
+                trailing: Icon(Icons.chevron_right_rounded,
+                    size: 20, color: secondaryText),
                 onTap: () => _showPrivacyDialog(context),
               ),
               _Divider(isDark: isDark),
@@ -180,8 +180,8 @@ class SettingsScreen extends StatelessWidget {
                     color: AppColors.primaryOrange, size: 20),
                 title: Text('Bug melden',
                     style: GoogleFonts.dmSans(color: primaryText)),
-                trailing: const Icon(Icons.open_in_new_rounded,
-                    size: 16, color: AppColors.textSecondaryDark),
+                trailing: Icon(Icons.open_in_new_rounded,
+                    size: 16, color: secondaryText),
                 onTap: () async {
                   final uri = Uri.parse(
                       'mailto:support@clocky.app?subject=Bug%20Report&body=Beschreibe%20den%20Fehler%20hier...');
@@ -310,6 +310,7 @@ class _LogoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryText = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final secondaryText = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
 
     return ListTile(
       leading: const Icon(Icons.image_outlined,
@@ -327,16 +328,16 @@ class _LogoTile extends StatelessWidget {
                 width: 36,
                 height: 36,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => const Icon(
+                errorBuilder: (_, __, ___) => Icon(
                   Icons.broken_image_outlined,
                   size: 24,
-                  color: AppColors.textSecondaryDark,
+                  color: secondaryText,
                 ),
               ),
             ),
           const SizedBox(width: 8),
-          const Icon(Icons.chevron_right_rounded,
-              size: 20, color: AppColors.textSecondaryDark),
+          Icon(Icons.chevron_right_rounded,
+              size: 20, color: secondaryText),
         ],
       ),
       onTap: () async {
@@ -382,8 +383,8 @@ class _TextEditTile extends StatelessWidget {
           ? Text(value,
               style: GoogleFonts.dmSans(color: secondaryText, fontSize: 13))
           : null,
-      trailing: const Icon(Icons.edit_outlined,
-          size: 16, color: AppColors.textSecondaryDark),
+      trailing: Icon(Icons.edit_outlined,
+          size: 16, color: secondaryText),
       onTap: () => _showEditDialog(context, primaryText),
     );
   }
@@ -444,7 +445,7 @@ class _NumberEditTile extends StatelessWidget {
     return ListTile(
       leading: Icon(icon, size: 20, color: AppColors.primaryOrange),
       title: Text(title,
-          style: GoogleFonts.dmSans(color: primaryText, fontWeight: FontWeight.w500)),
+          style: GoogleFonts.dmSans(color: primaryText, fontWeight: FontWeight.w500,)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -457,8 +458,8 @@ class _NumberEditTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 4),
-          const Icon(Icons.edit_outlined,
-              size: 16, color: AppColors.textSecondaryDark),
+          Icon(Icons.edit_outlined,
+              size: 16, color: secondaryText),
         ],
       ),
       onTap: () {
@@ -503,7 +504,15 @@ class _ThemeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = [
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final trackColor = isDark
+        ? AppColors.surfaceDark.withOpacity(0.6)
+        : Colors.grey.shade200;
+    final inactiveTextColor = isDark
+        ? AppColors.textSecondaryDark
+        : AppColors.textSecondaryLight;
+
+    const options = [
       ('system', 'System'),
       ('light', 'Hell'),
       ('dark', 'Dunkel'),
@@ -511,7 +520,7 @@ class _ThemeToggle extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surfaceDark.withOpacity(0.4),
+        color: trackColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -532,9 +541,7 @@ class _ThemeToggle extends StatelessWidget {
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: isSelected
-                      ? Colors.white
-                      : AppColors.textSecondaryDark,
+                  color: isSelected ? Colors.white : inactiveTextColor,
                 ),
               ),
             ),

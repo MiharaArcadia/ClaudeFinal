@@ -280,6 +280,22 @@ class ExportService {
     return value;
   }
 
+  // ── Save to Downloads ─────────────────────────────────────────────────────────
+
+  /// Saves to Downloads folder (or best available fallback). Returns the file path.
+  Future<String> saveToDownloads(Uint8List bytes, String filename) async {
+    Directory? dir;
+    try {
+      dir = await getDownloadsDirectory();
+    } catch (_) {}
+    dir ??= await getExternalStorageDirectory();
+    dir ??= await getApplicationDocumentsDirectory();
+
+    final file = File('${dir.path}/$filename');
+    await file.writeAsBytes(bytes, flush: true);
+    return file.path;
+  }
+
   // ── Share ─────────────────────────────────────────────────────────────────────
 
   Future<void> shareFile(

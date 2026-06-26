@@ -380,12 +380,24 @@ class _ExportScreenState extends State<ExportScreen> {
         settingsMap,
         _month,
       );
-      final monthLabel = _month.replaceAll('-', '_');
-      await ExportService.instance.shareFile(
-        bytes,
-        'Stundenzettel_$monthLabel.pdf',
-        'application/pdf',
-      );
+      final filename = 'Stundenzettel_${_month.replaceAll('-', '_')}.pdf';
+      await ExportService.instance.saveToDownloads(bytes, filename);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$filename gespeichert'),
+            action: SnackBarAction(
+              label: 'Teilen',
+              onPressed: () => ExportService.instance.shareFile(
+                bytes,
+                filename,
+                'application/pdf',
+              ),
+            ),
+          ),
+        );
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -405,12 +417,24 @@ class _ExportScreenState extends State<ExportScreen> {
         projects,
       );
       final bytes = Uint8List.fromList(csvString.codeUnits);
-      final monthLabel = _month.replaceAll('-', '_');
-      await ExportService.instance.shareFile(
-        bytes,
-        'Zeiten_$monthLabel.csv',
-        'text/csv',
-      );
+      final filename = 'Zeiten_${_month.replaceAll('-', '_')}.csv';
+      await ExportService.instance.saveToDownloads(bytes, filename);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$filename gespeichert'),
+            action: SnackBarAction(
+              label: 'Teilen',
+              onPressed: () => ExportService.instance.shareFile(
+                bytes,
+                filename,
+                'text/csv',
+              ),
+            ),
+          ),
+        );
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
