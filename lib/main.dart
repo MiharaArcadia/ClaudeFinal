@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +66,44 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
+
+  static const _widgetChannel = MethodChannel('clocky/widget');
+
+  @override
+  void initState() {
+    super.initState();
+    _widgetChannel.setMethodCallHandler(_handleWidgetAction);
+  }
+
+  @override
+  void dispose() {
+    _widgetChannel.setMethodCallHandler(null);
+    super.dispose();
+  }
+
+  Future<dynamic> _handleWidgetAction(MethodCall call) async {
+    final timer = context.read<TimerProvider>();
+    final entries = context.read<EntryProvider>();
+    switch (call.method) {
+      case 'start':
+        if (timer.state == TimerState.stopped || timer.state == TimerState.paused) {
+          timer.start(timer.currentProjectId);
+        }
+        break;
+      case 'pause':
+        if (timer.state == TimerState.running) {
+          timer.pause();
+        } else if (timer.state == TimerState.paused) {
+          timer.resume();
+        }
+        break;
+      case 'stop':
+        if (timer.state != TimerState.stopped) {
+          await timer.stop(entries);
+        }
+        break;
+    }
+  }
 
   static const _screens = [
     TimerScreen(),

@@ -43,7 +43,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="io.arcadiaapps.clocky.WIDGET_ACTION" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
@@ -55,7 +54,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="io.arcadiaapps.clocky.WIDGET_ACTION" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"

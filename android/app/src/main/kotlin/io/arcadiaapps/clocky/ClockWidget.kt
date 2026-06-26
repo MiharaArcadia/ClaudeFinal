@@ -144,16 +144,17 @@ class ClockWidget : AppWidgetProvider() {
         }
 
         fun buildActionPendingIntent(context: Context, action: String, requestCode: Int): PendingIntent {
-            val intent = Intent(ACTION_WIDGET_BROADCAST).apply {
-                setPackage(context.packageName)
+            val intent = Intent(context, MainActivity::class.java).apply {
+                this.action = ACTION_WIDGET_BROADCAST
                 putExtra(EXTRA_WIDGET_ACTION, action)
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
             } else {
                 PendingIntent.FLAG_UPDATE_CURRENT
             }
-            return PendingIntent.getBroadcast(context, requestCode, intent, flags)
+            return PendingIntent.getActivity(context, requestCode, intent, flags)
         }
 
         fun formatTime(totalSeconds: Long): String {
@@ -221,23 +222,8 @@ class ClockWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-
-        if (intent.action == ACTION_WIDGET_BROADCAST) {
-            val widgetAction = intent.getStringExtra(EXTRA_WIDGET_ACTION) ?: return
-
-            // Re-broadcast so the Flutter MethodChannel / BroadcastReceiver in the app can pick it up
-            val forwardIntent = Intent(ACTION_WIDGET_BROADCAST).apply {
-                setPackage(context.packageName)
-                putExtra(EXTRA_WIDGET_ACTION, widgetAction)
-                putExtra("source", "widget_button")
-            }
-            context.sendBroadcast(forwardIntent)
-
-            // Refresh all 2x2 widget instances immediately
-            val manager = AppWidgetManager.getInstance(context)
-            val ids = manager.getAppWidgetIds(ComponentName(context, ClockWidget::class.java))
-            onUpdate(context, manager, ids)
-        }
+        // Widget button presses are now delivered as Activity intents to MainActivity.
+        // Refresh widget on any relevant system broadcast (e.g. BOOT_COMPLETED).
     }
 
     override fun onEnabled(context: Context) {
