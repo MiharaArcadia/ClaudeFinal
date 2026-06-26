@@ -68,7 +68,7 @@ class EntryProvider extends ChangeNotifier {
     final sundayStr = _dateStr(sunday);
 
     return _entries
-        .where((e) => e.date >= mondayStr && e.date <= sundayStr)
+        .where((e) => e.date.compareTo(mondayStr) >= 0 && e.date.compareTo(sundayStr) <= 0)
         .fold(0.0, (sum, e) => sum + e.totalHours);
   }
 

@@ -24,7 +24,7 @@ class DatabaseService {
       fullPath,
       version: 1,
       onCreate: _onCreate,
-      onForeignKeys: (db) async {
+      onOpen: (db) async {
         await db.execute('PRAGMA foreign_keys = ON');
       },
     );

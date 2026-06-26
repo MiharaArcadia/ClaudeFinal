@@ -292,7 +292,7 @@ class ExportService {
     await file.writeAsBytes(bytes);
 
     final xFile = XFile(file.path, mimeType: mimeType, name: filename);
-    await SharePlus.instance.share(ShareParams(files: [xFile]));
+    await Share.shareXFiles([xFile], subject: filename);
   }
 
   // ── Email ─────────────────────────────────────────────────────────────────────
