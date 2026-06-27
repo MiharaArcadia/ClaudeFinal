@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/paypal-qr.png
+
+Sitemap: https://getcarby.app/sitemap.xml
