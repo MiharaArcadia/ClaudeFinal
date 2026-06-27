@@ -120,14 +120,37 @@
     }
     .footer-links { font-size: 13px; color: var(--muted); }
     .footer-links a { margin-right: 16px; }
+
+    .app-nav {
+      display: flex; gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .app-nav-item {
+      flex: 1; min-width: 100px; text-align: center;
+      padding: 10px 16px; border-radius: 10px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted); transition: all .2s;
+    }
+    .app-nav-item:hover { color: var(--text); background: rgba(255,255,255,.05); text-decoration: none; }
+    .app-nav-item.active { background: var(--orange); color: #fff; }
+    .app-nav-item.active:hover { background: var(--orange); }
   </style>
 </head>
 <body>
 <div class="page-wrap">
 
-  <a href="index.html" class="back-link">
-    ← Zurück zur Clocky-Startseite
-  </a>
+  <a href="index.html" class="back-link">← Zurück zur Clocky-Startseite</a>
+
+  <nav class="app-nav">
+    <a href="../privacy-policy.html" class="app-nav-item">&#129408; Carby</a>
+    <a href="privacy-policy.html" class="app-nav-item active">&#9201; Clocky</a>
+    <a href="../clockin/privacy-policy.html" class="app-nav-item">&#127973; ClockIN</a>
+  </nav>
 
   <div class="page-header">
     <div class="page-icon">⏱</div>
