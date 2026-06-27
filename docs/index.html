@@ -102,6 +102,26 @@
     .tc-teal{background:rgba(0,188,212,.15);color:#00BCD4;border:1px solid rgba(0,188,212,.3)}
     .teaser-note{font-size:12px;color:#555}
 
+    /* ── ClockIN Interest Modal ─────────────────────────── */
+    .ci-modal-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+    .ci-modal-overlay.open{display:flex}
+    .ci-modal{background:#0f1929;border:1px solid rgba(0,188,212,.25);border-radius:24px;padding:36px 32px;max-width:420px;width:100%;position:relative;animation:ci-in .18s ease}
+    @keyframes ci-in{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+    .ci-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:#555;font-size:20px;cursor:pointer;line-height:1;padding:4px 6px;border-radius:6px;transition:color .15s}
+    .ci-modal-close:hover{color:#fff}
+    .ci-modal-icon{font-size:34px;margin-bottom:12px}
+    .ci-modal h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+    .ci-modal p{font-size:13px;color:#666;margin-bottom:24px;line-height:1.6}
+    .ci-modal-btns{display:flex;flex-direction:column;gap:10px}
+    .ci-modal-btn{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#fff;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .15s,background .15s}
+    .ci-modal-btn:hover{border-color:rgba(0,188,212,.4);background:rgba(0,188,212,.07)}
+    .ci-modal-btn-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+    .ci-icon-teal{background:rgba(0,188,212,.15)}
+    .ci-icon-blue{background:rgba(66,165,245,.12)}
+    .ci-icon-green{background:rgba(76,175,80,.12)}
+    .ci-modal-btn-body strong{display:block;font-size:13px;font-weight:700;margin-bottom:1px}
+    .ci-modal-btn-body span{font-size:11px;color:#555}
+
     /* ── Section divider ────────────────────────────────── */
     .section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:0 auto;max-width:800px}
 
@@ -823,7 +843,7 @@
         </div>
         <div class="teaser-cta-row reveal">
           <span class="ac-status status-dev" style="font-size:12px;padding:5px 12px" data-i18n="clockin_status">In Entwicklung</span>
-          <a href="mailto:ArcadiaApps@proton.me" class="teaser-cta tc-teal" data-i18n="clockin_interest">Interesse melden</a>
+          <button onclick="document.getElementById('ci-modal').classList.add('open')" class="teaser-cta tc-teal" data-i18n="clockin_interest" style="font-family:inherit;cursor:pointer">Interesse melden</button>
         </div>
       </div>
     </div>
@@ -884,6 +904,39 @@
     </div>
   </div>
 </section>
+
+<!-- ClockIN INTERESSE MODAL -->
+<div class="ci-modal-overlay" id="ci-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="ci-modal">
+    <button class="ci-modal-close" onclick="document.getElementById('ci-modal').classList.remove('open')">✕</button>
+    <div class="ci-modal-icon">🏥</div>
+    <h3 id="ci-modal-title">Interesse an ClockIN?</h3>
+    <p id="ci-modal-sub">Erfahren Sie mehr über ClockIN — lesen Sie das Handbuch, schauen Sie sich das Prospekt an oder schreiben Sie uns direkt.</p>
+    <div class="ci-modal-btns">
+      <a href="clockin/handbuch.html" class="ci-modal-btn">
+        <div class="ci-modal-btn-icon ci-icon-teal">📖</div>
+        <div class="ci-modal-btn-body">
+          <strong id="ci-btn1-title">Handbuch öffnen</strong>
+          <span id="ci-btn1-sub">Vollständige Bedienungsanleitung (DE/EN)</span>
+        </div>
+      </a>
+      <a href="clockin/prospekt.html" target="_blank" class="ci-modal-btn">
+        <div class="ci-modal-btn-icon ci-icon-blue">📄</div>
+        <div class="ci-modal-btn-body">
+          <strong id="ci-btn2-title">Prospekt ansehen</strong>
+          <span id="ci-btn2-sub">4-seitige Übersicht als PDF</span>
+        </div>
+      </a>
+      <a href="mailto:ArcadiaApps@proton.me?subject=Interesse%20an%20ClockIN" class="ci-modal-btn">
+        <div class="ci-modal-btn-icon ci-icon-green">✉</div>
+        <div class="ci-modal-btn-body">
+          <strong id="ci-btn3-title">Kontakt aufnehmen</strong>
+          <span id="ci-btn3-sub">Frage stellen oder Demo vereinbaren</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1093,6 +1146,14 @@ const T = {
     clockin_p4_sub: 'Rechnungen & Export',
     clockin_status: 'In Entwicklung',
     clockin_interest: 'Interesse melden',
+    ci_modal_title: 'Interesse an ClockIN?',
+    ci_modal_sub: 'Erfahren Sie mehr über ClockIN — lesen Sie das Handbuch, schauen Sie sich das Prospekt an oder schreiben Sie uns direkt.',
+    ci_btn1_title: 'Handbuch öffnen',
+    ci_btn1_sub: 'Vollständige Bedienungsanleitung (DE/EN)',
+    ci_btn2_title: 'Prospekt ansehen',
+    ci_btn2_sub: '4-seitige Übersicht als PDF',
+    ci_btn3_title: 'Kontakt aufnehmen',
+    ci_btn3_sub: 'Frage stellen oder Demo vereinbaren',
     // Support
     sup_h2: 'Unsere Apps sind frei.<br>Bleiben frei.',
     sup_p: 'Keine Werbung, kein Abo, keine Premium-Mauer. Wenn dir unsere Apps helfen, freuen wir uns über eine kleine Unterstützung — damit neue Features entstehen können.',
@@ -1248,6 +1309,14 @@ const T = {
     clockin_p4_sub: 'Invoices & export',
     clockin_status: 'In Development',
     clockin_interest: 'Express Interest',
+    ci_modal_title: 'Interested in ClockIN?',
+    ci_modal_sub: 'Learn more about ClockIN — read the manual, check out the brochure, or contact us directly.',
+    ci_btn1_title: 'Open Manual',
+    ci_btn1_sub: 'Full user guide (DE/EN)',
+    ci_btn2_title: 'View Brochure',
+    ci_btn2_sub: '4-page overview as PDF',
+    ci_btn3_title: 'Get in touch',
+    ci_btn3_sub: 'Ask a question or request a demo',
     sup_h2: 'Our apps are free.<br>Stay free.',
     sup_p: 'No ads, no subscription, no premium wall. If our apps help you, we appreciate any support — so new features can keep coming.',
     tier1: 'Coffee',
@@ -1276,6 +1345,14 @@ function setLang(lang) {
     const key = el.dataset.i18nHtml;
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
+  // ClockIN modal text
+  const ciMap = {
+    'ci-modal-title':'ci_modal_title','ci-modal-sub':'ci_modal_sub',
+    'ci-btn1-title':'ci_btn1_title','ci-btn1-sub':'ci_btn1_sub',
+    'ci-btn2-title':'ci_btn2_title','ci-btn2-sub':'ci_btn2_sub',
+    'ci-btn3-title':'ci_btn3_title','ci-btn3-sub':'ci_btn3_sub'
+  };
+  Object.entries(ciMap).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&t[key])el.textContent=t[key];});
   document.documentElement.lang = lang;
   document.title = lang === 'de'
     ? 'ArcadiaApps — Einfache Apps. Echter Mehrwert.'
