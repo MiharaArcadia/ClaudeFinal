@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClockIn – Zeiterfassung & Patientenverwaltung für Praxen</title>
+<style>
+  :root {
+    --blue: #1565C0;
+    --blue-light: #42A5F5;
+    --blue-mid: #1976d2;
+    --orange: #f59e0b;
+    --orange-dark: #d97706;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card2: #162032;
+    --border: rgba(255,255,255,.08);
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --green: #22c55e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(15,23,42,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 32px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-text { font-size: 22px; font-weight: 900; letter-spacing: .02em; color: var(--text); }
+  .nav-logo-text span { color: var(--orange); }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--orange); color: #fff !important; font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 13px !important; transition: background .15s !important; }
+  .nav-cta:hover { background: var(--orange-dark) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero { min-height: calc(100vh - 60px); display: flex; align-items: center; padding: 60px 32px; max-width: 1200px; margin: 0 auto; gap: 60px; }
+  .hero-left { flex: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(21,101,192,.2); border: 1px solid rgba(66,165,245,.3); color: var(--blue-light); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 24px; }
+  .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+  .hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--orange); }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 480px; margin-bottom: 32px; line-height: 1.7; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+  .tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 20px; font-size: 12px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--blue); color: #fff; padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .15s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--blue-mid); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; border: 1.5px solid rgba(255,255,255,.15); transition: border-color .15s; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,.35); }
+  .btn-orange { background: var(--orange); color: #fff; padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .15s; }
+  .btn-orange:hover { background: var(--orange-dark); }
+
+  /* ── HERO MOCKUP ── */
+  .hero-right { flex: 1; max-width: 520px; }
+  .mockup { background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.5); }
+  .mockup-header { background: var(--bg-card2); padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+  .mockup-dots { display: flex; gap: 6px; }
+  .mockup-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.15); }
+  .mockup-title { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .mockup-body { padding: 16px; }
+  .mockup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .mockup-card { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: default; transition: background .15s; }
+  .mockup-card:hover { background: rgba(255,255,255,.07); }
+  .mockup-card-icon { font-size: 22px; margin-bottom: 8px; }
+  .mockup-card-title { font-size: 13px; font-weight: 700; color: var(--text); }
+  .mockup-card-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .mockup-list { display: flex; flex-direction: column; gap: 6px; }
+  .mockup-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,.03); border-radius: 8px; border: 1px solid var(--border); }
+  .mockup-row-name { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .mockup-row-name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-light); display: inline-block; }
+  .mockup-row-time { font-size: 12px; color: var(--blue-light); font-weight: 700; }
+
+  /* ── FEATURES ── */
+  section { padding: 80px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px; }
+  .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: var(--muted); max-width: 560px; margin-bottom: 52px; line-height: 1.7; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .feat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: border-color .2s, transform .2s; }
+  .feat-card:hover { border-color: rgba(66,165,245,.3); transform: translateY(-2px); }
+  .feat-icon { font-size: 28px; margin-bottom: 14px; }
+  .feat-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .feat-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── PRICING ── */
+  .pricing-section { background: rgba(255,255,255,.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .pricing-wrapper { max-width: 700px; margin: 0 auto; text-align: center; padding: 80px 32px; }
+  .pricing-card { background: var(--bg-card); border: 1.5px solid rgba(66,165,245,.3); border-radius: 24px; padding: 40px; max-width: 480px; margin: 0 auto; }
+  .pricing-badge { display: inline-block; background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.3); color: var(--orange); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
+  .pricing-name { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .pricing-price { font-size: 52px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+  .pricing-price span { font-size: 22px; color: var(--muted); }
+  .pricing-once { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .pricing-features { text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .pricing-feat { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .pricing-feat::before { content: '✓'; color: var(--green); font-weight: 900; font-size: 14px; }
+  .pricing-renewal { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+  .renewal-option { flex: 1; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+  .renewal-price { font-size: 18px; font-weight: 900; color: var(--text); }
+  .renewal-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── WHY ── */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .why-list { display: flex; flex-direction: column; gap: 20px; }
+  .why-item { display: flex; gap: 14px; }
+  .why-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(21,101,192,.2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .why-body strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .why-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .why-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+  .stat-row { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 900; color: var(--blue-light); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── DOCS CTA ── */
+  .docs-cta { background: linear-gradient(135deg, rgba(21,101,192,.2) 0%, rgba(25,118,210,.1) 100%); border: 1px solid rgba(66,165,245,.2); border-radius: 20px; padding: 48px; text-align: center; }
+  .docs-cta h2 { font-size: 28px; font-weight: 900; margin-bottom: 12px; }
+  .docs-cta p { color: var(--muted); margin-bottom: 28px; font-size: 15px; }
+  .docs-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); padding: 32px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--blue-light); text-decoration: none; }
+  footer .footer-logo { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
+  footer .footer-logo span { color: var(--orange); }
+
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; padding: 40px 20px; }
+    .hero-right { max-width: 100%; width: 100%; }
+    .why-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="140 90 400 280" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+      <defs>
+        <linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1565C0"/>
+          <stop offset="100%" stop-color="#42A5F5"/>
+        </linearGradient>
+      </defs>
+      <path d="M 230 295 A 130 130 0 1 1 395 100 A 95 95 0 0 0 253 275 Z" fill="url(#nlg)"/>
+      <circle cx="340" cy="195" r="90" fill="none" stroke-width="5" stroke="#e8eaed" opacity="0.7"/>
+      <line x1="340" y1="195" x2="302" y2="138" stroke="#e8eaed" stroke-width="7" stroke-linecap="round"/>
+      <line x1="340" y1="195" x2="388" y2="205" stroke="#e8eaed" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="340" cy="195" r="9" fill="#1565C0"/>
+    </svg>
+    <div class="nav-logo-text">Clock<span>In</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Funktionen</a>
+    <a href="#preise">Preise</a>
+    <a href="#vorteile">Vorteile</a>
+    <a href="handbuch.html">Handbuch</a>
+    <a href="prospekt.html" target="_blank">Prospekt (PDF)</a>
+    <a href="#preise" class="nav-cta">299 € kaufen</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><span></span> ClockIn – Practice Management</div>
+    <h1>Alles für<br><em>Ihre Praxis.</em></h1>
+    <p>ClockIn verbindet Mitarbeiterverwaltung, Dienstplanung, Patientenakten und Rechnungsstellung in einem einzigen Programm – lokal, ohne Cloud, DSGVO-konform.</p>
+    <div class="hero-tags">
+      <span class="tag">⏱ Digitale Stempeluhr</span>
+      <span class="tag">📋 Dienstplanung</span>
+      <span class="tag">🩺 Patientenverwaltung</span>
+      <span class="tag">🧾 Rechnungen</span>
+      <span class="tag">🔒 Offline-First</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#preise" class="btn-orange">Jetzt kaufen – 299 €</a>
+      <a href="#features" class="btn-secondary">Mehr erfahren</a>
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:var(--muted);">✓ Einmalzahlung &nbsp;·&nbsp; ✓ Keine Monatsgebühren &nbsp;·&nbsp; ✓ 7 Tage Demo kostenlos</p>
+  </div>
+  <div class="hero-right">
+    <div class="mockup">
+      <div class="mockup-header">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-title">⏱ ClockIn Master – Dashboard</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-grid">
+          <div class="mockup-card">
+            <div class="mockup-card-icon">⏱</div>
+            <div class="mockup-card-title">Zeiterfassung</div>
+            <div class="mockup-card-sub">Digital & vollständig</div>
+          </div>
+          <div class="mockup-card">
+            <div class="mockup-card-icon">📋</div>
+            <div class="mockup-card-title">Dienstplanung</div>
+            <div class="mockup-card-sub">Schichten planen</div>
+          </div>
+          <div class="mockup-card">
+            <div class="mockup-card-icon">🩺</div>
+            <div class="mockup-card-title">Patienten</div>
+            <div class="mockup-card-sub">Akten & Termine</div>
+          </div>
+          <div class="mockup-card">
+            <div class="mockup-card-icon">🧾</div>
+            <div class="mockup-card-title">Abrechnung</div>
+            <div class="mockup-card-sub">Rechnungen & Export</div>
+          </div>
+        </div>
+        <div class="mockup-list">
+          <div class="mockup-row">
+            <span class="mockup-row-name">Müller, Hans</span>
+            <span class="mockup-row-time">10:30 Uhr</span>
+          </div>
+          <div class="mockup-row">
+            <span class="mockup-row-name">Schmidt, Petra</span>
+            <span class="mockup-row-time">11:00 Uhr</span>
+          </div>
+          <div class="mockup-row">
+            <span class="mockup-row-name">Weber, Klaus</span>
+            <span class="mockup-row-time">11:30 Uhr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="section-label">Funktionen</div>
+  <div class="section-title">Alles was Ihre Praxis braucht.</div>
+  <div class="section-sub">Kein Zusammenwürfeln von vier verschiedenen Tools mehr. ClockIn bringt alles in einer einzigen Desktop-App zusammen.</div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">⏱</div>
+      <div class="feat-title">Digitale Stempeluhr</div>
+      <div class="feat-desc">Mitarbeiter stempeln per PIN ein und aus. Gesetzliche Pausen werden automatisch berechnet. Alle Zeiten lückenlos nachverfolgbar.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <div class="feat-title">Dienstplanung</div>
+      <div class="feat-desc">Wochenpläne erstellen, Schichtvorlagen anlegen, Tausch-Anträge genehmigen – direkt in der App, ohne externe Tabellen.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🩺</div>
+      <div class="feat-title">Patienten- & Kundenverwaltung</div>
+      <div class="feat-desc">Vollständige Akten mit Therapieprotokollen, Terminen, Körperwerten, Dokumentenanhängen und Verlaufsdiagrammen.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🧾</div>
+      <div class="feat-title">Rechnungsstellung</div>
+      <div class="feat-desc">Rechnungen nach §14 UStG erstellen, direkt aus der Patientenakte. Automatische Nummernvergabe, 19/7/0% MwSt., druckfertig.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👤</div>
+      <div class="feat-title">Mitarbeiterverwaltung</div>
+      <div class="feat-desc">Verträge, Urlaubstage, Gehalt, PIN-Login – alles zentral. Rollen: Admin oder Mitarbeiter. Automatischer Logout konfigurierbar.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-title">Offline-First & DSGVO</div>
+      <div class="feat-desc">Alle Daten bleiben lokal auf Ihrem Server. Kein Cloud-Zwang, kein externer Datenzugriff. Vollständig DSGVO-konform.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🖥</div>
+      <div class="feat-title">Mehrplatz-Betrieb</div>
+      <div class="feat-desc">Ein Master-PC hält alle Daten. Weitere Arbeitsplätze verbinden sich als Clients über das lokale Netzwerk – ohne Cloud.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Export & Berichte</div>
+      <div class="feat-desc">Zeiten, Abwesenheiten und Patientendaten exportieren für Lohnbuchhaltung, Steuerberater oder das eigene Archiv.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<div class="pricing-section" id="preise">
+  <div class="pricing-wrapper">
+    <div class="section-label" style="text-align:center">Preise</div>
+    <div class="section-title" style="text-align:center">Einmal kaufen. Für immer nutzen.</div>
+    <p style="color:var(--muted);margin-bottom:40px;font-size:15px">Kein Abo. Keine Monatsgebühren. Eine faire Einmalzahlung.</p>
+    <div class="pricing-card">
+      <div class="pricing-badge">⭐ Lifetime-Lizenz</div>
+      <div class="pricing-name">ClockIn Lifetime</div>
+      <div class="pricing-price">299 <span>€</span></div>
+      <div class="pricing-once">einmalig · zzgl. gesetzl. MwSt. · unbegrenzte Laufzeit</div>
+      <div class="pricing-features">
+        <div class="pricing-feat">Alle Funktionen – sofort und dauerhaft</div>
+        <div class="pricing-feat">Unbegrenzte Nutzer & Arbeitsplätze</div>
+        <div class="pricing-feat">24 Monate Update-Support inklusive</div>
+        <div class="pricing-feat">100% lokal – keine Cloud-Abhängigkeit</div>
+        <div class="pricing-feat">7 Tage Demo vorab – kostenlos & ohne Kreditkarte</div>
+        <div class="pricing-feat">Lizenzschlüssel per E-Mail nach Kauf</div>
+      </div>
+      <a href="mailto:support@getcarby.app?subject=ClockIn%20Lizenz%20kaufen" class="btn-orange" style="display:block;text-align:center;padding:14px">Jetzt kaufen – 299 €</a>
+      <div class="pricing-renewal">
+        <div class="renewal-option">
+          <div class="renewal-price">49 €</div>
+          <div class="renewal-label">+1 Jahr Update-Support</div>
+        </div>
+        <div class="renewal-option">
+          <div class="renewal-price">99 €</div>
+          <div class="renewal-label">+2 Jahre Update-Support</div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:14px;text-align:center">Nach Ablauf des Update-Supports läuft die Software weiterhin uneingeschränkt.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHY ── -->
+<section id="vorteile">
+  <div class="section-label">Warum ClockIn</div>
+  <div class="section-title">Gebaut für den Praxisalltag.</div>
+  <div class="section-sub">Nicht irgendeine Software – sondern genau das, was Heilpraktiker, Therapeuten und Ernährungsberater wirklich brauchen.</div>
+  <div class="why-grid">
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-icon">🔗</div>
+        <div class="why-body"><strong>Alles in einem Programm</strong><p>Kein Wechseln zwischen HR-Tool und Praxissoftware. Zeiterfassung und Patientenakten laufen zusammen – kein Konkurrent bietet das.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🔒</div>
+        <div class="why-body"><strong>Ihre Daten, Ihr Server</strong><p>Gesundheitsdaten gehören nicht in die Cloud. ClockIn speichert alles lokal – kein externer Zugriff, kein Datenleck-Risiko.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💶</div>
+        <div class="why-body"><strong>Faire Preisgestaltung</strong><p>Wettbewerber kosten 45–99€ pro Monat – ClockIn kostet einmalig 299€ und läuft für immer. Schon im ersten Jahr günstiger.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <div class="why-body"><strong>Sofort einsatzbereit</strong><p>Keine komplizierte Einrichtung, kein Cloud-Konto, kein Schulungsaufwand. In 10 Minuten installiert und eingerichtet.</p></div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">150k</div><div class="stat-label">Praxen in Deutschland</div></div>
+        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Tool statt vier</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">299€</div><div class="stat-label">statt 588€+/Jahr</div></div>
+        <div class="stat"><div class="stat-num">7 Tage</div><div class="stat-label">Demo – kostenlos</div></div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:8px;font-size:13px;color:var(--muted);line-height:1.7;">
+        <strong style="color:var(--text);display:block;margin-bottom:6px">Funktioniert auch ohne Internet.</strong>
+        ClockIn läuft vollständig offline. Kein Internet im Betrieb nötig – perfekt für Praxen, die auf Datensicherheit und Verlässlichkeit setzen.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOCS CTA ── -->
+<section>
+  <div class="docs-cta">
+    <h2>Alles nachlesen, bevor Sie kaufen.</h2>
+    <p>Vollständige Dokumentation, Schritt-für-Schritt-Anleitungen und ein detailliertes Prospekt – kostenlos verfügbar.</p>
+    <div class="docs-btns">
+      <a href="handbuch.html" class="btn-primary">📖 Handbuch öffnen</a>
+      <a href="prospekt.html" target="_blank" class="btn-secondary">📄 Prospekt ansehen (PDF)</a>
+      <a href="mailto:support@getcarby.app" class="btn-secondary">✉ Frage stellen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Clock<span>In</span></div>
+  <p><a href="handbuch.html">Handbuch</a> · <a href="prospekt.html">Prospekt</a> · <a href="mailto:support@getcarby.app">support@getcarby.app</a></p>
+  <p style="margin-top:8px">© 2026 ClockIn · <a href="#">Impressum</a> · <a href="#">Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

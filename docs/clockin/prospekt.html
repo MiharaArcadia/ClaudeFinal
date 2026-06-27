@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClockIn – Produktprospekt</title>
+<style>
+  /* ── Print & Screen ── */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: #f0f4f8;
+    color: #1e293b;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  /* ── Print button (screen only) ── */
+  .print-bar {
+    background: #1565C0;
+    color: #fff;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+  .print-bar strong { font-size: 15px; }
+  .print-bar p { opacity: .8; font-size: 12px; margin-top: 2px; }
+  .print-btn {
+    background: #f59e0b;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .print-btn:hover { background: #d97706; }
+  @media print { .print-bar { display: none; } }
+
+  /* ── Pages ── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    margin: 24px auto;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    position: relative;
+    page-break-after: always;
+  }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; width: 100%; min-height: 100vh; }
+  }
+
+  /* ─────────────────────── PAGE 1 – COVER ─────────────────────── */
+  .cover {
+    background: linear-gradient(150deg, #0d47a1 0%, #1565C0 50%, #1976d2 100%);
+    color: #fff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 297mm;
+  }
+  .cover-top {
+    padding: 40px 48px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-logo { display: flex; align-items: center; gap: 12px; }
+  .cover-logo-text { font-size: 28px; font-weight: 900; letter-spacing: .02em; }
+  .cover-logo-text span { color: #f59e0b; }
+  .cover-tagline { font-size: 12px; opacity: .6; letter-spacing: .1em; text-transform: uppercase; }
+  .cover-body { flex: 1; padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 16px; }
+  .cover-h1 { font-size: 52px; font-weight: 900; line-height: 1.05; margin-bottom: 24px; }
+  .cover-h1 em { font-style: normal; color: #f59e0b; }
+  .cover-desc { font-size: 17px; opacity: .8; max-width: 420px; line-height: 1.7; margin-bottom: 40px; }
+  .cover-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+  .cover-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .cover-price-box { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 24px 28px; display: inline-flex; align-items: center; gap: 28px; max-width: 380px; }
+  .cover-price-num { font-size: 44px; font-weight: 900; color: #f59e0b; }
+  .cover-price-label { font-size: 13px; opacity: .7; line-height: 1.6; }
+  .cover-price-label strong { font-size: 15px; color: #fff; display: block; }
+  .cover-footer { padding: 28px 48px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: .5; }
+
+  /* ── Decorative clock SVG ── */
+  .cover-deco { position: absolute; right: 32px; top: 80px; opacity: .06; }
+
+  /* ─────────────────────── PAGE 2 – FEATURES ─────────────────────── */
+  .page-inner { padding: 48px; }
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; padding-bottom: 20px; border-bottom: 2px solid #e2e8f0; }
+  .ph-logo { font-size: 16px; font-weight: 900; color: #1565C0; }
+  .ph-logo span { color: #f59e0b; }
+  .ph-tag { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+  .page-title { font-size: 28px; font-weight: 900; color: #1e293b; margin-bottom: 8px; }
+  .page-sub { font-size: 14px; color: #64748b; margin-bottom: 32px; line-height: 1.6; }
+
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .feat { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+  .feat-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .feat-ico { width: 36px; height: 36px; border-radius: 8px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .feat-name { font-size: 14px; font-weight: 800; color: #1e293b; }
+  .feat-text { font-size: 12px; color: #64748b; line-height: 1.6; }
+
+  /* ─────────────────────── PAGE 3 – PRICING + WHY ─────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .pricing-box { background: linear-gradient(135deg, #1565C0 0%, #1976d2 100%); border-radius: 16px; padding: 28px; color: #fff; }
+  .pricing-box-name { font-size: 13px; font-weight: 700; opacity: .7; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+  .pricing-box-price { font-size: 48px; font-weight: 900; margin-bottom: 4px; }
+  .pricing-box-price small { font-size: 20px; opacity: .7; }
+  .pricing-box-note { font-size: 12px; opacity: .65; margin-bottom: 20px; }
+  .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .pricing-list li { font-size: 12px; display: flex; gap: 8px; align-items: flex-start; }
+  .pricing-list li::before { content: '✓'; color: #86efac; font-weight: 900; flex-shrink: 0; }
+  .renewal-row { display: flex; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.15); }
+  .ren { flex: 1; background: rgba(255,255,255,.1); border-radius: 8px; padding: 10px; text-align: center; }
+  .ren-price { font-size: 20px; font-weight: 900; }
+  .ren-lbl { font-size: 10px; opacity: .65; margin-top: 2px; }
+
+  .why-list-p { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .why-item-p { display: flex; gap: 12px; align-items: flex-start; }
+  .why-ico-p { width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+  .why-body-p strong { font-size: 13px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 3px; }
+  .why-body-p p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  /* ── Comparison table ── */
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 12px; }
+  .comp-table th { padding: 10px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+  .comp-table th:first-child { text-align: left; color: #64748b; }
+  .comp-table th:not(:first-child) { text-align: center; }
+  .comp-table th:nth-child(2) { background: #1565C0; color: #fff; border-radius: 8px 8px 0 0; }
+  .comp-table td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; }
+  .comp-table td:first-child { color: #64748b; }
+  .comp-table td:not(:first-child) { text-align: center; font-weight: 700; }
+  .comp-table td:nth-child(2) { background: #eff6ff; color: #1565C0; }
+  .comp-yes { color: #16a34a; }
+  .comp-no { color: #dc2626; }
+
+  /* ─────────────────────── PAGE 4 – WORKFLOW + CTA ─────────────────────── */
+  .workflow { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .workflow::before { content: ''; position: absolute; left: 17px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(to bottom, #1565C0, #42A5F5); border-radius: 1px; }
+  .wf-step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px; }
+  .wf-num { width: 36px; height: 36px; border-radius: 50%; background: #1565C0; color: #fff; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; border: 3px solid #fff; box-shadow: 0 0 0 2px #1565C0; }
+  .wf-body strong { font-size: 14px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 4px; }
+  .wf-body p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  .cta-box { background: linear-gradient(135deg, #0d47a1, #1565C0); color: #fff; border-radius: 16px; padding: 36px; text-align: center; margin-top: 32px; }
+  .cta-box h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+  .cta-box p { opacity: .75; font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn { padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; }
+  .cta-btn-orange { background: #f59e0b; color: #fff; }
+  .cta-btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+  .contact-item { background: rgba(255,255,255,.08); border-radius: 10px; padding: 14px; }
+  .contact-item .ci-icon { font-size: 20px; margin-bottom: 6px; }
+  .contact-item .ci-label { font-size: 10px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .contact-item .ci-val { font-size: 13px; font-weight: 700; }
+
+  /* ── Page footer ── */
+  .page-footer { position: absolute; bottom: 24px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<!-- PRINT BAR (screen only) -->
+<div class="print-bar">
+  <div>
+    <strong>ClockIn – Produktprospekt</strong>
+    <p>Als PDF speichern: Drucken → "Als PDF speichern" wählen → A4, Hintergrundgrafiken aktivieren</p>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 Als PDF speichern</button>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 1 – COVER ═══ -->
+<div class="page cover">
+  <!-- Decorative clock -->
+  <div class="cover-deco">
+    <svg viewBox="140 90 400 280" xmlns="http://www.w3.org/2000/svg" width="320" height="320">
+      <circle cx="340" cy="195" r="130" fill="none" stroke="#fff" stroke-width="6"/>
+      <line x1="340" y1="195" x2="280" y2="110" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+      <line x1="340" y1="195" x2="420" y2="215" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="340" cy="195" r="14" fill="#fff"/>
+    </svg>
+  </div>
+
+  <div class="cover-top">
+    <div class="cover-logo">
+      <svg viewBox="140 90 400 280" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+        <path d="M 230 295 A 130 130 0 1 1 395 100 A 95 95 0 0 0 253 275 Z" fill="rgba(255,255,255,.9)"/>
+        <circle cx="340" cy="195" r="90" fill="none" stroke-width="5" stroke="rgba(255,255,255,.6)"/>
+        <line x1="340" y1="195" x2="302" y2="138" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="340" y1="195" x2="388" y2="205" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/>
+        <circle cx="340" cy="195" r="9" fill="#1565C0"/>
+      </svg>
+      <div>
+        <div class="cover-logo-text">Clock<span>In</span></div>
+        <div class="cover-tagline">Practice Management</div>
+      </div>
+    </div>
+    <div style="font-size:12px;opacity:.5">Produktprospekt · 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-label">Für Gesundheitspraxen & Therapiezentren</div>
+    <div class="cover-h1">Alles für<br>Ihre <em>Praxis.</em></div>
+    <div class="cover-desc">
+      ClockIn verbindet Mitarbeiterverwaltung, digitale Zeiterfassung, Patientenakten und Rechnungsstellung in einem einzigen Programm – lokal auf Ihrem Server, ohne Cloud, ohne Monatsgebühren.
+    </div>
+    <div class="cover-chips">
+      <span class="cover-chip">⏱ Digitale Stempeluhr</span>
+      <span class="cover-chip">📋 Dienstplanung</span>
+      <span class="cover-chip">🩺 Patientenverwaltung</span>
+      <span class="cover-chip">🧾 Rechnungsstellung §14 UStG</span>
+      <span class="cover-chip">🔒 Offline · DSGVO-konform</span>
+      <span class="cover-chip">🖥 Windows Desktop</span>
+    </div>
+    <div class="cover-price-box">
+      <div class="cover-price-num">299 €</div>
+      <div class="cover-price-label">
+        <strong>Lifetime-Lizenz</strong>
+        Einmalzahlung · keine Monatsgebühren<br>
+        24 Monate Update-Support inklusive<br>
+        7 Tage Demo – kostenlos testen
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span>getcarby.app</span>
+    <span>support@getcarby.app</span>
+    <span>Version 6 · Juni 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 2 – FUNKTIONEN ═══ -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Clock<span>In</span></div>
+      <div class="ph-tag">Funktionsübersicht</div>
+    </div>
+    <div class="page-title">Was ClockIn kann.</div>
+    <div class="page-sub">Kein Zusammenwürfeln von vier verschiedenen Tools mehr. ClockIn bringt alles in einer einzigen Desktop-App zusammen – speziell für Praxen mit 1–15 Mitarbeitern.</div>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">⏱</div>
+          <div class="feat-name">Digitale Stempeluhr</div>
+        </div>
+        <div class="feat-text">Mitarbeiter stempeln per 4-stelliger PIN ein und aus. Gesetzliche Pausenzeiten (30 Min. ab 6h, 45 Min. ab 9h) werden automatisch abgezogen. Zeiten lückenlos nachverfolgbar und korrigierbar.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">📋</div>
+          <div class="feat-name">Dienstplanung</div>
+        </div>
+        <div class="feat-text">Wochenpläne erstellen, eigene Schichtvorlagen anlegen, Tausch-Anträge zwischen Mitarbeitern verwalten und genehmigen. Übersicht über geplante vs. tatsächliche Zeiten.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">🩺</div>
+          <div class="feat-name">Patienten- & Kundenverwaltung</div>
+        </div>
+        <div class="feat-text">Vollständige Akten mit Stammdaten, Therapieprotokollen, Terminen, Körperwerten (Verlaufsdiagramme), Dokumentenanhängen und Zahlungshistorie. Flexibel: "Kunden" oder "Patienten".</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">🧾</div>
+          <div class="feat-name">Rechnungsstellung §14 UStG</div>
+        </div>
+        <div class="feat-text">Rechnungen direkt aus der Patientenakte erstellen. Automatische Nummernvergabe (RG-2026-001), 19/7/0% MwSt., mit Unternehmenslogo und -daten, druckfertig.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">👤</div>
+          <div class="feat-name">Mitarbeiterverwaltung</div>
+        </div>
+        <div class="feat-text">Mitarbeiter anlegen, Rollen vergeben (Admin/Mitarbeiter), Verträge hinterlegen (Vollzeit/Teilzeit, Urlaubstage, Gehalt), automatischen Logout konfigurieren. Urlaub & Abwesenheiten verwalten.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">🖥</div>
+          <div class="feat-name">Mehrplatz-Betrieb (LAN)</div>
+        </div>
+        <div class="feat-text">Ein Master-PC hält alle Daten. Weitere Arbeitsplätze verbinden sich als Clients über das lokale Netzwerk – unbegrenzt viele, ohne Cloud, ohne zusätzliche Lizenzkosten.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">🔒</div>
+          <div class="feat-name">Offline-First & DSGVO</div>
+        </div>
+        <div class="feat-text">Alle Daten bleiben lokal auf Ihrem Server. Kein externer Zugriff, keine Cloud-Pflicht, kein Sicherheitsrisiko für Gesundheitsdaten. Vollständig DSGVO-konform nach Art. 4.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head">
+          <div class="feat-ico">📊</div>
+          <div class="feat-name">Export & Berichte</div>
+        </div>
+        <div class="feat-text">Zeiten, Abwesenheiten und Patientendaten für Lohnbuchhaltung, Steuerberater oder Archiv exportieren. Nachrichten-System für interne Mitteilungen an alle oder einzelne Mitarbeiter.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>ClockIn · getcarby.app</span>
+    <span>Seite 2 von 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 3 – PREIS & VERGLEICH ═══ -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Clock<span>In</span></div>
+      <div class="ph-tag">Preis & Vergleich</div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="page-title">Faire Preisgestaltung.</div>
+        <div class="page-sub" style="margin-bottom:20px">Einmal zahlen, für immer nutzen. Kein Abo-Stress, keine Kostenfalle.</div>
+        <div class="pricing-box">
+          <div class="pricing-box-name">⭐ Lifetime-Lizenz</div>
+          <div class="pricing-box-price">299 <small>€</small></div>
+          <div class="pricing-box-note">einmalig · zzgl. gesetzl. MwSt.</div>
+          <ul class="pricing-list">
+            <li>Alle Funktionen – sofort und dauerhaft</li>
+            <li>Unbegrenzte Nutzer & Arbeitsplätze</li>
+            <li>24 Monate Update-Support inklusive</li>
+            <li>100% lokal – keine Cloud-Abhängigkeit</li>
+            <li>7 Tage Demo – kostenlos, ohne Kreditkarte</li>
+            <li>Lizenzschlüssel per E-Mail nach Kauf</li>
+            <li>Software läuft auch nach Update-Support weiter</li>
+          </ul>
+          <div class="renewal-row">
+            <div class="ren">
+              <div class="ren-price">49 €</div>
+              <div class="ren-lbl">+1 Jahr Update-Support</div>
+            </div>
+            <div class="ren">
+              <div class="ren-price">99 €</div>
+              <div class="ren-lbl">+2 Jahre Update-Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#1e293b;margin-bottom:16px;margin-top:48px">Warum ClockIn die bessere Wahl ist.</div>
+        <ul class="why-list-p">
+          <li class="why-item-p">
+            <div class="why-ico-p">🔗</div>
+            <div class="why-body-p"><strong>Alles in einem Programm</strong><p>HR-Tool + Praxissoftware kombiniert – kein Konkurrent bietet das. Keine Insellösungen, kein Daten-Import zwischen Tools.</p></div>
+          </li>
+          <li class="why-item-p">
+            <div class="why-ico-p">💶</div>
+            <div class="why-body-p"><strong>Massiv günstiger als Alternativen</strong><p>Wettbewerber kosten 45–99€/Monat = 540–1.188€/Jahr. ClockIn kostet einmalig 299€ – bereits im ersten Jahr die günstigere Wahl.</p></div>
+          </li>
+          <li class="why-item-p">
+            <div class="why-ico-p">🔒</div>
+            <div class="why-body-p"><strong>Ihre Daten, Ihr Server</strong><p>Patientendaten gehören nicht in die Cloud. Kein Datenleck-Risiko, kein externer Zugriff, kein Abhängigkeit von Drittanbietern.</p></div>
+          </li>
+          <li class="why-item-p">
+            <div class="why-ico-p">⚡</div>
+            <div class="why-body-p"><strong>In 10 Minuten einsatzbereit</strong><p>Keine komplizierte Cloud-Einrichtung, kein Account-System. Installieren, Lizenz eingeben, starten.</p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="comp-table" style="margin-top:28px">
+      <thead>
+        <tr>
+          <th>Funktion</th>
+          <th>ClockIn</th>
+          <th>Typische Praxissoftware</th>
+          <th>Typisches HR-Tool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Digitale Stempeluhr</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-yes">✓</td></tr>
+        <tr><td>Dienstplanung</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-yes">✓</td></tr>
+        <tr><td>Patientenakten</td><td class="comp-yes">✓</td><td class="comp-yes">✓</td><td class="comp-no">✗</td></tr>
+        <tr><td>Rechnungen §14 UStG</td><td class="comp-yes">✓</td><td class="comp-yes">✓</td><td class="comp-no">✗</td></tr>
+        <tr><td>Kein Cloud-Zwang</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-no">✗</td></tr>
+        <tr><td>Einmalzahlung</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-no">✗</td></tr>
+        <tr><td>Preis (3 Jahre)</td><td style="color:#1565C0;font-weight:800">299 € einmalig</td><td style="color:#dc2626">1.620–3.560 €</td><td style="color:#dc2626">3.384 €+</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">
+    <span>ClockIn · getcarby.app</span>
+    <span>Seite 3 von 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 4 – SO GEHT'S + CTA ═══ -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Clock<span>In</span></div>
+      <div class="ph-tag">Installation & Kontakt</div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="page-title">In 4 Schritten startklar.</div>
+        <div class="page-sub" style="margin-bottom:24px">Von Null auf produktiv in weniger als 15 Minuten.</div>
+        <div class="workflow">
+          <div class="wf-step">
+            <div class="wf-num">1</div>
+            <div class="wf-body"><strong>Demo herunterladen & testen</strong><p>Kostenlos, 7 Tage, voller Funktionsumfang – keine Kreditkarte, kein Account. Download auf getcarby.app.</p></div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-num">2</div>
+            <div class="wf-body"><strong>Lifetime-Lizenz kaufen</strong><p>Einmalzahlung 299€ auf getcarby.app. Lizenzschlüssel kommt sofort per E-Mail.</p></div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-num">3</div>
+            <div class="wf-body"><strong>ClockIn Master installieren</strong><p>Setup-Datei ausführen, Lizenzschlüssel eingeben, Praxisname und Daten einrichten.</p></div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-num">4</div>
+            <div class="wf-body"><strong>Optional: Clients einrichten</strong><p>Für weitere Arbeitsplätze im Netzwerk: Client-Setup auf den anderen PCs, IP des Masters eingeben – fertig.</p></div>
+          </div>
+        </div>
+
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:20px">
+          <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:10px">Systemvoraussetzungen</div>
+          <div style="font-size:11px;color:#64748b;line-height:1.8">
+            ✓ Windows 10 oder 11 (64-Bit)<br>
+            ✓ 4 GB RAM, 500 MB Speicher<br>
+            ✓ LAN-Netzwerk (für Mehrplatz-Betrieb)<br>
+            ✓ Kein Internetzwang im laufenden Betrieb
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#1e293b;margin-bottom:20px;margin-top:48px">Admin-Login auf einen Blick.</div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:18px">
+          <div style="font-size:12px;color:#64748b;line-height:1.8">
+            <strong style="color:#1e293b;display:block;margin-bottom:8px">Standard-PINs (Werkseinstellung):</strong>
+            👤 Maria Schmidt → <strong style="font-family:monospace">1111</strong><br>
+            👤 Thomas Müller → <strong style="font-family:monospace">2222</strong><br>
+            👤 Sabine Wagner → <strong style="font-family:monospace">3333</strong><br>
+            <span style="color:#dc2626;font-size:11px;margin-top:8px;display:block">⚠ Bitte sofort nach Einrichtung ändern!</span>
+          </div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px">
+          <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:10px">Datensicherung:</div>
+          <div style="font-size:11px;color:#64748b;line-height:1.8;font-family:monospace;background:#fff;padding:10px;border-radius:8px;border:1px solid #e2e8f0">
+            C:\Users\[Name]\AppData\Roaming\<br>ClockIn Master\clockin-master.json
+          </div>
+          <div style="font-size:11px;color:#64748b;margin-top:8px">Diese Datei regelmäßig auf externem Datenträger sichern.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h2>Bereit für ClockIn?</h2>
+      <p>7 Tage kostenlos testen – kein Kreditkarte, kein Account. Danach Lifetime-Lizenz für einmalig 299€.</p>
+      <div class="cta-btns">
+        <a class="cta-btn cta-btn-orange" href="https://getcarby.app">🚀 Demo starten – getcarby.app</a>
+        <a class="cta-btn cta-btn-ghost" href="mailto:support@getcarby.app">✉ Frage stellen</a>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="ci-icon">🌐</div>
+          <div class="ci-label">Website</div>
+          <div class="ci-val">getcarby.app</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">✉</div>
+          <div class="ci-label">E-Mail</div>
+          <div class="ci-val">support@getcarby.app</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📖</div>
+          <div class="ci-label">Handbuch</div>
+          <div class="ci-val">getcarby.app/handbuch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>ClockIn · getcarby.app · © 2026</span>
+    <span>Seite 4 von 4</span>
+  </div>
+</div>
+
+</body>
+</html>
