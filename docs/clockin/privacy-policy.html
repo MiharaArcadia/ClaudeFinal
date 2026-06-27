@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClockIN – Datenschutzerklärung</title>
+  <meta name="description" content="Datenschutzerklärung für ClockIN — die kostenlose Praxisverwaltungs-App von ArcadiaApps.">
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#080808;--bg2:#0e0e0e;--card:#111111;--border:rgba(255,255,255,.07);
+      --orange:#FF6B35;--green:#4CAF50;--blue:#2196F3;
+      --text:#EDEDED;--muted:#888;--font:'Inter',-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+    a{color:var(--orange);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .page-wrap{max-width:760px;margin:0 auto;padding:60px 32px 100px}
+    .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;margin-bottom:48px;transition:color .2s}
+    .back-link:hover{color:var(--text);text-decoration:none}
+    .page-header{margin-bottom:48px}
+    .page-icon{font-size:48px;margin-bottom:16px}
+    h1{font-size:2.2rem;font-weight:900;letter-spacing:-.03em;margin-bottom:8px;background:linear-gradient(135deg,var(--orange),#FF4081);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .page-sub{color:var(--muted);font-size:14px}
+    .last-updated{color:var(--muted);font-size:13px;margin-top:4px}
+    .highlight-box{background:rgba(76,175,80,.08);border:1px solid rgba(76,175,80,.2);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;gap:16px;align-items:flex-start}
+    .highlight-box.blue{background:rgba(33,150,243,.08);border-color:rgba(33,150,243,.25)}
+    .highlight-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+    .highlight-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.6}
+    .highlight-text span.green{color:var(--green)}
+    .highlight-text span.blue{color:var(--blue)}
+    .highlight-text p{font-size:14px;font-weight:400;color:#b0b0b0;margin-top:6px;margin-bottom:0}
+    h2{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin-top:48px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);color:var(--text)}
+    h3{font-size:1rem;font-weight:700;margin-top:24px;margin-bottom:10px;color:var(--text)}
+    p{font-size:15px;color:#b0b0b0;margin-bottom:14px}
+    ul{list-style:none;padding:0;margin-bottom:14px}
+    ul li{font-size:15px;color:#b0b0b0;padding:6px 0 6px 24px;position:relative}
+    ul li::before{content:'→';position:absolute;left:0;color:var(--orange);font-weight:700}
+    strong{color:var(--text);font-weight:600}
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px}
+    .data-table th{background:var(--card);color:var(--text);font-weight:700;text-align:left;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .data-table td{color:#b0b0b0;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top}
+    .permission-grid{display:grid;gap:12px;margin-top:12px}
+    .perm-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px}
+    .perm-icon{font-size:22px;flex-shrink:0}
+    .perm-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .perm-desc{font-size:13px;color:var(--muted)}
+    .contact-box{background:var(--card);border:1px solid rgba(255,107,53,.2);border-radius:12px;padding:24px;margin-top:16px}
+    .contact-box p{margin:0}
+    hr{border:none;border-top:1px solid var(--border);margin:48px 0 32px}
+    .footer-links{font-size:13px;color:var(--muted)}
+    .footer-links a{margin-right:16px}
+    .app-nav{display:flex;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:6px;margin-bottom:32px;flex-wrap:wrap}
+    .app-nav-item{flex:1;min-width:100px;text-align:center;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s}
+    .app-nav-item:hover{color:var(--text);background:rgba(255,255,255,.05);text-decoration:none}
+    .app-nav-item.active{background:var(--orange);color:#fff}
+    .app-nav-item.active:hover{background:var(--orange)}
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <a href="index.html" class="back-link">&#8592; Zurück zur ClockIN-Startseite</a>
+
+  <nav class="app-nav">
+    <a href="../privacy-policy.html" class="app-nav-item">&#129408; Carby</a>
+    <a href="../clocky/privacy-policy.html" class="app-nav-item">&#9201; Clocky</a>
+    <a href="privacy-policy.html" class="app-nav-item active">&#127973; ClockIN</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-icon">&#127973;</div>
+    <h1>Datenschutzerklärung</h1>
+    <div class="page-sub">ClockIN Android-App · ArcadiaApps</div>
+    <div class="last-updated">Zuletzt aktualisiert: Juni 2025</div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">&#128274;</div>
+    <div class="highlight-text">
+      <span class="green">Kurzfassung:</span> ClockIN speichert alle Daten ausschließlich lokal auf dem Gerät der Praxis oder des Betriebs. ArcadiaApps hat keinen Zugriff auf die eingegebenen Daten — keine Cloud, keine Server, kein Tracking.
+    </div>
+  </div>
+
+  <div class="highlight-box blue">
+    <div class="highlight-icon">&#9878;&#65039;</div>
+    <div class="highlight-text">
+      <span class="blue">Wichtiger Hinweis für Praxen und Betriebe:</span>
+      <p>ClockIN ist ein Werkzeug zur lokalen Datenverwaltung. Die Praxis bzw. der Betrieb, der ClockIN einsetzt, ist im Sinne der DSGVO der <strong>Verantwortliche</strong> für die darin eingetragenen Patienten-, Mitarbeiter- und Kundendaten. ArcadiaApps ist lediglich Anbieter der Software und verarbeitet selbst keine dieser Daten.</p>
+    </div>
+  </div>
+
+  <h2>1. Überblick</h2>
+  <p>ClockIN ist eine kostenlose Android-App für Arztpraxen, Therapeuten, Handwerksbetriebe und andere Dienstleister. Die App vereint digitale Zeiterfassung, Schichtplanung, Patienten- und Kundenverwaltung sowie integrierte Abrechnung in einer Anwendung — ohne Cloud-Anbindung und ohne monatliche Kosten.</p>
+  <p>ClockIN wurde als <strong>Offline-First-App</strong> konzipiert. Alle eingegebenen Daten bleiben auf dem Gerät, auf dem die App installiert ist. Eine Internetverbindung ist für den Betrieb der App nicht erforderlich.</p>
+
+  <h2>2. Verantwortliche Stellen</h2>
+
+  <h3>ArcadiaApps (Anbieter der Software)</h3>
+  <p>
+    Frederic Schroer<br>
+    ArcadiaApps<br>
+    Deutschland<br>
+    E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+  </p>
+  <p>ArcadiaApps ist verantwortlich für die App selbst (Funktionsweise, Berechtigungen, Datensicherheit der Software). ArcadiaApps verarbeitet <strong>keine</strong> der in ClockIN eingetragenen Patienten-, Mitarbeiter- oder Kundendaten.</p>
+
+  <h3>Praxis / Betrieb (Nutzer der Software)</h3>
+  <p>Die Praxis oder das Unternehmen, das ClockIN einsetzt, ist gemäß Art. 4 Nr. 7 DSGVO der <strong>Verantwortliche</strong> für alle personenbezogenen Daten, die in ClockIN eingegeben werden. Dazu gehören Patientendaten, Mitarbeiterdaten und Abrechnungsinformationen. Diese Stelle ist für die Einhaltung der DSGVO gegenüber ihren Patienten, Kunden und Mitarbeitern verantwortlich.</p>
+
+  <h2>3. Welche Daten werden in ClockIN verwaltet?</h2>
+  <p>ClockIN ermöglicht die lokale Verwaltung folgender Datenkategorien. Alle Daten werden ausschließlich auf dem Gerät gespeichert:</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Datenkategorie</th>
+        <th>Beispiele</th>
+        <th>Speicherort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Zeiterfassung</strong></td><td>Arbeitsbeginn, Arbeitsende, Pausen, Notizen</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Schichtplanung</strong></td><td>Schichten, Mitarbeiterzuordnung, Verfügbarkeiten</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Mitarbeiterdaten</strong></td><td>Name, Rolle, Arbeitszeiten</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Patienten- / Kundendaten</strong></td><td>Name, Kontaktdaten, Termininfos</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Abrechnungsdaten</strong></td><td>Leistungen, Preise, Rechnungen</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Exportierte Dokumente</strong></td><td>PDF-Rechnungen, CSV-Exporte</td><td>Lokal (Downloads-Ordner)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Daten, die ArcadiaApps NICHT erhebt</h3>
+  <ul>
+    <li>Keine Übertragung von Patienten- oder Kundendaten an ArcadiaApps</li>
+    <li>Keine Nutzungsstatistiken oder Analysedaten</li>
+    <li>Keine Absturzberichte an externe Dienste</li>
+    <li>Keine Gerätekennungen (IMEI, Advertising ID etc.)</li>
+    <li>Keine Standortdaten</li>
+    <li>Kein Profil- oder Accountsystem bei ArcadiaApps</li>
+  </ul>
+
+  <h2>4. Besondere Kategorien personenbezogener Daten (Art. 9 DSGVO)</h2>
+  <p>Wenn ClockIN in einer Arztpraxis oder therapeutischen Einrichtung eingesetzt wird, können dort <strong>Gesundheitsdaten</strong> im Sinne von Art. 9 DSGVO verwaltet werden. Diese Daten genießen einen besonderen Schutz.</p>
+  <p><strong>ArcadiaApps verarbeitet diese Daten selbst zu keinem Zeitpunkt.</strong> Sie bleiben ausschließlich auf dem Gerät der Praxis. Die Praxis ist als Verantwortliche verpflichtet, die besonderen Anforderungen der DSGVO für Gesundheitsdaten einzuhalten — insbesondere:</p>
+  <ul>
+    <li>Geeignete technische und organisatorische Maßnahmen zum Schutz der Daten (Art. 32 DSGVO)</li>
+    <li>Rechtmäßige Grundlage für die Verarbeitung (Art. 9 Abs. 2 DSGVO, z. B. Einwilligung oder Behandlungsvertrag)</li>
+    <li>Information der Patienten über die Datenverarbeitung</li>
+    <li>Ggf. Führung eines Verzeichnisses von Verarbeitungstätigkeiten (Art. 30 DSGVO)</li>
+  </ul>
+  <p>Wir empfehlen Praxen, ihren Datenschutzbeauftragten oder einen Fachanwalt für Datenschutzrecht hinzuzuziehen.</p>
+
+  <h2>5. Externe Dienste</h2>
+  <p>ClockIN nutzt <strong>keine</strong> externen Analysedienste, keine Cloud-Datenbanken und keine Drittanbieter-SDKs für Werbung oder Tracking.</p>
+  <p>Die einzige mögliche externe Kommunikation: Beim ersten App-Start können Schriftarten von <strong>Google Fonts</strong> geladen werden. Dabei wird die IP-Adresse des Geräts kurzzeitig an Google übertragen. Es werden keine App-Daten oder Patientendaten übermittelt. Datenschutzrichtlinie von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+  <p>Folgende Dienste werden ausdrücklich <strong>nicht</strong> verwendet: Firebase, Google Analytics, Crashlytics, Facebook SDK, Adjust, AppsFlyer oder vergleichbare Dienste.</p>
+
+  <h2>6. App-Berechtigungen</h2>
+  <div class="permission-grid">
+    <div class="perm-card">
+      <div class="perm-icon">&#127760;</div>
+      <div>
+        <div class="perm-name">Internet (INTERNET)</div>
+        <div class="perm-desc">Nur für das optionale Laden von Schriftarten beim ersten Start (Google Fonts). Es werden keine App-Daten oder Patientendaten übertragen.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">&#128190;</div>
+      <div>
+        <div class="perm-name">Speicher (WRITE_EXTERNAL_STORAGE)</div>
+        <div class="perm-desc">Nur für Android 9 und älter: Zum Speichern exportierter PDF-Rechnungen und CSV-Dateien im Downloads-Ordner. Auf Android 10+ nicht erforderlich.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">&#128243;</div>
+      <div>
+        <div class="perm-name">Autostart (RECEIVE_BOOT_COMPLETED)</div>
+        <div class="perm-desc">Damit optionale Home-Screen-Widgets nach einem Geräteneustart korrekt wiederhergestellt werden.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">ClockIN fordert <strong>keinerlei Berechtigungen</strong> für Kamera, Mikrofon, Standort, Kontakte, Kalender oder Bluetooth.</p>
+
+  <h2>7. Datensicherheit</h2>
+  <p>Da alle Daten lokal auf dem Android-Gerät der Praxis gespeichert werden, gilt:</p>
+  <ul>
+    <li>ClockINs Datenbank (SQLite) ist durch die Android-App-Sandbox geschützt — andere Apps können nicht darauf zugreifen.</li>
+    <li>Bei aktivierter Geräteverschlüsselung (Standard bei modernen Android-Geräten) sind die Daten verschlüsselt gespeichert.</li>
+    <li>Exportierte Dateien (PDF, CSV) liegen im Downloads-Ordner und sollten entsprechend gesichert werden.</li>
+    <li>Google-Backups können ClockIN-Daten umfassen, sofern in den Android-Systemeinstellungen aktiviert.</li>
+  </ul>
+  <p><strong>Empfehlung für Praxen:</strong> Geräteverschlüsselung aktivieren, starke Bildschirmsperre einrichten, Gerät nicht unbeaufsichtigt lassen und regelmäßige lokale Backups durchführen.</p>
+
+  <h2>8. Datenlöschung</h2>
+  <p>Die Praxis hat jederzeit vollständige Kontrolle über ihre Daten:</p>
+  <ul>
+    <li><strong>Einzelne Einträge:</strong> Direkt in der App löschbar.</li>
+    <li><strong>Alle App-Daten:</strong> Über Android-Einstellungen → Apps → ClockIN → Daten löschen.</li>
+    <li><strong>Deinstallation:</strong> Entfernt alle App-Daten automatisch.</li>
+    <li><strong>Exportierte Dateien:</strong> Im Downloads-Ordner über den Dateimanager manuell löschbar.</li>
+  </ul>
+
+  <h2>9. Rechte betroffener Personen (DSGVO)</h2>
+  <p>Personen, deren Daten in ClockIN verwaltet werden (z. B. Patienten oder Mitarbeiter), haben gegenüber der <strong>Praxis als Verantwortliche</strong> folgende Rechte:</p>
+  <ul>
+    <li><strong>Auskunft (Art. 15 DSGVO):</strong> Welche Daten über sie gespeichert sind.</li>
+    <li><strong>Berichtigung (Art. 16 DSGVO):</strong> Korrektur unrichtiger Daten.</li>
+    <li><strong>Löschung (Art. 17 DSGVO):</strong> Sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</li>
+    <li><strong>Einschränkung der Verarbeitung (Art. 18 DSGVO).</strong></li>
+    <li><strong>Datenübertragbarkeit (Art. 20 DSGVO).</strong></li>
+    <li><strong>Beschwerderecht</strong> bei einer Datenschutz-Aufsichtsbehörde.</li>
+  </ul>
+  <p>Diese Rechte sind gegenüber der jeweiligen Praxis geltend zu machen — nicht gegenüber ArcadiaApps, da ArcadiaApps keinen Zugriff auf die gespeicherten Daten hat.</p>
+
+  <h2>10. Kinder</h2>
+  <p>ClockIN richtet sich an Unternehmen und Praxen. Die App ist nicht für die direkte Nutzung durch Kinder unter 16 Jahren vorgesehen. Werden Daten von Minderjährigen (z. B. als Patienten) verwaltet, liegt die datenschutzrechtliche Verantwortung bei der Praxis.</p>
+
+  <h2>11. Änderungen dieser Datenschutzerklärung</h2>
+  <p>Änderungen werden auf dieser Seite veröffentlicht. Das Datum der letzten Aktualisierung ist oben angegeben. Bei wesentlichen Änderungen werden Nutzer über den Google Play Store informiert.</p>
+
+  <h2>12. Kontakt</h2>
+  <p>Bei Fragen zur App ClockIN oder zu dieser Datenschutzerklärung:</p>
+  <div class="contact-box">
+    <p>
+      <strong>ArcadiaApps</strong><br>
+      E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a><br><br>
+      <span style="color:var(--muted);font-size:13px">Für Fragen zur Verarbeitung von Patienten- oder Mitarbeiterdaten wende dich bitte an die Praxis, die ClockIN verwendet — diese ist als datenschutzrechtlich Verantwortliche zuständig.</span>
+    </p>
+  </div>
+
+  <hr>
+  <div class="footer-links">
+    <a href="index.html">&#127973; ClockIN Startseite</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="../clocky/privacy-policy.html">&#9201; Clocky Datenschutz</a>
+    <a href="../privacy-policy.html">&#129408; Carby Datenschutz</a>
+    <a href="mailto:ArcadiaApps@proton.me">Kontakt</a>
+  </div>
+
+</div>
+</body>
+</html>

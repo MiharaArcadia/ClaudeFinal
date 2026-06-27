@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carby – Datenschutzerklärung</title>
+  <meta name="description" content="Datenschutzerklärung für Carby — die kostenlose Ernährungs-Tracking-App von ArcadiaApps.">
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --bg2: #0e0e0e;
+      --card: #111111;
+      --border: rgba(255,255,255,.07);
+      --orange: #FF6B35;
+      --green: #4CAF50;
+      --text: #EDEDED;
+      --muted: #888;
+      --font: 'Inter', -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 32px 100px;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 14px; font-weight: 500;
+      margin-bottom: 48px;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--text); text-decoration: none; }
+
+    .page-header { margin-bottom: 48px; }
+    .page-icon { font-size: 48px; margin-bottom: 16px; }
+    h1 {
+      font-size: 2.2rem; font-weight: 900; letter-spacing: -.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--orange), #FF4081);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-sub { color: var(--muted); font-size: 14px; }
+    .last-updated { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    .highlight-box {
+      background: rgba(76,175,80,.08);
+      border: 1px solid rgba(76,175,80,.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .highlight-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .highlight-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.6; }
+    .highlight-text span { color: var(--green); }
+
+    h2 {
+      font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em;
+      margin-top: 48px; margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    h3 {
+      font-size: 1rem; font-weight: 700;
+      margin-top: 24px; margin-bottom: 10px;
+      color: var(--text);
+    }
+    p { font-size: 15px; color: #b0b0b0; margin-bottom: 14px; }
+    ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    ul li {
+      font-size: 15px; color: #b0b0b0;
+      padding: 6px 0 6px 24px;
+      position: relative;
+    }
+    ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--orange); font-weight: 700;
+    }
+    strong { color: var(--text); font-weight: 600; }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .service-card h3 { margin-top: 0; margin-bottom: 8px; }
+    .service-card p { margin-bottom: 0; }
+
+    .permission-grid {
+      display: grid; gap: 12px; margin-top: 12px;
+    }
+    .perm-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .perm-icon { font-size: 22px; flex-shrink: 0; }
+    .perm-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .perm-desc { font-size: 13px; color: var(--muted); }
+
+    .contact-box {
+      background: var(--card); border: 1px solid rgba(255,107,53,.2);
+      border-radius: 12px; padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-box p { margin: 0; }
+
+    hr {
+      border: none; border-top: 1px solid var(--border);
+      margin: 48px 0 32px;
+    }
+    .footer-links { font-size: 13px; color: var(--muted); }
+    .footer-links a { margin-right: 16px; }
+
+    .app-nav {
+      display: flex; gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .app-nav-item {
+      flex: 1; min-width: 100px; text-align: center;
+      padding: 10px 16px; border-radius: 10px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted); transition: all .2s;
+    }
+    .app-nav-item:hover { color: var(--text); background: rgba(255,255,255,.05); text-decoration: none; }
+    .app-nav-item.active { background: var(--orange); color: #fff; }
+    .app-nav-item.active:hover { background: var(--orange); }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <a href="index.html" class="back-link">← Zurück zur Carby-Startseite</a>
+
+  <nav class="app-nav">
+    <a href="privacy-policy.html" class="app-nav-item active">&#129408; Carby</a>
+    <a href="clocky/privacy-policy.html" class="app-nav-item">&#9201; Clocky</a>
+    <a href="clockin/privacy-policy.html" class="app-nav-item">&#127973; ClockIN</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-icon">🦀</div>
+    <h1>Datenschutzerklärung</h1>
+    <div class="page-sub">Carby App · ArcadiaApps</div>
+    <div class="last-updated">Zuletzt aktualisiert: Juni 2025</div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">🔒</div>
+    <div class="highlight-text">
+      <span>Kurzfassung:</span> Die meisten deiner Daten bleiben lokal auf deinem Gerät. Carby verwendet Firebase ausschließlich für anonyme (nicht personenbezogene) Synchronisation.
+    </div>
+  </div>
+
+  <!-- 1. Überblick -->
+  <h2>1. Überblick</h2>
+  <p>Carby ist eine kostenlose Ernährungs-Tracking-App, entwickelt von ArcadiaApps. Sie hilft dir, dein Lebensmittel-Tagebuch zu führen, deine Makros im Blick zu behalten und deine persönlichen Ernährungsziele zu verfolgen.</p>
+  <p>Der Schutz deiner Daten liegt uns am Herzen. Diese Datenschutzerklärung erklärt vollständig und transparent, welche Daten Carby erhebt, wie sie verwendet werden, welche externen Dienste eingebunden sind und welche Rechte du als Nutzer hast.</p>
+  <p>Carby enthält <strong>keine Werbung, keine Analyse-Tools von Drittanbietern und kein Cross-App-Tracking</strong>. Wir verkaufen keine Nutzerdaten.</p>
+
+  <!-- 2. Verantwortlicher -->
+  <h2>2. Verantwortlicher</h2>
+  <p>Verantwortlicher im Sinne der DSGVO ist:</p>
+  <p>
+    <strong>Frederic Schroer</strong><br>
+    ArcadiaApps<br>
+    Deutschland<br>
+    E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+  </p>
+
+  <!-- 3. Welche Daten werden gespeichert? -->
+  <h2>3. Welche Daten werden gespeichert?</h2>
+
+  <h3>Lokal auf deinem Gerät</h3>
+  <p>Folgende Daten werden <strong>ausschließlich lokal auf deinem Gerät</strong> gespeichert (Shared Preferences / lokale SQLite-Datenbank) und verlassen es nicht:</p>
+  <ul>
+    <li><strong>Lebensmittel-Tagebuch:</strong> Alle von dir erfassten Mahlzeiten und Lebensmittel mit Menge, Nährwerten und Uhrzeit.</li>
+    <li><strong>Profildaten:</strong> Dein Name, Alter, Gewicht, Körpergröße und dein persönliches Kalorienziel.</li>
+    <li><strong>App-Einstellungen:</strong> Deine Präferenzen und Anzeigeoptionen.</li>
+  </ul>
+
+  <h3>Externe Synchronisation via Firebase</h3>
+  <p>Wenn du die Synchronisierungsfunktion nutzt, werden deine Lebensmitteleinträge mit einer <strong>anonymen Firebase-Benutzer-ID</strong> verknüpft, die von Firebase automatisch generiert wird. Diese ID enthält keine E-Mail-Adresse, keinen Namen oder sonstige personenbezogene Informationen. Sie dient ausschließlich dazu, deine Gerätedaten anonym synchron zu halten.</p>
+
+  <h3>Was NICHT erhoben wird</h3>
+  <ul>
+    <li>Keine E-Mail-Adressen oder Passwörter</li>
+    <li>Keine Nutzungsstatistiken oder Analysedaten</li>
+    <li>Keine Gerätekennungen wie IMEI oder Advertising ID</li>
+    <li>Keine Standortdaten</li>
+    <li>Keine Kontaktdaten</li>
+    <li>Kein Accountsystem mit persönlichen Informationen</li>
+    <li>Keine Audiodaten werden dauerhaft gespeichert</li>
+  </ul>
+
+  <!-- 4. Externe Dienste -->
+  <h2>4. Externe Dienste</h2>
+  <p>Carby nutzt die folgenden externen Dienste. Im Folgenden wird jeweils erläutert, welche Daten übertragen werden und zu welchem Zweck.</p>
+
+  <div class="service-card">
+    <h3>🥦 OpenFoodFacts API</h3>
+    <p><strong>Zweck:</strong> Lebensmittelsuche und Nährwertdaten.<br>
+    <strong>Übertragene Daten:</strong> Nur deine Suchanfrage (z. B. „Apfel" oder ein Barcode). Es werden keinerlei personenbezogene Daten übertragen.<br>
+    <strong>Betreiber:</strong> Open Food Facts (gemeinnützige Organisation, Open-Source-Datenbank).<br>
+    <strong>Datenschutz:</strong> <a href="https://world.openfoodfacts.org/privacy" target="_blank" rel="noopener">world.openfoodfacts.org/privacy</a></p>
+  </div>
+
+  <div class="service-card">
+    <h3>🎙️ Hugging Face Inference API (Whisper)</h3>
+    <p><strong>Zweck:</strong> KI-gestützte Spracheingabe zur Erkennung von Lebensmitteln per Stimme.<br>
+    <strong>Übertragene Daten:</strong> Die Audioaufnahme wird ausschließlich zur Transkription an die Hugging Face Inference API (Whisper-Modell) gesendet. Das Mikrofon wird nur dann aktiviert, wenn du aktiv den Spracheingabe-Button tippst. Die Audiodaten werden nach der Verarbeitung weder von Hugging Face noch von ArcadiaApps dauerhaft gespeichert.<br>
+    <strong>Betreiber:</strong> Hugging Face, Inc., USA.<br>
+    <strong>Datenschutz:</strong> <a href="https://huggingface.co/privacy" target="_blank" rel="noopener">huggingface.co/privacy</a></p>
+  </div>
+
+  <div class="service-card">
+    <h3>🔥 Firebase (Google)</h3>
+    <p><strong>Zweck:</strong> Anonyme Benutzer-ID und optionale Synchronisation des Lebensmittelprotokolls zwischen Geräten.<br>
+    <strong>Übertragene Daten:</strong> Firebase erstellt automatisch eine anonyme, zufällig generierte Benutzer-ID. Dieser ID werden deine Lebensmitteleinträge zugeordnet. Es wird weder eine E-Mail-Adresse noch ein Name oder eine andere direkt identifizierbare Information an Firebase übertragen.<br>
+    <strong>Betreiber:</strong> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.<br>
+    <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung der Sync-Funktion). Da die verarbeiteten Daten anonym sind, ist eine direkte Zuordnung zu einer natürlichen Person nicht möglich.<br>
+    <strong>Datenschutz:</strong> <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></p>
+  </div>
+
+  <!-- 5. App-Berechtigungen -->
+  <h2>5. App-Berechtigungen</h2>
+  <p>Carby benötigt nur die folgenden Berechtigungen:</p>
+  <div class="permission-grid">
+    <div class="perm-card">
+      <div class="perm-icon">🌐</div>
+      <div>
+        <div class="perm-name">INTERNET</div>
+        <div class="perm-desc">Für die Lebensmittelsuche über OpenFoodFacts, die Spracheingabe über die Whisper API und die optionale Firebase-Synchronisation. Alle Verbindungen sind verschlüsselt (HTTPS).</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">🎙️</div>
+      <div>
+        <div class="perm-name">RECORD_AUDIO (Mikrofon)</div>
+        <div class="perm-desc">Ausschließlich für die optionale Spracheingabe-Funktion. Das Mikrofon wird nur aktiv, wenn du bewusst den Spracheingabe-Button tippst — niemals im Hintergrund. Du kannst die Berechtigung in deinen Android-Systemeinstellungen jederzeit widerrufen.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">Carby fordert <strong>keine</strong> Berechtigungen für Standort, Kontakte, Kamera, Kalender oder Telefon.</p>
+
+  <!-- 6. Datensicherheit -->
+  <h2>6. Datensicherheit</h2>
+  <p>Wir treffen angemessene technische und organisatorische Maßnahmen, um deine Daten zu schützen:</p>
+  <ul>
+    <li>Alle lokal gespeicherten Daten sind durch die Android-App-Sandbox geschützt — andere Apps können nicht darauf zugreifen.</li>
+    <li>Alle Netzwerkverbindungen zu externen Diensten erfolgen ausschließlich über HTTPS (verschlüsselt).</li>
+    <li>Firebase-Daten werden unter deiner anonymen Benutzer-ID gespeichert und sind nur über die App zugänglich.</li>
+    <li>Bei aktivierter Geräteverschlüsselung (Standard ab Android 6) sind lokale Daten zusätzlich geschützt.</li>
+  </ul>
+  <p>Bitte beachte: Kein Übertragungsweg im Internet und keine elektronische Speicherung ist vollständig sicher. Wir sind jedoch bemüht, handelsübliche Sicherheitsstandards einzuhalten.</p>
+
+  <!-- 7. Datenlöschung -->
+  <h2>7. Datenlöschung</h2>
+  <p>Du hast jederzeit die volle Kontrolle über deine Daten:</p>
+  <ul>
+    <li><strong>Lokale Daten löschen:</strong> Über Einstellungen → App-Daten löschen in Android (oder durch Deinstallation der App). Damit werden alle lokal gespeicherten Einträge und Profildaten unwiderruflich gelöscht.</li>
+    <li><strong>Einzelne Einträge löschen:</strong> Direkt in der App im Lebensmittel-Tagebuch möglich.</li>
+    <li><strong>Firebase-Daten löschen:</strong> Über die App-Einstellungen kannst du dein anonymes Konto und alle damit verknüpften Synchronisationsdaten löschen. Alternativ kannst du uns unter <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a> kontaktieren.</li>
+    <li><strong>Mikrofon-Berechtigung entziehen:</strong> In den Android-Systemeinstellungen unter Apps → Carby → Berechtigungen jederzeit möglich.</li>
+  </ul>
+
+  <!-- 8. Deine Rechte -->
+  <h2>8. Deine Rechte (DSGVO)</h2>
+  <p>Als betroffene Person stehen dir gemäß DSGVO folgende Rechte zu:</p>
+  <ul>
+    <li><strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Du hast das Recht zu erfahren, welche personenbezogenen Daten über dich verarbeitet werden. Da nahezu alle Daten lokal auf deinem Gerät liegen, kannst du sie dort direkt einsehen.</li>
+    <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Unrichtige Daten können jederzeit direkt in der App korrigiert werden.</li>
+    <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Du kannst die Löschung deiner Daten jederzeit in der App veranlassen oder uns kontaktieren.</li>
+    <li><strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Du kannst die Einschränkung der Verarbeitung verlangen, sofern die gesetzlichen Voraussetzungen erfüllt sind.</li>
+    <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Da deine Daten überwiegend lokal gespeichert sind, hast du direkten Zugriff und Kontrolle darüber.</li>
+    <li><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Du hast das Recht, gegen die Verarbeitung deiner Daten Widerspruch einzulegen.</li>
+    <li><strong>Beschwerderecht:</strong> Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren — z. B. beim Landesbeauftragten für Datenschutz in deinem Bundesland oder dem Bundesbeauftragten für den Datenschutz und die Informationsfreiheit (BfDI).</li>
+  </ul>
+  <p>Für die Ausübung deiner Rechte kontaktiere uns bitte unter <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>. Da wir keine personenbezogenen Daten wie Namen oder E-Mail-Adressen erheben, bitten wir dich, dein Anliegen so zu beschreiben, dass wir es zuordnen können (z. B. Hinweis auf dein Gerät oder die verwendete App-Version).</p>
+
+  <!-- 9. Kinder -->
+  <h2>9. Kinder</h2>
+  <p>Carby richtet sich nicht gezielt an Kinder unter 13 Jahren. Wir erheben wissentlich keine personenbezogenen Daten von Kindern unter 13 Jahren. Solltest du als Erziehungsberechtigte/r der Ansicht sein, dass dein Kind personenbezogene Daten über Carby übermittelt hat, kontaktiere uns bitte unter <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>, damit wir entsprechende Maßnahmen einleiten können.</p>
+
+  <!-- 10. Änderungen -->
+  <h2>10. Änderungen dieser Datenschutzerklärung</h2>
+  <p>Wir behalten uns vor, diese Datenschutzerklärung zu aktualisieren, um sie an geänderte rechtliche Anforderungen oder neue App-Funktionen anzupassen. Änderungen werden auf dieser Seite veröffentlicht. Das Datum der letzten Änderung wird oben auf der Seite angezeigt.</p>
+  <p>Wir empfehlen dir, diese Seite gelegentlich zu besuchen, um über etwaige Änderungen informiert zu bleiben. Die fortgesetzte Nutzung der App nach einer Änderung gilt als Zustimmung zur aktualisierten Datenschutzerklärung.</p>
+
+  <!-- 11. Kontakt -->
+  <h2>11. Kontakt</h2>
+  <p>Bei Fragen, Anregungen oder Anliegen zum Datenschutz wende dich bitte an:</p>
+  <div class="contact-box">
+    <p>
+      <strong>ArcadiaApps · Frederic Schroer</strong><br>
+      Deutschland<br>
+      E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a><br><br>
+      Wir versuchen, alle Anfragen innerhalb von 30 Tagen zu beantworten.
+    </p>
+  </div>
+
+  <hr>
+  <div class="footer-links">
+    <a href="index.html">🦀 Carby Startseite</a>
+    <a href="../clocky/privacy-policy.html">Clocky Datenschutz</a>
+    <a href="../clockin/privacy-policy.html">ClockIn Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="mailto:ArcadiaApps@proton.me">Kontakt</a>
+  </div>
+
+</div>
+</body>
+</html>
