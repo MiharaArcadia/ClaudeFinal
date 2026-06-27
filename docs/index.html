@@ -37,7 +37,17 @@
       <a href="#mockup" data-i18n="nav_preview">Preview</a>
       <a href="#download">Download</a>
       <a href="#support">Support</a>
-      <a href="privacy-policy.html" data-i18n="nav_privacy">Privacy</a>
+      <div class="nav-dropdown" id="ddDatenschutz">
+        <button class="nav-dropdown-btn" id="ddBtn">
+          Datenschutz
+          <span class="dd-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="nav-dropdown-menu" id="ddMenu">
+          <a href="privacy-policy.html">🦀 Carby</a>
+          <a href="clocky/privacy-policy.html">⏱ Clocky</a>
+          <a href="clockin/privacy-policy.html">🏥 ClockIN</a>
+        </div>
+      </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
       <a href="https://instagram.com/getcarby" target="_blank" class="nav-ig" aria-label="Instagram">
@@ -877,6 +887,13 @@ const hb = document.getElementById('hamburger');
 const nl = document.getElementById('navLinks');
 hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
 document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+
+// ─── Datenschutz Dropdown ────────────────────────────────────────────────────
+const ddWrap = document.getElementById('ddDatenschutz');
+const ddBtn  = document.getElementById('ddBtn');
+ddBtn.addEventListener('click', e => { e.stopPropagation(); ddWrap.classList.toggle('open'); });
+document.addEventListener('click', () => ddWrap.classList.remove('open'));
+document.querySelectorAll('#ddMenu a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
 
 // ─── Tier selection ──────────────────────────────────────────────────────────
 function selectTier(el, amt) {
