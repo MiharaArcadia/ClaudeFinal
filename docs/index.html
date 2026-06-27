@@ -102,6 +102,34 @@
     .tc-teal{background:rgba(0,188,212,.15);color:#00BCD4;border:1px solid rgba(0,188,212,.3)}
     .teaser-note{font-size:12px;color:#555}
 
+    /* ── Generic App Modal ──────────────────────────────── */
+    .app-modal-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+    .app-modal-overlay.open{display:flex}
+    .app-modal{background:#0f1929;border-radius:24px;padding:36px 32px;max-width:420px;width:100%;position:relative;animation:app-modal-in .18s ease}
+    @keyframes app-modal-in{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+    .app-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:#555;font-size:20px;cursor:pointer;line-height:1;padding:4px 6px;border-radius:6px;transition:color .15s}
+    .app-modal-close:hover{color:#fff}
+    .app-modal-icon{font-size:34px;margin-bottom:12px}
+    .app-modal h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+    .app-modal p{font-size:13px;color:#666;margin-bottom:24px;line-height:1.6}
+    .app-modal-btns{display:flex;flex-direction:column;gap:10px}
+    .app-modal-btn{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#fff;text-decoration:none;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .15s,background .15s}
+    .app-modal-btn-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+    .app-modal-btn-body strong{display:block;font-size:13px;font-weight:700;margin-bottom:1px}
+    .app-modal-btn-body span{font-size:11px;color:#555}
+    /* Carby orange */
+    .app-modal.am-carby{border:1px solid rgba(255,107,53,.25)}
+    .am-carby .app-modal-btn:hover{border-color:rgba(255,107,53,.4);background:rgba(255,107,53,.07)}
+    .am-carby .btn-icon-1{background:rgba(255,107,53,.15)}
+    .am-carby .btn-icon-2{background:rgba(255,140,0,.12)}
+    .am-carby .btn-icon-3{background:rgba(76,175,80,.12)}
+    /* Clocky yellow */
+    .app-modal.am-clocky{border:1px solid rgba(255,184,0,.25)}
+    .am-clocky .app-modal-btn:hover{border-color:rgba(255,184,0,.4);background:rgba(255,184,0,.06)}
+    .am-clocky .btn-icon-1{background:rgba(255,184,0,.12)}
+    .am-clocky .btn-icon-2{background:rgba(255,140,0,.1)}
+    .am-clocky .btn-icon-3{background:rgba(76,175,80,.12)}
+
     /* ── ClockIN Interest Modal ─────────────────────────── */
     .ci-modal-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
     .ci-modal-overlay.open{display:flex}
@@ -697,6 +725,9 @@
         <div class="ib-step"><div class="ib-num">3</div><div style="color:#4CAF50;font-weight:700" data-i18n-html="ib_step3">✓ Fertig<br>Carby starten</div></div>
       </div>
     </div>
+    <div style="text-align:center;margin-top:24px">
+      <button onclick="document.getElementById('carby-modal').classList.add('open')" class="teaser-cta" style="background:rgba(255,107,53,.12);color:#FF6B35;border:1px solid rgba(255,107,53,.25);font-family:inherit;cursor:pointer" data-i18n="carby_info_btn">📄 Prospekt & Infos ansehen</button>
+    </div>
   </div>
 </section>
 
@@ -724,7 +755,7 @@
         </div>
         <div class="teaser-cta-row reveal">
           <span class="ac-status status-beta" style="font-size:12px;padding:5px 12px" data-i18n="clocky_status">Beta — Android Play Store</span>
-          <span class="teaser-note" data-i18n="clocky_note">Weitere Plattformen in Planung</span>
+          <button onclick="document.getElementById('clocky-modal').classList.add('open')" class="teaser-cta tc-orange" data-i18n="clocky_interest" style="font-family:inherit;cursor:pointer">Mehr erfahren</button>
         </div>
       </div>
       <div class="teaser-mockup reveal">
@@ -904,6 +935,72 @@
     </div>
   </div>
 </section>
+
+<!-- CARBY MODAL -->
+<div class="app-modal-overlay" id="carby-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="app-modal am-carby">
+    <button class="app-modal-close" onclick="document.getElementById('carby-modal').classList.remove('open')">✕</button>
+    <div class="app-modal-icon">🦀</div>
+    <h3 id="carby-modal-title">Mehr über Carby erfahren</h3>
+    <p id="carby-modal-sub">Alles über Carby – Prospekt ansehen, direkt herunterladen oder uns kontaktieren.</p>
+    <div class="app-modal-btns">
+      <a href="carby/prospekt.html" target="_blank" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-1">📄</div>
+        <div class="app-modal-btn-body">
+          <strong id="carby-btn1-title">Prospekt ansehen</strong>
+          <span id="carby-btn1-sub">4-seitige Übersicht als PDF</span>
+        </div>
+      </a>
+      <a href="https://github.com/MiharaArcadia/ClaudeFinal/releases/download/Health/Carby.Setup.1.0.0.exe" target="_blank" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-2">🪟</div>
+        <div class="app-modal-btn-body">
+          <strong id="carby-btn2-title">Windows App herunterladen</strong>
+          <span id="carby-btn2-sub">Carby.Setup.1.0.0.exe · kostenlos</span>
+        </div>
+      </a>
+      <a href="mailto:ArcadiaApps@proton.me?subject=Frage%20zu%20Carby" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-3">✉</div>
+        <div class="app-modal-btn-body">
+          <strong id="carby-btn3-title">Kontakt aufnehmen</strong>
+          <span id="carby-btn3-sub">Frage stellen oder Feedback geben</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CLOCKY MODAL -->
+<div class="app-modal-overlay" id="clocky-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="app-modal am-clocky">
+    <button class="app-modal-close" onclick="document.getElementById('clocky-modal').classList.remove('open')">✕</button>
+    <div class="app-modal-icon">⏱️</div>
+    <h3 id="clocky-modal-title">Mehr über Clocky erfahren</h3>
+    <p id="clocky-modal-sub">Erfahren Sie mehr über Clocky – Prospekt ansehen oder uns kontaktieren.</p>
+    <div class="app-modal-btns">
+      <a href="clocky/prospekt.html" target="_blank" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-1">📄</div>
+        <div class="app-modal-btn-body">
+          <strong id="clocky-btn1-title">Prospekt ansehen</strong>
+          <span id="clocky-btn1-sub">4-seitige Übersicht als PDF</span>
+        </div>
+      </a>
+      <a href="https://play.google.com/store" target="_blank" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-2">🤖</div>
+        <div class="app-modal-btn-body">
+          <strong id="clocky-btn2-title">Android – Play Store</strong>
+          <span id="clocky-btn2-sub">Beta · kostenlos herunterladen</span>
+        </div>
+      </a>
+      <a href="mailto:ArcadiaApps@proton.me?subject=Interesse%20an%20Clocky" class="app-modal-btn">
+        <div class="app-modal-btn-icon btn-icon-3">✉</div>
+        <div class="app-modal-btn-body">
+          <strong id="clocky-btn3-title">Kontakt aufnehmen</strong>
+          <span id="clocky-btn3-sub">Frage stellen oder Feedback geben</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ClockIN INTERESSE MODAL -->
 <div class="ci-modal-overlay" id="ci-modal" onclick="if(event.target===this)this.classList.remove('open')">
@@ -1127,6 +1224,24 @@ const T = {
     clocky_stat2: 'Diese Woche',
     clocky_status: 'Beta — Android Play Store',
     clocky_note: 'Weitere Plattformen in Planung',
+    clocky_interest: 'Mehr erfahren',
+    carby_info_btn: '📄 Prospekt & Infos ansehen',
+    carby_modal_title: 'Mehr über Carby erfahren',
+    carby_modal_sub: 'Alles über Carby – Prospekt ansehen, direkt herunterladen oder uns kontaktieren.',
+    carby_btn1_title: 'Prospekt ansehen',
+    carby_btn1_sub: '4-seitige Übersicht als PDF',
+    carby_btn2_title: 'Windows App herunterladen',
+    carby_btn2_sub: 'Carby.Setup.1.0.0.exe · kostenlos',
+    carby_btn3_title: 'Kontakt aufnehmen',
+    carby_btn3_sub: 'Frage stellen oder Feedback geben',
+    clocky_modal_title: 'Mehr über Clocky erfahren',
+    clocky_modal_sub: 'Erfahren Sie mehr über Clocky – Prospekt ansehen oder uns kontaktieren.',
+    clocky_btn1_title: 'Prospekt ansehen',
+    clocky_btn1_sub: '4-seitige Übersicht als PDF',
+    clocky_btn2_title: 'Android – Play Store',
+    clocky_btn2_sub: 'Beta · kostenlos herunterladen',
+    clocky_btn3_title: 'Kontakt aufnehmen',
+    clocky_btn3_sub: 'Frage stellen oder Feedback geben',
     // ClockIN teaser
     clockin_eyebrow: 'ClockIN — Praxisverwaltung',
     clockin_h2: 'Alles für<br>deine Praxis.',
@@ -1291,6 +1406,24 @@ const T = {
     clocky_stat2: 'This Week',
     clocky_status: 'Beta — Android Play Store',
     clocky_note: 'More platforms planned',
+    clocky_interest: 'Learn more',
+    carby_info_btn: '📄 View Brochure & Info',
+    carby_modal_title: 'Learn more about Carby',
+    carby_modal_sub: 'Everything about Carby – view the brochure, download directly, or contact us.',
+    carby_btn1_title: 'View brochure',
+    carby_btn1_sub: '4-page overview as PDF',
+    carby_btn2_title: 'Download Windows App',
+    carby_btn2_sub: 'Carby.Setup.1.0.0.exe · free',
+    carby_btn3_title: 'Get in touch',
+    carby_btn3_sub: 'Ask a question or give feedback',
+    clocky_modal_title: 'Learn more about Clocky',
+    clocky_modal_sub: 'Learn more about Clocky – view the brochure or contact us.',
+    clocky_btn1_title: 'View brochure',
+    clocky_btn1_sub: '4-page overview as PDF',
+    clocky_btn2_title: 'Android – Play Store',
+    clocky_btn2_sub: 'Beta · free download',
+    clocky_btn3_title: 'Get in touch',
+    clocky_btn3_sub: 'Ask a question or give feedback',
     clockin_eyebrow: 'ClockIN — Practice Management',
     clockin_h2: 'Everything for<br>your practice.',
     clockin_p: 'ClockIN combines everything a practice needs in one app — digital time tracking, shift planning, patient and client management, and integrated billing. No cloud required, no monthly costs.',
@@ -1345,6 +1478,12 @@ function setLang(lang) {
     const key = el.dataset.i18nHtml;
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
+  // Carby modal text
+  const carbMap = {'carby-modal-title':'carby_modal_title','carby-modal-sub':'carby_modal_sub','carby-btn1-title':'carby_btn1_title','carby-btn1-sub':'carby_btn1_sub','carby-btn2-title':'carby_btn2_title','carby-btn2-sub':'carby_btn2_sub','carby-btn3-title':'carby_btn3_title','carby-btn3-sub':'carby_btn3_sub'};
+  Object.entries(carbMap).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&t[key])el.textContent=t[key];});
+  // Clocky modal text
+  const clockyMap = {'clocky-modal-title':'clocky_modal_title','clocky-modal-sub':'clocky_modal_sub','clocky-btn1-title':'clocky_btn1_title','clocky-btn1-sub':'clocky_btn1_sub','clocky-btn2-title':'clocky_btn2_title','clocky-btn2-sub':'clocky_btn2_sub','clocky-btn3-title':'clocky_btn3_title','clocky-btn3-sub':'clocky_btn3_sub'};
+  Object.entries(clockyMap).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&t[key])el.textContent=t[key];});
   // ClockIN modal text
   const ciMap = {
     'ci-modal-title':'ci_modal_title','ci-modal-sub':'ci_modal_sub',
