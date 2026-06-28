@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparky – Datenschutzerklärung</title>
+  <meta name="description" content="Datenschutzerklärung für Sparky — das lokale Haushaltsbuch von ArcadiaApps. 100 % offline, keine Cloud, kein Tracking.">
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#080808;--bg2:#0e0e0e;--card:#111111;--border:rgba(255,255,255,.07);
+      --orange:#FF6B35;--green:#4CAF50;--blue:#2196F3;
+      --text:#EDEDED;--muted:#888;--font:'Inter',-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+    a{color:var(--orange);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .page-wrap{max-width:760px;margin:0 auto;padding:60px 32px 100px}
+    .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;margin-bottom:48px;transition:color .2s}
+    .back-link:hover{color:var(--text);text-decoration:none}
+    .page-header{margin-bottom:48px}
+    .page-icon{font-size:48px;margin-bottom:16px}
+    h1{font-size:2.2rem;font-weight:900;letter-spacing:-.03em;margin-bottom:8px;background:linear-gradient(135deg,var(--orange),#FF4081);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .page-sub{color:var(--muted);font-size:14px}
+    .last-updated{color:var(--muted);font-size:13px;margin-top:4px}
+    .highlight-box{background:rgba(76,175,80,.08);border:1px solid rgba(76,175,80,.2);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;gap:16px;align-items:flex-start}
+    .highlight-box.blue{background:rgba(33,150,243,.08);border-color:rgba(33,150,243,.25)}
+    .highlight-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+    .highlight-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.6}
+    .highlight-text span.green{color:var(--green)}
+    .highlight-text span.blue{color:var(--blue)}
+    .highlight-text p{font-size:14px;font-weight:400;color:#b0b0b0;margin-top:6px;margin-bottom:0}
+    h2{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin-top:48px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);color:var(--text)}
+    h3{font-size:1rem;font-weight:700;margin-top:24px;margin-bottom:10px;color:var(--text)}
+    p{font-size:15px;color:#b0b0b0;margin-bottom:14px}
+    ul{list-style:none;padding:0;margin-bottom:14px}
+    ul li{font-size:15px;color:#b0b0b0;padding:6px 0 6px 24px;position:relative}
+    ul li::before{content:'→';position:absolute;left:0;color:var(--orange);font-weight:700}
+    strong{color:var(--text);font-weight:600}
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px}
+    .data-table th{background:var(--card);color:var(--text);font-weight:700;text-align:left;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .data-table td{color:#b0b0b0;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top}
+    .permission-grid{display:grid;gap:12px;margin-top:12px}
+    .perm-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px}
+    .perm-icon{font-size:22px;flex-shrink:0}
+    .perm-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .perm-desc{font-size:13px;color:var(--muted)}
+    .contact-box{background:var(--card);border:1px solid rgba(255,107,53,.2);border-radius:12px;padding:24px;margin-top:16px}
+    .contact-box p{margin:0}
+    hr{border:none;border-top:1px solid var(--border);margin:48px 0 32px}
+    .footer-links{font-size:13px;color:var(--muted)}
+    .footer-links a{margin-right:16px}
+    .app-nav{display:flex;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:6px;margin-bottom:32px;flex-wrap:wrap}
+    .app-nav-item{flex:1;min-width:100px;text-align:center;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s}
+    .app-nav-item:hover{color:var(--text);background:rgba(255,255,255,.05);text-decoration:none}
+    .app-nav-item.active{background:var(--orange);color:#fff}
+    .app-nav-item.active:hover{background:var(--orange)}
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <a href="index.html" class="back-link">&#8592; Zurück zur Sparky-Startseite</a>
+
+  <nav class="app-nav">
+    <a href="../carby/privacy-policy.html" class="app-nav-item">&#129408; Carby</a>
+    <a href="../clocky/privacy-policy.html" class="app-nav-item">&#9201; Clocky</a>
+    <a href="../clockin/privacy-policy.html" class="app-nav-item">&#127973; ClockIN</a>
+    <a href="privacy-policy.html" class="app-nav-item active">&#9889; Sparky</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-icon">&#9889;</div>
+    <h1>Datenschutzerklärung</h1>
+    <div class="page-sub">Sparky · Haushaltsbuch für Windows & Android · ArcadiaApps</div>
+    <div class="last-updated">Zuletzt aktualisiert: Juni 2026</div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">&#128274;</div>
+    <div class="highlight-text">
+      <span class="green">Kurzfassung:</span> Sparky speichert alle deine Finanzdaten ausschließlich lokal auf deinem Gerät. ArcadiaApps hat zu keinem Zeitpunkt Zugriff darauf — keine Cloud, keine Server, kein Tracking, keine Werbung, kein Konto.
+    </div>
+  </div>
+
+  <div class="highlight-box blue">
+    <div class="highlight-icon">&#128179;</div>
+    <div class="highlight-text">
+      <span class="blue">Deine Finanzen bleiben deine Finanzen:</span>
+      <p>Sparky benötigt keine Bankverbindung, kein Online-Banking und keine Kontodaten von Drittanbietern. Du trägst Einnahmen und Ausgaben selbst ein — es findet keinerlei automatischer Abruf bei Banken statt.</p>
+    </div>
+  </div>
+
+  <h2>1. Überblick</h2>
+  <p>Sparky ist ein persönliches Haushaltsbuch für Windows und Android. Du erfasst deine Einnahmen, Ausgaben, Budgets, Abos und Sparziele — die App wertet sie für dich aus (Ringdiagramme, Statistiken, Spar-Coach). Sparky ist als <strong>Offline-First-App</strong> konzipiert: Alle eingegebenen Daten bleiben auf dem Gerät, auf dem die App installiert ist. Eine Internetverbindung ist für den Betrieb nicht erforderlich.</p>
+
+  <h2>2. Verantwortlicher</h2>
+  <p>
+    Frederic Schroer<br>
+    ArcadiaApps<br>
+    Deutschland<br>
+    E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+  </p>
+  <p>ArcadiaApps ist verantwortlich für die App selbst (Funktionsweise, Berechtigungen, Datensicherheit der Software). ArcadiaApps verarbeitet <strong>keine</strong> der in Sparky eingetragenen Finanz- oder Personendaten, da diese das Gerät nicht verlassen.</p>
+
+  <h2>3. Welche Daten verwaltet Sparky?</h2>
+  <p>Sparky speichert ausschließlich lokal in einer SQLite-Datenbank auf deinem Gerät. Es werden folgende Datenkategorien verwaltet:</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Datenkategorie</th>
+        <th>Beispiele</th>
+        <th>Speicherort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Transaktionen</strong></td><td>Betrag, Kategorie, Konto, Datum, Notiz, Tags</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Konten</strong></td><td>Name, Typ, Startguthaben</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Kategorien & Budgets</strong></td><td>Name, Icon, Monatslimit</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Abos</strong></td><td>Name, Betrag, Intervall, Fälligkeit</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Sparziele</strong></td><td>Zielbetrag, aktueller Stand</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Einstellungen</strong></td><td>Name (optional), Netto-Einkommen (optional), Kommunikationsstil, Sprache, Währung</td><td>Lokal (SQLite)</td></tr>
+      <tr><td><strong>Exporte</strong></td><td>CSV- und PDF-Dateien</td><td>Lokal (von dir gewählter Ort)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Daten, die ArcadiaApps NICHT erhebt</h3>
+  <ul>
+    <li>Keine Übertragung deiner Finanzdaten an ArcadiaApps oder Dritte</li>
+    <li>Keine Nutzungsstatistiken oder Analysedaten</li>
+    <li>Keine Absturzberichte an externe Dienste</li>
+    <li>Keine Gerätekennungen (IMEI, Advertising ID etc.)</li>
+    <li>Keine Standortdaten</li>
+    <li>Kein Profil-, Konto- oder Login-System</li>
+    <li>Keine Bankverbindung, kein Zugriff auf Online-Banking</li>
+  </ul>
+
+  <h2>4. Externe Dienste</h2>
+  <p>Sparky nutzt <strong>keine</strong> Analysedienste, keine Cloud-Datenbanken und keine Drittanbieter-SDKs für Werbung oder Tracking. Es findet zur Laufzeit kein Netzwerkzugriff statt.</p>
+  <p>Die einzige mögliche externe Kommunikation: Beim ersten App-Start kann die Schriftart <strong>DM Sans</strong> über Google Fonts geladen werden. Dabei wird die IP-Adresse des Geräts kurzzeitig an Google übertragen. Es werden keine App- oder Finanzdaten übermittelt. Datenschutzrichtlinie von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+  <p>Folgende Dienste werden ausdrücklich <strong>nicht</strong> verwendet: Firebase, Google Analytics, Crashlytics, Facebook SDK, Adjust, AppsFlyer oder vergleichbare Dienste.</p>
+
+  <h2>5. App-Berechtigungen</h2>
+  <div class="permission-grid">
+    <div class="perm-card">
+      <div class="perm-icon">&#127760;</div>
+      <div>
+        <div class="perm-name">Internet (INTERNET)</div>
+        <div class="perm-desc">Nur für das optionale Laden der Schriftart beim ersten Start (Google Fonts). Es werden keine App- oder Finanzdaten übertragen.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">&#128190;</div>
+      <div>
+        <div class="perm-name">Speicher / Dateien</div>
+        <div class="perm-desc">Nur wenn du selbst einen CSV- oder PDF-Export erstellst und speicherst bzw. teilst.</div>
+      </div>
+    </div>
+    <div class="perm-card">
+      <div class="perm-icon">&#128273;</div>
+      <div>
+        <div class="perm-name">Biometrie (USE_BIOMETRIC)</div>
+        <div class="perm-desc">Optional, nur wenn du die App-Sperre per Fingerabdruck/Gesichtserkennung aktivierst. Die Auswertung erfolgt ausschließlich durch das Betriebssystem.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">Sparky fordert <strong>keine</strong> Berechtigungen für Kamera, Mikrofon, Standort, Kontakte oder Bankzugänge.</p>
+
+  <h2>6. Datensicherheit</h2>
+  <p>Da alle Daten lokal auf deinem Gerät gespeichert werden, gilt:</p>
+  <ul>
+    <li>Sparkys Datenbank (SQLite) ist durch die App-Sandbox des Betriebssystems geschützt.</li>
+    <li>Bei aktivierter Geräteverschlüsselung sind die Daten verschlüsselt gespeichert.</li>
+    <li>Optional kannst du eine PIN- oder Biometrie-Sperre für die App aktivieren.</li>
+    <li>Exportierte Dateien (CSV, PDF) liegen am von dir gewählten Ort und sollten entsprechend gesichert werden.</li>
+  </ul>
+  <p><strong>Empfehlung:</strong> Geräteverschlüsselung und eine Bildschirmsperre aktivieren sowie regelmäßige Backups deiner Daten anlegen.</p>
+
+  <h2>7. Datenlöschung</h2>
+  <p>Du hast jederzeit die vollständige Kontrolle über deine Daten:</p>
+  <ul>
+    <li><strong>Einzelne Einträge:</strong> Direkt in der App löschbar (Wischgeste mit Rückgängig-Funktion).</li>
+    <li><strong>Alle Daten:</strong> In den Einstellungen über „App zurücksetzen".</li>
+    <li><strong>Deinstallation:</strong> Entfernt alle App-Daten automatisch.</li>
+    <li><strong>Exportierte Dateien:</strong> Über den Dateimanager manuell löschbar.</li>
+  </ul>
+
+  <h2>8. Deine Rechte (DSGVO)</h2>
+  <p>Da ArcadiaApps keine personenbezogenen Daten von dir verarbeitet, fallen keine Daten an, über die wir Auskunft geben oder die wir löschen könnten. Du behältst die volle Kontrolle direkt in der App. Dir stehen grundsätzlich die Rechte auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) sowie ein Beschwerderecht bei einer Aufsichtsbehörde zu.</p>
+
+  <h2>9. Kinder</h2>
+  <p>Sparky richtet sich an Erwachsene, die ihre Finanzen verwalten möchten. Es werden keinerlei Daten an Dritte übermittelt.</p>
+
+  <h2>10. Änderungen dieser Datenschutzerklärung</h2>
+  <p>Änderungen werden auf dieser Seite veröffentlicht. Das Datum der letzten Aktualisierung ist oben angegeben.</p>
+
+  <h2>11. Kontakt</h2>
+  <p>Bei Fragen zu Sparky oder zu dieser Datenschutzerklärung:</p>
+  <div class="contact-box">
+    <p>
+      <strong>ArcadiaApps</strong><br>
+      E-Mail: <a href="mailto:ArcadiaApps@proton.me">ArcadiaApps@proton.me</a>
+    </p>
+  </div>
+
+  <hr>
+  <div class="footer-links">
+    <a href="index.html">&#9889; Sparky Startseite</a>
+    <a href="../impressum.html">Impressum</a>
+    <a href="../carby/privacy-policy.html">&#129408; Carby Datenschutz</a>
+    <a href="../clocky/privacy-policy.html">&#9201; Clocky Datenschutz</a>
+    <a href="../clockin/privacy-policy.html">&#127973; ClockIN Datenschutz</a>
+    <a href="mailto:ArcadiaApps@proton.me">Kontakt</a>
+  </div>
+
+</div>
+</body>
+</html>

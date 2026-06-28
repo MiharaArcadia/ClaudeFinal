@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparky – Produktprospekt</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif; background: #f0f4f8; color: #1e293b; line-height: 1.5; font-size: 14px; }
+
+  .print-bar { background: #1A1A2E; color: #fff; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; position: sticky; top: 0; z-index: 99; }
+  .print-bar strong { font-size: 15px; }
+  .print-bar p { opacity: .8; font-size: 12px; margin-top: 2px; }
+  .print-btn { background: #FF6B35; color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .print-btn:hover { background: #e85a28; }
+  @media print { .print-bar { display: none; } }
+
+  .page { width: 210mm; min-height: 297mm; background: #fff; margin: 24px auto; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.12); position: relative; page-break-after: always; }
+  @media print { body { background: #fff; } .page { margin: 0; box-shadow: none; width: 100%; min-height: 100vh; } }
+
+  /* COVER */
+  .cover { background: linear-gradient(150deg, #1A1A2E 0%, #2D2D44 60%, #3A3A55 100%); color: #fff; display: flex; flex-direction: column; min-height: 297mm; }
+  .cover-top { padding: 40px 48px 0; display: flex; justify-content: space-between; align-items: center; }
+  .cover-logo { display: flex; align-items: center; gap: 12px; }
+  .cover-logo-text { font-size: 28px; font-weight: 900; letter-spacing: .02em; }
+  .cover-logo-text span { color: #FF6B35; }
+  .cover-tagline { font-size: 12px; opacity: .6; letter-spacing: .1em; text-transform: uppercase; }
+  .cover-body { flex: 1; padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; }
+  .cover-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 16px; }
+  .cover-h1 { font-size: 52px; font-weight: 900; line-height: 1.05; margin-bottom: 24px; }
+  .cover-h1 em { font-style: normal; color: #FF6B35; }
+  .cover-desc { font-size: 17px; opacity: .8; max-width: 440px; line-height: 1.7; margin-bottom: 40px; }
+  .cover-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+  .cover-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .cover-price-box { background: rgba(255,107,53,.12); border: 1px solid rgba(255,107,53,.3); border-radius: 16px; padding: 24px 28px; display: inline-flex; align-items: center; gap: 28px; max-width: 420px; }
+  .cover-price-num { font-size: 44px; font-weight: 900; color: #FF6B35; }
+  .cover-price-label { font-size: 13px; opacity: .8; line-height: 1.6; }
+  .cover-price-label strong { font-size: 15px; color: #fff; display: block; }
+  .cover-footer { padding: 28px 48px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: .5; }
+  .cover-deco { position: absolute; right: 40px; top: 90px; opacity: .08; }
+
+  /* FEATURES */
+  .page-inner { padding: 48px; }
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; padding-bottom: 20px; border-bottom: 2px solid #e2e8f0; }
+  .ph-logo { font-size: 16px; font-weight: 900; color: #1A1A2E; }
+  .ph-logo span { color: #FF6B35; }
+  .ph-tag { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+  .page-title { font-size: 28px; font-weight: 900; color: #1e293b; margin-bottom: 8px; }
+  .page-sub { font-size: 14px; color: #64748b; margin-bottom: 32px; line-height: 1.6; }
+
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .feat { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+  .feat-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .feat-ico { width: 36px; height: 36px; border-radius: 8px; background: #fff1eb; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .feat-name { font-size: 14px; font-weight: 800; color: #1e293b; }
+  .feat-text { font-size: 12px; color: #64748b; line-height: 1.6; }
+
+  /* PRICING + WHY */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .pricing-box { background: linear-gradient(135deg, #FF6B35 0%, #FF4081 100%); border-radius: 16px; padding: 28px; color: #fff; }
+  .pricing-box-name { font-size: 13px; font-weight: 700; opacity: .85; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+  .pricing-box-price { font-size: 48px; font-weight: 900; margin-bottom: 4px; }
+  .pricing-box-price small { font-size: 20px; opacity: .8; }
+  .pricing-box-note { font-size: 12px; opacity: .8; margin-bottom: 20px; }
+  .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pricing-list li { font-size: 12px; display: flex; gap: 8px; align-items: flex-start; }
+  .pricing-list li::before { content: '✓'; color: #fff; font-weight: 900; flex-shrink: 0; }
+
+  .why-list-p { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .why-item-p { display: flex; gap: 12px; align-items: flex-start; }
+  .why-ico-p { width: 32px; height: 32px; border-radius: 8px; background: #fff1eb; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+  .why-body-p strong { font-size: 13px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 3px; }
+  .why-body-p p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 12px; }
+  .comp-table th { padding: 10px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+  .comp-table th:first-child { text-align: left; color: #64748b; }
+  .comp-table th:not(:first-child) { text-align: center; }
+  .comp-table th:nth-child(2) { background: #FF6B35; color: #fff; border-radius: 8px 8px 0 0; }
+  .comp-table td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; }
+  .comp-table td:first-child { color: #64748b; }
+  .comp-table td:not(:first-child) { text-align: center; font-weight: 700; }
+  .comp-table td:nth-child(2) { background: #fff1eb; color: #FF6B35; }
+  .comp-yes { color: #16a34a; }
+  .comp-no { color: #dc2626; }
+
+  /* WORKFLOW + CTA */
+  .workflow { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .workflow::before { content: ''; position: absolute; left: 17px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(to bottom, #FF6B35, #FF4081); border-radius: 1px; }
+  .wf-step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px; }
+  .wf-num { width: 36px; height: 36px; border-radius: 50%; background: #FF6B35; color: #fff; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; border: 3px solid #fff; box-shadow: 0 0 0 2px #FF6B35; }
+  .wf-body strong { font-size: 14px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 4px; }
+  .wf-body p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  .cta-box { background: linear-gradient(135deg, #1A1A2E, #2D2D44); color: #fff; border-radius: 16px; padding: 36px; text-align: center; margin-top: 32px; }
+  .cta-box h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+  .cta-box p { opacity: .75; font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn { padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; }
+  .cta-btn-orange { background: #FF6B35; color: #fff; }
+  .cta-btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+  .contact-item { background: rgba(255,255,255,.08); border-radius: 10px; padding: 14px; }
+  .contact-item .ci-icon { font-size: 20px; margin-bottom: 6px; }
+  .contact-item .ci-label { font-size: 10px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .contact-item .ci-val { font-size: 13px; font-weight: 700; }
+
+  .page-footer { position: absolute; bottom: 24px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <div>
+    <strong>Sparky – Produktprospekt</strong>
+    <p>Als PDF speichern: Drucken → "Als PDF speichern" wählen → A4, Hintergrundgrafiken aktivieren</p>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 Als PDF speichern</button>
+</div>
+
+<!-- PAGE 1 – COVER -->
+<div class="page cover">
+  <div class="cover-deco">
+    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+      <circle cx="160" cy="160" r="120" fill="none" stroke="#fff" stroke-width="14"/>
+      <path d="M170 70 L120 175 H160 L150 250 L210 145 H170 Z" fill="#fff"/>
+    </svg>
+  </div>
+
+  <div class="cover-top">
+    <div class="cover-logo">
+      <svg viewBox="0 0 64 64" width="40" height="40"><rect x="6" y="14" width="52" height="36" rx="8" fill="none" stroke="#FF6B35" stroke-width="5"/><path d="M34 22 L24 38 H32 L30 50 L42 32 H34 Z" fill="#FF6B35"/></svg>
+      <div>
+        <div class="cover-logo-text">Spark<span>y</span></div>
+        <div class="cover-tagline">Haushaltsbuch</div>
+      </div>
+    </div>
+    <div style="font-size:12px;opacity:.5">Produktprospekt · 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-label">Dein persönliches Haushaltsbuch</div>
+    <div class="cover-h1">Behalte dein<br><em>Geld</em> im Griff.</div>
+    <div class="cover-desc">
+      Sparky verbindet Ausgaben-Tracking, Budgets, Abo-Verwaltung und einen smarten Spar-Coach in einer App — 100 % lokal auf deinem Gerät, ohne Cloud, ohne Bankverbindung, ohne Abo.
+    </div>
+    <div class="cover-chips">
+      <span class="cover-chip">🍩 Animierte Ringdiagramme</span>
+      <span class="cover-chip">🎯 Budgets & Limits</span>
+      <span class="cover-chip">🔁 Abo-Tracker</span>
+      <span class="cover-chip">🐷 Spar-Coach</span>
+      <span class="cover-chip">🔒 Offline · DSGVO-konform</span>
+      <span class="cover-chip">🪟 Windows  ·  🤖 Android</span>
+    </div>
+    <div class="cover-price-box">
+      <div class="cover-price-num">4,99 €</div>
+      <div class="cover-price-label">
+        <strong>Einmalkauf</strong>
+        Einmal zahlen · kein Abo, keine Werbung<br>
+        Alle Features freigeschaltet<br>
+        Deine Daten bleiben auf deinem Gerät
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span>getcarby.app/sparky</span>
+    <span>ArcadiaApps@proton.me</span>
+    <span>Version 1.0 · Juni 2026</span>
+  </div>
+</div>
+
+<!-- PAGE 2 – FUNKTIONEN -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Spark<span>y</span></div>
+      <div class="ph-tag">Funktionsübersicht</div>
+    </div>
+    <div class="page-title">Was Sparky kann.</div>
+    <div class="page-sub">Schluss mit unübersichtlichen Tabellen. Sparky bringt alles in einer App zusammen — und erklärt dir, wo dein Geld bleibt.</div>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">💸</div><div class="feat-name">Transaktionen</div></div>
+        <div class="feat-text">Einnahmen, Ausgaben und Transfers in Sekunden erfassen — mit Kategorie, Konto, Datum, Notiz und Tags. Wiederkehrende Buchungen werden automatisch gebucht.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">🍩</div><div class="feat-name">Ringdiagramme</div></div>
+        <div class="feat-text">Das Dashboard zeigt deine Ausgaben als animiertes Donut-Chart pro Kategorie — sofort erkennbar, wohin dein Geld fließt.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">🎯</div><div class="feat-name">Budgets & Limits</div></div>
+        <div class="feat-text">Setze pro Kategorie ein Monatsbudget mit optionalem Rollover. Sparky warnt bei 80 % und 100 % Ausschöpfung — lokal, ohne Server.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">🔁</div><div class="feat-name">Abo-Tracker</div></div>
+        <div class="feat-text">Alle Abos an einem Ort, mit nächstem Fälligkeitsdatum und Jahresgesamtkosten. Automatische Buchung am Stichtag.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">🐷</div><div class="feat-name">Spar-Coach</div></div>
+        <div class="feat-text">Vergleicht deine Ausgaben mit Richtwerten, zeigt konkretes Einsparpotenzial, trackt Sparziele und berechnet deinen Notfall-Fonds.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">📊</div><div class="feat-name">Statistiken</div></div>
+        <div class="feat-text">Ausgaben nach Kategorie, Einnahmen vs. Ausgaben über 6 Monate, Kategorie-Drilldown und Jahresübersicht.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">🗣️</div><div class="feat-name">4 Kommunikationsstile</div></div>
+        <div class="feat-text">Seriös, humorvoll, sarkastisch oder lieb — du wählst, wie Sparky mit dir spricht. Jederzeit umstellbar.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-head"><div class="feat-ico">📤</div><div class="feat-name">Export & Sicherheit</div></div>
+        <div class="feat-text">CSV- und PDF-Export zum Teilen. Optional PIN- oder Biometrie-Sperre. Deine Daten bleiben jederzeit bei dir.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Sparky · getcarby.app</span><span>Seite 2 von 4</span></div>
+</div>
+
+<!-- PAGE 3 – PREIS & VERGLEICH -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Spark<span>y</span></div>
+      <div class="ph-tag">Preis & Vergleich</div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="page-title">Ein fairer Preis.</div>
+        <div class="page-sub" style="margin-bottom:20px">Einmal zahlen, für immer nutzen. Kein Abo, keine Kostenfalle.</div>
+        <div class="pricing-box">
+          <div class="pricing-box-name">⚡ Einmalkauf</div>
+          <div class="pricing-box-price">4,99 <small>€</small></div>
+          <div class="pricing-box-note">einmalig · kein Abo</div>
+          <ul class="pricing-list">
+            <li>Alle Funktionen — sofort und dauerhaft</li>
+            <li>Keine Werbung, kein Tracking</li>
+            <li>100 % lokal — keine Cloud, keine Bankverbindung</li>
+            <li>Windows & Android aus einer Codebasis</li>
+            <li>Deutsch & Englisch</li>
+            <li>Keine In-App-Käufe, keine Feature-Mauern</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#1e293b;margin-bottom:16px;margin-top:48px">Warum Sparky die bessere Wahl ist.</div>
+        <ul class="why-list-p">
+          <li class="why-item-p"><div class="why-ico-p">🔒</div><div class="why-body-p"><strong>Keine Bankverbindung nötig</strong><p>Anders als viele Finanz-Apps verlangt Sparky keinen Zugriff auf dein Online-Banking. Du behältst die Kontrolle.</p></div></li>
+          <li class="why-item-p"><div class="why-ico-p">💶</div><div class="why-body-p"><strong>Kein Abo</strong><p>Wettbewerber kosten oft 60 €+ pro Jahr. Sparky kostet einmalig 4,99 € — und gehört dann dir.</p></div></li>
+          <li class="why-item-p"><div class="why-ico-p">🐷</div><div class="why-body-p"><strong>Mit Spar-Coach</strong><p>Sparky zeigt nicht nur Zahlen, sondern konkretes Einsparpotenzial — regelbasiert, lokal berechnet.</p></div></li>
+          <li class="why-item-p"><div class="why-ico-p">⚡</div><div class="why-body-p"><strong>Sofort einsatzbereit</strong><p>Kein Account, keine E-Mail, keine Einrichtung. Onboarding in unter einer Minute.</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>Funktion</th><th>Sparky</th><th>Typische Finanz-App</th><th>Tabellenkalkulation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Offline & ohne Cloud</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-yes">✓</td></tr>
+        <tr><td>Ohne Bankverbindung</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-yes">✓</td></tr>
+        <tr><td>Budgets & Warnungen</td><td class="comp-yes">✓</td><td class="comp-yes">✓</td><td class="comp-no">✗</td></tr>
+        <tr><td>Abo-Tracker</td><td class="comp-yes">✓</td><td class="comp-yes">✓</td><td class="comp-no">✗</td></tr>
+        <tr><td>Spar-Coach</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-no">✗</td></tr>
+        <tr><td>Kein Abo</td><td class="comp-yes">✓</td><td class="comp-no">✗</td><td class="comp-yes">✓</td></tr>
+        <tr><td>Preis</td><td style="color:#FF6B35;font-weight:800">4,99 € einmalig</td><td style="color:#dc2626">60 €+ / Jahr</td><td style="color:#64748b">Aufwand</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer"><span>Sparky · getcarby.app</span><span>Seite 3 von 4</span></div>
+</div>
+
+<!-- PAGE 4 – SO GEHT'S + CTA -->
+<div class="page" style="position:relative">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="ph-logo">Spark<span>y</span></div>
+      <div class="ph-tag">So fängst du an</div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="page-title">In 4 Schritten startklar.</div>
+        <div class="page-sub" style="margin-bottom:24px">Von der Installation zum Überblick in unter einer Minute.</div>
+        <div class="workflow">
+          <div class="wf-step"><div class="wf-num">1</div><div class="wf-body"><strong>Installieren</strong><p>Sparky aus dem Play Store (Android) oder als Windows-App laden. Kein Account, keine E-Mail.</p></div></div>
+          <div class="wf-step"><div class="wf-num">2</div><div class="wf-body"><strong>Onboarding</strong><p>Kommunikationsstil wählen, optional Name & Einkommen, ein Kategorie-Template und dein erstes Konto.</p></div></div>
+          <div class="wf-step"><div class="wf-num">3</div><div class="wf-body"><strong>Erfassen</strong><p>Ausgaben und Einnahmen eintragen, Budgets setzen, Abos hinterlegen — alles bleibt lokal.</p></div></div>
+          <div class="wf-step"><div class="wf-num">4</div><div class="wf-body"><strong>Sparen</strong><p>Der Spar-Coach zeigt dir, wo Potenzial liegt. Sparziele setzen und den Fortschritt verfolgen.</p></div></div>
+        </div>
+
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:20px">
+          <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:10px">Plattformen</div>
+          <div style="font-size:11px;color:#64748b;line-height:1.8">
+            ✓ Windows 10 / 11 (64-Bit)<br>
+            ✓ Android 8.0 oder neuer<br>
+            ✓ iOS in Planung<br>
+            ✓ Kein Internet im Betrieb nötig
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#1e293b;margin-bottom:20px;margin-top:48px">Deine Daten gehören dir.</div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:18px">
+          <div style="font-size:12px;color:#64748b;line-height:1.8">
+            <strong style="color:#1e293b;display:block;margin-bottom:8px">100 % lokal gespeichert:</strong>
+            🔒 Keine Cloud, keine Server<br>
+            🚫 Kein Tracking, keine Werbung<br>
+            🏦 Keine Bankverbindung<br>
+            📤 Export als CSV & PDF jederzeit möglich
+          </div>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px">
+          <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:10px">Teil der ArcadiaApps-Familie</div>
+          <div style="font-size:11px;color:#64748b;line-height:1.8">
+            🦀 Carby · ⏱️ Clocky · 🏥 ClockIN · ⚡ Sparky<br>
+            Einfache Apps. Echter Mehrwert. Ohne Abo, ohne Werbung.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h2>Bereit, dein Geld in den Griff zu bekommen?</h2>
+      <p>Sparky kostet einmalig 4,99 € — kein Abo, keine Werbung, alle Features inklusive.</p>
+      <div class="cta-btns">
+        <a class="cta-btn cta-btn-orange" href="https://getcarby.app/sparky/">⚡ Mehr auf getcarby.app/sparky</a>
+        <a class="cta-btn cta-btn-ghost" href="mailto:ArcadiaApps@proton.me?subject=Interesse%20an%20Sparky">✉ Frage stellen</a>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="ci-icon">🌐</div><div class="ci-label">Website</div><div class="ci-val">getcarby.app/sparky</div></div>
+        <div class="contact-item"><div class="ci-icon">✉</div><div class="ci-label">E-Mail</div><div class="ci-val">ArcadiaApps@proton.me</div></div>
+        <div class="contact-item"><div class="ci-icon">📖</div><div class="ci-label">Handbuch</div><div class="ci-val">getcarby.app/sparky/handbuch</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Sparky · getcarby.app · © 2026 ArcadiaApps</span><span>Seite 4 von 4</span></div>
+</div>
+
+</body>
+</html>

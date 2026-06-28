@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sparky – Haushaltsbuch App | Lokal, offline, kein Abo</title>
+  <meta name="description" content="Sparky ist dein persönliches Haushaltsbuch für Windows & Android: Budgets, Abo-Tracker, Spar-Coach und animierte Ringdiagramme. 100 % offline, keine Cloud, kein Abo — einmalig 4,99 €.">
+  <link rel="canonical" href="https://getcarby.app/sparky/">
+  <link rel="alternate" hreflang="de" href="https://getcarby.app/sparky/">
+  <link rel="alternate" hreflang="x-default" href="https://getcarby.app/sparky/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getcarby.app/sparky/">
+  <meta property="og:title" content="Sparky – Haushaltsbuch App | Lokal, offline, kein Abo">
+  <meta property="og:description" content="Dein persönliches Haushaltsbuch für Windows & Android: Budgets, Abo-Tracker, Spar-Coach. 100 % offline, kein Abo.">
+  <meta property="og:image" content="https://getcarby.app/assets/logo.png">
+  <meta property="og:site_name" content="ArcadiaApps">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://getcarby.app/assets/logo.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sparky",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Windows, Android",
+    "offers": { "@type": "Offer", "price": "4.99", "priceCurrency": "EUR" },
+    "description": "Persönliches Haushaltsbuch für Windows und Android. Budgets, Abo-Tracker, Spar-Coach und animierte Ringdiagramme — 100 % offline, keine Cloud, kein Abo.",
+    "url": "https://getcarby.app/sparky/",
+    "author": {
+      "@type": "Organization",
+      "name": "ArcadiaApps",
+      "url": "https://getcarby.app"
+    }
+  }
+  </script>
+
+  <meta name="theme-color" content="#FF6B35">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .sub-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .sub-nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+    .sub-nav-logo img{width:28px;height:28px;border-radius:6px}
+    .sub-nav-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);text-decoration:none;font-size:14px;transition:color .2s}
+    .sub-nav-back:hover{color:#FF6B35}
+    .sub-nav-back svg{width:16px;height:16px}
+    .sub-page-wrap{max-width:900px;margin:0 auto;padding:100px 24px 60px}
+    .breadcrumb{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:32px}
+    .breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none}
+    .breadcrumb a:hover{color:#FF6B35}
+    .page-hero{margin-bottom:64px}
+    .page-eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#FF6B35;margin-bottom:16px}
+    .page-h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin:0 0 20px}
+    .page-h1 .grad{background:linear-gradient(135deg,#FF6B35,#FF4081);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{font-size:1.1rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:600px;margin-bottom:32px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:#FF6B35;color:#fff;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,53,.35)}
+    .btn-secondary{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;transition:border-color .2s,color .2s}
+    .btn-secondary:hover{border-color:#FF6B35;color:#FF6B35}
+    .proof-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:28px}
+    .proof-item{font-size:13px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px}
+    .proof-item::before{content:'✓';color:#FF6B35;font-weight:700}
+    .content-section{margin-bottom:64px}
+    .section-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FF6B35;margin-bottom:12px}
+    .content-h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin:0 0 16px;line-height:1.2}
+    .content-body{color:rgba(255,255,255,.7);line-height:1.7;font-size:1rem;margin-bottom:24px}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .feature-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;transition:border-color .2s,transform .2s}
+    .feature-card:hover{border-color:rgba(255,107,53,.3);transform:translateY(-2px)}
+    .fc-icon{font-size:28px;margin-bottom:12px}
+    .fc-title{font-size:15px;font-weight:700;margin-bottom:6px}
+    .fc-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+    .pillar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:64px}
+    .pillar-card{background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(255,107,53,.02));border:1px solid rgba(255,107,53,.2);border-radius:16px;padding:28px 20px;text-align:center}
+    .pillar-icon{font-size:36px;margin-bottom:12px}
+    .pillar-title{font-size:15px;font-weight:700;color:#FF8C42;margin-bottom:6px}
+    .pillar-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5}
+    .price-card{background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:16px;padding:28px;margin-bottom:64px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+    .price-num{font-size:44px;font-weight:900;color:#FF6B35}
+    .price-body{flex:1;min-width:220px}
+    .price-title{font-size:17px;font-weight:700;margin-bottom:8px}
+    .price-text{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6}
+    .platform-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px}
+    .platform-icon{font-size:40px;flex-shrink:0}
+    .platform-name{font-size:17px;font-weight:700;margin-bottom:4px}
+    .platform-detail{font-size:13px;color:rgba(255,255,255,.5)}
+    .platform-badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-top:8px}
+    .badge-dev{background:rgba(255,107,53,.15);color:#FF6B35}
+    .badge-soon{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
+    .cta-box{background:linear-gradient(135deg,rgba(255,107,53,.12),rgba(255,107,53,.04));border:1px solid rgba(255,107,53,.2);border-radius:20px;padding:48px 32px;text-align:center;margin-bottom:64px}
+    .cta-box h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin:0 0 12px}
+    .cta-box p{color:rgba(255,255,255,.6);margin-bottom:28px}
+    .doc-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .sub-footer{border-top:1px solid rgba(255,255,255,.07);padding-top:32px;text-align:center;color:rgba(255,255,255,.3);font-size:13px}
+    .sub-footer a{color:rgba(255,255,255,.3);text-decoration:none;margin:0 10px}
+    .sub-footer a:hover{color:#FF6B35}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+
+  <nav class="sub-nav">
+    <a href="../" class="sub-nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      ArcadiaApps
+    </a>
+    <a href="../" class="sub-nav-logo">
+      <img src="../assets/logo.png" alt="ArcadiaApps">
+      Sparky
+    </a>
+    <a href="prospekt.html" class="btn-primary" style="padding:10px 20px;font-size:13px">📄 Prospekt</a>
+  </nav>
+
+  <div class="sub-page-wrap">
+    <div class="breadcrumb reveal">
+      <a href="../">ArcadiaApps</a> › Sparky
+    </div>
+
+    <div class="page-hero reveal">
+      <div class="page-eyebrow">Haushaltsbuch · Windows & Android</div>
+      <h1 class="page-h1">Sparky – <span class="grad">Behalte dein<br>Geld im Griff.</span></h1>
+      <p class="page-desc">Dein persönliches Haushaltsbuch — lokal gespeichert, ohne Cloud, ohne Abo. Erfasse Einnahmen und Ausgaben, setze Budgets, verwalte Abos und lass dir vom Spar-Coach zeigen, wo Geld liegen bleibt. Einmal kaufen, für immer nutzen.</p>
+      <div class="hero-btns">
+        <a href="#features" class="btn-primary">Features entdecken</a>
+        <a href="handbuch.html" class="btn-secondary">📖 Handbuch lesen</a>
+      </div>
+      <div class="proof-row">
+        <span class="proof-item">100 % offline</span>
+        <span class="proof-item">Kein Abo</span>
+        <span class="proof-item">Keine Cloud, kein Tracking</span>
+        <span class="proof-item">DSGVO-konform</span>
+      </div>
+    </div>
+
+    <div class="pillar-grid reveal">
+      <div class="pillar-card">
+        <div class="pillar-icon">🍩</div>
+        <div class="pillar-title">Ringdiagramme</div>
+        <div class="pillar-desc">Animierte Donut-Charts zeigen sofort, wohin dein Geld fließt — pro Kategorie, mit Farbe.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🎯</div>
+        <div class="pillar-title">Budgets & Limits</div>
+        <div class="pillar-desc">Monatsbudget pro Kategorie mit Rollover und Warnung bei 80 % und 100 %.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🔁</div>
+        <div class="pillar-title">Abo-Tracker</div>
+        <div class="pillar-desc">Alle Abos an einem Ort, automatisch gebucht, mit Jahreskosten auf einen Blick.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🐷</div>
+        <div class="pillar-title">Spar-Coach</div>
+        <div class="pillar-desc">Regelbasierte Tipps, Sparziele und Notfall-Fonds-Rechner — alles lokal berechnet.</div>
+      </div>
+    </div>
+
+    <div id="features" class="content-section reveal">
+      <div class="section-label">Was Sparky kann</div>
+      <h2 class="content-h2">Ein Haushaltsbuch, das mitdenkt</h2>
+      <p class="content-body">Sparky wurde für Menschen gebaut, die den Überblick behalten wollen — ohne Tabellen-Chaos und ohne ihre Bankdaten herzugeben.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="fc-icon">💸</div>
+          <div class="fc-title">Schnell erfassen</div>
+          <div class="fc-desc">Einnahme oder Ausgabe in Sekunden eintragen — mit Kategorie, Konto, Notiz und Tags.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🗂️</div>
+          <div class="fc-title">Kategorien & Templates</div>
+          <div class="fc-desc">Fertige Vorlagen für Haushalt, Freelancer, Familie, Student & Vielreisende.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📊</div>
+          <div class="fc-title">Statistiken</div>
+          <div class="fc-desc">Ausgaben nach Kategorie, Einnahmen vs. Ausgaben über 6 Monate, Drilldown.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🗣️</div>
+          <div class="fc-title">Dein Kommunikationsstil</div>
+          <div class="fc-desc">Seriös, humorvoll, sarkastisch oder lieb — Sparky redet so mit dir, wie du willst.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📤</div>
+          <div class="fc-title">Export</div>
+          <div class="fc-desc">CSV für die Tabellenkalkulation, PDF-Monatsauswertung zum Teilen.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🔒</div>
+          <div class="fc-title">Privacy First</div>
+          <div class="fc-desc">Keine Werbung, kein Tracking, keine Bankverbindung. Optional PIN-/Biometrie-Sperre.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-num">4,99 €</div>
+      <div class="price-body">
+        <div class="price-title">Einmalkauf · kein Abo</div>
+        <div class="price-text">Du zahlst einmalig und besitzt Sparky für immer. Keine Feature-Mauern, keine In-App-Käufe, keine monatlichen Kosten. Wer zahlt, hat alles.</div>
+      </div>
+    </div>
+
+    <div class="content-section reveal">
+      <div class="section-label">Verfügbarkeit</div>
+      <h2 class="content-h2">Sparky auf deinem Gerät</h2>
+      <div class="feature-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+        <div class="platform-card">
+          <div class="platform-icon">🪟</div>
+          <div class="platform-info">
+            <div class="platform-name">Windows</div>
+            <div class="platform-detail">Windows 10 / 11 · Desktop-App</div>
+            <div class="platform-badge badge-dev">Bald verfügbar</div>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon">🤖</div>
+          <div class="platform-info">
+            <div class="platform-name">Android</div>
+            <div class="platform-detail">Android 8.0+ · Play Store</div>
+            <div class="platform-badge badge-dev">Bald verfügbar</div>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon">🍎</div>
+          <div class="platform-info">
+            <div class="platform-name">iOS / iPhone</div>
+            <div class="platform-detail">Geplant nach dem Release</div>
+            <div class="platform-badge badge-soon">Geplant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box reveal">
+      <h2>Mehr über Sparky erfahren</h2>
+      <p>Lies das Handbuch, schau dir das Prospekt an oder schreib uns — wir informieren dich, sobald Sparky verfügbar ist.</p>
+      <div class="doc-links">
+        <a href="handbuch.html" class="btn-primary">📖 Handbuch</a>
+        <a href="prospekt.html" class="btn-secondary">📄 Prospekt</a>
+        <a href="privacy-policy.html" class="btn-secondary">🔒 Datenschutz</a>
+        <a href="mailto:ArcadiaApps@proton.me?subject=Interesse%20an%20Sparky" class="btn-secondary">✉ Kontakt</a>
+      </div>
+    </div>
+
+    <div class="sub-footer">
+      <p>Ein Produkt von <a href="../">ArcadiaApps</a></p>
+      <p><a href="privacy-policy.html">Datenschutz</a><a href="../impressum.html">Impressum</a></p>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
