@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Billo – Kostenlose Rechnungs-App für Freelancer | EU-konform, offline</title>
+  <meta name="description" content="Billo erstellt EU-konforme PDF-Rechnungen für Freelancer. §19 UStG, Kundenverwaltung, Angebote, AMOLED Dark Mode. Android, kostenlos.">
+  <link rel="canonical" href="https://getcarby.app/billo/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getcarby.app/billo/">
+  <meta property="og:title" content="Billo – Kostenlose Rechnungs-App für Freelancer | EU-konform, offline">
+  <meta property="og:description" content="Billo erstellt EU-konforme PDF-Rechnungen für Freelancer. §19 UStG, Kundenverwaltung, Angebote. Android, kostenlos.">
+  <meta property="og:image" content="https://getcarby.app/assets/logo.png">
+  <meta property="og:site_name" content="ArcadiaApps">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://getcarby.app/assets/logo.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Billo",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+    "description": "EU-konforme Rechnungs-App für Freelancer. PDF-Rechnungen, §19 UStG, Kundenverwaltung. Offline.",
+    "url": "https://getcarby.app/billo/"
+  }
+  </script>
+
+  <meta name="theme-color" content="#6C63FF">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root { --accent: #6C63FF; }
+
+    .sub-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .sub-nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+    .sub-nav-logo img{width:24px;height:24px;object-fit:contain}
+    .sub-nav-back{font-size:13px;color:#888;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s}
+    .sub-nav-back:hover{color:#6C63FF}
+
+    .page-hero{padding:120px 0 60px;text-align:center;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,99,255,.12),transparent 70%);pointer-events:none}
+    .page-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6C63FF;margin-bottom:16px}
+    .page-h1{font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:16px}
+    .page-h1 span{background:linear-gradient(135deg,#6C63FF,#9B94FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{font-size:18px;color:#888;line-height:1.7;max-width:600px;margin:0 auto 32px}
+    .hero-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:#6C63FF;color:#fff;font-weight:700;font-size:15px;text-decoration:none;transition:opacity .2s}
+    .btn-primary:hover{opacity:.85}
+    .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#ccc;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s}
+    .btn-secondary:hover{border-color:rgba(108,99,255,.4);color:#fff}
+
+    .status-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);color:#6C63FF;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:99px;margin-bottom:20px}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#6C63FF;animation:blink 1.5s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    .content-section{padding:80px 0}
+    .content-section+.content-section{border-top:1px solid rgba(255,255,255,.05)}
+    .section-wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+    .section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6C63FF;margin-bottom:10px}
+    .content-h2{font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px}
+    .content-p{font-size:16px;color:#888;line-height:1.7;max-width:600px;margin-bottom:28px}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
+    .feat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;transition:border-color .2s,transform .2s}
+    .feat-card:hover{border-color:rgba(108,99,255,.3);transform:translateY(-2px)}
+    .feat-icon{font-size:28px;margin-bottom:12px}
+    .feat-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+    .feat-text{font-size:13px;color:#666;line-height:1.6}
+
+    .platform-row{display:grid;grid-template-columns:1fr;gap:12px;margin-top:32px;max-width:300px}
+    .plat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;text-align:center}
+    .plat-card.plat-featured{border-color:rgba(108,99,255,.3);background:rgba(108,99,255,.04)}
+    .plat-icon{font-size:28px;margin-bottom:8px}
+    .plat-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+    .plat-sub{font-size:12px;color:#555;margin-bottom:12px}
+    .plat-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;transition:opacity .2s}
+    .plat-btn.pb-soon{background:rgba(255,255,255,.06);color:#555;cursor:default}
+
+    .cta-section{padding:80px 0;text-align:center}
+    .cta-box{background:linear-gradient(135deg,rgba(108,99,255,.08),rgba(155,148,255,.05));border:1px solid rgba(108,99,255,.2);border-radius:24px;padding:60px 40px;max-width:700px;margin:0 auto}
+    .cta-h2{font-size:36px;font-weight:800;color:#fff;margin-bottom:12px}
+    .cta-p{font-size:16px;color:#888;margin-bottom:32px}
+
+    .breadcrumb{font-size:13px;color:#555;margin-bottom:8px}
+    .breadcrumb a{color:#555;text-decoration:none}
+    .breadcrumb a:hover{color:#6C63FF}
+    .breadcrumb span{margin:0 6px}
+
+    .proof-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+    .proof-item{display:flex;align-items:center;gap:6px;font-size:13px;color:#666}
+    .proof-dot{width:3px;height:3px;border-radius:50%;background:#333}
+
+    footer.sub-footer{padding:32px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.05);font-size:13px;color:#444}
+    footer.sub-footer a{color:#555;text-decoration:none}
+    footer.sub-footer a:hover{color:#6C63FF}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav class="sub-nav">
+  <a href="../" class="sub-nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    ArcadiaApps
+  </a>
+  <a href="../" class="sub-nav-logo">
+    <img src="../assets/logo.png" alt="Billo" onerror="this.style.display='none'">
+    <span>Billo</span>
+  </a>
+  <a href="mailto:ArcadiaApps@proton.me" class="btn-primary" style="font-size:13px;padding:8px 16px">Kontakt</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="section-wrap">
+    <div class="breadcrumb"><a href="../">ArcadiaApps</a><span>›</span> Billo</div>
+    <div class="status-badge"><span class="status-dot"></span> In Entwicklung</div>
+    <div class="page-eyebrow">📄 Billo — Rechnungs-App</div>
+    <h1 class="page-h1">Billo – <span>Rechnung fertig. In 3 Taps.</span></h1>
+    <p class="page-desc">EU-konforme Rechnungen für Solo-Freelancer. Keine Cloud. Kein Abo.</p>
+    <div class="hero-btns">
+      <a href="prospekt.html" class="btn-primary">Prospekt ansehen</a>
+      <a href="handbuch.html" class="btn-secondary">Handbuch lesen</a>
+    </div>
+    <div class="proof-row">
+      <div class="proof-item"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/></svg> 100% Offline</div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/></svg> Kein Account</div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/></svg> EU-konform §14 UStG</div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/></svg> §19 UStG Kleinunternehmer</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Features</div>
+    <h2 class="content-h2">Alles was Freelancer wirklich brauchen</h2>
+    <p class="content-p">Billo macht Rechnungsstellung einfach — ohne Cloud-Zwang, ohne Abo und ohne steuerrechtliche Kompromisse.</p>
+    <div class="feature-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">📄</div>
+        <div class="feat-title">EU-konforme PDFs</div>
+        <div class="feat-text">Alle Pflichtfelder nach §14 UStG automatisch ausgefüllt. Rechnungsnummer, Datum, Adressen, Steuernummer, Netto/MwSt./Brutto — kein Pflichtfeld vergessen.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">💜</div>
+        <div class="feat-title">3-Ringe Dashboard</div>
+        <div class="feat-text">Einnahmen, offene und überfällige Rechnungen auf einen Blick. Der violette Überblick zeigt dir sofort, wo du stehst.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">🔄</div>
+        <div class="feat-title">Angebote → Rechnungen</div>
+        <div class="feat-text">1-Tap Konvertierung vom Angebot zur Rechnung mit automatischer Vergabe der nächsten Rechnungsnummer. Keine Doppelarbeit.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">§</div>
+        <div class="feat-title">§19 UStG Modus</div>
+        <div class="feat-text">Kleinunternehmer-Modus mit automatischem Pflichttext. Billo kennt die gesetzlichen Anforderungen und fügt sie korrekt ein.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">👥</div>
+        <div class="feat-title">Kundenverwaltung</div>
+        <div class="feat-text">Alle Kunden mit vollständiger Zahlungshistorie. Einmal anlegen, immer wieder verwenden — mit automatischer Adressbefüllung in Rechnungen.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📵</div>
+        <div class="feat-title">100% Offline</div>
+        <div class="feat-text">Alle Daten lokal in Room/SQLite. PDFs werden lokal generiert — kein Internet, kein Cloud-Upload, keine Abhängigkeit von externen Servern.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Plattform</div>
+    <h2 class="content-h2">Billo auf Android</h2>
+    <p class="content-p">Entwickelt mit Jetpack Compose für ein natives, schnelles Android-Erlebnis mit AMOLED Dark Mode.</p>
+    <div class="platform-row">
+      <div class="plat-card plat-featured reveal">
+        <div class="plat-icon">🤖</div>
+        <div class="plat-name">Android</div>
+        <div class="plat-sub">min. SDK 26 · Jetpack Compose</div>
+        <span class="plat-btn pb-soon">🔧 In Entwicklung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-wrap">
+    <div class="cta-box reveal">
+      <div style="font-size:48px;margin-bottom:16px">📄</div>
+      <h2 class="cta-h2">Billo ist in Entwicklung.</h2>
+      <p class="cta-p">Interesse an Billo? Melde dich für Updates an oder schreib uns direkt. Freelancer-Feedback ist Gold wert.</p>
+      <a href="mailto:ArcadiaApps@proton.me" class="btn-primary" style="font-size:16px;padding:16px 36px;margin:0 auto">
+        ✉️ ArcadiaApps@proton.me
+      </a>
+      <div style="margin-top:16px;font-size:12px;color:#444">Kein Account · Keine Cloud · 100% DSGVO-konform</div>
+    </div>
+  </div>
+</section>
+
+<footer class="sub-footer">
+  <div>© 2026 <a href="../">ArcadiaApps</a> · <a href="privacy-policy.html">Datenschutz</a> · <a href="../impressum.html">Impressum</a> · <a href="mailto:ArcadiaApps@proton.me">Kontakt</a></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

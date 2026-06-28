@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Billo Handbuch – Anleitung & FAQ | ArcadiaApps</title>
+  <meta name="description" content="Billo Handbuch: Onboarding, Rechnung erstellen, §19 UStG, EU-Pflichtfelder-Tabelle und FAQ. Schritt-für-Schritt Anleitung für die Rechnungs-App.">
+  <link rel="canonical" href="https://getcarby.app/billo/handbuch.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getcarby.app/billo/handbuch.html">
+  <meta property="og:title" content="Billo Handbuch – Anleitung & FAQ | ArcadiaApps">
+  <meta property="og:image" content="https://getcarby.app/assets/logo.png">
+  <meta property="og:site_name" content="ArcadiaApps">
+
+  <meta name="theme-color" content="#6C63FF">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root { --accent: #6C63FF; }
+
+    .sub-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .sub-nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+    .sub-nav-logo img{width:24px;height:24px;object-fit:contain}
+    .sub-nav-back{font-size:13px;color:#888;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s}
+    .sub-nav-back:hover{color:#6C63FF}
+
+    .page-hero{padding:120px 0 40px;text-align:center;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(108,99,255,.1),transparent 70%);pointer-events:none}
+    .page-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6C63FF;margin-bottom:16px}
+    .page-h1{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:12px}
+    .page-desc{font-size:17px;color:#888;line-height:1.7;max-width:600px;margin:0 auto}
+
+    .section-wrap{max-width:900px;margin:0 auto;padding:0 24px}
+    .content-section{padding:60px 0}
+    .content-section+.content-section{border-top:1px solid rgba(255,255,255,.05)}
+    .section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6C63FF;margin-bottom:10px}
+    .content-h2{font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:20px}
+    .content-p{font-size:15px;color:#888;line-height:1.8;margin-bottom:16px}
+
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+    .step{display:flex;gap:20px;align-items:flex-start}
+    .step-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(108,99,255,.12);border:1.5px solid rgba(108,99,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#6C63FF}
+    .step-body{flex:1;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px 20px}
+    .step-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+    .step-text{font-size:13px;color:#777;line-height:1.6}
+
+    /* Info box */
+    .info-box{background:rgba(108,99,255,.06);border:1px solid rgba(108,99,255,.2);border-radius:14px;padding:24px;margin:24px 0}
+    .info-box-title{font-size:14px;font-weight:700;color:#6C63FF;margin-bottom:8px}
+    .info-box p{font-size:14px;color:#888;line-height:1.7;margin:0}
+
+    /* FAQ */
+    .faq-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+    .faq-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px 24px}
+    .faq-q{font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px}
+    .faq-q::before{content:'Q';flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(108,99,255,.15);color:#6C63FF;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+    .faq-a{font-size:14px;color:#777;line-height:1.7;padding-left:32px}
+
+    /* EU table */
+    .eu-table{width:100%;border-collapse:collapse;margin:20px 0}
+    .eu-table th{text-align:left;padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#555;border-bottom:1px solid rgba(255,255,255,.07)}
+    .eu-table td{padding:12px 14px;font-size:13px;color:#888;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5;vertical-align:top}
+    .eu-table td:first-child{color:#ccc;font-weight:600}
+    .eu-table td:last-child{color:#4CAF50;font-weight:600;white-space:nowrap}
+    .eu-table tr:last-child td{border-bottom:none}
+
+    /* §19 Box */
+    .legal-box{background:rgba(255,193,7,.04);border:1px solid rgba(255,193,7,.15);border-radius:14px;padding:24px;margin:24px 0}
+    .legal-box-title{font-size:14px;font-weight:700;color:#FFC107;margin-bottom:8px}
+    .legal-box p{font-size:14px;color:#888;line-height:1.7;margin:0}
+    .legal-box code{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:2px 8px;border-radius:4px;font-size:13px;color:#ccc;font-family:monospace}
+
+    .breadcrumb{font-size:13px;color:#555;margin-bottom:8px}
+    .breadcrumb a{color:#555;text-decoration:none}
+    .breadcrumb a:hover{color:#6C63FF}
+    .breadcrumb span{margin:0 6px}
+
+    footer.sub-footer{padding:32px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.05);font-size:13px;color:#444}
+    footer.sub-footer a{color:#555;text-decoration:none}
+    footer.sub-footer a:hover{color:#6C63FF}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav class="sub-nav">
+  <a href="index.html" class="sub-nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Billo
+  </a>
+  <a href="../" class="sub-nav-logo">
+    <img src="../assets/logo.png" alt="ArcadiaApps" onerror="this.style.display='none'">
+    <span>ArcadiaApps</span>
+  </a>
+  <a href="mailto:ArcadiaApps@proton.me" style="font-size:13px;color:#888;text-decoration:none">Kontakt</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="section-wrap">
+    <div class="breadcrumb"><a href="../">ArcadiaApps</a><span>›</span> <a href="index.html">Billo</a><span>›</span> Handbuch</div>
+    <div class="page-eyebrow">📖 Handbuch</div>
+    <h1 class="page-h1">Billo – Anleitung & FAQ</h1>
+    <p class="page-desc">Von der Einrichtung zur ersten EU-konformen Rechnung — Schritt für Schritt.</p>
+  </div>
+</section>
+
+<!-- ONBOARDING -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Onboarding · 6 Schritte</div>
+    <h2 class="content-h2">Billo einrichten</h2>
+    <p class="content-p">Das Onboarding richtet dein Profil ein. Diese Daten werden in jede Rechnung automatisch eingetragen.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Firmenname & Adresse</div>
+          <div class="step-text">Dein vollständiger Name (oder Firmenname), Straße, PLZ, Ort. Diese Daten erscheinen als Absender auf jeder Rechnung und müssen nach §14 UStG vollständig sein.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">IBAN + BIC</div>
+          <div class="step-text">Deine Bankverbindung für Überweisungen. Wird automatisch in die Fußzeile jeder Rechnung eingefügt. BIC ist für SEPA-Überweisungen wichtig.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Steuerstatus</div>
+          <div class="step-text">Wähle zwischen <strong style="color:#fff">§19 UStG Kleinunternehmer</strong> (keine MwSt.) oder <strong style="color:#fff">Regelbesteuert</strong> (mit USt-ID oder Steuernummer). Diese Einstellung bestimmt das gesamte Rechnungsformat.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Standard-MwSt.-Satz</div>
+          <div class="step-text">Wähle deinen häufigst genutzten Steuersatz: 0%, 7% (ermäßigt) oder 19% (Regelsteuersatz). Du kannst den Satz für jede Position einzeln überschreiben.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Standard-Zahlungsziel</div>
+          <div class="step-text">Wie viele Tage hat dein Kunde Zeit zu zahlen? Standard: 30 Tage. Billo berechnet das Fälligkeitsdatum automatisch ab Rechnungsdatum.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title">Rechnungsnummern-Präfix</div>
+          <div class="step-text">Definiere dein Präfix, z. B. <strong style="color:#fff">RE</strong>, <strong style="color:#fff">INV</strong> oder <strong style="color:#fff">RG</strong>. Billo nummeriert automatisch: RE-2026-001, RE-2026-002 usw. Fortlaufend ohne Lücken.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECHNUNG ERSTELLEN -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Rechnung erstellen</div>
+    <h2 class="content-h2">Rechnung in 4 Schritten</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Kunden wählen oder neu anlegen</div>
+          <div class="step-text">Wähle einen bestehenden Kunden aus deiner Kundenliste oder lege mit ein paar Taps einen neuen Kunden an (Name, Adresse). Beim nächsten Mal ist er gespeichert.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Positionen hinzufügen</div>
+          <div class="step-text">Füge Positionen hinzu: Beschreibung, Menge, Einheit (Std., Stück, Pauschal, etc.), Einzelpreis und MwSt.-Satz. Mehrere Positionen mit unterschiedlichen Steuersätzen sind möglich.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Automatische Berechnung</div>
+          <div class="step-text">Nettobetrag, MwSt. und Bruttobetrag werden live berechnet und aktualisiert — während du tippst. Kein manuelles Rechnen nötig.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">PDF erstellen & teilen</div>
+          <div class="step-text">Tippe auf „PDF erstellen" — Billo generiert die Rechnung lokal. Dann teile sie direkt per Android-Share: E-Mail, WhatsApp, Telegram oder als Datei speichern.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANGEBOTE -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Angebote</div>
+    <h2 class="content-h2">Angebote zu Rechnungen konvertieren</h2>
+    <p class="content-p">Angebote erstellst du genauso wie Rechnungen — sie werden nur anders markiert. Wenn der Kunde zusagt:</p>
+    <div class="info-box reveal">
+      <div class="info-box-title">👆 Swipe-Right → Konvertieren</div>
+      <p>Wische das Angebot in der Liste nach rechts. Billo fragt, ob du es zur Rechnung konvertieren möchtest. Mit einem Tap wird die nächste Rechnungsnummer (z. B. RE-2026-043) automatisch vergeben. Das Original-Angebot bleibt als Referenz gespeichert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECHNUNGSNUMMERN -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Rechnungsnummern-System</div>
+    <h2 class="content-h2">Fortlaufende Nummerierung</h2>
+    <p class="content-p">Das Finanzamt verlangt fortlaufende, lückenlose Rechnungsnummern. Billo verwaltet das automatisch.</p>
+    <div class="info-box reveal">
+      <div class="info-box-title">📋 Format: Präfix-JAHR-Nummer</div>
+      <p>Beispiel: <strong style="color:#fff">RE-2026-001</strong>, RE-2026-002, RE-2026-003 ...<br><br>
+      Dein Präfix (RE, INV, RG) + aktuelles Jahr + dreistellige Nummer. Billo vergbt die nächste Nummer immer automatisch. Du kannst die Startnummer manuell setzen, falls du eine bestehende Nummerierung weiterfühst.</p>
+    </div>
+    <p class="content-p">Rechnungen können nicht gelöscht werden (nur storniert) — das verhindert ungewollte Lücken in der Nummerierung, die beim Finanzamt auffallen könnten.</p>
+  </div>
+</section>
+
+<!-- §19 UStG -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">§19 UStG</div>
+    <h2 class="content-h2">Kleinunternehmerregelung erklärt</h2>
+    <div class="legal-box reveal">
+      <div class="legal-box-title">⚖️ Was ist die Kleinunternehmerregelung?</div>
+      <p>Wenn dein Jahresumsatz im Vorjahr unter 22.000 € lag und im laufenden Jahr voraussichtlich unter 50.000 € bleibt, kannst du die Kleinunternehmerregelung nach §19 UStG nutzen. Du musst dann keine Umsatzsteuer in Rechnung stellen und keine Umsatzsteuer-Voranmeldung abgeben.</p>
+    </div>
+    <p class="content-p"><strong style="color:#ccc">Wann aktivieren?</strong> Wenn du Kleinunternehmer bist, aktiviere den §19-Modus im Onboarding (Schritt 3). Billo fügt dann automatisch folgenden Pflichttext in jede Rechnung ein:</p>
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;margin:16px 0;font-size:14px;color:#ccc;line-height:1.7;font-style:italic">
+      „Gemäß § 19 UStG wird keine Umsatzsteuer berechnet."
+    </div>
+    <p class="content-p"><strong style="color:#ccc">Welcher Text erscheint?</strong> Der exakte Pflichttext nach §19 Abs. 1 UStG. Keine manuelle Eingabe nötig.</p>
+    <p class="content-p"><strong style="color:#ccc">Was ändert sich?</strong> Im §19-Modus werden keine MwSt.-Beträge ausgewiesen. Der Rechnungsbetrag ist immer der Nettobetrag. Das Steuerfeld zeigt „0% (§19 UStG)" an.</p>
+  </div>
+</section>
+
+<!-- EU PFLICHTFELDER TABELLE -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">EU-Pflichtfelder</div>
+    <h2 class="content-h2">Übersicht nach §14 UStG</h2>
+    <p class="content-p">Alle Pflichtfelder einer ordnungsgemäßen Rechnung auf einen Blick — und wie Billo sie behandelt.</p>
+    <table class="eu-table reveal">
+      <thead>
+        <tr>
+          <th>Pflichtfeld</th>
+          <th>Rechtsgrundlage</th>
+          <th>Billo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vollständiger Name & Adresse des Lieferanten</td>
+          <td>§14 Abs. 4 Nr. 1 UStG</td>
+          <td>Aus Profil ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>Vollständiger Name & Adresse des Leistungsempfängers</td>
+          <td>§14 Abs. 4 Nr. 1 UStG</td>
+          <td>Aus Kundendaten ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>Steuernummer oder USt-ID des Lieferanten</td>
+          <td>§14 Abs. 4 Nr. 2 UStG</td>
+          <td>Aus Profil ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>Ausstellungsdatum (Rechnungsdatum)</td>
+          <td>§14 Abs. 4 Nr. 3 UStG</td>
+          <td>Heute ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>Fortlaufende Rechnungsnummer</td>
+          <td>§14 Abs. 4 Nr. 4 UStG</td>
+          <td>RE-2026-001 ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>Art und Menge der Leistung</td>
+          <td>§14 Abs. 4 Nr. 5 UStG</td>
+          <td>Positionen ✓ Manuell</td>
+        </tr>
+        <tr>
+          <td>Zeitpunkt der Leistung / Leistungsdatum</td>
+          <td>§14 Abs. 4 Nr. 6 UStG</td>
+          <td>Heute ✓ Anpassbar</td>
+        </tr>
+        <tr>
+          <td>Nettobetrag, Steuersatz, Steuerbetrag, Bruttobetrag</td>
+          <td>§14 Abs. 4 Nr. 7 UStG</td>
+          <td>Live-Berechnung ✓ Auto</td>
+        </tr>
+        <tr>
+          <td>§19 UStG-Hinweis (wenn Kleinunternehmer)</td>
+          <td>§19 Abs. 1 UStG</td>
+          <td>Pflichttext ✓ Auto</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">FAQ</div>
+    <h2 class="content-h2">Häufige Fragen</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">Kann ich Rechnungen löschen?</div>
+        <div class="faq-a">Nein — aus gutem Grund. Stattdessen erstellt Billo eine <strong style="color:#fff">Stornorechnung</strong>, die das Original auf Null setzt. Das Original bleibt erhalten, da Rechnungslücken beim Finanzamt problematisch sein können. Die Stornorechnung erhält eine eigene Nummer (z. B. STORNO-RE-2026-042).</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Werden Rechnungen in der Cloud gespeichert?</div>
+        <div class="faq-a">Nein. Alle Rechnungen, Kundendaten und PDFs werden ausschließlich lokal auf deinem Android-Gerät gespeichert. Kein Upload in eine Cloud, kein Account, kein Server. Billo benötigt keine Internetverbindung für seine Kernfunktionen.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Unterstützt Billo mehrere MwSt.-Sätze?</div>
+        <div class="faq-a">Ja. Du kannst für jede Position in einer Rechnung einen eigenen Steuersatz festlegen (0%, 7%, 19%). Billo berechnet dann für jeden Satz separat und zeigt sie in der Rechnungszusammenfassung getrennt aus — korrekt nach §14 UStG.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Kann ich meinen Steuerstatus nachträglich ändern?</div>
+        <div class="faq-a">Ja, unter Einstellungen → Steuerstatus. Beachte jedoch: Ändere den Status nur zum Beginn eines neuen Geschäftsjahres oder nach Absprache mit deinem Steuerberater. Bereits erstellte Rechnungen behalten ihren ursprünglichen Status.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Wie sichere ich meine Daten?</div>
+        <div class="faq-a">Billo speichert alle Daten lokal. Für ein Backup empfehlen wir die Android-eigene Backup-Funktion (Google One Backup oder manuelle Sicherung des App-Speichers). Ein Export aller Rechnungen als ZIP ist in einer späteren Version geplant.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Kann ich Billo für mehrere Firmen nutzen?</div>
+        <div class="faq-a">Billo ist aktuell für ein einzelnes Profil ausgelegt. Multi-Profil-Support (z. B. Hauptgewerbe + Nebengewerbe) ist für eine spätere Version geplant.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="sub-footer">
+  <div>© 2026 <a href="../">ArcadiaApps</a> · <a href="index.html">Billo</a> · <a href="privacy-policy.html">Datenschutz</a> · <a href="../impressum.html">Impressum</a> · <a href="mailto:ArcadiaApps@proton.me">Kontakt</a></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
