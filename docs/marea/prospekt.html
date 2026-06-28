@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Marea Prospekt – 4 Phasen, 4 Stile | ArcadiaApps</title>
+  <meta name="description" content="Entdecke Marea: 4-Phasen-Zyklus-Tracking, 4 Kommunikationsstile und vollständige Offline-Privatsphäre. Eleganter Prospekt zur App.">
+  <link rel="canonical" href="https://getcarby.app/marea/prospekt.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getcarby.app/marea/prospekt.html">
+  <meta property="og:title" content="Marea Prospekt – 4 Phasen, 4 Stile | ArcadiaApps">
+  <meta property="og:image" content="https://getcarby.app/assets/logo.png">
+  <meta property="og:site_name" content="ArcadiaApps">
+
+  <meta name="theme-color" content="#C9747A">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root { --accent: #C9747A; }
+
+    .sub-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .sub-nav-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+    .sub-nav-logo img{width:24px;height:24px;object-fit:contain}
+    .sub-nav-back{font-size:13px;color:#888;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s}
+    .sub-nav-back:hover{color:#C9747A}
+
+    .page-hero{padding:120px 0 60px;text-align:center;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:600px;background:radial-gradient(ellipse,rgba(201,116,122,.15),transparent 70%);pointer-events:none}
+    .page-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#C9747A;margin-bottom:16px}
+    .page-h1{font-size:clamp(40px,6vw,72px);font-weight:900;line-height:1.05;color:#fff;margin-bottom:16px}
+    .page-h1 span{background:linear-gradient(135deg,#C9747A,#E89EA3,#C9747A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{font-size:20px;color:#888;line-height:1.6;max-width:600px;margin:0 auto 32px;font-weight:300}
+
+    .status-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,116,122,.12);border:1px solid rgba(201,116,122,.3);color:#C9747A;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:99px;margin-bottom:24px}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#C9747A;animation:blink 1.5s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    .section-wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+    .content-section{padding:80px 0}
+    .content-section+.content-section{border-top:1px solid rgba(255,255,255,.05)}
+    .section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C9747A;margin-bottom:10px}
+    .content-h2{font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px}
+    .content-p{font-size:16px;color:#888;line-height:1.7;max-width:600px;margin-bottom:28px}
+
+    /* Phase tiles */
+    .phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
+    .phase-card{border-radius:20px;padding:32px 24px;position:relative;overflow:hidden;transition:transform .2s}
+    .phase-card:hover{transform:translateY(-3px)}
+    .phase-card-menstruation{background:linear-gradient(135deg,rgba(201,116,122,.15),rgba(201,116,122,.05));border:1px solid rgba(201,116,122,.3)}
+    .phase-card-follikel{background:linear-gradient(135deg,rgba(122,175,140,.15),rgba(122,175,140,.05));border:1px solid rgba(122,175,140,.3)}
+    .phase-card-eisprung{background:linear-gradient(135deg,rgba(232,197,71,.15),rgba(232,197,71,.05));border:1px solid rgba(232,197,71,.3)}
+    .phase-card-luteal{background:linear-gradient(135deg,rgba(196,132,106,.15),rgba(196,132,106,.05));border:1px solid rgba(196,132,106,.3)}
+    .phase-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;opacity:.7}
+    .phase-card-menstruation .phase-num{color:#C9747A}
+    .phase-card-follikel .phase-num{color:#7AAF8C}
+    .phase-card-eisprung .phase-num{color:#E8C547}
+    .phase-card-luteal .phase-num{color:#C4846A}
+    .phase-name{font-size:22px;font-weight:800;color:#fff;margin-bottom:6px}
+    .phase-sub{font-size:14px;color:#888;margin-bottom:16px;font-style:italic}
+    .phase-text{font-size:13px;color:#777;line-height:1.6}
+    .phase-dot{width:40px;height:8px;border-radius:99px;margin-bottom:16px}
+    .phase-card-menstruation .phase-dot{background:#C9747A}
+    .phase-card-follikel .phase-dot{background:#7AAF8C}
+    .phase-card-eisprung .phase-dot{background:#E8C547}
+    .phase-card-luteal .phase-dot{background:#C4846A}
+
+    /* CSS phone mockup */
+    .mockup-wrap{display:flex;justify-content:center;margin:40px 0}
+    .phone-frame{width:220px;height:420px;background:#0a0a0a;border-radius:36px;border:2px solid rgba(255,255,255,.12);position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.6)}
+    .phone-notch{width:80px;height:20px;background:#0a0a0a;border-radius:0 0 14px 14px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:2;border:2px solid rgba(255,255,255,.08);border-top:none}
+    .phone-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+    .phase-ring-wrap{position:relative;width:140px;height:140px;margin-bottom:20px}
+    .phase-ring{width:140px;height:140px;border-radius:50%;background:conic-gradient(#C9747A 0deg 90deg,#7AAF8C 90deg 180deg,#E8C547 180deg 270deg,#C4846A 270deg 360deg);animation:spin-slow 12s linear infinite}
+    @keyframes spin-slow{to{transform:rotate(360deg)}}
+    .phase-ring-inner{position:absolute;inset:20px;background:#0a0a0a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .phase-ring-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em}
+    .phase-ring-phase{font-size:11px;font-weight:700;color:#C9747A;margin-top:2px}
+    .phone-day-label{font-size:11px;color:#555;margin-bottom:6px}
+    .phone-day-num{font-size:28px;font-weight:900;color:#fff}
+
+    /* Kommunikationsstile */
+    .style-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
+    .style-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;transition:border-color .2s,transform .2s}
+    .style-card:hover{border-color:rgba(201,116,122,.25);transform:translateY(-2px)}
+    .style-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:#555}
+    .style-name{font-size:18px;font-weight:800;color:#fff;margin-bottom:12px}
+    .style-bubble{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;border-bottom-left-radius:4px;padding:14px 16px;font-size:14px;color:#ccc;line-height:1.6;font-style:italic}
+
+    /* Feature grid */
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:32px}
+    .feat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;transition:border-color .2s}
+    .feat-card:hover{border-color:rgba(201,116,122,.25)}
+    .feat-icon{font-size:24px;margin-bottom:10px}
+    .feat-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px}
+    .feat-text{font-size:12px;color:#666;line-height:1.6}
+
+    .cta-section{padding:80px 0;text-align:center}
+    .cta-box{background:linear-gradient(135deg,rgba(201,116,122,.08),rgba(232,158,163,.05));border:1px solid rgba(201,116,122,.2);border-radius:24px;padding:60px 40px;max-width:700px;margin:0 auto}
+    .cta-h2{font-size:36px;font-weight:800;color:#fff;margin-bottom:12px}
+    .cta-p{font-size:16px;color:#888;margin-bottom:32px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:#C9747A;color:#fff;font-weight:700;font-size:15px;text-decoration:none;transition:opacity .2s}
+    .btn-primary:hover{opacity:.85}
+
+    .breadcrumb{font-size:13px;color:#555;margin-bottom:8px}
+    .breadcrumb a{color:#555;text-decoration:none}
+    .breadcrumb a:hover{color:#C9747A}
+    .breadcrumb span{margin:0 6px}
+
+    footer.sub-footer{padding:32px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.05);font-size:13px;color:#444}
+    footer.sub-footer a{color:#555;text-decoration:none}
+    footer.sub-footer a:hover{color:#C9747A}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav class="sub-nav">
+  <a href="index.html" class="sub-nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Marea
+  </a>
+  <a href="../" class="sub-nav-logo">
+    <img src="../assets/logo.png" alt="ArcadiaApps" onerror="this.style.display='none'">
+    <span>ArcadiaApps</span>
+  </a>
+  <a href="mailto:ArcadiaApps@proton.me" style="font-size:13px;color:#888;text-decoration:none">Kontakt</a>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="section-wrap">
+    <div class="breadcrumb"><a href="../">ArcadiaApps</a><span>›</span> <a href="index.html">Marea</a><span>›</span> Prospekt</div>
+    <div class="status-badge"><span class="status-dot"></span> In Entwicklung</div>
+    <div class="page-eyebrow">🌙 Marea Prospekt</div>
+    <h1 class="page-h1"><span>Marea</span></h1>
+    <p class="page-desc">Dein Zyklus. Dein Rhythmus. Deine Stimme.</p>
+  </div>
+</section>
+
+<!-- PHONE MOCKUP + PHASES -->
+<section class="content-section">
+  <div class="section-wrap" style="text-align:center">
+    <div class="section-label">4 Phasen, 1 Rhythmus</div>
+    <h2 class="content-h2" style="max-width:600px;margin:0 auto 14px">Verstehe deinen Körper in seiner ganzen Komplexität</h2>
+    <p class="content-p" style="margin:0 auto 0">Marea visualisiert deinen Zyklus als lebendigen, farbigen Ring — jede Phase mit ihren eigenen Eigenschaften, Farben und Empfehlungen.</p>
+
+    <div class="mockup-wrap reveal">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-day-label">Heute</div>
+          <div class="phase-ring-wrap">
+            <div class="phase-ring"></div>
+            <div class="phase-ring-inner">
+              <div class="phase-ring-label">Phase</div>
+              <div class="phase-ring-phase">Follikel</div>
+            </div>
+          </div>
+          <div class="phone-day-num" style="color:#7AAF8C">Tag 8</div>
+          <div style="font-size:11px;color:#555;margin-top:8px">Energie steigt ↑</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card phase-card-menstruation reveal">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 1 · Tage 1–5</div>
+        <div class="phase-name">Menstruation</div>
+        <div class="phase-sub">Ruhe & Regeneration</div>
+        <div class="phase-text">Hormonwerte sinken, der Körper regeneriert sich. Marea empfiehlt sanfte Aktivitäten und beobachtet Stimmung und Energie täglich.</div>
+      </div>
+      <div class="phase-card phase-card-follikel reveal">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 2 · Tage 6–13</div>
+        <div class="phase-name">Follikel</div>
+        <div class="phase-sub">Energie & Aufbruch</div>
+        <div class="phase-text">Östrogen steigt, Energie und Motivation nehmen zu. Die beste Zeit für neue Projekte, Sport und soziale Aktivitäten.</div>
+      </div>
+      <div class="phase-card phase-card-eisprung reveal">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 3 · Tage 14–16</div>
+        <div class="phase-name">Eisprung</div>
+        <div class="phase-sub">Höchstleistung & Verbindung</div>
+        <div class="phase-text">LH-Peak, Höchstenergie. Fruchtbarkeit auf dem Höhepunkt. Marea markiert diese Phase und gibt entsprechende Hinweise.</div>
+      </div>
+      <div class="phase-card phase-card-luteal reveal">
+        <div class="phase-dot"></div>
+        <div class="phase-num">Phase 4 · Tage 17–28</div>
+        <div class="phase-name">Luteal</div>
+        <div class="phase-sub">Reflektion & Innenraum</div>
+        <div class="phase-text">Progesteron steigt, Energie sinkt. Zeit für Selbstfürsorge, Reflexion und ruhige Aktivitäten. PMS-Symptome werden erfasst.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KOMMUNIKATIONSSTILE -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">4 Kommunikationsstile</div>
+    <h2 class="content-h2">Du entscheidest, wie Marea mit dir spricht</h2>
+    <p class="content-p">Nicht jeder will dasselbe hören. Marea respektiert das — wähle den Ton, der zu dir passt, und ändere ihn jederzeit.</p>
+    <div class="style-grid">
+      <div class="style-card reveal">
+        <div class="style-label">Stil 1</div>
+        <div class="style-name">💖 Liebevoll</div>
+        <div class="style-bubble">"Du hast heute alles gegeben. Gönn dir Ruhe. 🌸"</div>
+      </div>
+      <div class="style-card reveal">
+        <div class="style-label">Stil 2</div>
+        <div class="style-name">📊 Sachlich</div>
+        <div class="style-bubble">"Tag 3 deiner Menstruation. Hormonwerte niedrig."</div>
+      </div>
+      <div class="style-card reveal">
+        <div class="style-label">Stil 3</div>
+        <div class="style-name">😄 Humorvoll</div>
+        <div class="style-bubble">"Dein Körper läuft heute auf Sparflamme. Drama-Modus: aktiv. 🎭"</div>
+      </div>
+      <div class="style-card reveal">
+        <div class="style-label">Stil 4</div>
+        <div class="style-name">😏 Sarkastisch</div>
+        <div class="style-bubble">"Oh, Überraschung. Nochmal Krämpfe. Wer hätte das gedacht."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="content-section">
+  <div class="section-wrap">
+    <div class="section-label">Feature-Highlights</div>
+    <h2 class="content-h2">Alles was Marea kann</h2>
+    <div class="feature-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">🌙</div>
+        <div class="feat-title">4-Phasen-Tracking</div>
+        <div class="feat-text">Farbiger Phasen-Ring auf dem Dashboard</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📋</div>
+        <div class="feat-title">Symptom-Log</div>
+        <div class="feat-text">Stimmung, Energie, Schmerzen, Schlaf täglich</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">💊</div>
+        <div class="feat-title">15 Verhütungstypen</div>
+        <div class="feat-text">Individuelle Erinnerungen und Tracking</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📅</div>
+        <div class="feat-title">Kalender-View</div>
+        <div class="feat-text">Zyklushistorie auf einen Blick</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📵</div>
+        <div class="feat-title">100% Offline</div>
+        <div class="feat-text">Kein Account, keine Cloud, alle Daten lokal</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📤</div>
+        <div class="feat-title">PDF & CSV Export</div>
+        <div class="feat-text">Für das Arztgespräch vorbereitet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-wrap">
+    <div class="cta-box reveal">
+      <div style="font-size:48px;margin-bottom:16px">🌙</div>
+      <h2 class="cta-h2">Marea ist in Entwicklung.</h2>
+      <p class="cta-p">Interesse an Marea? Schreib uns — wir nehmen Feedback gerne entgegen und informieren über den Release.</p>
+      <a href="mailto:ArcadiaApps@proton.me" class="btn-primary" style="font-size:16px;padding:16px 36px;margin:0 auto">
+        ✉️ ArcadiaApps@proton.me
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="sub-footer">
+  <div>© 2026 <a href="../">ArcadiaApps</a> · <a href="index.html">Marea</a> · <a href="privacy-policy.html">Datenschutz</a> · <a href="../impressum.html">Impressum</a></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
