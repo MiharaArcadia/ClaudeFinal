@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speisekarte — Han Palas Restaurant Neuss · Demo-Entwurf</title>
+<meta name="description" content="Die Speisekarte des Han Palas Restaurant Neuss: Drehspieß, Adana, İskender, Pide, Pfannengerichte, vegetarische Gerichte, Pizza & Pasta, Salate und Desserts. Beispielkarte (Demo).">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%238E2434'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <span class="spark" aria-hidden="true">◆</span>
+    <span><strong>Design-Entwurf</strong> · Unverbindliche Demo für das Han Palas Restaurant Neuss – nicht die offizielle Website.</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Han Palas Restaurant Neuss – Startseite">
+      <span class="brand__mark" aria-hidden="true">H</span>
+      <span><span class="brand__name">Han Palas</span><span class="brand__sub">Restaurant Neuss</span></span>
+      <span class="brand__demo" title="Unverbindlicher Entwurf">DEMO</span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="index.html">Start</a>
+      <a href="speisekarte.html" class="is-active" aria-current="page">Speisekarte</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn--primary btn--lg" href="kontakt.html#reservieren">Tisch reservieren</a>
+      <button class="cart-btn" type="button" aria-label="Warenkorb (Demo)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cart-btn__count" data-cart-count>0</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menü">
+  <div class="drawer__top">
+    <span class="brand"><span class="brand__mark" aria-hidden="true">H</span><span class="brand__name">Han Palas</span></span>
+    <button class="drawer__close" data-close-drawer type="button" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile Navigation">
+    <a href="index.html">Start</a>
+    <a href="speisekarte.html" class="is-active">Speisekarte</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="warum-website.html">Warum neue Website?</a>
+  </nav>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--block" href="kontakt.html#reservieren">Tisch reservieren</a>
+    <a class="btn btn--secondary btn--block" href="tel:+4921317391807">Anrufen &amp; bestellen</a>
+  </div>
+  <div class="drawer__info">
+    An der Münze 8 · 41460 Neuss<br>
+    Täglich 09:00 – 22:00 Uhr<br>
+    <a href="tel:+4921317391807" style="color:var(--gp-ember);font-weight:700;text-decoration:none">02131 7391807</a>
+  </div>
+</aside>
+
+<main id="main">
+
+  <!-- Page-Hero -->
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Brotkrümel"><a href="index.html">Start</a> <span aria-hidden="true">/</span> <span>Speisekarte</span></nav>
+      <span class="eyebrow eyebrow--saffron">Speisekarte</span>
+      <h1 class="h1 mt-2">Frisch zubereitet, jeden Tag</h1>
+      <p class="lead">Vom Drehspieß über den Holzkohlegrill bis zur heißen Sac-Pfanne – alles halal, hausgemacht und mit Liebe angerichtet. Kategorie wählen und stöbern.</p>
+      <div class="flex wrap-gap mt-6">
+        <span class="chip chip--halal">Halal</span>
+        <span class="chip chip--rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg> 4,7</span>
+        <span class="chip chip--dark">Abholbereit in ~15 Min.</span>
+        <span class="chip chip--dark">Lieferung in Neuss</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--cream2" style="padding-bottom:clamp(48px,6vw,84px)">
+    <div class="wrap">
+
+      <!-- Sticky-Kategorie-Tabs -->
+      <div class="menu-tabs">
+        <div class="menu-tabs__row" role="tablist" aria-label="Kategorien">
+          <button class="tab is-active" data-target="cat-drehspiess" type="button">Vom Drehspieß</button>
+          <button class="tab" data-target="cat-grill" type="button">Grill-Spezialitäten</button>
+          <button class="tab" data-target="cat-ofen" type="button">Pide &amp; Lahmacun</button>
+          <button class="tab" data-target="cat-pfanne" type="button">Sac-Pfannen</button>
+          <button class="tab" data-target="cat-veggie" type="button">Vegetarisch</button>
+          <button class="tab" data-target="cat-pizzapasta" type="button">Pizza &amp; Pasta</button>
+          <button class="tab" data-target="cat-salate" type="button">Salate &amp; Mezze</button>
+          <button class="tab" data-target="cat-suess" type="button">Süßes &amp; Getränke</button>
+        </div>
+      </div>
+
+      <p class="faint" style="font-size:13px;margin:0 0 8px">Alle Preise in&nbsp;€ inkl. MwSt. · halal · <strong>Beispielkarte (Demo)</strong> – Gerichte &amp; Preise dienen nur zur Veranschaulichung.</p>
+
+      <!-- ===== Vom Drehspieß ===== -->
+      <div class="menu-cat" id="cat-drehspiess">
+        <div class="menu-cat__head"><h2 class="h3 serif">Vom Drehspieß</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Dürüm</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Dürüm Drehspieß</h3><span class="price dish__price">8,90&nbsp;€</span></div><p class="dish__desc">Hauchdünnes Drehspießfleisch im dünnen Fladen mit Salat &amp; Sauce.</p><button class="dish__add" type="button" data-add="Dürüm Drehspieß">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--dark ph__tag--tr">Beliebt</span><span class="ph__label">FOTO · Döner Teller</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Döner Teller</h3><span class="price dish__price">13,90&nbsp;€</span></div><p class="dish__desc">Mit Reis, Salat, Grillgemüse und zwei hausgemachten Saucen.</p><button class="dish__add" type="button" data-add="Döner Teller">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--saffron"><span class="ph__tag ph__tag--dark ph__tag--tr">Beliebt</span><span class="ph__label">FOTO · İskender</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">İskender</h3><span class="price dish__price">15,90&nbsp;€</span></div><p class="dish__desc">Drehspießfleisch auf Fladenbrotwürfeln, Tomatensauce, Joghurt &amp; gebräunter Butter.</p><button class="dish__add" type="button" data-add="İskender">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="3">
+            <div class="ph ph--char"><span class="ph__label">FOTO · Drehspieß-Box</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Drehspieß-Box</h3><span class="price dish__price">9,90&nbsp;€</span></div><p class="dish__desc">Pommes, Drehspießfleisch und Sauce – für den schnellen Hunger zwischendurch.</p><button class="dish__add" type="button" data-add="Drehspieß-Box">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Grill-Spezialitäten ===== -->
+      <div class="menu-cat" id="cat-grill">
+        <div class="menu-cat__head"><h2 class="h3 serif">Spezialitäten vom Holzkohlegrill</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--dark ph__tag--tr">Beliebt</span><span class="ph__label">FOTO · Adana</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Adana Kebab</h3><span class="price dish__price">15,90&nbsp;€</span></div><p class="dish__desc">Würzig gegrillter Lammhackspieß vom Holzkohlegrill mit Bulgur &amp; Salat.</p><button class="dish__add" type="button" data-add="Adana Kebab">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Köfte</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Köfte-Teller</h3><span class="price dish__price">14,90&nbsp;€</span></div><p class="dish__desc">Hausgemachte Hackbällchen mit Reis, Salat und Grillgemüse.</p><button class="dish__add" type="button" data-add="Köfte-Teller">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--saffron"><span class="ph__label">FOTO · Tavuk Şiş</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Hähnchenspieß · Tavuk Şiş</h3><span class="price dish__price">14,90&nbsp;€</span></div><p class="dish__desc">Marinierte Hähnchenfilet-Stücke vom Spieß mit Reis &amp; Salat.</p><button class="dish__add" type="button" data-add="Hähnchenspieß">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="3">
+            <div class="ph ph--char"><span class="ph__label">FOTO · Kuzu Şiş</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Lammspieß · Kuzu Şiş</h3><span class="price dish__price">18,90&nbsp;€</span></div><p class="dish__desc">Zarte Lammfiletwürfel vom Grill mit Reis, Bulgur und Salat.</p><button class="dish__add" type="button" data-add="Lammspieß">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Ali Nazik</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Ali Nazik</h3><span class="price dish__price">16,90&nbsp;€</span></div><p class="dish__desc">Gegrilltes Lammspießfleisch auf cremigem Auberginen-Joghurt.</p><button class="dish__add" type="button" data-add="Ali Nazik">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--dark ph__tag--tr">Für 2</span><span class="ph__label">FOTO · Grillplatte</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Gemischte Grillplatte</h3><span class="price dish__price">36,90&nbsp;€</span></div><p class="dish__desc">Adana, Köfte, Hähnchen- &amp; Lammspieß – üppig angerichtet für zwei Genießer.</p><button class="dish__add" type="button" data-add="Gemischte Grillplatte">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Pide & Lahmacun ===== -->
+      <div class="menu-cat" id="cat-ofen">
+        <div class="menu-cat__head"><h2 class="h3 serif">Pide &amp; Lahmacun</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--saffron"><span class="ph__label">FOTO · Lahmacun</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Lahmacun</h3><span class="price dish__price">6,50&nbsp;€</span></div><p class="dish__desc">Dünner Teigfladen mit würziger Hackauflage, Salat &amp; Zitrone.</p><button class="dish__add" type="button" data-add="Lahmacun">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Pide Hack</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Pide Kıymalı</h3><span class="price dish__price">11,90&nbsp;€</span></div><p class="dish__desc">Schiffchen-Pide aus dem Ofen mit gewürztem Hackfleisch.</p><button class="dish__add" type="button" data-add="Pide Kıymalı">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--olive"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Pide Käse</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Pide Kaşarlı</h3><span class="price dish__price">10,90&nbsp;€</span></div><p class="dish__desc">Mit reichlich geschmolzenem türkischem Kaşar-Käse.</p><button class="dish__add" type="button" data-add="Pide Kaşarlı">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="3">
+            <div class="ph ph--char"><span class="ph__label">FOTO · Pide Sucuk</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Pide Sucuk</h3><span class="price dish__price">12,90&nbsp;€</span></div><p class="dish__desc">Mit pikanter türkischer Knoblauchwurst und Käse.</p><button class="dish__add" type="button" data-add="Pide Sucuk">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Sac-Pfannen ===== -->
+      <div class="menu-cat" id="cat-pfanne">
+        <div class="menu-cat__head"><h2 class="h3 serif">Pfannengerichte vom Sac</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--dark ph__tag--tr">Beliebt</span><span class="ph__label">FOTO · Tavuk Sac</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Tavuk Sac</h3><span class="price dish__price">15,90&nbsp;€</span></div><p class="dish__desc">Hähnchen aus der heißen Eisenpfanne mit Tomaten, Champignons, Zwiebeln &amp; Paprika.</p><button class="dish__add" type="button" data-add="Tavuk Sac">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--char"><span class="ph__label">FOTO · Kuzu Sac</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Kuzu Sac · Lamm</h3><span class="price dish__price">18,90&nbsp;€</span></div><p class="dish__desc">Zartes Lamm mit Gemüse, brutzelnd serviert in der Gusspfanne.</p><button class="dish__add" type="button" data-add="Kuzu Sac">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Sac Karışık</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Sac Karışık</h3><span class="price dish__price">17,90&nbsp;€</span></div><p class="dish__desc">Gemischte Pfanne mit Hähnchen und Lamm – würzig und herzhaft.</p><button class="dish__add" type="button" data-add="Sac Karışık">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Vegetarisch ===== -->
+      <div class="menu-cat" id="cat-veggie">
+        <div class="menu-cat__head"><h2 class="h3 serif">Vegetarisch</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--olive"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Falafel</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Falafel-Teller</h3><span class="price dish__price">12,90&nbsp;€</span></div><p class="dish__desc">Knusprige Kichererbsenbällchen mit Hummus, Salat, Reis &amp; Sesamsauce.</p><button class="dish__add" type="button" data-add="Falafel-Teller">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--saffron"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Halloumi</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Gegrillter Halloumi</h3><span class="price dish__price">13,90&nbsp;€</span></div><p class="dish__desc">Gegrillter Halloumi-Käse mit Grillgemüse, Salat und Fladenbrot.</p><button class="dish__add" type="button" data-add="Gegrillter Halloumi">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--olive"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Sigara Böreği</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Sigara Böreği</h3><span class="price dish__price">6,90&nbsp;€</span></div><p class="dish__desc">Vier knusprige Teigröllchen mit cremiger Käsefüllung.</p><button class="dish__add" type="button" data-add="Sigara Böreği">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Pizza & Pasta ===== -->
+      <div class="menu-cat" id="cat-pizzapasta">
+        <div class="menu-cat__head"><h2 class="h3 serif">Pizza &amp; Pasta</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Margherita</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Pizza Margherita</h3><span class="price dish__price">9,90&nbsp;€</span></div><p class="dish__desc">Tomate, Mozzarella und frisches Basilikum auf knusprigem Boden.</p><button class="dish__add" type="button" data-add="Pizza Margherita">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Pizza Sucuk</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Pizza Sucuk</h3><span class="price dish__price">12,90&nbsp;€</span></div><p class="dish__desc">Mit pikanter türkischer Knoblauchwurst, Paprika und Käse.</p><button class="dish__add" type="button" data-add="Pizza Sucuk">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--saffron"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Spaghetti</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Spaghetti Napoli</h3><span class="price dish__price">9,90&nbsp;€</span></div><p class="dish__desc">Mit fruchtiger Tomatensauce, Basilikum und Parmesan.</p><button class="dish__add" type="button" data-add="Spaghetti Napoli">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Salate & Mezze ===== -->
+      <div class="menu-cat" id="cat-salate">
+        <div class="menu-cat__head"><h2 class="h3 serif">Salate &amp; Mezze</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--olive"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Çoban</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Hirtensalat · Çoban</h3><span class="price dish__price">7,90&nbsp;€</span></div><p class="dish__desc">Tomate, Gurke, Zwiebel &amp; Paprika mit Olivenöl und Granatapfelsirup.</p><button class="dish__add" type="button" data-add="Hirtensalat">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--saffron"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Mezze</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Mezze-Teller</h3><span class="price dish__price">11,90&nbsp;€</span></div><p class="dish__desc">Hummus, Auberginencreme, Joghurt-Dip, Oliven und warmes Fladenbrot.</p><button class="dish__add" type="button" data-add="Mezze-Teller">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--meat"><span class="ph__label">FOTO · Hähnchen-Bowl</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Hähnchen-Salat-Bowl</h3><span class="price dish__price">12,90&nbsp;€</span></div><p class="dish__desc">Bunter Salat mit gegrilltem Hähnchen, Joghurt-Dressing &amp; Croûtons.</p><button class="dish__add" type="button" data-add="Hähnchen-Salat-Bowl">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ===== Süßes & Getränke ===== -->
+      <div class="menu-cat" id="cat-suess">
+        <div class="menu-cat__head"><h2 class="h3 serif">Süßes &amp; Getränke</h2><span class="line" aria-hidden="true"></span></div>
+        <div class="grid grid--auto-250">
+          <article class="card dish reveal">
+            <div class="ph ph--saffron"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Baklava</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Baklava (3&nbsp;St.)</h3><span class="price dish__price">5,90&nbsp;€</span></div><p class="dish__desc">Blätterteig mit Pistazien und Honigsirup – süß, knusprig, klassisch.</p><button class="dish__add" type="button" data-add="Baklava">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="1">
+            <div class="ph ph--ember"><span class="ph__tag ph__tag--dark ph__tag--tr">Beliebt</span><span class="ph__label">FOTO · Künefe</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Künefe</h3><span class="price dish__price">6,90&nbsp;€</span></div><p class="dish__desc">Warmes Käsegebäck in Zuckersirup mit Pistazien – frisch aus dem Ofen.</p><button class="dish__add" type="button" data-add="Künefe">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="2">
+            <div class="ph ph--olive"><span class="ph__tag ph__tag--veg ph__tag--tl"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>Vegetarisch</span><span class="ph__label">FOTO · Ayran</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Ayran (0,25&nbsp;l)</h3><span class="price dish__price">2,50&nbsp;€</span></div><p class="dish__desc">Erfrischendes, leicht gesalzenes Joghurtgetränk – hausgemacht.</p><button class="dish__add" type="button" data-add="Ayran">+ Hinzufügen</button></div>
+          </article>
+          <article class="card dish reveal" data-d="3">
+            <div class="ph ph--char"><span class="ph__label">FOTO · Çay</span></div>
+            <div class="dish__body"><div class="dish__row"><h3 class="dish__name">Türkischer Çay</h3><span class="price dish__price">2,00&nbsp;€</span></div><p class="dish__desc">Schwarzer Tee im klassischen Tulpenglas – zum Abschluss ein Muss.</p><button class="dish__add" type="button" data-add="Türkischer Çay">+ Hinzufügen</button></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Abschluss-CTA -->
+      <div class="cta-band reveal mt-8">
+        <h2 class="h2">Hunger bekommen?</h2>
+        <p>Rufen Sie an und holen Sie Ihre Bestellung in rund 15&nbsp;Minuten ab – oder reservieren Sie gleich einen Tisch am Grill.</p>
+        <div class="flex wrap-gap mt-6" style="justify-content:center">
+          <a class="btn btn--primary btn--lg" href="tel:+4921317391807">02131 7391807</a>
+          <a class="btn btn--secondary btn--lg" href="kontakt.html#reservieren">Tisch reservieren</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true">H</span><span><span class="brand__name">Han Palas</span><span class="brand__sub">Restaurant Neuss</span></span></a>
+        <p>Türkische Küche mitten in Neuss – Döner vom Drehspieß, Adana, İskender und hausgemachte Mezze, halal und täglich frisch.</p>
+        <div class="socials mt-4">
+          <a class="soc" href="#" aria-label="Instagram (Platzhalter)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a class="soc" href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1.3-3 3.2V11H9v3h2v6h3v-6h2.4l.6-3H14V9.4c0-.3.2-.4.5-.4z"/></svg></a>
+          <a class="soc" href="https://wa.me/4921317391807" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3zm0 2a7 7 0 0 1 5.9 10.8l-.4.6.5 2-2-.5-.6.3A7 7 0 1 1 12 5zm-2.5 3c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.5.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3l-1.4-.7c-.2-.1-.4-.1-.5.1l-.6.8c-.1.1-.2.2-.5.1-.3-.2-1.1-.4-2-1.3-.8-.7-1.3-1.5-1.4-1.8-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3.2-.5 0-.1 0-.3 0-.4l-.7-1.6c-.2-.4-.4-.4-.6-.4z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Entdecken</h4>
+        <a href="index.html">Start</a><a href="speisekarte.html">Speisekarte</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a><a href="warum-website.html">Warum neue Website?</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <span>An der Münze 8<br>41460 Neuss</span>
+        <a href="tel:+4921317391807">02131 7391807</a>
+        <a href="mailto:info@hanpalas.de">info@hanpalas.de</a>
+      </div>
+      <div class="footer-col">
+        <h4>Öffnungszeiten</h4>
+        <span>Montag – Sonntag<br>09:00 – 22:00 Uhr</span>
+        <span style="color:var(--gp-faint)">Fr &amp; Sa bis 23:00 Uhr</span>
+      </div>
+    </div>
+    <div class="footer-demo">
+      <strong>Hinweis – unverbindlicher Entwurf:</strong> Diese Website ist eine Demo-Designstudie für das Han Palas Restaurant Neuss und <strong>nicht die offizielle Website</strong> des Restaurants. Texte, Preise und Bewertungen sind Beispielinhalte, Fotos sind Platzhalter. Bestell- und Zahlungsfunktionen sind rein visuell angedeutet.
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Han Palas Restaurant Neuss · Demo-Entwurf</span>
+      <span>Konzept &amp; Gestaltung: <strong style="color:#C9BCA9">[Ihr Name / Ihre Webagentur]</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
