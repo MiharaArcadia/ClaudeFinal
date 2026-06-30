@@ -1,0 +1,240 @@
+/* ============================================================================
+   MR. BEEF DINER — „Bright Pop-Diner" Override-Layer
+   Lädt NACH styles.css. Macht aus der schlichten Vorlage einen lauten,
+   instagramablen American-Diner-Look (Rot · Royalblau · Pop-Gelb · Creme).
+   ========================================================================== */
+:root{
+  --blue:      #143C8C;   /* Royalblau – Sekundär      */
+  --blue-2:    #1B4FB0;   /* helleres Blau, Verläufe   */
+  --blue-deep: #0E2A63;   /* Aktiv/Schatten            */
+  --yellow:    #FFC629;   /* Pop-Gelb – Sterne/Akzent  */
+  --ink:       #181410;   /* Tiefschwarz               */
+  --script:    'Pacifico', 'Brush Script MT', cursive;
+}
+
+/* ---------- Grundgefühl ---------- */
+body{ background:var(--gp-cream); }
+::selection{ background:var(--yellow); color:var(--ink); }
+:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; }
+
+/* ---------- Display / Headlines: Diner-Schild ---------- */
+.display,.h1,.h2{ text-transform:uppercase; letter-spacing:.005em; }
+.display{ line-height:.92; font-size:clamp(48px,8.2vw,104px); }
+.h1{ line-height:.95; }
+.h2{ line-height:.96; }
+.hero .display{ text-shadow:4px 4px 0 var(--yellow), 8px 8px 0 rgba(20,60,140,.18); }
+.display .red,.h1 .red,.h2 .red{ color:var(--gp-ember); }
+.display .blue,.h1 .blue,.h2 .blue{ color:var(--blue); }
+.page-hero .h1{ text-shadow:3px 3px 0 var(--gp-ember); }
+
+/* ---------- Eyebrow: Retro-Script ---------- */
+.eyebrow{
+  font-family:var(--script); font-size:clamp(20px,2.4vw,28px); letter-spacing:0;
+  text-transform:none; color:var(--gp-ember); font-weight:400; gap:10px;
+}
+.eyebrow::before{ height:3px; width:30px; border-radius:3px; }
+.eyebrow--saffron{ color:var(--yellow); }
+.section--char .eyebrow{ color:var(--yellow); }
+
+/* ---------- Buttons: Sticker mit hartem Versatz-Schatten ---------- */
+.btn{
+  border:2.5px solid var(--ink); border-radius:12px; text-transform:uppercase;
+  letter-spacing:.045em; font-weight:800; font-family:var(--gp-sans);
+  box-shadow:4px 4px 0 var(--ink); transition:transform .12s var(--ease),box-shadow .12s var(--ease),background .12s;
+}
+.btn--lg{ border-radius:14px; box-shadow:5px 5px 0 var(--ink); }
+.btn:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
+.btn:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+.btn--primary{ background:var(--gp-ember); color:#fff; }
+.btn--primary:hover{ background:var(--gp-ember-dark); color:#fff; }
+.btn--secondary{ background:var(--blue); color:#fff; border-color:var(--ink); }
+.btn--secondary:hover{ background:var(--blue-deep); color:#fff; }
+.btn--onchar{ background:var(--yellow); color:var(--ink); border-color:var(--ink); }
+.btn--ghost{ border-color:transparent; box-shadow:none; }
+.btn--ghost:hover{ transform:none; box-shadow:none; background:rgba(224,27,34,.08); color:var(--gp-ember); }
+.cta-band .btn--primary{ background:var(--yellow); color:var(--ink); border-color:var(--ink); }
+.cta-band .btn--secondary{ background:transparent; color:#fff; border-color:#fff; box-shadow:4px 4px 0 rgba(0,0,0,.35); }
+
+/* ---------- Header / Brand ---------- */
+.site-header{ background:var(--gp-cream); border-bottom:3px solid var(--ink); backdrop-filter:none; }
+.site-header.is-stuck{ box-shadow:0 6px 0 -2px rgba(0,0,0,.12); background:var(--gp-cream); }
+.brand__mark{
+  border-radius:10px; background:var(--gp-ember); border:2.5px solid var(--ink);
+  box-shadow:3px 3px 0 var(--ink); font-family:var(--gp-serif); transform:rotate(-3deg);
+}
+.brand__name{ font-family:var(--gp-serif); text-transform:uppercase; letter-spacing:.02em; font-size:25px; }
+.brand__sub{ color:var(--blue); }
+.nav a{ font-weight:700; text-transform:uppercase; font-size:13.5px; letter-spacing:.03em; }
+.nav a:hover{ background:var(--yellow); color:var(--ink); }
+.nav a.is-active{ background:var(--gp-ember); color:#fff; }
+.cart-btn,.burger,.drawer__close{ border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink); border-radius:11px; }
+
+/* ---------- Demo-Bar ---------- */
+.demo-bar{ background:var(--blue-deep); color:#dfe6f5; border-bottom:none; }
+.demo-bar strong{ color:#fff; }
+.demo-bar .spark{ color:var(--yellow); }
+
+/* ---------- Marquee-Laufband ---------- */
+.marquee{
+  background:var(--gp-ember); color:#fff; border-block:3px solid var(--ink);
+  overflow:hidden; white-space:nowrap; padding:11px 0;
+}
+.marquee--blue{ background:var(--blue); }
+.marquee__track{ display:inline-flex; gap:0; animation:mb-marquee 26s linear infinite; will-change:transform; }
+.marquee__track span{
+  font-family:var(--gp-serif); text-transform:uppercase; font-size:18px; letter-spacing:.05em;
+  padding:0 26px; display:inline-flex; align-items:center; gap:26px;
+}
+.marquee__track span::after{ content:"★"; color:var(--yellow); font-size:15px; }
+@keyframes mb-marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ---------- Sticker-Badges ---------- */
+.sticker{
+  display:inline-flex; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--gp-serif); text-transform:uppercase; line-height:.95; letter-spacing:.02em;
+  width:108px; height:108px; border-radius:50%; padding:10px;
+  background:var(--yellow); color:var(--ink); border:3px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink); transform:rotate(-8deg); font-size:16px;
+}
+.sticker--red{ background:var(--gp-ember); color:#fff; }
+.sticker--blue{ background:var(--blue); color:#fff; }
+.sticker--ring{ box-shadow:0 0 0 4px var(--gp-cream),4px 4px 0 4px var(--ink); }
+
+/* ---------- Foto-Platzhalter: kräftig + Duoton + großes Label ---------- */
+.ph{ border:3px solid var(--ink); box-shadow:5px 5px 0 var(--ink); border-radius:14px; }
+.dish .ph{ border-radius:0; border-width:0 0 3px 0; box-shadow:none; }
+.gallery .ph{ box-shadow:5px 5px 0 var(--ink); }
+.ph__label{
+  font-family:var(--gp-sans); font-weight:800; text-transform:uppercase; font-size:11px; letter-spacing:.05em;
+  background:var(--ink); color:#fff; border-radius:7px;
+}
+.ph--ember  { background:linear-gradient(140deg,#e01b22,#8e0f14); }
+.ph--meat   { background:linear-gradient(140deg,#143c8c,#0e2a63); }
+.ph--saffron{ background:linear-gradient(140deg,#ffc629,#f0322a); }
+.ph--olive  { background:linear-gradient(140deg,#2f9e44,#176b2c); }
+.ph--char   { background:linear-gradient(140deg,#2a2018,#7a1f12); }
+.ph--coal   { background:linear-gradient(140deg,#0e0b08,#143c8c); }
+.ph--hero   { background:linear-gradient(150deg,#e01b22 0%,#b8141a 45%,#143c8c 100%); }
+.ph__tag{ font-family:var(--gp-sans); font-weight:800; text-transform:uppercase; border:2px solid var(--ink); }
+.ph__tag--dark{ background:var(--yellow); color:var(--ink); }
+.ph__tag--veg{ background:#fff; color:var(--gp-veg); }
+
+/* ---------- Cards / Dishes ---------- */
+.card{ border:3px solid var(--ink); border-radius:16px; box-shadow:6px 6px 0 var(--ink); }
+.dish:hover{ transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink); border-color:var(--ink); }
+.highlight:hover,.benefit:hover{ transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink); }
+.dish__name{ font-family:var(--gp-serif); text-transform:uppercase; font-size:19px; letter-spacing:.01em; font-weight:400; }
+.highlight h3,.benefit h3{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; letter-spacing:.01em; }
+.highlight__ico,.benefit__ico,.info-row__ico{ border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink); }
+.highlight__ico{ background:var(--yellow); color:var(--ink); }
+.info-row__ico{ background:var(--blue); color:#fff; }
+.benefit__ico{ background:var(--gp-ember); color:#fff; }
+
+/* Preis als schräges Tag */
+.dish__price,.price{ font-family:var(--gp-serif); color:var(--gp-ember); }
+.dish__price{
+  background:var(--yellow); color:var(--ink); border:2.5px solid var(--ink); border-radius:8px;
+  padding:2px 9px; transform:rotate(3deg); box-shadow:2px 2px 0 var(--ink); font-size:17px;
+}
+.dish__add{ background:var(--blue); border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
+  text-transform:uppercase; font-weight:800; letter-spacing:.03em; border-radius:10px; }
+.dish__add:hover{ background:var(--blue-deep); transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink); }
+
+/* ---------- Chips ---------- */
+.chip{ border:2px solid var(--ink); text-transform:uppercase; font-weight:800; letter-spacing:.03em; box-shadow:2px 2px 0 var(--ink); }
+.chip--halal{ background:var(--yellow); color:var(--ink); }
+.chip--rating{ background:var(--ink); color:var(--yellow); }
+.chip--dark{ background:var(--blue); color:#fff; border-color:var(--ink); }
+.chip--veg{ background:#fff; color:var(--gp-veg); }
+
+/* ---------- Menü-Tabs ---------- */
+.menu-tabs{ background:var(--gp-cream); border-bottom:3px solid var(--ink); }
+.tab{ border:2.5px solid var(--ink); text-transform:uppercase; font-weight:800; letter-spacing:.02em; box-shadow:3px 3px 0 var(--ink); border-radius:11px; }
+.tab:hover{ background:var(--yellow); color:var(--ink); border-color:var(--ink); }
+.tab.is-active{ background:var(--gp-ember); color:#fff; border-color:var(--ink); }
+.menu-cat__head .h3{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; }
+.menu-cat__head .line{ height:3px; background:var(--ink); border-radius:3px; }
+
+/* ---------- Stars / Rating ---------- */
+.stars{ color:var(--yellow); }
+.stars svg{ filter:drop-shadow(1.5px 1.5px 0 var(--ink)); }
+.openflag{ color:var(--blue); font-weight:800; }
+.openflag .dot{ background:var(--gp-veg); box-shadow:0 0 0 3px rgba(47,158,68,.25); }
+
+/* ---------- Hero-Glows -> Pop-Kreise ---------- */
+.hero{ background:
+  radial-gradient(circle at 12% 18%, rgba(255,198,41,.20), transparent 38%),
+  radial-gradient(circle at 88% 80%, rgba(20,60,140,.12), transparent 42%),
+  var(--gp-cream); }
+.hero__glow{ display:none; }
+.floatcard{ border:3px solid var(--ink); box-shadow:5px 5px 0 var(--ink); border-radius:14px; }
+.floatcard__dot{ background:var(--gp-ember); border:2px solid var(--ink); }
+.floatcard b{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; letter-spacing:.01em; }
+.pill-stat{ background:var(--blue); border:3px solid var(--ink); box-shadow:5px 5px 0 var(--ink); border-radius:14px; }
+.pill-stat b{ color:var(--yellow); }
+
+/* ---------- Sections / Dividers ---------- */
+.section--char{ background:var(--ink); }
+.section--char .price{ color:var(--yellow); }
+.section--cream2{ background:var(--gp-cream-2); }
+.divider-zig{ height:14px; background:
+  linear-gradient(135deg,var(--gp-ember) 25%,transparent 25%) -14px 0/28px 28px,
+  linear-gradient(225deg,var(--gp-ember) 25%,transparent 25%) -14px 0/28px 28px; }
+
+/* ---------- CTA-Band: Pop ---------- */
+.cta-band{ background:var(--gp-ember); border:3px solid var(--ink); box-shadow:8px 8px 0 var(--ink);
+  background-image:radial-gradient(rgba(255,255,255,.16) 2px, transparent 2px); background-size:18px 18px; }
+.cta-band::after{ background:radial-gradient(circle,rgba(255,198,41,.55),transparent 70%); }
+.cta-band .h2{ text-shadow:3px 3px 0 var(--blue-deep); }
+
+/* ---------- Forms ---------- */
+.form{ border:3px solid var(--ink); box-shadow:8px 8px 0 var(--ink); border-radius:18px; }
+.form__title{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; }
+.input,.select,.textarea{ border:2.5px solid var(--ink); border-radius:11px; }
+.input:focus,.select:focus,.textarea:focus{ border-color:var(--blue); box-shadow:0 0 0 3px rgba(20,60,140,.18); }
+.stepper{ border:2.5px solid var(--ink); }
+.form-success__check{ background:var(--gp-veg); color:#fff; border:3px solid var(--ink); }
+
+/* ---------- Footer ---------- */
+.site-footer{ background:var(--ink); }
+.footer-demo{ background:rgba(255,198,41,.12); border:2px solid rgba(255,198,41,.3); }
+.footer-demo strong{ color:var(--yellow); }
+.footer-col a:hover{ color:var(--yellow); }
+.soc{ border:2.5px solid #000; box-shadow:3px 3px 0 #000; }
+.soc:hover{ background:var(--gp-ember); }
+
+/* ---------- Steps / Before-After (Warum-Seite) ---------- */
+.step{ border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); border-radius:16px; }
+.step__n{ background:var(--gp-ember); border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink); font-family:var(--gp-serif); font-weight:400; }
+.step h3{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; }
+.ba__col{ border:3px solid var(--ink); border-radius:16px; }
+.ba__col--new{ box-shadow:6px 6px 0 var(--ink); }
+.stat{ border:3px solid var(--ink); box-shadow:5px 5px 0 var(--ink); border-radius:14px; }
+.stat b{ font-family:var(--gp-serif); color:var(--gp-ember); }
+.section--char .stat b{ color:var(--yellow); }
+
+/* ---------- Quote ---------- */
+.quote{ font-family:var(--gp-sans); font-weight:800; font-style:italic; }
+.section--char .quote{ color:#fff; }
+
+/* ---------- Map ---------- */
+.map-ph{ border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); }
+.map-ph__pin{ color:var(--gp-ember); }
+.map-ph__label{ font-family:var(--gp-sans); font-weight:700; border:2px solid var(--ink); }
+
+/* ---------- Team ---------- */
+.team__card .ph{ aspect-ratio:1/1; }
+.team__name{ font-family:var(--gp-serif); text-transform:uppercase; font-weight:400; }
+.team__role{ color:var(--blue); font-weight:800; text-transform:uppercase; font-size:13px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  .marquee__track{ animation:none; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width:600px){
+  .hero .display{ text-shadow:3px 3px 0 var(--yellow); }
+  .sticker{ width:88px; height:88px; font-size:13px; }
+  .card,.cta-band,.form{ box-shadow:5px 5px 0 var(--ink); }
+}

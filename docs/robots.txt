@@ -1,8 +1,9 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 Disallow: /assets/paypal-qr.png
 Disallow: /gpdp29/
 Disallow: /hpdw29/
 Disallow: /idbr53/
+Disallow: /mbdn33/
 
 Sitemap: https://getcarby.app/sitemap.xml
