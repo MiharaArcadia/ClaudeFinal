@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anschreiben — Designvorschlag Taverne Yia Mas Neuss</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FBF6EA'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%235E7A2C' stroke-width='2'/%3E%3Cellipse cx='13' cy='17' rx='3' ry='4' fill='%235E7A2C'/%3E%3Cellipse cx='18.5' cy='15' rx='3' ry='4' fill='%23C0432B'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --olive:#5E7A2C;--olive-dark:#46611F;--olive-deep:#2D3A1E;--yellow:#F2B829;
+    --terra:#C0432B;--terra-dark:#9E3420;--cream:#FBF6EA;--surface:#FFFFFF;
+    --ink:#2A2418;--muted:#6a5f4e;--line:#E7DCC4;
+    --display:'Cinzel','Playfair Display',Georgia,serif;
+    --sans:'Karla',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EFE7D2;color:var(--ink);font-family:var(--sans);line-height:1.6;
+    padding:32px 16px;-webkit-font-smoothing:antialiased}
+  .toolbar{max-width:760px;margin:0 auto 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .toolbar .hint{font-size:13px;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;border:none;
+    padding:12px 20px;border-radius:11px;font:inherit;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    font-size:14px;cursor:pointer;text-decoration:none;box-shadow:0 10px 22px -10px rgba(120,60,30,.7)}
+  .btn:hover{background:var(--terra-dark)}
+  .btn svg{width:18px;height:18px}
+
+  .sheet{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--line);
+    border-radius:18px;box-shadow:0 30px 60px -30px rgba(70,60,20,.5);overflow:hidden}
+  .sheet__head{background:var(--olive-deep);color:#fff;padding:30px 44px;display:flex;align-items:center;gap:16px;
+    position:relative;overflow:hidden}
+  .sheet__head::after{content:"";position:absolute;right:-60px;top:-80px;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle,rgba(242,184,41,.35),transparent 70%)}
+  .mark{width:52px;height:52px;border-radius:50%;background:#fff;border:2px solid var(--olive);color:var(--olive);
+    display:flex;align-items:center;justify-content:center;flex:none;position:relative;z-index:1}
+  .mark svg{width:28px;height:28px}
+  .sheet__head h1{margin:0;font-family:var(--display);text-transform:uppercase;font-size:26px;line-height:1.1;letter-spacing:.02em;position:relative;z-index:1}
+  .sheet__head .sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin-top:4px;position:relative;z-index:1}
+
+  .body{padding:44px}
+  .meta{font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--terra);font-weight:800;margin-bottom:8px}
+  .subject{font-family:var(--display);text-transform:uppercase;font-size:26px;line-height:1.12;letter-spacing:.01em;margin:0 0 26px}
+  .body p{margin:0 0 17px;font-size:15.5px;color:#332c26}
+  .body strong{color:var(--ink)}
+  .demo-link{display:inline-block;background:#eef3e2;border:1px solid #cdddb3;color:var(--olive-dark);
+    padding:3px 10px;border-radius:8px;font-weight:700;text-decoration:none;font-size:14.5px}
+  .sign{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+  .sign .name{font-family:var(--display);text-transform:uppercase;font-size:22px;letter-spacing:.02em}
+  .sign .role{color:var(--muted);font-size:14px;margin-top:2px}
+  .contact{margin-top:14px;display:flex;flex-direction:column;gap:5px;font-size:14.5px;color:#332c26}
+  .contact span{display:flex;align-items:center;gap:9px}
+  .contact .ico{width:30px;height:30px;border-radius:8px;background:var(--olive);color:#fff;
+    display:flex;align-items:center;justify-content:center;flex:none}
+  .contact .ico svg{width:15px;height:15px}
+  .ph{background:#fbe6cf;border:1px dashed var(--yellow);border-radius:6px;padding:1px 7px;color:#7a5a1c;font-weight:700;font-size:13.5px}
+  .footnote{margin:18px auto 0;max-width:760px;font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
+
+  @media (max-width:560px){.sheet__head,.body{padding:24px}}
+  @media print{
+    body{background:#fff;padding:0}
+    .toolbar,.footnote{display:none}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none}
+    .sheet__head{background:#fff;color:var(--ink);border-bottom:2px solid var(--olive);padding:0 0 18px;margin-bottom:24px}
+    .sheet__head h1{color:var(--ink)} .sheet__head .sub{color:var(--olive-dark)}
+    .sheet__head::after{display:none}
+    .body{padding:0}
+    @page{margin:22mm}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="hint">Tipp: Auf „Drucken" klicken und als <strong>PDF speichern</strong>, oder den Text aus <strong>Anschreiben.md</strong> in die E-Mail kopieren.</span>
+  <button class="btn" type="button" onclick="window.print()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg>
+    Drucken / als PDF speichern
+  </button>
+</div>
+
+<article class="sheet">
+  <header class="sheet__head">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c4-1 8-5 11-12"/><path d="M9 13c-2-1-3 0-4-2 2-1 3 0 4 2zM13 9c-1-2 0-3 2-4 1 2 0 3-2 4zM15 14c2 0 3-1 3-3-2 0-3 1-3 3z"/><circle cx="16" cy="6" r="1.3" fill="currentColor"/><circle cx="18.5" cy="9.5" r="1.3" fill="currentColor"/></svg></span>
+    <div>
+      <h1>Designvorschlag für die Taverne Yia Mas</h1>
+      <div class="sub">Unverbindlich, Webdesign aus der Region</div>
+    </div>
+  </header>
+
+  <div class="body">
+    <div class="meta">Betreff</div>
+    <h2 class="subject">Eine eigene Website für Ihre Taverne, unverbindlich</h2>
+
+    <p>Liebes Team der Taverne Yia Mas,</p>
+
+    <p>ich heiße <span class="ph">[Ihr Name]</span> und gestalte Websites für Gastronomie in und um Neuss.</p>
+
+    <p>Ihre griechische Küche hat mich neugierig gemacht. Online findet man Sie bisher vor allem über eine schlichte Google-Seite. Eine eigene Website kann viel mehr: Sie zeigt Ihre Speisekarte mit Fotos, nimmt Reservierungen rund um die Uhr entgegen und bringt den Charme Ihrer Taverne ins Netz.</p>
+
+    <p>Deshalb habe ich Ihnen unverbindlich einen Entwurf gebaut: hell und mediterran, mit Olivenzweig, großen Food-Bildern und Ihren Farben in Grün, Gelb und Rot.</p>
+
+    <p>Schauen Sie in Ruhe rein: <a class="demo-link" href="https://getcarby.app/ymtv41/">getcarby.app/ymtv41</a>. Kostenlos, unverbindlich. Texte, Preise und Fotos sind Platzhalter.</p>
+
+    <p>Gefällt es Ihnen, freue ich mich auf ein kurzes Gespräch, am liebsten bei einem Ouzo bei Ihnen vor Ort. Wenn nicht, ist das auch völlig in Ordnung. Dann sehen Sie den Entwurf als Gruß aus der Nachbarschaft.</p>
+
+    <p>Beste Grüße aus der Region<br><strong>[Ihr Name]</strong></p>
+
+    <div class="sign">
+      <div class="name">[Ihr Name]</div>
+      <div class="role">Webdesign für lokale Unternehmen</div>
+      <div class="contact">
+        <span><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>Telefon: <span class="ph">[Ihre Telefonnummer]</span></span>
+        <span><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span>Mail: <span class="ph">[Ihre Mailadresse]</span></span>
+        <span><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>Web: <span class="ph">[Ihre Website]</span></span>
+      </div>
+    </div>
+  </div>
+</article>
+
+<p class="footnote">Der gezeigte Entwurf ist eine unverbindliche Demo und nicht die offizielle Website der Taverne Yia Mas Neuss. Es entstehen keine Kosten und keine Verpflichtungen.</p>
+
+</body>
+</html>

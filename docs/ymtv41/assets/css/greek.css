@@ -1,0 +1,179 @@
+/* ============================================================================
+   TAVERNE YIA MAS — „Sonnige Taverna" Override-Layer
+   Lädt NACH styles.css. Macht aus der Vorlage eine helle, foto-lastige
+   griechische Taverna (Olivgrün · Sonnengelb · Terrakotta-Rot) mit
+   Meander-(Greek-Key)-Zierbändern und Olivenzweig-Motiv. Kein Blau.
+   ========================================================================== */
+:root{
+  --olive:      #5E7A2C;
+  --olive-dark: #46611F;
+  --olive-deep: #2D3A1E;
+  --yellow:     #F2B829;
+  --terra:      #C0432B;
+  --terra-dark: #9E3420;
+  --ink:        #2A2418;
+  --cream:      #FBF6EA;
+}
+
+/* ---------- Grund ---------- */
+body{ background:var(--gp-cream); }
+::selection{ background:var(--yellow); color:var(--ink); }
+:focus-visible{ outline:3px solid var(--olive); outline-offset:3px; }
+
+/* ---------- Headlines: Cinzel, klassisch ---------- */
+.display,.h1,.h2{ text-transform:uppercase; letter-spacing:.02em; }
+.display{ line-height:1.04; font-size:clamp(40px,6vw,76px); }
+.h1{ line-height:1.06; }
+.h2{ line-height:1.08; }
+.display .terra,.h1 .terra,.h2 .terra{ color:var(--terra); }
+.display .olive,.h1 .olive,.h2 .olive{ color:var(--olive); }
+.menu-cat__head .h3,.dish__name,.highlight h3,.benefit h3,.brand__name,.team__name,.step h3,.form__title{
+  font-family:var(--gp-serif); text-transform:uppercase; letter-spacing:.02em; font-weight:700;
+}
+.dish__name{ font-size:17px; }
+
+/* ---------- Eyebrow: Olivenzweig-Strich ---------- */
+.eyebrow{ color:var(--terra); font-weight:700; letter-spacing:.18em; }
+.eyebrow--saffron{ color:var(--olive); }
+.section--char .eyebrow{ color:var(--yellow); }
+
+/* ---------- Meander / Greek-Key-Zierband ---------- */
+.meander{
+  height:24px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 22' width='40' height='22'%3E%3Cpath d='M0 19 H40 M6 19 V6 H34 V19 M13 19 V12 H27 V19' fill='none' stroke='%235E7A2C' stroke-width='2.5'/%3E%3C/svg%3E") repeat-x center/40px 22px,
+    var(--gp-cream);
+  border-block:1px solid var(--gp-line);
+}
+.meander--terra{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 22' width='40' height='22'%3E%3Cpath d='M0 19 H40 M6 19 V6 H34 V19 M13 19 V12 H27 V19' fill='none' stroke='%23C0432B' stroke-width='2.5'/%3E%3C/svg%3E") repeat-x center/40px 22px,
+    var(--gp-cream);
+}
+.meander--onolive{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 22' width='40' height='22'%3E%3Cpath d='M0 19 H40 M6 19 V6 H34 V19 M13 19 V12 H27 V19' fill='none' stroke='%23F2B829' stroke-width='2.5'/%3E%3C/svg%3E") repeat-x center/40px 22px,
+    var(--olive-deep);
+  border-block:none;
+}
+
+/* ---------- Header / Brand mit Olivenzweig-Logo ---------- */
+.site-header{ background:rgba(251,246,234,.92); border-bottom:2px solid var(--olive); }
+.site-header.is-stuck{ box-shadow:0 8px 24px -18px rgba(70,60,20,.6); }
+.brand__mark{
+  background:#fff; border:2px solid var(--olive); color:var(--olive);
+  box-shadow:0 4px 10px -5px rgba(70,90,30,.6); border-radius:50%;
+}
+.brand__mark svg{ width:24px; height:24px; }
+.brand__name{ font-size:22px; color:var(--olive-deep); letter-spacing:.04em; }
+.brand__sub{ color:var(--terra); }
+.nav a{ font-weight:700; letter-spacing:.02em; }
+.nav a:hover{ background:rgba(94,122,44,.12); color:var(--olive-dark); }
+.nav a.is-active{ background:var(--olive); color:#fff; }
+
+/* ---------- Demo-Bar ---------- */
+.demo-bar{ background:var(--olive-deep); color:#e6e8d6; }
+.demo-bar strong{ color:#fff; }
+.demo-bar .spark{ color:var(--yellow); }
+
+/* ---------- Buttons: warm & gerundet ---------- */
+.btn{ border-radius:11px; text-transform:uppercase; letter-spacing:.05em; font-weight:700;
+  font-family:var(--gp-sans); box-shadow:0 8px 18px -10px rgba(120,60,30,.55); }
+.btn--primary{ background:var(--terra); color:#fff; }
+.btn--primary:hover{ background:var(--terra-dark); transform:translateY(-2px); }
+.btn--secondary{ background:#fff; color:var(--olive-dark); border:1.5px solid var(--olive); box-shadow:none; }
+.btn--secondary:hover{ background:#f2f5e8; color:var(--olive-dark); transform:translateY(-2px); }
+.btn--ghost{ box-shadow:none; }
+.btn--ghost:hover{ background:rgba(94,122,44,.12); color:var(--olive-dark); }
+.btn--onchar{ background:var(--yellow); color:var(--ink); }
+.cta-band .btn--primary{ background:#fff; color:var(--terra); }
+.cta-band .btn--secondary{ background:transparent; color:#fff; border-color:rgba(255,255,255,.7); }
+
+/* ---------- Foto-Platzhalter: warm-mediterran, Big Pictures ---------- */
+.ph{ border-radius:18px; box-shadow:0 18px 34px -22px rgba(70,60,20,.55); }
+.ph__label{ font-family:var(--gp-sans); font-weight:700; background:rgba(45,58,30,.78); }
+.ph--ember  { background:linear-gradient(140deg,#c0432b,#84291a); }
+.ph--meat   { background:linear-gradient(140deg,#b5562a,#7a3318); }
+.ph--saffron{ background:linear-gradient(140deg,#f2b829,#d98a1f); }
+.ph--olive  { background:linear-gradient(140deg,#6f8a36,#3f5a1c); }
+.ph--char   { background:linear-gradient(140deg,#3a4a24,#2d3a1e); }
+.ph--coal   { background:linear-gradient(140deg,#2d3a1e,#5a3318); }
+.ph--hero   { background:linear-gradient(150deg,#6f8a36 0%,#f2b829 55%,#c0432b 100%); }
+.ph__tag--veg{ background:#eef3e2; color:var(--olive-dark); }
+.ph__tag--dark{ background:var(--olive-deep); color:var(--yellow); }
+.hero__media .ph{ aspect-ratio:4/5; }
+.gallery{ grid-auto-rows:178px; }
+
+/* ---------- Cards ---------- */
+.card{ border-radius:18px; border-color:var(--gp-line); }
+.dish:hover,.highlight:hover,.benefit:hover{ box-shadow:0 22px 40px -22px rgba(70,60,20,.55); border-color:#dcceac; }
+.highlight__ico{ background:linear-gradient(140deg,#eef3e2,#dceabf); color:var(--olive-dark); }
+.benefit__ico{ background:var(--olive); color:#fff; }
+.info-row__ico{ background:linear-gradient(140deg,#fbe7d8,#f3d0bf); color:var(--terra); }
+.dish__add{ background:var(--olive); border-radius:10px; }
+.dish__add:hover{ background:var(--olive-dark); }
+.price,.dish__price{ font-family:var(--gp-serif); color:var(--terra); font-weight:700; }
+.section--char .price{ color:var(--yellow); }
+
+/* ---------- Chips ---------- */
+.chip--halal{ background:#eef3e2; color:var(--olive-dark); }
+.chip--rating{ background:var(--olive-deep); color:var(--yellow); }
+.chip--dark{ background:var(--terra); color:#fff; }
+.chip--veg{ background:#eef3e2; color:var(--olive-dark); }
+
+/* ---------- Menü-Tabs ---------- */
+.menu-tabs{ background:rgba(243,234,212,.95); border-bottom:2px solid var(--olive); }
+.tab:hover{ border-color:var(--olive); color:var(--olive-dark); }
+.tab.is-active{ background:var(--olive); color:#fff; border-color:var(--olive); }
+.menu-cat__head .line{ background:var(--gp-line); }
+
+/* ---------- Stars / Rating ---------- */
+.stars{ color:var(--yellow); }
+.openflag{ color:var(--olive-dark); font-weight:700; }
+.openflag .dot{ background:var(--olive); box-shadow:0 0 0 3px rgba(94,122,44,.22); }
+
+/* ---------- Hero ---------- */
+.hero{ background:
+  radial-gradient(circle at 14% 16%, rgba(242,184,41,.20), transparent 40%),
+  radial-gradient(circle at 86% 84%, rgba(94,122,44,.14), transparent 44%),
+  var(--gp-cream); }
+.hero__glow{ display:none; }
+.floatcard{ border-radius:14px; box-shadow:0 18px 34px -18px rgba(70,60,20,.5); }
+.floatcard__dot{ background:linear-gradient(140deg,#6f8a36,#c0432b); }
+.pill-stat{ background:var(--olive); border-radius:14px; }
+.pill-stat b{ color:var(--yellow); }
+
+/* ---------- Sections ---------- */
+.section--char{ background:var(--olive-deep); }
+.section--char .quote__by{ color:#c9cdb6; }
+.cta-band{ background:linear-gradient(135deg,#46611f,#5e7a2c 55%,#c0432b); }
+.cta-band::after{ background:radial-gradient(circle,rgba(242,184,41,.5),transparent 70%); }
+
+/* ---------- Forms ---------- */
+.input:focus,.select:focus,.textarea:focus{ border-color:var(--olive); box-shadow:0 0 0 3px rgba(94,122,44,.18); }
+.stepper button{ color:var(--terra); }
+.form-success__check{ background:#eef3e2; color:var(--olive-dark); }
+
+/* ---------- Steps / Before-After ---------- */
+.step__n{ background:var(--terra); font-family:var(--gp-serif); }
+.ba__col--new .ba__tag{ color:var(--terra); }
+.ba__col--new .m{ color:var(--olive); }
+.stat b{ color:var(--terra); }
+.section--char .stat b{ color:var(--yellow); }
+
+/* ---------- Footer ---------- */
+.site-footer{ background:var(--olive-deep); }
+.footer-demo{ background:rgba(242,184,41,.12); border:1px solid rgba(242,184,41,.3); }
+.footer-demo strong{ color:var(--yellow); }
+.footer-col a:hover{ color:var(--yellow); }
+.soc:hover{ background:var(--terra); border-color:var(--terra); }
+
+/* ---------- Map ---------- */
+.map-ph__pin{ color:var(--terra); }
+
+/* ---------- Quote ---------- */
+.quote{ font-family:var(--gp-serif); text-transform:none; letter-spacing:.01em; }
+.section--char .quote{ color:#fff; }
+
+/* ---------- Team ---------- */
+.team__role{ color:var(--olive-dark); font-weight:700; }

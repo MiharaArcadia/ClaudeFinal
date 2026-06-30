@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Über uns — Taverne Yia Mas Neuss · Demo-Entwurf</title>
+<meta name="description" content="Die Geschichte der Taverne Yia Mas Neuss: griechische Familien-Taverne, frische Küche, Holzkohlegrill, echte Gastfreundschaft. Lernen Sie das Team kennen. Demo-Entwurf.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/greek.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FBF6EA'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%235E7A2C' stroke-width='2'/%3E%3Cellipse cx='13' cy='17' rx='3' ry='4' fill='%235E7A2C'/%3E%3Cellipse cx='18.5' cy='15' rx='3' ry='4' fill='%23C0432B'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <span class="spark" aria-hidden="true">◆</span>
+    <span><strong>Design-Entwurf</strong> · Unverbindliche Demo für die Taverne Yia Mas Neuss – nicht die offizielle Website.</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Taverne Yia Mas – Startseite">
+      <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c4-1 8-5 11-12"/><path d="M9 13c-2-1-3 0-4-2 2-1 3 0 4 2zM13 9c-1-2 0-3 2-4 1 2 0 3-2 4zM15 14c2 0 3-1 3-3-2 0-3 1-3 3z"/><circle cx="16" cy="6" r="1.3" fill="currentColor"/><circle cx="18.5" cy="9.5" r="1.3" fill="currentColor"/></svg></span>
+      <span><span class="brand__name">Yia Mas</span><span class="brand__sub">Taverne · Neuss</span></span>
+      <span class="brand__demo" title="Unverbindlicher Entwurf">DEMO</span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="index.html">Start</a>
+      <a href="speisekarte.html">Speisekarte</a>
+      <a href="ueber-uns.html" class="is-active" aria-current="page">Über uns</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn--primary btn--lg" href="kontakt.html#reservieren">Tisch reservieren</a>
+      <button class="cart-btn" type="button" aria-label="Warenkorb (Demo)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cart-btn__count" data-cart-count>0</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menü">
+  <div class="drawer__top">
+    <span class="brand"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c4-1 8-5 11-12"/><path d="M9 13c-2-1-3 0-4-2 2-1 3 0 4 2zM13 9c-1-2 0-3 2-4 1 2 0 3-2 4zM15 14c2 0 3-1 3-3-2 0-3 1-3 3z"/><circle cx="16" cy="6" r="1.3" fill="currentColor"/><circle cx="18.5" cy="9.5" r="1.3" fill="currentColor"/></svg></span><span class="brand__name">Yia Mas</span></span>
+    <button class="drawer__close" data-close-drawer type="button" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile Navigation">
+    <a href="index.html">Start</a>
+    <a href="speisekarte.html">Speisekarte</a>
+    <a href="ueber-uns.html" class="is-active">Über uns</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="warum-website.html">Warum neue Website?</a>
+  </nav>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--block" href="kontakt.html#reservieren">Tisch reservieren</a>
+    <a class="btn btn--secondary btn--block" href="speisekarte.html">Zur Speisekarte</a>
+  </div>
+  <div class="drawer__info">
+    Hafenstraße 28 · 41460 Neuss<br>
+    Reservierung &amp; Bestellung<br>
+    <a href="tel:+492131754347" style="color:var(--terra);font-weight:700;text-decoration:none">02131 754347</a>
+  </div>
+</aside>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Brotkrümel"><a href="index.html">Start</a> <span aria-hidden="true">/</span> <span>Über uns</span></nav>
+      <span class="eyebrow eyebrow--saffron">Unsere Geschichte</span>
+      <h1 class="h1 mt-2">Familie, Olivenöl<br>und ein offenes Haus</h1>
+      <p class="lead">„Yia Mas" heißt „Auf uns". Bei uns kommen Gäste zusammen, teilen Meze und gehen als Freunde. Das ist griechische Gastfreundschaft.</p>
+    </div>
+  </section>
+
+  <div class="meander meander--onolive" aria-hidden="true"></div>
+
+  <!-- Geschichte -->
+  <section class="section section--cream">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Kalós orísate</span>
+        <h2 class="h2 mt-4">Rezepte, die von Hand zu Hand gehen</h2>
+        <p class="lead mt-4">Unsere Küche ist die unserer Familie: Rezepte aus Griechenland, weitergegeben über Generationen. Gutes Olivenöl, frische Kräuter, Gemüse vom Markt und Fleisch vom Holzkohlegrill.</p>
+        <p class="muted mt-4" style="font-size:15.5px;line-height:1.7">Wir wollten ein Stück Heimat nach Neuss bringen: einen Ort, an dem die Teller über den Tisch wandern, das Glas nie lange leer bleibt und am Ende ein Ouzo aufs Haus kommt. Genau das ist die Taverne Yia Mas.</p>
+        <div class="flex wrap-gap mt-6">
+          <a class="btn btn--primary" href="speisekarte.html">Unsere Gerichte</a>
+          <a class="btn btn--ghost btn--arrow" href="kontakt.html">Besuchen Sie uns
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="reveal" data-d="1">
+        <div class="ph ph--hero">
+          <span class="ph__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 19c4-1 8-5 11-12"/><path d="M9 13c-2-1-3 0-4-2 2-1 3 0 4 2zM13 9c-1-2 0-3 2-4 1 2 0 3-2 4z"/></svg></span>
+          <span class="ph__label">FOTO · In unserer Küche</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meilensteine -->
+  <section class="section section--cream2">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow eyebrow--bare">Meilensteine</span>
+        <h2 class="h2">Unser Weg in Kürze</h2>
+      </div>
+      <div class="steps mt-7">
+        <div class="step reveal" data-d="1"><div class="step__n">1</div><h3>Die Idee</h3><p>Ein Stück griechische Heimat nach Neuss bringen – mit den Rezepten der Familie.</p></div>
+        <div class="step reveal" data-d="2"><div class="step__n">2</div><h3>Die Taverne öffnet</h3><p>An der Hafenstraße entsteht ein Ort zum Zusammensitzen, Teilen und Genießen.</p></div>
+        <div class="step reveal" data-d="3"><div class="step__n">3</div><h3>Die Karte wächst</h3><p>Immer mehr Meze, frischer Fisch und Klassiker aus dem Ofen kommen dazu.</p></div>
+        <div class="step reveal" data-d="4"><div class="step__n">4</div><h3>Heute</h3><p>Stammgäste, volle Tische und Gastfreundschaft, die man schmeckt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atmosphäre -->
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Atmosphäre</span>
+        <h2 class="h2">Wie ein Abend am Mittelmeer</h2>
+        <p>Warmes Licht, der Duft vom Grill, Oliven auf dem Tisch und gute Gespräche. Bei uns darf man lange sitzen bleiben.</p>
+      </div>
+      <div class="gallery mt-6 reveal" data-d="1">
+        <div class="ph ph--char g-tall"><span class="ph__label">FOTO · Gastraum</span></div>
+        <div class="ph ph--meat"><span class="ph__label">FOTO · Am Grill</span></div>
+        <div class="ph ph--saffron"><span class="ph__label">FOTO · Meze-Tisch</span></div>
+        <div class="ph ph--ember g-wide"><span class="ph__label">FOTO · Gemütlich beisammen</span></div>
+        <div class="ph ph--olive"><span class="ph__label">FOTO · Frische Zutaten</span></div>
+        <div class="ph ph--coal"><span class="ph__label">FOTO · Detail</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Werte -->
+  <section class="section section--char">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow eyebrow--saffron eyebrow--bare">Worauf wir stehen</span>
+        <h2 class="h2" style="color:#fff">Drei Dinge, bei denen wir keine Kompromisse machen</h2>
+      </div>
+      <div class="grid grid--3 mt-7">
+        <article class="benefit reveal" data-d="1" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">
+          <span class="benefit__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 19c4-1 8-5 11-12M9 13c-2-1-3 0-4-2 2-1 3 0 4 2z"/></svg></span>
+          <h3 style="color:#fff">Olivenöl &amp; Frische</h3>
+          <p style="color:#cdd1bd">Gutes Olivenöl, frische Kräuter und Gemüse vom Markt. Nichts aus der Dose.</p>
+        </article>
+        <article class="benefit reveal" data-d="2" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">
+          <span class="benefit__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 14h16M4 14a8 5 0 0 1 16 0M5 17h14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/></svg></span>
+          <h3 style="color:#fff">Echter Holzkohlegrill</h3>
+          <p style="color:#cdd1bd">Gyros, Souvlaki und Fisch über echter Kohle. Das gibt das Aroma.</p>
+        </article>
+        <article class="benefit reveal" data-d="3" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">
+          <span class="benefit__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.3-9.2-8.5C1 9 2.5 5.5 6 5.5c2 0 3.2 1.2 4 2.5.8-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.2 7C19 16.7 12 21 12 21z"/></svg></span>
+          <h3 style="color:#fff">Gastfreundschaft</h3>
+          <p style="color:#cdd1bd">Bei uns ist jeder willkommen. Kommen Sie als Gast, gehen Sie als Freund.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow eyebrow--bare">Das Team</span>
+        <h2 class="h2">Die Familie hinter der Taverne</h2>
+        <p>Platzhalter für Ihre echten Team-Fotos – damit Ihre Gäste schon vorab ein Gesicht zum Namen haben.</p>
+      </div>
+      <div class="team mt-7">
+        <div class="team__card reveal" data-d="1">
+          <div class="ph ph--char"><span class="ph__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="9" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="ph__label">FOTO</span></div>
+          <div class="team__name">Der Wirt</div>
+          <div class="team__role">Inhaber &amp; Gastgeber</div>
+          <p class="team__bio">Begrüßt jeden Gast persönlich und sorgt dafür, dass niemand hungrig geht.</p>
+        </div>
+        <div class="team__card reveal" data-d="2">
+          <div class="ph ph--ember"><span class="ph__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="9" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="ph__label">FOTO</span></div>
+          <div class="team__name">Die Küche</div>
+          <div class="team__role">Herd &amp; Ofen</div>
+          <p class="team__bio">Kocht nach Familienrezept – von der Moussaka bis zum Galaktoboureko.</p>
+        </div>
+        <div class="team__card reveal" data-d="3">
+          <div class="ph ph--meat"><span class="ph__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="9" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="ph__label">FOTO</span></div>
+          <div class="team__name">Der Grillmeister</div>
+          <div class="team__role">Holzkohlegrill</div>
+          <p class="team__bio">Weiß genau, wann Gyros, Souvlaki und Oktopus perfekt sind.</p>
+        </div>
+        <div class="team__card reveal" data-d="4">
+          <div class="ph ph--olive"><span class="ph__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="9" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="ph__label">FOTO</span></div>
+          <div class="team__name">Service-Team</div>
+          <div class="team__role">Gastraum</div>
+          <p class="team__bio">Sorgt für volle Teller, gute Laune und den Ouzo zum Schluss.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--cream2">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <h2 class="h2" style="color:#fff">Setzen Sie sich zu uns</h2>
+        <p>Reservieren Sie einen Tisch und erleben Sie einen Abend wie am Mittelmeer. Wir freuen uns auf Sie.</p>
+        <div class="flex wrap-gap mt-6" style="justify-content:center">
+          <a class="btn btn--primary btn--lg" href="kontakt.html#reservieren">Tisch reservieren</a>
+          <a class="btn btn--secondary btn--lg" href="kontakt.html">Anfahrt &amp; Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c4-1 8-5 11-12"/><path d="M9 13c-2-1-3 0-4-2 2-1 3 0 4 2zM13 9c-1-2 0-3 2-4 1 2 0 3-2 4zM15 14c2 0 3-1 3-3-2 0-3 1-3 3z"/><circle cx="16" cy="6" r="1.3" fill="currentColor"/><circle cx="18.5" cy="9.5" r="1.3" fill="currentColor"/></svg></span><span><span class="brand__name" style="color:#fff">Yia Mas</span><span class="brand__sub">Taverne · Neuss</span></span></a>
+        <p>Griechische Taverne in Neuss – Meze, Gyros &amp; Souvlaki vom Holzkohlegrill, gegrillter Oktopus und Bauernsalat. Frisch und hausgemacht.</p>
+        <div class="socials mt-4">
+          <a class="soc" href="#" aria-label="Instagram (Platzhalter)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a class="soc" href="https://www.facebook.com/p/Taverne-YiaMas-100059933896427/" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1.3-3 3.2V11H9v3h2v6h3v-6h2.4l.6-3H14V9.4c0-.3.2-.4.5-.4z"/></svg></a>
+          <a class="soc" href="tel:+492131754347" aria-label="Anrufen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Entdecken</h4>
+        <a href="index.html">Start</a><a href="speisekarte.html">Speisekarte</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a><a href="warum-website.html">Warum neue Website?</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <span>Hafenstraße 28<br>41460 Neuss</span>
+        <a href="tel:+492131754347">02131 754347</a>
+        <span>Reservierung am liebsten telefonisch</span>
+      </div>
+      <div class="footer-col">
+        <h4>Öffnungszeiten</h4>
+        <span>Di – So 12:00 – 22:00<br>Montag Ruhetag</span>
+        <span style="color:var(--gp-faint)">Beispielzeiten (Demo)</span>
+      </div>
+    </div>
+    <div class="footer-demo">
+      <strong>Hinweis – unverbindlicher Entwurf:</strong> Diese Website ist eine Demo-Designstudie für die Taverne Yia Mas Neuss und <strong>nicht die offizielle Website</strong> des Restaurants. Texte, Namen und Bewertungen sind Beispielinhalte, Fotos sind Platzhalter.
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Taverne Yia Mas Neuss · Demo-Entwurf</span>
+      <span>Konzept &amp; Gestaltung: <strong style="color:#fff">[Ihr Name / Ihre Webagentur]</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
