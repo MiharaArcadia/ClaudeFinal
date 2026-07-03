@@ -1,0 +1,54 @@
+name: blockzy
+description: "Blockzy — a colorful, juicy block-and-candy puzzle game."
+publish_to: 'none'
+
+# version+build. Bump the build number (+N) on every Play upload.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management (matches the wider repo's conventions).
+  provider: ^6.1.2
+
+  # Local persistence (save games, stats, settings, progression).
+  shared_preferences: ^2.2.3
+
+  # Typography.
+  google_fonts: ^6.2.1
+
+  # Opening the PayPal donation link on the Support page.
+  url_launcher: ^6.3.0
+
+  # Audio playback (SFX + music). Graceful no-op if asset files are absent.
+  audioplayers: ^6.0.0
+
+  # Optional stronger haptics beyond the platform HapticFeedback channel.
+  vibration: ^2.0.0
+
+  # Small utils.
+  intl: ^0.19.0
+
+  # --- Cloud save (prepared, not yet enabled) -------------------------------
+  # Uncomment to wire the FirebaseCloudSaveService drop-in replacement.
+  # firebase_core: ^3.3.0
+  # firebase_auth: ^5.1.4
+  # cloud_firestore: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/candies/
+    - assets/audio/
+    - assets/images/
