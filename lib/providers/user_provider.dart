@@ -15,6 +15,13 @@ class UserProvider extends ChangeNotifier {
   bool get loading => _loading;
   bool get onboardingComplete => _onboardingComplete;
   String get lang => _profile?.language ?? 'de';
+  ThemeMode get themeMode {
+    return switch (_profile?.themeMode ?? 'system') {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      _ => ThemeMode.system,
+    };
+  }
 
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();

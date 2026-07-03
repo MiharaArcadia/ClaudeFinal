@@ -25,6 +25,15 @@ class AppColors {
   ];
 }
 
+class AppColorsLight {
+  static const background = Color(0xFFF5F5F5);
+  static const surface = Color(0xFFFFFFFF);
+  static const card = Color(0xFFEFEFEF);
+  static const textPrimary = Color(0xFF1A1A1A);
+  static const textSecondary = Color(0xFF666666);
+  static const ringEmpty = Color(0xFFDDDDDD);
+}
+
 class AppTheme {
   static ThemeData get dark {
     return ThemeData(
@@ -51,6 +60,37 @@ class AppTheme {
         backgroundColor: AppColors.surface,
         selectedItemColor: AppColors.orange,
         unselectedItemColor: AppColors.textSecondary,
+        type: BottomNavigationBarType.fixed,
+      ),
+    );
+  }
+
+  static ThemeData get light {
+    return ThemeData(
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: AppColorsLight.background,
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.orange,
+        secondary: AppColors.teal,
+        surface: AppColorsLight.surface,
+        background: AppColorsLight.background,
+      ),
+      textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColorsLight.surface,
+        elevation: 0,
+        iconTheme: IconThemeData(color: AppColorsLight.textPrimary),
+        foregroundColor: AppColorsLight.textPrimary,
+      ),
+      cardTheme: CardThemeData(
+        color: AppColorsLight.card,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: AppColorsLight.surface,
+        selectedItemColor: AppColors.orange,
+        unselectedItemColor: AppColorsLight.textSecondary,
         type: BottomNavigationBarType.fixed,
       ),
     );

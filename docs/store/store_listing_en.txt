@@ -1,0 +1,63 @@
+==================================================
+CARBY — PLAY STORE LISTING (ENGLISH)
+For Copy-Paste into Google Play Console
+==================================================
+
+SHORT DESCRIPTION (80 chars max):
+Calorie tracker with voice input & barcode scanner — free, offline
+
+FULL DESCRIPTION (4000 chars max):
+--------------------------------------------------
+
+🥗 Carby – Your Smart Nutrition Tracker
+
+Logging meals has never been easier. With Carby you track your food via voice input, barcode scan, or text search — and always keep calories, protein, carbs, and fat in view.
+
+🎙️ VOICE INPUT
+Just say "chicken breast with rice" and Carby searches the database automatically. No typing, no scrolling.
+
+📊 FULL MACRO TRACKING
+Track daily:
+• Calories (kcal)
+• Protein (g)
+• Carbohydrates (g)
+• Fat (g)
+• Fiber (g)
+
+🔍 HUGE FOOD DATABASE
+Over 3 million foods from the OpenFoodFacts database — from supermarket products to restaurant meals. Barcode scanner for instant scanning of packaged foods.
+
+💧 WATER TRACKER
+Stay on top of your daily hydration with the built-in water tracker.
+
+🧮 PERSONAL CALORIE GOAL
+Enter your age, weight, height, and activity level — Carby calculates your personal calorie needs (TDEE) using the Mifflin-St Jeor formula.
+
+❤️ FAVORITES
+Save your go-to meals for lightning-fast access.
+
+📅 FOOD LOG
+All meals chronologically, filterable by day, with nutrition summary.
+
+🔒 PRIVACY
+No ads. No subscription. No hidden costs.
+Your nutrition data is yours — optional Firebase sync, 100% anonymous.
+
+🌍 TWO LANGUAGES
+German and English — automatically follows system language.
+
+---
+PERFECT FOR:
+• Calorie counters and diet trackers
+• Fitness enthusiasts and athletes
+• People with nutrition goals (lose weight, gain muscle, maintain)
+• Diabetics and nutrition-conscious users
+• Anyone looking for a free MyFitnessPal alternative
+
+KEYWORDS: calorie counter, nutrition tracker, calorie calculator, diet app, food log, food diary, barcode scanner food, macro tracker, protein tracker, free no subscription
+
+==================================================
+CATEGORY: Health & Fitness
+CONTENT RATING: Everyone
+PRICE: Free
+==================================================

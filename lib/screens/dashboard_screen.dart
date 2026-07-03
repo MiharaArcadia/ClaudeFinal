@@ -18,6 +18,7 @@ import 'package:carby/widgets/calorie_ring_chart.dart';
 import 'package:carby/widgets/macro_card.dart';
 import 'package:carby/widgets/nutrient_gap_row.dart';
 import 'package:carby/widgets/pulsing_mic_button.dart';
+import 'package:carby/widgets/feature_walkthrough.dart';
 
 bool get _isDesktop =>
     !kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux);
@@ -51,6 +52,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
       nutritionProvider.onFifthEntry = () {
         if (mounted) maybeShowDonationSheet(context);
       };
+      // Show feature walkthrough on first launch
+      shouldShowWalkthrough().then((show) {
+        if (show && mounted) {
+          final lang = userProvider.lang;
+          showFeatureWalkthrough(context, lang);
+        }
+      });
     });
   }
 

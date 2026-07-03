@@ -62,11 +62,15 @@ class CarbyApp extends StatelessWidget {
           create: (_) => FavoritesProvider()..init(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Carby',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.dark,
-        home: const SplashScreen(),
+      child: Consumer<UserProvider>(
+        builder: (_, userProvider, __) => MaterialApp(
+          title: 'Carby',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: userProvider.themeMode,
+          home: const SplashScreen(),
+        ),
       ),
     );
   }

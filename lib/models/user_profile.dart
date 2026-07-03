@@ -6,6 +6,7 @@ class UserProfile {
   final double height;
   final String goal; // 'lose' | 'maintain' | 'gain'
   final String language; // 'de' | 'en'
+  final String themeMode; // 'system' | 'light' | 'dark'
   int dailyCalorieGoal;
 
   UserProfile({
@@ -16,6 +17,7 @@ class UserProfile {
     required this.height,
     required this.goal,
     required this.language,
+    this.themeMode = 'system',
     required this.dailyCalorieGoal,
   });
 
@@ -43,6 +45,7 @@ class UserProfile {
         'height': height,
         'goal': goal,
         'language': language,
+        'themeMode': themeMode,
         'dailyCalorieGoal': dailyCalorieGoal,
       };
 
@@ -54,6 +57,7 @@ class UserProfile {
         height: (m['height'] as num?)?.toDouble() ?? 175,
         goal: m['goal'] ?? 'maintain',
         language: m['language'] ?? 'de',
+        themeMode: m['themeMode'] ?? 'system',
         dailyCalorieGoal: (m['dailyCalorieGoal'] as num?)?.toInt() ?? 2000,
       );
 
@@ -64,6 +68,7 @@ class UserProfile {
     double? height,
     String? goal,
     String? language,
+    String? themeMode,
     int? dailyCalorieGoal,
   }) =>
       UserProfile(
@@ -74,6 +79,7 @@ class UserProfile {
         height: height ?? this.height,
         goal: goal ?? this.goal,
         language: language ?? this.language,
+        themeMode: themeMode ?? this.themeMode,
         dailyCalorieGoal: dailyCalorieGoal ?? this.dailyCalorieGoal,
       );
 }

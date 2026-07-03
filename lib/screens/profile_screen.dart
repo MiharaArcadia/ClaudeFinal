@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:carby/models/user_profile.dart';
 import 'package:carby/providers/user_provider.dart';
 import 'package:carby/theme/app_theme.dart';
@@ -19,6 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late int _age;
   late String _goal;
   late String _language;
+  late String _themeMode;
   late int _calorieGoal;
   bool _saving = false;
 
@@ -32,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _age = profile?.age ?? 25;
     _goal = profile?.goal ?? 'maintain';
     _language = profile?.language ?? 'de';
+    _themeMode = profile?.themeMode ?? 'system';
     _calorieGoal = profile?.dailyCalorieGoal ?? 2000;
   }
 
@@ -65,6 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       age: _age,
       goal: _goal,
       language: _language,
+      themeMode: _themeMode,
       dailyCalorieGoal: _calorieGoal,
     );
     await provider.updateProfile(updated);
@@ -286,6 +290,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 24),
+
+          // Theme toggle
+          _SectionLabel(label: lang == 'de' ? 'Design' : 'Appearance'),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              for (final option in [
+                ('system', lang == 'de' ? '🌗 System' : '🌗 System'),
+                ('light', lang == 'de' ? '☀️ Hell' : '☀️ Light'),
+                ('dark', lang == 'de' ? '🌙 Dunkel' : '🌙 Dark'),
+              ])
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: option.$1 != 'dark' ? 8.0 : 0.0,
+                    ),
+                    child: _LangButton(
+                      label: option.$2,
+                      selected: _themeMode == option.$1,
+                      onTap: () => setState(() => _themeMode = option.$1),
+                    ),
+                  ),
+                ),
+            ],
+          ),
           const SizedBox(height: 32),
 
           // Save button
@@ -310,6 +340,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
             ),
+          ),
+          const SizedBox(height: 24),
+
+          // More section
+          _SectionLabel(label: lang == 'de' ? 'Mehr' : 'More'),
+          const SizedBox(height: 8),
+          _MoreTile(
+            icon: Icons.star_outline_rounded,
+            label: lang == 'de' ? 'App bewerten ⭐' : 'Rate this app ⭐',
+            color: AppColors.orange,
+            onTap: () async {
+              final androidUri = Uri.parse(
+                  'market://details?id=io.arcadiaapps.carby');
+              final webUri = Uri.parse(
+                  'https://play.google.com/store/apps/details?id=io.arcadiaapps.carby');
+              if (!await launchUrl(androidUri,
+                  mode: LaunchMode.externalApplication)) {
+                await launchUrl(webUri,
+                    mode: LaunchMode.externalApplication);
+              }
+            },
           ),
           const SizedBox(height: 32),
           Text(
@@ -494,6 +545,50 @@ class _GoalCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MoreTile extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _MoreTile({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: AppColors.card,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: color, size: 20),
+            const SizedBox(width: 12),
+            Text(
+              label,
+              style: GoogleFonts.inter(
+                color: color,
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ),
+            const Spacer(),
+            Icon(Icons.chevron_right, color: color.withOpacity(0.5), size: 18),
+          ],
         ),
       ),
     );

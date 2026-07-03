@@ -1,0 +1,63 @@
+==================================================
+CARBY — PLAY STORE LISTING (DEUTSCH)
+Für Copy-Paste in Google Play Console
+==================================================
+
+KURZBESCHREIBUNG (80 Zeichen max):
+Kalorienzähler mit Spracheingabe & Barcode-Scanner — kostenlos, offline
+
+VOLLSTÄNDIGE BESCHREIBUNG (4000 Zeichen max):
+--------------------------------------------------
+
+🥗 Carby – Dein smarter Ernährungstracker
+
+Essen erfassen war noch nie so einfach. Mit Carby loggst du deine Mahlzeiten per Spracheingabe, Barcode-Scan oder Texteingabe — und behältst Kalorien, Protein, Kohlenhydrate und Fett immer im Blick.
+
+🎙️ SPRACHEINGABE
+Sag einfach „Hähnchenbrust mit Reis" und Carby sucht automatisch in der Datenbank. Kein Tippen, kein Scrollen.
+
+📊 VOLLSTÄNDIGES MAKRO-TRACKING
+Verfolge täglich:
+• Kalorien (kcal)
+• Protein (g)
+• Kohlenhydrate (g)
+• Fett (g)
+• Ballaststoffe (g)
+
+🔍 RIESIGE LEBENSMITTEL-DATENBANK
+Über 3 Millionen Lebensmittel aus der OpenFoodFacts-Datenbank — von Supermarktprodukten bis zu Restaurantgerichten. Barcode-Scanner für schnelles Einlesen von Verpackungen.
+
+💧 WASSER-TRACKER
+Behalte deine tägliche Flüssigkeitszufuhr im Blick mit dem integrierten Wasser-Tracker.
+
+🧮 PERSÖNLICHER KALORIENBEDARF
+Gib Alter, Gewicht, Größe und Aktivitätslevel ein — Carby berechnet deinen individuellen Kalorienbedarf (TDEE) mit der Mifflin-St.-Jeor-Formel.
+
+❤️ FAVORITEN
+Speichere deine Lieblingsmahlzeiten für blitzschnellen Zugriff.
+
+📅 TAGEBUCH
+Alle Mahlzeiten chronologisch, täglich filterbar, mit Nährwert-Zusammenfassung.
+
+🔒 DATENSCHUTZ
+Keine Werbung. Kein Abo. Keine versteckten Kosten.
+Deine Ernährungsdaten gehören dir — optional mit Firebase-Sync, 100% anonym.
+
+🌍 ZWEI SPRACHEN
+Deutsch und Englisch — automatisch nach Systemsprache.
+
+---
+IDEAL FÜR:
+• Kalorienzähler und Diät-Tracker
+• Fitness-Enthusiasten und Sportler
+• Menschen mit Ernährungszielen (Abnehmen, Zunehmen, Gewicht halten)
+• Diabetiker und Ernährungs-bewusste Nutzer
+• Alle die eine kostenlose MyFitnessPal-Alternative suchen
+
+KEYWORDS: Kalorienzähler, Ernährungstracker, Kalorienrechner, Diät App, food log, calorie counter, Barcode Scanner Lebensmittel, Makro Tracker, Protein Tracker, kostenlos ohne Abo
+
+==================================================
+KATEGORIE: Gesundheit & Fitness
+CONTENT RATING: Für alle (FSK 0)
+PREIS: Kostenlos
+==================================================
