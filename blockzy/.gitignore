@@ -1,0 +1,26 @@
+# Flutter/Dart build output
+/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+
+# Android local config & secrets (never commit)
+android/local.properties
+android/key.properties
+android/.gradle/
+*.jks
+*.keystore
+
+# iOS generated
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/ephemeral/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store

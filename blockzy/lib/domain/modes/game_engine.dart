@@ -67,6 +67,7 @@ class GameEngine {
   int _score = 0;
   int _bestCombo = 0;
   int _movesUsed = 0;
+  int _candiesCleared = 0;
   bool _gameOver = false;
 
   int get difficulty => _difficulty;
@@ -74,6 +75,9 @@ class GameEngine {
   int get score => _score;
   int get bestCombo => _bestCombo;
   int get movesUsed => _movesUsed;
+
+  /// Cumulative candies cleared this run (feeds stats + achievements).
+  int get candiesCleared => _candiesCleared;
   bool get gameOver => _gameOver;
 
   /// Whether [piece] can be placed at the given board anchor.
@@ -97,6 +101,7 @@ class GameEngine {
 
     _movesUsed++;
     _score += result.gainedScore;
+    _candiesCleared += result.candiesCleared;
     if (result.combo > _bestCombo) _bestCombo = result.combo;
 
     // Perfect clear bonus.
@@ -126,6 +131,7 @@ class GameEngine {
   /// Recomputes game-over afterward (a clear can re-open the board).
   Map<CandyType, int> ultraBlastRow(int row) {
     final removed = board.clearRow(row);
+    _candiesCleared += removed.values.fold(0, (a, b) => a + b);
     _gameOver = board.isGameOver(_tray);
     return removed;
   }

@@ -154,13 +154,13 @@ class _GameScreenState extends State<GameScreen>
   void _onTrayDragEnd() {
     final index = _dragIndex;
     if (index != null && _previewValid && _previewCells.isNotEmpty) {
-      final anchor = _previewCells.first; // first cell == top-left anchor cell
-      // Recover the true anchor (min col/row) from the preview cells.
-      final minCol = _previewCells.map((e) => e.col).reduce((a, b) => a < b ? a : b);
-      final minRow = _previewCells.map((e) => e.row).reduce((a, b) => a < b ? a : b);
+      // Shapes are top-left normalised, so the min col/row of the preview cells
+      // is exactly the placement anchor the engine expects.
+      final minCol =
+          _previewCells.map((e) => e.col).reduce((a, b) => a < b ? a : b);
+      final minRow =
+          _previewCells.map((e) => e.row).reduce((a, b) => a < b ? a : b);
       c.placePiece(index, minCol, minRow);
-      // ignore: unused_local_variable
-      final _ = anchor;
     }
     setState(() {
       _dragIndex = null;
@@ -206,17 +206,11 @@ class _GameScreenState extends State<GameScreen>
                 builder: (context, constraints) {
                   final boardPx = _boardSizePx(constraints);
                   final cellPx = boardPx / boardSize;
-                  // Publish geometry so the controller can place particles.
-                  final box =
-                      _boardKey.currentContext?.findRenderObject() as RenderBox?;
-                  if (box != null) {
-                    final origin = box.localToGlobal(Offset.zero);
-                    c.setGeometry(
-                      BoardGeometry(origin: Offset.zero, cellSize: cellPx),
-                    );
-                    // ignore: unused_local_variable
-                    final _ = origin;
-                  }
+                  // Effects paint inside the board's own coordinate space, so
+                  // the geometry origin is zero and only the cell size matters.
+                  c.setGeometry(
+                    BoardGeometry(origin: Offset.zero, cellSize: cellPx),
+                  );
                   return _buildBoard(boardPx, cellPx, boardSize);
                 },
               ),
@@ -258,7 +252,7 @@ class _GameScreenState extends State<GameScreen>
   Widget _buildBoard(double boardPx, double cellPx, int boardSize) {
     _lastBoardPx = boardPx;
     return AnimatedBuilder(
-      animation: c.effects.isEmpty ? c.repaint : c.repaint,
+      animation: c.repaint,
       builder: (context, _) {
         final shake = c.effects.shakeOffset;
         return Transform.translate(

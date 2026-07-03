@@ -9,6 +9,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../core/design_tokens.dart';
+import '../../domain/board.dart';
 import '../../domain/candy.dart';
 import '../../domain/levels/level_def.dart';
 import '../../domain/modes/adventure_engine.dart';
@@ -136,10 +137,10 @@ class GameController extends ChangeNotifier {
     }
   }
 
-  Color _colorForCell(int col, int row, placement) {
+  Color _colorForCell(int col, int row, PlacementResult placement) {
     // The cell is already cleared; approximate its colour from the dominant
     // cleared type for a pleasing burst.
-    final byType = placement.candiesClearedByType as Map<CandyType, int>;
+    final byType = placement.candiesClearedByType;
     if (byType.isEmpty) return BlockzyColors.primary;
     final dominant =
         byType.entries.reduce((a, b) => a.value >= b.value ? a : b).key;

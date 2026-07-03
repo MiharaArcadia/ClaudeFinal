@@ -32,14 +32,13 @@ class CandyPainter {
         .withValues(alpha: alpha);
 
     if (image != null) {
-      final paint = Paint()..filterQuality = FilterQuality.medium;
-      if (alpha < 1) paint.color = Colors.white.withValues(alpha: alpha);
       paintImage(
         canvas: canvas,
         rect: cell,
         image: image,
         fit: BoxFit.contain,
         opacity: alpha,
+        filterQuality: FilterQuality.medium,
       );
       return;
     }

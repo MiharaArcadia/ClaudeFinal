@@ -5,8 +5,9 @@ publish_to: 'none'
 # version+build. Bump the build number (+N) on every Play upload.
 version: 1.0.0+1
 
+# Requires Dart 3.6 / Flutter 3.27+ (uses Color.withValues).
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   flutter:
