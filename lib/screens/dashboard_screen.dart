@@ -18,6 +18,7 @@ import 'package:carby/widgets/calorie_ring_chart.dart';
 import 'package:carby/widgets/macro_card.dart';
 import 'package:carby/widgets/nutrient_gap_row.dart';
 import 'package:carby/widgets/pulsing_mic_button.dart';
+import 'package:carby/screens/barcode_scanner_screen.dart';
 import 'package:carby/widgets/feature_walkthrough.dart';
 
 bool get _isDesktop =>
@@ -196,14 +197,34 @@ class _DashboardBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.card,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.notifications_none,
-                          color: AppColors.textSecondary, size: 22),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => const BarcodeScannerScreen()),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: AppColors.card,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(Icons.qr_code_scanner,
+                                color: AppColors.teal, size: 22),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.card,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.notifications_none,
+                              color: AppColors.textSecondary, size: 22),
+                        ),
+                      ],
                     ),
                   ],
                 ),
