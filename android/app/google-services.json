@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "ERSETZEN_MIT_FIREBASE_APP_ID",
         "android_client_info": {
-          "package_name": "com.carby.app"
+          "package_name": "io.arcadiaapps.carby"
         }
       },
       "oauth_client": [],
