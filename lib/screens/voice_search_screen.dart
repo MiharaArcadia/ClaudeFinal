@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:carby/models/food_model.dart';
 import 'package:carby/providers/user_provider.dart';
+import 'package:carby/screens/barcode_scanner_screen.dart';
 import 'package:carby/screens/food_detail_screen.dart';
 import 'package:carby/services/open_food_facts_service.dart';
 import 'package:carby/services/speech_service.dart';
@@ -166,11 +167,13 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
                     onSubmitted: _search,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
                 PulsingMicButton(
                   listening: _listening,
                   onPressed: _toggleListening,
                 ),
+                const SizedBox(width: 10),
+                _BarcodeButton(lang: lang),
               ],
             ),
           ),
@@ -322,6 +325,34 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
       color: AppColors.surface,
       child: const Icon(Icons.restaurant,
           color: AppColors.textSecondary, size: 24),
+    );
+  }
+}
+
+class _BarcodeButton extends StatelessWidget {
+  final String lang;
+  const _BarcodeButton({required this.lang});
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: lang == 'de' ? 'Barcode scannen' : 'Scan barcode',
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BarcodeScannerScreen()),
+        ),
+        child: Container(
+          width: 52,
+          height: 52,
+          decoration: BoxDecoration(
+            color: AppColors.card,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: AppColors.teal.withOpacity(0.4)),
+          ),
+          child: const Icon(Icons.qr_code_scanner,
+              color: AppColors.teal, size: 26),
+        ),
+      ),
     );
   }
 }

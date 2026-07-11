@@ -62,6 +62,25 @@ class OpenFoodFactsService {
         .toList();
   }
 
+  Future<Food?> lookupBarcode(String barcode) async {
+    final uri = Uri.parse('$_base/api/v0/product/$barcode.json')
+        .replace(queryParameters: {'fields': _fields});
+    try {
+      final response =
+          await http.get(uri).timeout(const Duration(seconds: 10));
+      if (response.statusCode != 200) return null;
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      if (data['status'] != 1) return null;
+      final product = data['product'] as Map<String, dynamic>?;
+      if (product == null) return null;
+      final food = Food.fromOpenFoodFacts(product);
+      if (food.name.isEmpty) return null;
+      return food;
+    } catch (_) {
+      return null;
+    }
+  }
+
   double getDefaultPortionWeight(String foodName) {
     final name = foodName.toLowerCase();
     final portions = {
