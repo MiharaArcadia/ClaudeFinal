@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'assets/images/Arcadia_Apps_transparent.png',
+                'assets/images/android_foreground_512.png',
                 width: 180,
               ),
               const SizedBox(height: 16),
