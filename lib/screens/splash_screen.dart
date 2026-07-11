@@ -63,31 +63,19 @@ class _SplashScreenState extends State<SplashScreen>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ShaderMask(
-                shaderCallback: (bounds) => const LinearGradient(
-                  colors: AppColors.ringGradient,
-                ).createShader(bounds),
-                child: const Icon(Icons.donut_large,
-                    size: 80, color: Colors.white),
+              Image.asset(
+                'assets/images/Arcadia_Apps.png',
+                width: 180,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               Text(
-                'Carby',
+                'ArcadiaApps',
                 style: GoogleFonts.inter(
-                  fontSize: 36,
-                  fontWeight: FontWeight.w800,
-                  foreground: Paint()
-                    ..shader = const LinearGradient(
-                      colors: [AppColors.orange, AppColors.teal],
-                    ).createShader(
-                        const Rect.fromLTWH(0, 0, 200, 60)),
+                  color: AppColors.textSecondary,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1.5,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Smart nutrition tracking',
-                style: GoogleFonts.inter(
-                    color: AppColors.textSecondary, fontSize: 14),
               ),
             ],
           ),
