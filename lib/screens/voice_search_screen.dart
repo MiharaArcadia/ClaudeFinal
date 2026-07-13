@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,9 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
   List<Food> _results = [];
   bool _searched = false;
 
+  Timer? _debounce;
+  String _activeQuery = '';
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +47,7 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _speech.dispose();
     _textController.dispose();
     super.dispose();
@@ -90,22 +95,44 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
     }
   }
 
-  Future<void> _search(String query) async {
-    if (query.trim().isEmpty) return;
+  // Live autocomplete: debounce keystrokes and search as the user types.
+  void _onQueryChanged(String value) {
+    _debounce?.cancel();
+    final query = value.trim();
+    if (query.length < 2) {
+      setState(() {
+        _results = [];
+        _searched = false;
+        _searching = false;
+      });
+      return;
+    }
+    setState(() {}); // reflect the clear-button / text state in the field
+    _debounce = Timer(const Duration(milliseconds: 350), () {
+      _search(query, autoOpen: false);
+    });
+  }
+
+  Future<void> _search(String query, {bool autoOpen = true}) async {
+    final q = query.trim();
+    if (q.isEmpty) return;
+    _activeQuery = q;
+    // Keep previous results visible while the new ones load (no blanking).
     setState(() {
       _searching = true;
       _searched = false;
-      _results = [];
     });
 
-    final results = await _foodApi.searchFood(query.trim(), lang: _lang);
+    final results = await _foodApi.searchFood(q, lang: _lang);
+    // Ignore stale responses from earlier keystrokes.
+    if (!mounted || _activeQuery != q) return;
     setState(() {
       _results = results;
       _searching = false;
       _searched = true;
     });
 
-    if (results.length == 1) {
+    if (autoOpen && results.length == 1) {
       _openDetail(results.first);
     }
   }
@@ -161,10 +188,38 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
                       ),
                       prefixIcon: const Icon(Icons.search,
                           color: AppColors.textSecondary),
+                      suffixIcon: _searching
+                          ? const Padding(
+                              padding: EdgeInsets.all(12),
+                              child: SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: AppColors.orange),
+                              ),
+                            )
+                          : (_textController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.close,
+                                      color: AppColors.textSecondary),
+                                  onPressed: () {
+                                    _debounce?.cancel();
+                                    _textController.clear();
+                                    setState(() {
+                                      _results = [];
+                                      _searched = false;
+                                      _searching = false;
+                                    });
+                                  },
+                                )
+                              : null),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 14, horizontal: 16),
                     ),
-                    onSubmitted: _search,
+                    textInputAction: TextInputAction.search,
+                    onChanged: _onQueryChanged,
+                    onSubmitted: (q) => _search(q),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -213,17 +268,10 @@ class _VoiceSearchScreenState extends State<VoiceSearchScreen> {
               ),
             ),
 
-          // Loading
-          if (_searching)
-            const Padding(
-              padding: EdgeInsets.all(40),
-              child: CircularProgressIndicator(color: AppColors.orange),
-            ),
-
-          // Results
-          if (!_searching)
+          // Results — stay visible while a live search loads (spinner is in the field)
+          if (!(_searching && _results.isEmpty))
             Expanded(
-              child: _results.isEmpty && _searched
+              child: _results.isEmpty && _searched && !_searching
                   ? Center(
                       child: Text(
                         lang == 'de' ? 'Keine Ergebnisse' : 'No results',
