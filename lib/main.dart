@@ -15,6 +15,10 @@ import 'package:carby/theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Never paint the red/yellow debug error box in the UI — a transient
+  // build error (e.g. during a theme switch) should not disfigure the app.
+  ErrorWidget.builder = (FlutterErrorDetails details) => const SizedBox.shrink();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Color(0xFF0D0D0D),
     systemNavigationBarIconBrightness: Brightness.light,
