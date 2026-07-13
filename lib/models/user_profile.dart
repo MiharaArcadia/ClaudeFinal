@@ -17,7 +17,7 @@ class UserProfile {
     required this.height,
     required this.goal,
     required this.language,
-    this.themeMode = 'system',
+    this.themeMode = 'dark',
     required this.dailyCalorieGoal,
   });
 
@@ -57,7 +57,7 @@ class UserProfile {
         height: (m['height'] as num?)?.toDouble() ?? 175,
         goal: m['goal'] ?? 'maintain',
         language: m['language'] ?? 'de',
-        themeMode: m['themeMode'] ?? 'system',
+        themeMode: m['themeMode'] ?? 'dark',
         dailyCalorieGoal: (m['dailyCalorieGoal'] as num?)?.toInt() ?? 2000,
       );
 

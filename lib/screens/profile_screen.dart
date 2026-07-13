@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _age = profile?.age ?? 25;
     _goal = profile?.goal ?? 'maintain';
     _language = profile?.language ?? 'de';
-    _themeMode = profile?.themeMode ?? 'system';
+    _themeMode = profile?.themeMode ?? 'dark';
     _calorieGoal = profile?.dailyCalorieGoal ?? 2000;
   }
 

@@ -16,7 +16,7 @@ class UserProvider extends ChangeNotifier {
   bool get onboardingComplete => _onboardingComplete;
   String get lang => _profile?.language ?? 'de';
   ThemeMode get themeMode {
-    return switch (_profile?.themeMode ?? 'system') {
+    return switch (_profile?.themeMode ?? 'dark') {
       'light' => ThemeMode.light,
       'dark' => ThemeMode.dark,
       _ => ThemeMode.system,
