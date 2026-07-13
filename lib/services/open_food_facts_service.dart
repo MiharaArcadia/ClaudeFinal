@@ -5,7 +5,30 @@ import 'package:carby/models/food_model.dart';
 class OpenFoodFactsService {
   static const _base = 'https://world.openfoodfacts.org';
   static const _fields =
-      'product_name,nutriments,image_url,serving_size,brands,_id';
+      'product_name,nutriments,image_url,serving_size,brands,_id,nova_group,categories_tags';
+
+  // Words that indicate a processed / compound product (DE + EN).
+  static const _processedKeywords = [
+    'chips', 'sticks', 'snack', 'riegel', 'sauce', 'soße', 'frikassee',
+    'gewürz', 'würz', 'pulver', 'getrocknet', 'mix', 'fertig', 'paste',
+    'aufstrich', 'konserve', 'creme', 'crème', 'gebacken', 'paniert',
+    'nuggets', 'wurst', 'aufschnitt', 'dip', 'dressing', 'marinade',
+    'geräuchert', 'smoked', 'fried', 'roasted', 'seasoned', 'flavour',
+    'flavor',
+  ];
+
+  // Substrings that indicate a composed dish rather than a raw ingredient.
+  static const _compositionMarkers = [' mit ', ' and ', ' & ', '+'];
+
+  static const _rawCategoryTags = [
+    'en:vegetables', 'en:fruits', 'en:fresh-', 'en:meats', 'en:fresh-meat',
+    'en:eggs',
+  ];
+
+  static const _processedCategoryTags = [
+    'en:snacks', 'en:chips', 'en:prepared-meals', 'en:desserts',
+    'en:sweet-snacks',
+  ];
 
   Future<List<Food>> searchFood(String query, {String lang = 'de'}) async {
     final results = await _fetch(query);
@@ -21,7 +44,7 @@ class OpenFoodFactsService {
       'action': 'process',
       'json': '1',
       'fields': _fields,
-      'page_size': '30',
+      'page_size': '50',
     });
 
     try {
@@ -32,26 +55,79 @@ class OpenFoodFactsService {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final products = (data['products'] as List?) ?? [];
 
-      final results = products
-          .map((p) => Food.fromOpenFoodFacts(p as Map<String, dynamic>))
-          .where((f) => f.name.isNotEmpty)
-          .toList();
+      // Rank on the raw JSON (needs nova_group / categories_tags), then map.
+      final ranked = products
+          .whereType<Map<String, dynamic>>()
+          .where((p) =>
+              (p['product_name']?.toString() ?? '').trim().isNotEmpty)
+          .toList()
+        ..sort((a, b) =>
+            _scoreProduct(b, query).compareTo(_scoreProduct(a, query)));
 
-      results.sort((a, b) =>
-          _relevance(b.name, query).compareTo(_relevance(a.name, query)));
-      return results;
+      return ranked.map((p) => Food.fromOpenFoodFacts(p)).toList();
     } catch (_) {
       return [];
     }
   }
 
-  int _relevance(String name, String query) {
-    final n = name.toLowerCase();
-    final q = query.toLowerCase();
-    if (n == q) return 3;
-    if (n.startsWith(q)) return 2;
-    if (n.contains(q)) return 1;
-    return 0;
+  /// Higher score = closer to the pure/raw product the user likely wants.
+  int _scoreProduct(Map<String, dynamic> product, String query) {
+    final name = (product['product_name']?.toString() ?? '').toLowerCase();
+    final q = query.toLowerCase().trim();
+    var score = 0;
+
+    // --- Name match ---
+    if (name == q) {
+      score += 100;
+    } else {
+      final words = name.split(RegExp(r'\s+')).where((w) => w.isNotEmpty);
+      if (words.contains(q)) score += 40;
+      if (name.startsWith(q)) score += 25;
+      if (name.contains(q)) score += 10;
+    }
+    final wordCount =
+        name.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+    score += (6 - wordCount).clamp(0, 6) * 4; // fewer words = purer
+    if (name.length <= 15) score += 8;
+
+    // --- Processing level (NOVA) — strongest signal ---
+    final nova = (product['nova_group'] as num?)?.toInt();
+    score += switch (nova) {
+      1 => 35,
+      2 => 10,
+      3 => -10,
+      4 => -30,
+      _ => 0,
+    };
+
+    // --- Processed / compound name penalties ---
+    for (final kw in _processedKeywords) {
+      if (name.contains(kw)) score -= 25;
+    }
+    for (final marker in _compositionMarkers) {
+      if (name.contains(marker)) score -= 15;
+    }
+
+    // --- Category signals ---
+    final tags = ((product['categories_tags'] as List?) ?? [])
+        .map((t) => t.toString().toLowerCase())
+        .toList();
+    if (tags.any((t) => _rawCategoryTags.any((r) => t.startsWith(r)))) {
+      score += 20;
+    }
+    if (tags.any((t) => _processedCategoryTags.contains(t))) {
+      score -= 20;
+    }
+
+    // --- Data-quality tie-breakers ---
+    if ((product['image_url']?.toString() ?? '').isNotEmpty) score += 3;
+    final nutriments = (product['nutriments'] as Map<String, dynamic>?) ?? {};
+    if (((nutriments['energy-kcal_100g'] as num?)?.toDouble() ?? 0) > 0) {
+      score += 3;
+    }
+    if ((product['brands']?.toString() ?? '').trim().isNotEmpty) score -= 5;
+
+    return score;
   }
 
   // Offline fallback with common foods
