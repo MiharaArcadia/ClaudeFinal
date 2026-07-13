@@ -77,6 +77,9 @@ class CarbyApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: userProvider.themeMode,
+          // Switch instantly — avoids TextStyle.lerp crashing on GoogleFonts
+          // styles with mismatched `inherit` flags during the cross-fade.
+          themeAnimationDuration: Duration.zero,
           home: const SplashScreen(),
         ),
       ),
