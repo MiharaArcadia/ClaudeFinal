@@ -36,6 +36,14 @@ class UserProvider extends ChangeNotifier {
       _profile = await _firebase.getUserProfile(uid);
     }
 
+    // Apply locally-stored theme even if Firebase profile is unavailable
+    if (_profile != null) {
+      final savedTheme = prefs.getString('theme_mode');
+      if (savedTheme != null && savedTheme != (_profile!.themeMode ?? 'system')) {
+        _profile = _profile!.copyWith(themeMode: savedTheme);
+      }
+    }
+
     _loading = false;
     notifyListeners();
   }
@@ -58,7 +66,16 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> updateProfile(UserProfile updated) async {
     _profile = updated;
-    await _firebase.saveUserProfile(updated);
     notifyListeners();
+    _firebase.saveUserProfile(updated).catchError((_) {});
+  }
+
+  Future<void> updateThemeMode(String mode) async {
+    if (_profile == null) return;
+    _profile = _profile!.copyWith(themeMode: mode);
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('theme_mode', mode);
+    _firebase.saveUserProfile(_profile!).catchError((_) {});
   }
 }

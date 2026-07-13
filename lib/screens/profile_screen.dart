@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       themeMode: _themeMode,
       dailyCalorieGoal: _calorieGoal,
     );
-    await provider.updateProfile(updated);
+    provider.updateProfile(updated); // non-blocking, Firebase runs in background
     setState(() => _saving = false);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -310,7 +310,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: _LangButton(
                       label: option.$2,
                       selected: _themeMode == option.$1,
-                      onTap: () => setState(() => _themeMode = option.$1),
+                      onTap: () {
+                        setState(() => _themeMode = option.$1);
+                        context.read<UserProvider>().updateThemeMode(option.$1);
+                      },
                     ),
                   ),
                 ),
