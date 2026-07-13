@@ -34,12 +34,6 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _navIndex = 0;
 
-  final _dashKey = GlobalKey<NavigatorState>();
-  final _logKey = GlobalKey<NavigatorState>();
-  final _profileKey = GlobalKey<NavigatorState>();
-  final _favKey = GlobalKey<NavigatorState>();
-  final _supportKey = GlobalKey<NavigatorState>();
-
   @override
   void initState() {
     super.initState();
@@ -103,26 +97,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           IndexedStack(
             index: _navIndex,
             children: [
-              _TabNavigator(
-                navigatorKey: _dashKey,
-                child: _DashboardBody(greeting: _greeting),
-              ),
-              _TabNavigator(
-                navigatorKey: _logKey,
-                child: const FoodLogScreen(),
-              ),
-              _TabNavigator(
-                navigatorKey: _favKey,
-                child: const FavoritesScreen(),
-              ),
-              _TabNavigator(
-                navigatorKey: _profileKey,
-                child: const ProfileScreen(),
-              ),
-              _TabNavigator(
-                navigatorKey: _supportKey,
-                child: const SupportScreen(),
-              ),
+              _DashboardBody(greeting: _greeting),
+              const FoodLogScreen(),
+              const FavoritesScreen(),
+              const ProfileScreen(),
+              const SupportScreen(),
             ],
           ),
         ],
@@ -453,21 +432,6 @@ class _BetaBannerState extends State<_BetaBanner> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _TabNavigator extends StatelessWidget {
-  final GlobalKey<NavigatorState> navigatorKey;
-  final Widget child;
-
-  const _TabNavigator({required this.navigatorKey, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Navigator(
-      key: navigatorKey,
-      onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => child),
     );
   }
 }
