@@ -39,7 +39,7 @@ class UserProvider extends ChangeNotifier {
     // Apply locally-stored theme even if Firebase profile is unavailable
     if (_profile != null) {
       final savedTheme = prefs.getString('theme_mode');
-      if (savedTheme != null && savedTheme != (_profile!.themeMode ?? 'system')) {
+      if (savedTheme != null && savedTheme != (_profile!.themeMode ?? 'dark')) {
         _profile = _profile!.copyWith(themeMode: savedTheme);
       }
     }
