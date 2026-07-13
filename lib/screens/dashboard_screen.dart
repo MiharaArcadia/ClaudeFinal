@@ -31,14 +31,14 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-final _dashKey = GlobalKey<NavigatorState>();
-final _logKey = GlobalKey<NavigatorState>();
-final _profileKey = GlobalKey<NavigatorState>();
-final _favKey = GlobalKey<NavigatorState>();
-final _supportKey = GlobalKey<NavigatorState>();
-
 class _DashboardScreenState extends State<DashboardScreen> {
   int _navIndex = 0;
+
+  final _dashKey = GlobalKey<NavigatorState>();
+  final _logKey = GlobalKey<NavigatorState>();
+  final _profileKey = GlobalKey<NavigatorState>();
+  final _favKey = GlobalKey<NavigatorState>();
+  final _supportKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
