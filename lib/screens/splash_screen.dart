@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:carby/providers/user_provider.dart';
 import 'package:carby/screens/onboarding_screen.dart';
@@ -60,24 +59,9 @@ class _SplashScreenState extends State<SplashScreen>
       body: Center(
         child: FadeTransition(
           opacity: _opacity,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'assets/images/android_foreground_512.png',
-                width: 180,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'ArcadiaApps',
-                style: GoogleFonts.inter(
-                  color: AppColors.textSecondary,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.5,
-                ),
-              ),
-            ],
+          child: Image.asset(
+            'assets/images/Arcadia_Apps_transparent.png',
+            width: 260,
           ),
         ),
       ),
