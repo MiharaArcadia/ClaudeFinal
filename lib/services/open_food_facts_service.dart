@@ -70,6 +70,12 @@ class OpenFoodFactsService {
     }
   }
 
+  static int? _toInt(dynamic v) {
+    if (v is num) return v.toInt();
+    if (v is String) return int.tryParse(v.trim());
+    return null;
+  }
+
   /// Higher score = closer to the pure/raw product the user likely wants.
   int _scoreProduct(Map<String, dynamic> product, String query) {
     final name = (product['product_name']?.toString() ?? '').toLowerCase();
@@ -91,7 +97,8 @@ class OpenFoodFactsService {
     if (name.length <= 15) score += 8;
 
     // --- Processing level (NOVA) — strongest signal ---
-    final nova = (product['nova_group'] as num?)?.toInt();
+    // OFF sometimes returns nova_group as a String ("1"); parse both.
+    final nova = _toInt(product['nova_group']);
     score += switch (nova) {
       1 => 35,
       2 => 10,
