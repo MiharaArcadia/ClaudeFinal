@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:carby/data/common_foods.dart';
 import 'package:carby/models/food_model.dart';
 
 class OpenFoodFactsService {
@@ -31,11 +32,20 @@ class OpenFoodFactsService {
   ];
 
   Future<List<Food>> searchFood(String query, {String lang = 'de'}) async {
-    final results = await _fetch(query);
-    if (results.isNotEmpty) return results;
-    // Retry without language filter if nothing found
-    return _fallbackSearch(query);
+    // 1) Curated German DB first — always clean, instant, works offline.
+    final local = CommonFoods.search(query);
+    // 2) API for the long tail / specific brands.
+    final api = await _fetch(query);
+
+    final seen = local.map((f) => _norm(f.name)).toSet();
+    final merged = <Food>[
+      ...local,
+      ...api.where((f) => !seen.contains(_norm(f.name))),
+    ];
+    return merged;
   }
+
+  static String _norm(String s) => s.toLowerCase().trim();
 
   Future<List<Food>> _fetch(String query) async {
     final uri = Uri.parse('$_base/cgi/search.pl').replace(queryParameters: {
@@ -45,6 +55,8 @@ class OpenFoodFactsService {
       'json': '1',
       'fields': _fields,
       'page_size': '50',
+      'sort_by': 'unique_scans_n', // best-known products first
+      'lc': 'de', // bias toward German product data
     });
 
     try {
@@ -147,14 +159,6 @@ class OpenFoodFactsService {
     return score;
   }
 
-  // Offline fallback with common foods
-  List<Food> _fallbackSearch(String query) {
-    final q = query.toLowerCase();
-    return _commonFoods
-        .where((f) => f.name.toLowerCase().contains(q))
-        .toList();
-  }
-
   Future<Food?> lookupBarcode(String barcode) async {
     final uri = Uri.parse('$_base/api/v0/product/$barcode.json')
         .replace(queryParameters: {'fields': _fields});
@@ -204,47 +208,4 @@ class OpenFoodFactsService {
     }
     return 100.0;
   }
-
-  static final List<Food> _commonFoods = [
-    Food(
-      id: 'apple', name: 'Apfel', imageUrl: '', brand: '',
-      calories: 52, protein: 0.3, carbs: 14, fat: 0.2, fiber: 2.4,
-      sugar: 10, salt: 0.0, defaultPortionGrams: 182,
-    ),
-    Food(
-      id: 'banana', name: 'Banane', imageUrl: '', brand: '',
-      calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6,
-      sugar: 12, salt: 0.0, defaultPortionGrams: 120,
-    ),
-    Food(
-      id: 'egg', name: 'Ei', imageUrl: '', brand: '',
-      calories: 155, protein: 13, carbs: 1.1, fat: 11, fiber: 0,
-      sugar: 1.1, salt: 0.4, defaultPortionGrams: 60,
-    ),
-    Food(
-      id: 'chicken', name: 'Hähnchenbrust', imageUrl: '', brand: '',
-      calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0,
-      sugar: 0, salt: 0.07, defaultPortionGrams: 150,
-    ),
-    Food(
-      id: 'oats', name: 'Haferflocken', imageUrl: '', brand: '',
-      calories: 389, protein: 17, carbs: 66, fat: 7, fiber: 10.6,
-      sugar: 1, salt: 0.0, defaultPortionGrams: 80,
-    ),
-    Food(
-      id: 'salmon', name: 'Lachs', imageUrl: '', brand: '',
-      calories: 208, protein: 20, carbs: 0, fat: 13, fiber: 0,
-      sugar: 0, salt: 0.06, defaultPortionGrams: 150,
-    ),
-    Food(
-      id: 'bread', name: 'Vollkornbrot', imageUrl: '', brand: '',
-      calories: 247, protein: 9, carbs: 44, fat: 3.4, fiber: 7,
-      sugar: 4, salt: 1.1, defaultPortionGrams: 30,
-    ),
-    Food(
-      id: 'yogurt', name: 'Joghurt', imageUrl: '', brand: '',
-      calories: 59, protein: 3.5, carbs: 5, fat: 3.3, fiber: 0,
-      sugar: 5, salt: 0.1, defaultPortionGrams: 150,
-    ),
-  ];
 }
