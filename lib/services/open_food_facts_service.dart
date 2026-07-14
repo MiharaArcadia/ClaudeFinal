@@ -76,6 +76,11 @@ class OpenFoodFactsService {
     return null;
   }
 
+  // Split on any non-alphanumeric char so hyphen/compound names ("Coca-Cola",
+  // "TK-Pizza") break into real words.
+  static List<String> _words(String s) =>
+      s.split(RegExp(r'[^a-z0-9äöüß]+')).where((w) => w.isNotEmpty).toList();
+
   /// Higher score = closer to the pure/raw product the user likely wants.
   int _scoreProduct(Map<String, dynamic> product, String query) {
     final name = (product['product_name']?.toString() ?? '').toLowerCase();
@@ -83,16 +88,21 @@ class OpenFoodFactsService {
     var score = 0;
 
     // --- Name match ---
+    final nameWords = _words(name);
     if (name == q) {
       score += 100;
     } else {
-      final words = name.split(RegExp(r'\s+')).where((w) => w.isNotEmpty);
-      if (words.contains(q)) score += 40;
+      if (nameWords.contains(q)) score += 40;
       if (name.startsWith(q)) score += 25;
       if (name.contains(q)) score += 10;
+      // Multi-word query (e.g. "energy drink", "rote bete"): all query words present.
+      final queryWords = _words(q);
+      if (queryWords.length > 1 &&
+          queryWords.every((w) => nameWords.contains(w))) {
+        score += 30;
+      }
     }
-    final wordCount =
-        name.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+    final wordCount = nameWords.length;
     score += (6 - wordCount).clamp(0, 6) * 4; // fewer words = purer
     if (name.length <= 15) score += 8;
 
