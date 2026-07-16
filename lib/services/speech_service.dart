@@ -35,10 +35,16 @@ class SpeechService {
         }
       },
       localeId: localeId,
-      listenFor: const Duration(seconds: 15),
-      pauseFor: const Duration(seconds: 2),
-      partialResults: true,
-      cancelOnError: true,
+      listenFor: const Duration(seconds: 30),
+      pauseFor: const Duration(seconds: 3),
+      listenOptions: stt.SpeechListenOptions(
+        // Dictation mode is far more tolerant of soft/continuous speech than
+        // the default confirmation mode (which cuts off quiet input quickly).
+        listenMode: stt.ListenMode.dictation,
+        partialResults: true,
+        cancelOnError: false,
+        autoPunctuation: false,
+      ),
     );
   }
 

@@ -73,6 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
 
   void _next() {
+    FocusScope.of(context).unfocus();
     if (_page < 4) {
       _pageController.nextPage(
           duration: const Duration(milliseconds: 350), curve: Curves.easeOut);
@@ -138,13 +139,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (p) => setState(() => _page = p),
+                onPageChanged: (p) {
+                  FocusScope.of(context).unfocus();
+                  setState(() => _page = p);
+                },
                 children: [
-                  _buildLanguagePage(),
-                  _buildNamePage(),
-                  _buildAgePage(),
-                  _buildGoalPage(),
-                  _buildSummaryPage(),
+                  _scrollable(_buildLanguagePage()),
+                  _scrollable(_buildNamePage()),
+                  _scrollable(_buildAgePage()),
+                  _scrollable(_buildGoalPage()),
+                  _scrollable(_buildSummaryPage()),
                 ],
               ),
             ),
@@ -180,6 +184,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
+
+  // Scrollable so an open keyboard never overflows the page content.
+  Widget _scrollable(Widget child) => SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: child,
+      );
 
   Widget _buildLanguagePage() {
     return Padding(
