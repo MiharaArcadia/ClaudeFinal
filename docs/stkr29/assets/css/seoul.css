@@ -1,0 +1,214 @@
+/* ============================================================================
+   SEOUL TABLE — „Hell & handgezeichnet" Override-Layer (koreanisch)
+   Lädt NACH styles.css. Cremepapier · Soju-Grün · Ink-Linien · Hangul-Akzente.
+   Inspiriert vom „Titanic Soju Erlebnis"-Poster. Modern & polished.
+   ========================================================================== */
+:root{
+  --green:      #2E7D32;
+  --green-dark: #1F5E24;
+  --green-deep: #164A1B;
+  --red:        #D33A2C;   /* Gochujang – Akzent/Schärfe */
+  --gold:       #E8A33A;
+  --blue:       #2E77C9;   /* Soju-Tropfen (winzig)      */
+  --cream:      #F7F1E1;
+  --ink:        #1A1A17;
+  --script:     'Caveat', 'Bradley Hand', cursive;
+}
+
+/* ---------- Papier-Grund ---------- */
+body{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    var(--gp-cream);
+}
+::selection{ background:var(--green); color:#fff; }
+:focus-visible{ outline:3px solid var(--green); outline-offset:3px; }
+
+/* ---------- Headlines: Bricolage bold ---------- */
+.display,.h1,.h2{ font-weight:800; letter-spacing:-.02em; }
+.display{ line-height:.98; font-size:clamp(44px,7vw,92px); }
+.h1{ line-height:1.0; }
+.h2{ line-height:1.02; }
+.display .green,.h1 .green,.h2 .green{ color:var(--green); }
+.display .red,.h1 .red,.h2 .red{ color:var(--red); }
+.dish__name,.highlight h3,.benefit h3,.menu-cat__head .h3,.brand__name,.team__name,.step h3,.form__title{
+  font-family:var(--gp-serif); font-weight:800; letter-spacing:-.01em;
+}
+
+/* handgezeichnete Underline unter Wörtern */
+.uline{ position:relative; display:inline-block; }
+.uline::after{
+  content:""; position:absolute; left:-2%; right:-2%; bottom:-.14em; height:.32em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M2 11 C40 4 80 13 120 8 S180 5 198 9' fill='none' stroke='%232E7D32' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  z-index:-1; pointer-events:none;
+}
+
+/* ---------- Eyebrow: Caveat-Handschrift ---------- */
+.eyebrow{
+  font-family:var(--script); font-size:clamp(21px,2.4vw,28px); letter-spacing:0;
+  text-transform:none; color:var(--green); font-weight:700; gap:9px;
+}
+.eyebrow::before{ height:3px; width:26px; border-radius:3px; background:var(--red); }
+.eyebrow--saffron{ color:var(--red); }
+.section--char .eyebrow{ color:var(--gold); }
+
+/* ---------- Buttons: Ink-Outline + Offset ---------- */
+.btn{
+  border:2.5px solid var(--ink); border-radius:14px; font-weight:800; letter-spacing:.01em;
+  font-family:var(--gp-sans); box-shadow:3px 3px 0 var(--ink);
+  transition:transform .12s var(--ease),box-shadow .12s var(--ease),background .12s;
+}
+.btn--lg{ box-shadow:4px 4px 0 var(--ink); }
+.btn:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
+.btn:active{ transform:translate(1px,1px); box-shadow:1px 1px 0 var(--ink); }
+.btn--primary{ background:var(--green); color:#fff; }
+.btn--primary:hover{ background:var(--green-dark); color:#fff; }
+.btn--secondary{ background:var(--gp-surface); color:var(--ink); border-color:var(--ink); }
+.btn--secondary:hover{ background:#fff; color:var(--green-dark); }
+.btn--onchar{ background:var(--gold); color:var(--ink); }
+.btn--ghost{ border-color:transparent; box-shadow:none; }
+.btn--ghost:hover{ transform:none; box-shadow:none; background:rgba(46,125,50,.1); color:var(--green-dark); }
+.cta-band .btn--primary{ background:#fff; color:var(--green-dark); }
+.cta-band .btn--secondary{ background:transparent; color:#fff; border-color:#fff; box-shadow:3px 3px 0 rgba(0,0,0,.35); }
+
+/* ---------- Header / Brand ---------- */
+.site-header{ background:rgba(247,241,225,.92); border-bottom:2.5px solid var(--ink); }
+.brand__mark{ background:var(--green); border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink); color:#fff; border-radius:12px; }
+.brand__mark svg{ width:24px; height:24px; }
+.brand__name{ font-size:23px; color:var(--ink); letter-spacing:-.02em; }
+.brand__sub{ color:var(--green-dark); font-weight:700; }
+.nav a{ font-weight:700; }
+.nav a:hover{ background:rgba(46,125,50,.12); color:var(--green-dark); }
+.nav a.is-active{ background:var(--green); color:#fff; }
+.cart-btn,.burger,.drawer__close{ border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink); }
+
+/* ---------- Demo-Bar ---------- */
+.demo-bar{ background:var(--green-deep); color:#dce7dc; }
+.demo-bar strong{ color:#fff; } .demo-bar .spark{ color:var(--gold); }
+
+/* ---------- Hangul-Chips & Heat ---------- */
+.kchip{ display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:12.5px;
+  padding:5px 11px; border-radius:999px; border:2px solid var(--ink); background:#fff; color:var(--ink); box-shadow:2px 2px 0 var(--ink); }
+.kchip .han{ font-weight:800; color:var(--green); }
+.heat{ display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:800; color:var(--red);
+  border:1.5px solid var(--red); border-radius:999px; padding:2px 8px; }
+
+/* ---------- Marquee ---------- */
+.marquee{ background:var(--green); color:#fff; border-block:2.5px solid var(--ink); overflow:hidden; white-space:nowrap; padding:10px 0; }
+.marquee--ink{ background:var(--ink); }
+.marquee__track{ display:inline-flex; animation:st-marquee 28s linear infinite; will-change:transform; }
+.marquee__track span{ font-family:var(--gp-serif); font-weight:800; text-transform:uppercase; font-size:17px; letter-spacing:.03em; padding:0 24px; display:inline-flex; align-items:center; gap:24px; }
+.marquee__track span::after{ content:"소주"; color:var(--gold); font-size:15px; }
+@keyframes st-marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ---------- Foto-Platzhalter + echte Bilder ---------- */
+.ph{ border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:16px; }
+.ph > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:2; }
+.dish .ph{ border-radius:0; border-width:0 0 2.5px 0; box-shadow:none; }
+.dish .ph > img{ z-index:2; }
+.ph__label{ font-family:var(--gp-sans); font-weight:800; background:var(--ink); color:#fff; }
+.ph--ember  { background:linear-gradient(140deg,#2E7D32,#164A1B); }
+.ph--meat   { background:linear-gradient(140deg,#2a2a20,#16341c); }
+.ph--saffron{ background:linear-gradient(140deg,#D33A2C,#8f2117); }
+.ph--olive  { background:linear-gradient(140deg,#3E9E45,#1f5e24); }
+.ph--char   { background:linear-gradient(140deg,#16341c,#0f2413); }
+.ph--coal   { background:linear-gradient(140deg,#1a1a17,#16341c); }
+.ph--hero   { background:linear-gradient(150deg,#2E7D32 0%,#164A1B 60%,#1a1a17 100%); }
+.ph__tag{ font-family:var(--gp-sans); font-weight:800; border:2px solid var(--ink); }
+.ph__tag--dark{ background:var(--gold); color:var(--ink); }
+.ph__tag--veg{ background:#fff; color:var(--green-dark); }
+.hero__media .ph{ aspect-ratio:4/5; }
+.gallery{ grid-auto-rows:172px; }
+
+/* ---------- Cards ---------- */
+.card{ border:2.5px solid var(--ink); border-radius:16px; box-shadow:5px 5px 0 var(--ink); }
+.dish:hover,.highlight:hover,.benefit:hover{ transform:translate(-3px,-3px); box-shadow:8px 8px 0 var(--ink); border-color:var(--ink); }
+.highlight__ico{ background:var(--green); color:#fff; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); }
+.benefit__ico{ background:var(--red); color:#fff; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); }
+.info-row__ico{ background:var(--green); color:#fff; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); }
+.price,.dish__price{ font-family:var(--gp-serif); color:var(--green-dark); font-weight:800; }
+.section--char .price{ color:var(--gold); }
+.dish__add{ background:var(--ink); color:#fff; border-radius:11px; font-weight:800; }
+.dish__add:hover{ background:var(--green-dark); }
+
+/* ---------- Chips ---------- */
+.chip{ border:2px solid var(--ink); font-weight:800; box-shadow:2px 2px 0 var(--ink); }
+.chip--halal{ background:var(--green); color:#fff; }
+.chip--rating{ background:var(--ink); color:var(--gold); }
+.chip--dark{ background:#fff; color:var(--ink); }
+.chip--veg{ background:#fff; color:var(--green-dark); }
+
+/* ---------- Tabs ---------- */
+.menu-tabs{ background:rgba(247,241,225,.96); border-bottom:2.5px solid var(--ink); }
+.tab{ border:2.5px solid var(--ink); font-weight:800; box-shadow:2.5px 2.5px 0 var(--ink); border-radius:11px; }
+.tab:hover{ background:var(--gold); color:var(--ink); border-color:var(--ink); }
+.tab.is-active{ background:var(--green); color:#fff; border-color:var(--ink); }
+.menu-cat__head .line{ height:2.5px; background:var(--ink); border-radius:3px; }
+
+/* ---------- Stars ---------- */
+.stars{ color:var(--red); }
+.openflag{ color:var(--green-dark); font-weight:800; }
+.openflag .dot{ background:var(--green); box-shadow:0 0 0 3px rgba(46,125,50,.22); }
+
+/* ---------- Hero ---------- */
+.hero{ background:
+  radial-gradient(circle at 12% 16%, rgba(46,125,50,.14), transparent 40%),
+  radial-gradient(circle at 88% 82%, rgba(211,58,44,.10), transparent 42%),
+  var(--gp-cream); }
+.hero__glow{ display:none; }
+.floatcard{ border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:14px; }
+.floatcard__dot{ background:var(--green); border:2px solid var(--ink); }
+.pill-stat{ background:var(--ink); border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--green); border-radius:14px; }
+.pill-stat b{ color:var(--gold); }
+
+/* ---------- Sections ---------- */
+.section--char{ background:var(--green-deep); }
+.section--cream2{ background:var(--gp-cream-2); }
+
+/* ---------- Titanic Soju Erlebnis (Signature) ---------- */
+.soju{ background:var(--ink); color:#fff; border:2.5px solid var(--ink); border-radius:20px; box-shadow:8px 8px 0 var(--green);
+  padding:clamp(26px,4vw,48px); position:relative; overflow:hidden; }
+.soju .h2{ color:#fff; } .soju .eyebrow{ color:var(--gold); }
+.soju__steps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; margin-top:26px; }
+.soju__step{ background:rgba(255,255,255,.05); border:2px solid rgba(255,255,255,.18); border-radius:14px; padding:18px; }
+.soju__n{ font-family:var(--gp-serif); font-weight:800; font-size:26px; color:var(--gold); }
+.soju__step h4{ margin:6px 0 6px; font-size:16px; font-weight:800; color:#fff; }
+.soju__step p{ margin:0; font-size:14px; color:#c9d3c9; line-height:1.5; }
+.soju__note{ margin-top:20px; font-family:var(--script); font-size:22px; color:var(--gold); }
+
+/* ---------- Forms ---------- */
+.form{ border:2.5px solid var(--ink); box-shadow:8px 8px 0 var(--ink); border-radius:18px; }
+.form__title{ font-family:var(--gp-serif); font-weight:800; }
+.input,.select,.textarea{ border:2.5px solid var(--ink); border-radius:11px; }
+.input:focus,.select:focus,.textarea:focus{ border-color:var(--green); box-shadow:0 0 0 3px rgba(46,125,50,.18); }
+.stepper{ border:2.5px solid var(--ink); }
+.form-success__check{ background:var(--green); color:#fff; border:2.5px solid var(--ink); }
+
+/* ---------- Steps / Before-After ---------- */
+.step{ border:2.5px solid var(--ink); box-shadow:5px 5px 0 var(--ink); border-radius:16px; }
+.step__n{ background:var(--green); border:2.5px solid var(--ink); box-shadow:2.5px 2.5px 0 var(--ink); font-family:var(--gp-serif); font-weight:800; }
+.ba__col{ border:2.5px solid var(--ink); border-radius:16px; }
+.ba__col--new{ box-shadow:5px 5px 0 var(--ink); }
+.ba__col--new .m{ color:var(--green); } .ba__col--new .ba__tag{ color:var(--green-dark); }
+.stat{ border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:14px; }
+.stat b{ font-family:var(--gp-serif); color:var(--green-dark); font-weight:800; }
+.section--char .stat b{ color:var(--gold); }
+
+/* ---------- Footer ---------- */
+.site-footer{ background:var(--green-deep); }
+.footer-demo{ background:rgba(232,163,58,.12); border:2px solid rgba(232,163,58,.3); }
+.footer-demo strong{ color:var(--gold); }
+.footer-col a:hover{ color:var(--gold); }
+.soc{ border:2.5px solid #000; box-shadow:3px 3px 0 #000; }
+.soc:hover{ background:var(--green); border-color:#000; }
+
+/* ---------- Quote / Map / Team ---------- */
+.quote{ font-family:var(--gp-serif); font-weight:800; font-style:normal; }
+.section--char .quote{ color:#fff; }
+.map-ph{ border:2.5px solid var(--ink); box-shadow:5px 5px 0 var(--ink); }
+.map-ph__pin{ color:var(--red); }
+.team__role{ color:var(--green-dark); font-weight:800; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){ .marquee__track{ animation:none; } }
+@media (max-width:600px){ .card,.cta-band,.form,.soju{ box-shadow:5px 5px 0 var(--ink); } }

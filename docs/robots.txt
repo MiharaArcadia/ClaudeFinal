@@ -6,5 +6,6 @@ Disallow: /hpdw29/
 Disallow: /idbr53/
 Disallow: /mbdn33/
 Disallow: /ymtv41/
+Disallow: /stkr29/
 
 Sitemap: https://getcarby.app/sitemap.xml
